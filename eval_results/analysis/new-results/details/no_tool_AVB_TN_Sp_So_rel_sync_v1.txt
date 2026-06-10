@@ -1,0 +1,230 @@
+====================================================================================================
+METHOD
+====================================================================================================
+no_tool
+
+====================================================================================================
+AXIS
+====================================================================================================
+AVB
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+TN
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+38
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_So_rel_sync
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v1
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+1
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_So_rel_sync/Sp_So_rel_sync_v1_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (sounding)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+relative_synchronization
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+The visual component of the speech event is absent, failing the prerequisite for binding evaluation.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+The lack of visible lip motion makes it impossible to verify the binding between the spoken word and the visible speech action.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+The person performs the required hand-slapping action on the right thigh, but their mouth remains entirely closed with no visible speaking motion. Additionally, the person's full face is not visible due to framing.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+The visual component for the speech event is missing, which triggers a downward hierarchical failure for binding and temporal constraints.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+A plain indoor room is shown in a static medium shot with one seated person facing the camera on a chair, both hands initially resting on the knees or thighs. Person A’s full face, mouth, upper body, both hands, and thighs remain clearly visible during the target moment. Person A clearly says the single word “help” while at the same moment the right hand strikes the top of the right thigh, making visible contact and producing a sharp slap sound exactly at impact. The speech and the sounding action happen once in synchronization, with no extra words and no extra target sounds. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_So_rel_sync
+- modality_combination: Speech + Action (sounding)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "sounding_action": {"actor": "person_A", "action": "slapping_the_thigh", "acting_body_side": "right", "acting_body_part": "hand", "target_body_side": "right", "target_body_part": "thigh", "target_sound": "sharp slap sound", "definition": "The person's right hand strikes the top of the person's right thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."}}
+- temporal_constraint: {"relation_type": "synchronization", "timing_type": "relative", "value": {"events": ["speech", "sounding_action"]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound
+
+Axis-specific criteria (evaluate in this hierarchical order; a failure cascades downward):
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+- The sound corresponding to the sounding action "slapping the thigh" must be clearly audible and appropriate for the prompt.
+
+2. Visual Event Correctness
+- The visible motion for the sounding action "slapping the thigh" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding (WITHIN each event)
+- Audio-Visual Binding is evaluated WITHIN each event: whether that event's audio component and visual component are correctly bound (temporally and causally aligned), assuming both are present and correct.
+- Precondition (hierarchical): evaluate this axis only when the event's required audio (Audio Event Correctness) AND required visual component (Visual Event Correctness) are both correct. If either is incorrect or missing, mark this axis no.
+- For the speech event "help": given correct spoken audio and correct visible mouth/lip motion, check that the audible speech is temporally aligned with that visible mouth/lip motion. If the spoken word is wrong or the visible speaking motion is wrong/absent, mark this axis no.
+- For the sounding action "slapping the thigh": given a correct sound and a correctly performed visible motion, check that the sound occurs at the moment implied by the visible action. If either the sound or the visible action is wrong or missing, mark this axis no.
+
+4. Temporal Relation Satisfaction (BETWEEN events)
+- Relation type: relative synchronization.
+- Check whether the required target events are synchronized: Event 1: says "help" + Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound.
+- The target events must occur simultaneously or with tight temporal alignment as specified by the original generation prompt.
+- If the required events are sequential instead of simultaneous, offset, disconnected, missing, or unclear, mark this sub-axis as no.
+- Precondition: evaluate this sub-axis only when Audio Event Correctness, Visual Event Correctness, and Audio-Visual Binding are all satisfied; otherwise mark it no.
+
+5. Temporal Count Satisfaction (number of occurrences)
+- This sub-axis checks the number of occurrences (counting / repetition), independent of the relation type.
+- The required synchronized bundle should occur exactly once. Count only clear, completed occurrences.
+- Any extra or spurious occurrence of a target action/sound/speech beyond the specified structure makes this sub-axis no.
+- This applies to every temporal type: even for order, synchronization, spacing, absolute-timing, rhythm, or start/stop prompts, verify each required event occurs the required number of times (default exactly once) with no extra repetitions, unless the prompt explicitly allows repetition.
+- If the number of occurrences differs from the requirement, or the count is unclear, mark this sub-axis as no.
+- Precondition: evaluate this sub-axis only when Audio Event Correctness, Visual Event Correctness, and Audio-Visual Binding are all satisfied; otherwise mark it no.
+
+6. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- Apply the hierarchical dependency: Audio-Visual Binding is "no" if either the required audio or visual component is incorrect/missing; both temporal sub-axes (relation and count) are "no" if audio, visual, or Audio-Visual Binding fails.
+- Output audio_event_correctness, visual_event_correctness, audio_visual_binding, temporal_relation_satisfaction, temporal_count_satisfaction, and constraint_compliance. Do NOT output a combined temporal_constraint_satisfaction; it is derived as relation AND count.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_relation_satisfaction AND temporal_count_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "The required speech and slap sound are both present in the audio.",
+    "evidence": "The audio track contains the spoken word \"help\" and a sharp slap sound."
+  },
+  "visual_event_correctness": {
+    "label": "no",
+    "reason": "The right hand slapping action is visible, but there is no visible speaking motion for the speech event.",
+    "evidence": "The right hand strikes the thigh at 00:01.417, but the person's mouth remains completely closed and static."
+  },
+  "audio_visual_binding": {
+    "label": "no",
+    "reason": "The visual component of the speech event is absent, failing the prerequisite for binding evaluation.",
+    "evidence": "The lack of visible lip motion makes it impossible to verify the binding between the spoken word and the visible speech action."
+  },
+  "temporal_relation_satisfaction": {
+    "label": "no",
+    "reason": "Evaluated as no due to the cascading failure from missing visual event correctness and audio-visual binding.",
+    "evidence": "Hierarchical prerequisite failure prevents relation evaluation."
+  },
+  "temporal_count_satisfaction": {
+    "label": "no",
+    "reason": "Evaluated as no due to the cascading failure from missing visual event correctness and audio-visual binding.",
+    "evidence": "Hierarchical prerequisite failure prevents count evaluation."
+  },
+  "constraint_compliance": {
+    "label": "no",
+    "reason": "The requirement for the person's full face to be clearly visible is violated.",
+    "evidence": "The video framing crops out the top half of the person's face."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "The visual component for the speech event is missing, which triggers a downward hierarchical failure for binding and temporal constraints.",
+  "observed_behavior_summary": "The person performs the required hand-slapping action on the right thigh, but their mouth remains entirely closed with no visible speaking motion. Additionally, the person's full face is not visible due to framing."
+}

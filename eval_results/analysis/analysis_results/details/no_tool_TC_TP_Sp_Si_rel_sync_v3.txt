@@ -1,0 +1,210 @@
+====================================================================================================
+METHOD
+====================================================================================================
+no_tool
+
+====================================================================================================
+AXIS
+====================================================================================================
+TC
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+TP
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+30
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_Si_rel_sync
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v3
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+3
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_Si_rel_sync/Sp_Si_rel_sync_v3_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2/Sp_Si_rel_sync/Sp_Si_rel_sync_v3_raw.mp4
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (silent)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+relative_synchronization
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+The speech event and the visual action occur simultaneously, satisfying the synchronization requirement.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+The word 'help' is spoken at the very beginning of the video, exactly while the right hand forms the thumbs-up pose (00:00.000 - 00:00.125).
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+The video shows a seated person from the chest down to the thighs, with their face cropped out above the nose. At the start of the video, they say 'help' while simultaneously forming a thumbs-up pose with their right hand. The pose is held statically for the remainder of the video without any additional actions.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+Both the audio and visual events are correct, properly bound, and synchronized according to the prompt's temporal constraints.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible; they begin seated on a chair with both hands resting on the knees or thighs. The person clearly says the single word “help” while the right hand simultaneously forms and holds a clear thumbs-up pose, with the thumb extended upward and the fist closed. The speech is audible and easy to distinguish, and the thumbs-up is clearly visible as a pose rather than a separate hand-raising motion. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_Si_rel_sync
+- modality_combination: Speech + Action (silent)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "silent_action": {"actor": "person_A", "action": "thumbs_up", "body_side": "right", "body_part": "hand", "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."}}
+- temporal_constraint: {"relation_type": "synchronization", "timing_type": "relative", "value": {"events": ["speech", "silent_action"]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the silent visual action "thumbs up"
+
+Axis-specific criteria:
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+
+2. Visual Event Correctness
+- The visual silent action "thumbs up" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding
+- If the speaker is visible, visible speaking/lip motion should be temporally aligned with the spoken event "help". If the face/mouth is not visible but the prompt does not require it, judge based on available evidence and the prompt.
+
+4. Temporal Constraint Satisfaction
+- Temporal constraint type: relative synchronization.
+- Check whether the required target events are synchronized: Event 1: says "help" + Event 2: performs the silent visual action "thumbs up".
+- The target events must occur simultaneously or with tight temporal alignment as specified by the original generation prompt.
+- If the required events are sequential instead of simultaneous, offset, disconnected, missing, or unclear, mark this axis as no.
+
+5. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_constraint_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "The audio contains the clear speech event 'help' at the beginning of the video.",
+    "evidence": "Audio features a voice saying 'help' around 00:00.000 - 00:00.500."
+  },
+  "visual_event_correctness": {
+    "label": "yes",
+    "reason": "The person's right hand forms and holds a clear thumbs-up pose as required.",
+    "evidence": "The person's right hand (viewer's left) forms a thumbs-up pose starting at 00:00.042 and holds it for the remainder of the video."
+  },
+  "audio_visual_binding": {
+    "label": "yes",
+    "reason": "The visible mouth movement aligns temporally with the spoken word 'help'.",
+    "evidence": "The person's mouth is visible and moves between 00:00.000 and 00:00.125, synchronizing with the speech audio."
+  },
+  "temporal_constraint_satisfaction": {
+    "label": "yes",
+    "reason": "The speech event and the visual action occur simultaneously, satisfying the synchronization requirement.",
+    "evidence": "The word 'help' is spoken at the very beginning of the video, exactly while the right hand forms the thumbs-up pose (00:00.000 - 00:00.125)."
+  },
+  "constraint_compliance": {
+    "label": "no",
+    "reason": "The prompt requires the full face to be clearly visible, but the person's head is cropped, making only the mouth and chin visible.",
+    "evidence": "Throughout the video, the framing cuts off the upper half of the person's face, violating the 'full face' visibility constraint."
+  },
+  "overall_temporal_success": "yes",
+  "overall_reason": "Both the audio and visual events are correct, properly bound, and synchronized according to the prompt's temporal constraints.",
+  "observed_behavior_summary": "The video shows a seated person from the chest down to the thighs, with their face cropped out above the nose. At the start of the video, they say 'help' while simultaneously forming a thumbs-up pose with their right hand. The pose is held statically for the remainder of the video without any additional actions."
+}

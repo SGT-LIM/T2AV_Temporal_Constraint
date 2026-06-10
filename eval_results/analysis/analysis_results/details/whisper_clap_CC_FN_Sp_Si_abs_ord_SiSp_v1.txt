@@ -1,0 +1,294 @@
+====================================================================================================
+METHOD
+====================================================================================================
+whisper_clap
+
+====================================================================================================
+AXIS
+====================================================================================================
+CC
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+FN
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+24
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_Si_abs_ord_SiSp
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v1
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+1
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_Si_abs_ord_SiSp/Sp_Si_abs_ord_SiSp_v1_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2/Sp_Si_abs_ord_SiSp/Sp_Si_abs_ord_SiSp_v1_raw.mp4
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (silent)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+absolute_order
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+The prompt's constraint that the thumbs-up pose be kept separate from the speaking moment is violated, as the two events overlap. Furthermore, the wrong hand is used.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+The left-hand thumbs-up motion begins at 3.1 seconds and overlapping speech begins at 3.2 seconds, failing the separation constraint.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+A seated person rests both hands on their thighs for the first 3 seconds. Starting at approximately 3.1 seconds, the person raises their left hand to perform a thumbs-up while simultaneously saying the word 'help', contradicting the required right hand, 1.5-second timing, and event separation.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+Although the speech event is correct and properly bound to the speaker's lip movements, the video fails visual correctness by using the wrong hand and fails temporal constraint satisfaction by missing the 1.5-second absolute timing and overlapping the two events.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+both
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room, a seated person facing the camera is shown in a static medium shot with the full face, mouth, upper body, both hands, and thighs visible, and both hands initially resting on the knees or thighs. At 1.5 seconds, the person’s right hand forms and holds a clear thumbs-up pose with the thumb extended upward. At 3.5 seconds, the person clearly says the single word “help,” with the mouth fully visible and the speech easy to distinguish. The thumbs-up happens before the speech, and the pose is kept separate from the speaking moment. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_Si_abs_ord_SiSp
+- modality_combination: Speech + Action (silent)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "silent_action": {"actor": "person_A", "action": "thumbs_up", "body_side": "right", "body_part": "hand", "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."}}
+- temporal_constraint: {"relation_type": "order", "timing_type": "absolute", "value": {"schedule": [{"time_sec": 1.5, "events": ["silent_action"]}, {"time_sec": 3.5, "events": ["speech"]}]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the silent visual action "thumbs up"
+
+Whisper ASR transcription (raw open-vocabulary speech evidence):
+- model: faster-whisper:large-v3-turbo
+- detected language: en (lang_prob=1.00)
+- audio duration (s): 5.01
+- has_speech (any segment with no_speech_prob<0.5): True
+- mean no_speech_prob across segments: 0.000
+- This is RAW ASR output. It is not a correctness label. Use it as one piece of evidence and defer to the audio itself if disagreement occurs.
+
+Segments:
+  [  3.02 -   3.70] (no_speech_prob=0.00, avg_logprob=-0.26) help
+    words: help@3.02-3.70
+
+CLAP open-vocabulary sound-event evidence (raw text-audio similarity):
+- model: transformers-clap:laion/clap-htsat-unfused
+- audio duration (s): 5.01
+- mode: temporal
+- queries: ['a person speaking']
+- negative queries: ['silence', 'background noise', 'white noise']
+- These are RAW cosine similarities, not correctness labels.
+- Higher cosine generally means closer audio-text match, but absolute thresholds are unreliable.
+- Compare positive queries against negative anchors and against other plausible competing queries.
+- Sliding-window scores are approximate chunk-level evidence. A high score means the queried sound may occur somewhere in that window, not exactly at the window center.
+
+Sliding-window similarities:
+  [  0.00 -   0.75] positives: "a person speaking"=0.244 | negatives: "silence"=0.470, "background noise"=0.253, "white noise"=0.235
+  [  0.25 -   1.00] positives: "a person speaking"=0.315 | negatives: "silence"=0.615, "background noise"=0.402, "white noise"=0.356
+  [  0.50 -   1.25] positives: "a person speaking"=0.211 | negatives: "silence"=0.519, "background noise"=0.305, "white noise"=0.305
+  [  0.75 -   1.50] positives: "a person speaking"=0.191 | negatives: "silence"=0.433, "background noise"=0.196, "white noise"=0.153
+  [  1.00 -   1.75] positives: "a person speaking"=0.097 | negatives: "silence"=0.333, "background noise"=0.188, "white noise"=0.103
+  [  1.25 -   2.00] positives: "a person speaking"=0.135 | negatives: "silence"=0.366, "background noise"=0.182, "white noise"=0.119
+  [  1.50 -   2.25] positives: "a person speaking"=0.159 | negatives: "silence"=0.435, "background noise"=0.242, "white noise"=0.111
+  [  1.75 -   2.50] positives: "a person speaking"=0.182 | negatives: "silence"=0.540, "background noise"=0.320, "white noise"=0.260
+  [  2.00 -   2.75] positives: "a person speaking"=0.228 | negatives: "silence"=0.511, "background noise"=0.355, "white noise"=0.264
+  [  2.25 -   3.00] positives: "a person speaking"=0.355 | negatives: "silence"=0.624, "background noise"=0.518, "white noise"=0.349
+  [  2.50 -   3.25] positives: "a person speaking"=0.248 | negatives: "silence"=0.470, "background noise"=0.291, "white noise"=0.189
+  [  2.75 -   3.50] positives: "a person speaking"=-0.066 | negatives: "silence"=-0.041, "background noise"=-0.144, "white noise"=-0.132
+  [  3.00 -   3.75] positives: "a person speaking"=-0.079 | negatives: "silence"=0.027, "background noise"=-0.036, "white noise"=-0.056
+  [  3.25 -   4.00] positives: "a person speaking"=-0.144 | negatives: "silence"=-0.037, "background noise"=-0.074, "white noise"=-0.088
+  [  3.50 -   4.25] positives: "a person speaking"=-0.011 | negatives: "silence"=0.026, "background noise"=0.006, "white noise"=-0.024
+  [  3.75 -   4.50] positives: "a person speaking"=0.068 | negatives: "silence"=0.253, "background noise"=0.108, "white noise"=0.036
+  [  4.00 -   4.75] positives: "a person speaking"=0.254 | negatives: "silence"=0.499, "background noise"=0.359, "white noise"=0.254
+  [  4.25 -   5.00] positives: "a person speaking"=0.204 | negatives: "silence"=0.443, "background noise"=0.271, "white noise"=0.187
+
+Axis-specific criteria:
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+
+2. Visual Event Correctness
+- The visual silent action "thumbs up" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding
+- If the speaker is visible, visible speaking/lip motion should be temporally aligned with the spoken event "help". If the face/mouth is not visible but the prompt does not require it, judge based on available evidence and the prompt.
+
+4. Temporal Constraint Satisfaction
+- Temporal constraint type: absolute order.
+- Required absolute schedule/order: around 1.5 seconds: Event 2: performs the silent visual action "thumbs up" -> around 3.5 seconds: Event 1: says "help".
+- Each required event must appear clearly in that exact order.
+- If the order is reversed, mixed, overlapping when it should be sequential, missing, or unclear, mark this axis as no.
+
+5. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_constraint_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+Whisper ASR transcription (raw open-vocabulary speech evidence):
+- model: faster-whisper:large-v3-turbo
+- detected language: en (lang_prob=1.00)
+- audio duration (s): 5.01
+- has_speech (any segment with no_speech_prob<0.5): True
+- mean no_speech_prob across segments: 0.000
+- This is RAW ASR output. It is not a correctness label. Use it as one piece of evidence and defer to the audio itself if disagreement occurs.
+
+Segments:
+  [  3.02 -   3.70] (no_speech_prob=0.00, avg_logprob=-0.26) help
+    words: help@3.02-3.70
+
+CLAP open-vocabulary sound-event evidence (raw text-audio similarity):
+- model: transformers-clap:laion/clap-htsat-unfused
+- audio duration (s): 5.01
+- mode: temporal
+- queries: ['a person speaking']
+- negative queries: ['silence', 'background noise', 'white noise']
+- These are RAW cosine similarities, not correctness labels.
+- Higher cosine generally means closer audio-text match, but absolute thresholds are unreliable.
+- Compare positive queries against negative anchors and against other plausible competing queries.
+- Sliding-window scores are approximate chunk-level evidence. A high score means the queried sound may occur somewhere in that window, not exactly at the window center.
+
+Sliding-window similarities:
+  [  0.00 -   0.75] positives: "a person speaking"=0.244 | negatives: "silence"=0.470, "background noise"=0.253, "white noise"=0.235
+  [  0.25 -   1.00] positives: "a person speaking"=0.315 | negatives: "silence"=0.615, "background noise"=0.402, "white noise"=0.356
+  [  0.50 -   1.25] positives: "a person speaking"=0.211 | negatives: "silence"=0.519, "background noise"=0.305, "white noise"=0.305
+  [  0.75 -   1.50] positives: "a person speaking"=0.191 | negatives: "silence"=0.433, "background noise"=0.196, "white noise"=0.153
+  [  1.00 -   1.75] positives: "a person speaking"=0.097 | negatives: "silence"=0.333, "background noise"=0.188, "white noise"=0.103
+  [  1.25 -   2.00] positives: "a person speaking"=0.135 | negatives: "silence"=0.366, "background noise"=0.182, "white noise"=0.119
+  [  1.50 -   2.25] positives: "a person speaking"=0.159 | negatives: "silence"=0.435, "background noise"=0.242, "white noise"=0.111
+  [  1.75 -   2.50] positives: "a person speaking"=0.182 | negatives: "silence"=0.540, "background noise"=0.320, "white noise"=0.260
+  [  2.00 -   2.75] positives: "a person speaking"=0.228 | negatives: "silence"=0.511, "background noise"=0.355, "white noise"=0.264
+  [  2.25 -   3.00] positives: "a person speaking"=0.355 | negatives: "silence"=0.624, "background noise"=0.518, "white noise"=0.349
+  [  2.50 -   3.25] positives: "a person speaking"=0.248 | negatives: "silence"=0.470, "background noise"=0.291, "white noise"=0.189
+  [  2.75 -   3.50] positives: "a person speaking"=-0.066 | negatives: "silence"=-0.041, "background noise"=-0.144, "white noise"=-0.132
+  [  3.00 -   3.75] positives: "a person speaking"=-0.079 | negatives: "silence"=0.027, "background noise"=-0.036, "white noise"=-0.056
+  [  3.25 -   4.00] positives: "a person speaking"=-0.144 | negatives: "silence"=-0.037, "background noise"=-0.074, "white noise"=-0.088
+  [  3.50 -   4.25] positives: "a person speaking"=-0.011 | negatives: "silence"=0.026, "background noise"=0.006, "white noise"=-0.024
+  [  3.75 -   4.50] positives: "a person speaking"=0.068 | negatives: "silence"=0.253, "background noise"=0.108, "white noise"=0.036
+  [  4.00 -   4.75] positives: "a person speaking"=0.254 | negatives: "silence"=0.499, "background noise"=0.359, "white noise"=0.254
+  [  4.25 -   5.00] positives: "a person speaking"=0.204 | negatives: "silence"=0.443, "background noise"=0.271, "white noise"=0.187
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "The required speech event is present and correct, as the person clearly says the single word 'help'.",
+    "evidence": "Audio inspection and Whisper ASR transcription confirm the word 'help' is spoken clearly between 3.02 and 3.70 seconds."
+  },
+  "visual_event_correctness": {
+    "label": "no",
+    "reason": "The visual action is incorrect because the person uses their left hand to form the thumbs-up, whereas the prompt explicitly required the right hand.",
+    "evidence": "Video inspection shows the person raising the hand on the viewer's right (the person's left hand) to form a thumbs-up starting around 3.1 seconds, while the right hand remains resting on the leg."
+  },
+  "audio_visual_binding": {
+    "label": "yes",
+    "reason": "The visible mouth and lip movements are temporally aligned with the audible speech event.",
+    "evidence": "The person's mouth clearly opens and articulates the word 'help' in perfect synchronization with the speech audio heard between 3.2 and 3.6 seconds."
+  },
+  "temporal_constraint_satisfaction": {
+    "label": "no",
+    "reason": "The events do not satisfy the absolute timing or the sequential order requested. The thumbs-up does not occur at 1.5 seconds, and instead occurs almost simultaneously with the speech around 3.1 to 3.6 seconds.",
+    "evidence": "Video and audio evidence show both the thumbs-up action and the speech event beginning around 3.1 to 3.2 seconds. The scheduled action at 1.5 seconds is completely missing."
+  },
+  "constraint_compliance": {
+    "label": "no",
+    "reason": "The prompt's constraint that the thumbs-up pose be kept separate from the speaking moment is violated, as the two events overlap. Furthermore, the wrong hand is used.",
+    "evidence": "The left-hand thumbs-up motion begins at 3.1 seconds and overlapping speech begins at 3.2 seconds, failing the separation constraint."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "Although the speech event is correct and properly bound to the speaker's lip movements, the video fails visual correctness by using the wrong hand and fails temporal constraint satisfaction by missing the 1.5-second absolute timing and overlapping the two events.",
+  "observed_behavior_summary": "A seated person rests both hands on their thighs for the first 3 seconds. Starting at approximately 3.1 seconds, the person raises their left hand to perform a thumbs-up while simultaneously saying the word 'help', contradicting the required right hand, 1.5-second timing, and event separation."
+}

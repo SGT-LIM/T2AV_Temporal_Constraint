@@ -1,0 +1,105 @@
+{
+  "benchmark_name": "T2AV_current_help_thumbsup_thighslap",
+  "defaults": {
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "sync_time_sec": 2.0,
+    "sync_count_times_sec": [
+      1.5,
+      3.5
+    ],
+    "order_times_sec_by_length": {
+      "2": [
+        1.5,
+        3.5
+      ],
+      "3": [
+        1.0,
+        2.5,
+        4.0
+      ]
+    },
+    "sync_count": 2
+  },
+  "subjects": [
+    {
+      "id": "person_A",
+      "description": "one seated person facing the camera",
+      "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+      "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+    }
+  ],
+  "events": [
+    {
+      "id": "speech",
+      "modality": "speech",
+      "actor": "person_A",
+      "text": "help",
+      "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+    },
+    {
+      "id": "silent_action",
+      "modality": "silent_action",
+      "actor": "person_A",
+      "action": "thumbs_up",
+      "body_side": "right",
+      "body_part": "hand",
+      "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+    },
+    {
+      "id": "sounding_action",
+      "modality": "sounding_action",
+      "actor": "person_A",
+      "action": "slapping_the_thigh",
+      "acting_body_side": "right",
+      "acting_body_part": "hand",
+      "target_body_side": "right",
+      "target_body_part": "thigh",
+      "target_sound": "sharp slap sound",
+      "definition": "The person's right hand strikes the top of the person's right thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+    }
+  ],
+  "event_sets": [
+    {
+      "name": "Speech + Action (silent)",
+      "events": [
+        "speech",
+        "silent_action"
+      ]
+    },
+    {
+      "name": "Speech + Action (sounding)",
+      "events": [
+        "speech",
+        "sounding_action"
+      ]
+    },
+    {
+      "name": "Action (silent) + Action (sounding)",
+      "events": [
+        "silent_action",
+        "sounding_action"
+      ]
+    },
+    {
+      "name": "Speech + Action (silent) + Action (sounding)",
+      "events": [
+        "speech",
+        "silent_action",
+        "sounding_action"
+      ]
+    }
+  ],
+  "relations_to_generate": {
+    "relative": [
+      "synchronization",
+      "sync_count",
+      "order"
+    ],
+    "absolute": [
+      "synchronization",
+      "sync_count",
+      "order"
+    ]
+  }
+}

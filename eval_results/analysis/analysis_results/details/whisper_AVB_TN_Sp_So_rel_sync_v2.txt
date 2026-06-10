@@ -1,0 +1,234 @@
+====================================================================================================
+METHOD
+====================================================================================================
+whisper
+
+====================================================================================================
+AXIS
+====================================================================================================
+AVB
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+TN
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+38
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_So_rel_sync
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v2
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+2
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_So_rel_sync/Sp_So_rel_sync_v2_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2/Sp_So_rel_sync/Sp_So_rel_sync_v2_raw.mp4
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (sounding)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+relative_synchronization
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+While the speech audio is aligned with the visible mouth motion, the required slapping action and its corresponding sound are both missing, preventing the required audio-visual binding for the sounding action.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+Speech is synchronized with lip movement between 0.00 and 0.30 seconds. Neither the visible slap nor the audible slap sound occurs, so their binding is absent.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+The person says 'help' at the very beginning of the video. However, they do not slap their right thigh, and no slap sound is heard. Instead, starting around 1.00 second, the person lifts their right leg towards the camera.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+The video fails because the required slapping action and its corresponding sound are completely missing. Only the speech event occurs, which breaks the required synchronization. Additionally, an unprompted leg-lifting action occurs later in the video.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+whisper
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+A plain indoor room is shown in a static medium shot with one seated person facing the camera on a chair, both hands initially resting on the knees or thighs. Person A’s full face, mouth, upper body, both hands, and thighs remain clearly visible during the target moment. Person A clearly says the single word “help” while at the same moment the right hand strikes the top of the right thigh, making visible contact and producing a sharp slap sound exactly at impact. The speech and the sounding action happen once in synchronization, with no extra words and no extra target sounds. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_So_rel_sync
+- modality_combination: Speech + Action (sounding)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "sounding_action": {"actor": "person_A", "action": "slapping_the_thigh", "acting_body_side": "right", "acting_body_part": "hand", "target_body_side": "right", "target_body_part": "thigh", "target_sound": "sharp slap sound", "definition": "The person's right hand strikes the top of the person's right thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."}}
+- temporal_constraint: {"relation_type": "synchronization", "timing_type": "relative", "value": {"events": ["speech", "sounding_action"]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound
+
+Whisper ASR transcription (raw open-vocabulary speech evidence):
+- model: faster-whisper:large-v3-turbo
+- detected language: en (lang_prob=1.00)
+- audio duration (s): 5.01
+- has_speech (any segment with no_speech_prob<0.5): True
+- mean no_speech_prob across segments: 0.000
+- This is RAW ASR output. It is not a correctness label. Use it as one piece of evidence and defer to the audio itself if disagreement occurs.
+
+Segments:
+  [  0.00 -   0.28] (no_speech_prob=0.00, avg_logprob=-0.78) help.
+    words: help.@0.00-0.28
+
+Axis-specific criteria:
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+- The sound corresponding to the sounding action "slapping the thigh" must be clearly audible and appropriate for the prompt.
+
+2. Visual Event Correctness
+- The visible motion for the sounding action "slapping the thigh" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding
+- If the speaker is visible, visible speaking/lip motion should be temporally aligned with the spoken event "help". If the face/mouth is not visible but the prompt does not require it, judge based on available evidence and the prompt.
+- The visible action "slapping the thigh" must be temporally aligned with its corresponding sound; the sound should occur at the moment implied by the visible action.
+
+4. Temporal Constraint Satisfaction
+- Temporal constraint type: relative synchronization.
+- Check whether the required target events are synchronized: Event 1: says "help" + Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound.
+- The target events must occur simultaneously or with tight temporal alignment as specified by the original generation prompt.
+- If the required events are sequential instead of simultaneous, offset, disconnected, missing, or unclear, mark this axis as no.
+
+5. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_constraint_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+Whisper ASR transcription (raw open-vocabulary speech evidence):
+- model: faster-whisper:large-v3-turbo
+- detected language: en (lang_prob=1.00)
+- audio duration (s): 5.01
+- has_speech (any segment with no_speech_prob<0.5): True
+- mean no_speech_prob across segments: 0.000
+- This is RAW ASR output. It is not a correctness label. Use it as one piece of evidence and defer to the audio itself if disagreement occurs.
+
+Segments:
+  [  0.00 -   0.28] (no_speech_prob=0.00, avg_logprob=-0.78) help.
+    words: help.@0.00-0.28
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "no",
+    "reason": "The word 'help' is clearly spoken, but the required sharp slap sound is entirely missing from the audio.",
+    "evidence": "Whisper detects speech at 0.00-0.28 seconds, and direct audio inspection confirms the word 'help'. However, no slapping sound is audible at any point in the video."
+  },
+  "visual_event_correctness": {
+    "label": "no",
+    "reason": "The visible speaking motion for 'help' is present, but the required action of the right hand striking the right thigh does not occur.",
+    "evidence": "The person's mouth moves at the beginning of the video, but the right hand remains resting on the leg. Instead of slapping the thigh, the person lifts their right leg towards the camera starting around 1.00 second."
+  },
+  "audio_visual_binding": {
+    "label": "no",
+    "reason": "While the speech audio is aligned with the visible mouth motion, the required slapping action and its corresponding sound are both missing, preventing the required audio-visual binding for the sounding action.",
+    "evidence": "Speech is synchronized with lip movement between 0.00 and 0.30 seconds. Neither the visible slap nor the audible slap sound occurs, so their binding is absent."
+  },
+  "temporal_constraint_satisfaction": {
+    "label": "no",
+    "reason": "The required synchronization between the speech and the thigh slap is not met because the slapping action and sound never occur.",
+    "evidence": "The prompt requires the word 'help' to be spoken at the exact same moment the right hand slaps the thigh. Only the speech occurs (0.00-0.30s), so the synchronized sequence is broken."
+  },
+  "constraint_compliance": {
+    "label": "no",
+    "reason": "The video includes a salient, unprompted leg-lifting motion after the speech, violating the constraints against extra actions and post-event stillness.",
+    "evidence": "Starting at approximately 1.00 second and continuing to the end of the video, the person continuously lifts and extends their right leg."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "The video fails because the required slapping action and its corresponding sound are completely missing. Only the speech event occurs, which breaks the required synchronization. Additionally, an unprompted leg-lifting action occurs later in the video.",
+  "observed_behavior_summary": "The person says 'help' at the very beginning of the video. However, they do not slap their right thigh, and no slap sound is heard. Instead, starting around 1.00 second, the person lifts their right leg towards the camera."
+}

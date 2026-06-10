@@ -1,0 +1,274 @@
+====================================================================================================
+METHOD
+====================================================================================================
+clap
+
+====================================================================================================
+AXIS
+====================================================================================================
+CC
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+FP
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+17
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_Si_So_rel_ord_SiSpSo
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v3
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+3
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_Si_So_rel_ord_SiSpSo/Sp_Si_So_rel_ord_SiSpSo_v3_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2/Sp_Si_So_rel_ord_SiSpSo/Sp_Si_So_rel_ord_SiSpSo_v3_raw.mp4
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (silent) + Action (sounding)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+relative_order
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+The video satisfies all non-core constraints. The setting, shot type, and subject visibility are correct, and there are no extra unprompted actions or speech.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+The video features a single person in a plain indoor room, captured in a static medium shot with the face, upper body, hands, and thighs visible. The person remains still after the final thigh slap action, and no extra sounds or speech are introduced.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+The person begins by saying the word 'help' (0.00-1.00s). Afterward, they raise their right hand to form a thumbs-up pose (1.25-1.87s). Finally, they strike their right thigh with their right hand, producing a sharp slap sound at exactly 4.00s. They remain still thereafter.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+While all requested audio and visual events are present and properly synchronized, the video fails the temporal constraint because the speech occurs before the thumbs-up pose, violating the strict sequential order specified in the prompt.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+clap
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room, a single seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and both thighs visible. The person starts seated on a chair with both hands resting on the knees or thighs, then first forms and holds a clear right-handed thumbs-up pose. After that pose is complete, the person clearly says “help” and nothing else. After the speech ends, the person strikes the top of the right thigh with the right hand, making visible contact and a sharp slap sound exactly at impact. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_Si_So_rel_ord_SiSpSo
+- modality_combination: Speech + Action (silent) + Action (sounding)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "silent_action": {"actor": "person_A", "action": "thumbs_up", "body_side": "right", "body_part": "hand", "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."}, "sounding_action": {"actor": "person_A", "action": "slapping_the_thigh", "acting_body_side": "right", "acting_body_part": "hand", "target_body_side": "right", "target_body_part": "thigh", "target_sound": "sharp slap sound", "definition": "The person's right hand strikes the top of the person's right thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."}}
+- temporal_constraint: {"relation_type": "order", "timing_type": "relative", "value": {"sequence": ["silent_action", "speech", "sounding_action"]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the silent visual action "thumbs up"
+- Event 3: performs the sounding action "slapping the thigh" with corresponding visible motion and sound
+
+CLAP open-vocabulary sound-event evidence (raw text-audio similarity):
+- model: transformers-clap:laion/clap-htsat-unfused
+- audio duration (s): 5.01
+- mode: temporal
+- queries: ['slapping_the_thigh', 'a person speaking']
+- negative queries: ['silence', 'background noise', 'white noise']
+- These are RAW cosine similarities, not correctness labels.
+- Higher cosine generally means closer audio-text match, but absolute thresholds are unreliable.
+- Compare positive queries against negative anchors and against other plausible competing queries.
+- Sliding-window scores are approximate chunk-level evidence. A high score means the queried sound may occur somewhere in that window, not exactly at the window center.
+
+Sliding-window similarities:
+  [  0.00 -   0.75] positives: "slapping_the_thigh"=0.133, "a person speaking"=-0.043 | negatives: "silence"=0.054, "background noise"=-0.045, "white noise"=-0.012
+  [  0.25 -   1.00] positives: "slapping_the_thigh"=0.027, "a person speaking"=0.040 | negatives: "silence"=0.090, "background noise"=-0.049, "white noise"=-0.038
+  [  0.50 -   1.25] positives: "slapping_the_thigh"=0.127, "a person speaking"=0.118 | negatives: "silence"=0.190, "background noise"=0.048, "white noise"=0.149
+  [  0.75 -   1.50] positives: "slapping_the_thigh"=0.105, "a person speaking"=0.120 | negatives: "silence"=0.178, "background noise"=0.039, "white noise"=0.136
+  [  1.00 -   1.75] positives: "slapping_the_thigh"=0.114, "a person speaking"=0.136 | negatives: "silence"=0.303, "background noise"=0.132, "white noise"=0.251
+  [  1.25 -   2.00] positives: "slapping_the_thigh"=0.094, "a person speaking"=0.161 | negatives: "silence"=0.325, "background noise"=0.164, "white noise"=0.182
+  [  1.50 -   2.25] positives: "slapping_the_thigh"=0.225, "a person speaking"=0.023 | negatives: "silence"=0.117, "background noise"=0.053, "white noise"=0.032
+  [  1.75 -   2.50] positives: "slapping_the_thigh"=0.241, "a person speaking"=0.039 | negatives: "silence"=0.118, "background noise"=0.060, "white noise"=0.052
+  [  2.00 -   2.75] positives: "slapping_the_thigh"=0.206, "a person speaking"=0.027 | negatives: "silence"=0.094, "background noise"=0.033, "white noise"=0.011
+  [  2.25 -   3.00] positives: "slapping_the_thigh"=-0.040, "a person speaking"=0.163 | negatives: "silence"=0.342, "background noise"=0.169, "white noise"=0.180
+  [  2.50 -   3.25] positives: "slapping_the_thigh"=-0.010, "a person speaking"=0.118 | negatives: "silence"=0.255, "background noise"=0.070, "white noise"=0.104
+  [  2.75 -   3.50] positives: "slapping_the_thigh"=0.043, "a person speaking"=0.058 | negatives: "silence"=0.166, "background noise"=-0.026, "white noise"=0.019
+  [  3.00 -   3.75] positives: "slapping_the_thigh"=0.035, "a person speaking"=0.087 | negatives: "silence"=0.195, "background noise"=0.024, "white noise"=0.069
+  [  3.25 -   4.00] positives: "slapping_the_thigh"=-0.024, "a person speaking"=0.069 | negatives: "silence"=0.179, "background noise"=0.007, "white noise"=0.020
+  [  3.50 -   4.25] positives: "slapping_the_thigh"=0.089, "a person speaking"=-0.017 | negatives: "silence"=-0.018, "background noise"=0.040, "white noise"=-0.056
+  [  3.75 -   4.50] positives: "slapping_the_thigh"=0.051, "a person speaking"=-0.056 | negatives: "silence"=-0.115, "background noise"=-0.027, "white noise"=-0.122
+  [  4.00 -   4.75] positives: "slapping_the_thigh"=0.020, "a person speaking"=-0.062 | negatives: "silence"=-0.125, "background noise"=-0.018, "white noise"=-0.102
+  [  4.25 -   5.00] positives: "slapping_the_thigh"=-0.027, "a person speaking"=-0.015 | negatives: "silence"=0.094, "background noise"=0.017, "white noise"=-0.038
+
+Axis-specific criteria:
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+- The sound corresponding to the sounding action "slapping the thigh" must be clearly audible and appropriate for the prompt.
+
+2. Visual Event Correctness
+- The visual silent action "thumbs up" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action "slapping the thigh" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding
+- If the speaker is visible, visible speaking/lip motion should be temporally aligned with the spoken event "help". If the face/mouth is not visible but the prompt does not require it, judge based on available evidence and the prompt.
+- The visible action "slapping the thigh" must be temporally aligned with its corresponding sound; the sound should occur at the moment implied by the visible action.
+
+4. Temporal Constraint Satisfaction
+- Temporal constraint type: relative order.
+- Required order: Event 2: performs the silent visual action "thumbs up" -> Event 1: says "help" -> Event 3: performs the sounding action "slapping the thigh" with corresponding visible motion and sound.
+- Each required event must appear clearly in that exact order.
+- If the order is reversed, mixed, overlapping when it should be sequential, missing, or unclear, mark this axis as no.
+
+5. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_constraint_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+CLAP open-vocabulary sound-event evidence (raw text-audio similarity):
+- model: transformers-clap:laion/clap-htsat-unfused
+- audio duration (s): 5.01
+- mode: temporal
+- queries: ['slapping_the_thigh', 'a person speaking']
+- negative queries: ['silence', 'background noise', 'white noise']
+- These are RAW cosine similarities, not correctness labels.
+- Higher cosine generally means closer audio-text match, but absolute thresholds are unreliable.
+- Compare positive queries against negative anchors and against other plausible competing queries.
+- Sliding-window scores are approximate chunk-level evidence. A high score means the queried sound may occur somewhere in that window, not exactly at the window center.
+
+Sliding-window similarities:
+  [  0.00 -   0.75] positives: "slapping_the_thigh"=0.133, "a person speaking"=-0.043 | negatives: "silence"=0.054, "background noise"=-0.045, "white noise"=-0.012
+  [  0.25 -   1.00] positives: "slapping_the_thigh"=0.027, "a person speaking"=0.040 | negatives: "silence"=0.090, "background noise"=-0.049, "white noise"=-0.038
+  [  0.50 -   1.25] positives: "slapping_the_thigh"=0.127, "a person speaking"=0.118 | negatives: "silence"=0.190, "background noise"=0.048, "white noise"=0.149
+  [  0.75 -   1.50] positives: "slapping_the_thigh"=0.105, "a person speaking"=0.120 | negatives: "silence"=0.178, "background noise"=0.039, "white noise"=0.136
+  [  1.00 -   1.75] positives: "slapping_the_thigh"=0.114, "a person speaking"=0.136 | negatives: "silence"=0.303, "background noise"=0.132, "white noise"=0.251
+  [  1.25 -   2.00] positives: "slapping_the_thigh"=0.094, "a person speaking"=0.161 | negatives: "silence"=0.325, "background noise"=0.164, "white noise"=0.182
+  [  1.50 -   2.25] positives: "slapping_the_thigh"=0.225, "a person speaking"=0.023 | negatives: "silence"=0.117, "background noise"=0.053, "white noise"=0.032
+  [  1.75 -   2.50] positives: "slapping_the_thigh"=0.241, "a person speaking"=0.039 | negatives: "silence"=0.118, "background noise"=0.060, "white noise"=0.052
+  [  2.00 -   2.75] positives: "slapping_the_thigh"=0.206, "a person speaking"=0.027 | negatives: "silence"=0.094, "background noise"=0.033, "white noise"=0.011
+  [  2.25 -   3.00] positives: "slapping_the_thigh"=-0.040, "a person speaking"=0.163 | negatives: "silence"=0.342, "background noise"=0.169, "white noise"=0.180
+  [  2.50 -   3.25] positives: "slapping_the_thigh"=-0.010, "a person speaking"=0.118 | negatives: "silence"=0.255, "background noise"=0.070, "white noise"=0.104
+  [  2.75 -   3.50] positives: "slapping_the_thigh"=0.043, "a person speaking"=0.058 | negatives: "silence"=0.166, "background noise"=-0.026, "white noise"=0.019
+  [  3.00 -   3.75] positives: "slapping_the_thigh"=0.035, "a person speaking"=0.087 | negatives: "silence"=0.195, "background noise"=0.024, "white noise"=0.069
+  [  3.25 -   4.00] positives: "slapping_the_thigh"=-0.024, "a person speaking"=0.069 | negatives: "silence"=0.179, "background noise"=0.007, "white noise"=0.020
+  [  3.50 -   4.25] positives: "slapping_the_thigh"=0.089, "a person speaking"=-0.017 | negatives: "silence"=-0.018, "background noise"=0.040, "white noise"=-0.056
+  [  3.75 -   4.50] positives: "slapping_the_thigh"=0.051, "a person speaking"=-0.056 | negatives: "silence"=-0.115, "background noise"=-0.027, "white noise"=-0.122
+  [  4.00 -   4.75] positives: "slapping_the_thigh"=0.020, "a person speaking"=-0.062 | negatives: "silence"=-0.125, "background noise"=-0.018, "white noise"=-0.102
+  [  4.25 -   5.00] positives: "slapping_the_thigh"=-0.027, "a person speaking"=-0.015 | negatives: "silence"=0.094, "background noise"=0.017, "white noise"=-0.038
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "The required audio events are present. The spoken word 'help' is clearly audible, and a sharp slap sound is heard later in the video.",
+    "evidence": "The word 'help' is heard between 0.00 and 0.50 seconds. A sharp slap sound is clearly audible at exactly 4.00 seconds."
+  },
+  "visual_event_correctness": {
+    "label": "yes",
+    "reason": "The required visual actions and speaking behaviors are correctly depicted. The person performs a thumbs-up, slaps their thigh, and has visible mouth movements.",
+    "evidence": "The person's mouth moves to articulate speech from 0.00 to 1.00 seconds. A clear right-handed thumbs-up pose is formed and held between 1.25 and 1.87 seconds. The right hand then strikes the top of the right thigh, making visible contact around 4.00 seconds."
+  },
+  "audio_visual_binding": {
+    "label": "yes",
+    "reason": "The audio events are correctly synchronized with their corresponding visual actions.",
+    "evidence": "The speech 'help' aligns perfectly with the visible mouth movements at the start of the video (0.00-1.00s). The sharp slap sound at 4.00 seconds aligns exactly with the right hand making contact with the right thigh."
+  },
+  "temporal_constraint_satisfaction": {
+    "label": "no",
+    "reason": "The events do not follow the required chronological order. The prompt specified that the thumbs-up should occur first, followed by the speech, and then the thigh slap. The generated video plays the speech first, followed by the thumbs-up.",
+    "evidence": "The speech 'help' occurs first (0.00-1.00s), followed by the thumbs-up pose (1.25-1.87s), and finally the sounding thigh slap (4.00s). This violates the required sequence of silent action -> speech -> sounding action."
+  },
+  "constraint_compliance": {
+    "label": "yes",
+    "reason": "The video satisfies all non-core constraints. The setting, shot type, and subject visibility are correct, and there are no extra unprompted actions or speech.",
+    "evidence": "The video features a single person in a plain indoor room, captured in a static medium shot with the face, upper body, hands, and thighs visible. The person remains still after the final thigh slap action, and no extra sounds or speech are introduced."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "While all requested audio and visual events are present and properly synchronized, the video fails the temporal constraint because the speech occurs before the thumbs-up pose, violating the strict sequential order specified in the prompt.",
+  "observed_behavior_summary": "The person begins by saying the word 'help' (0.00-1.00s). Afterward, they raise their right hand to form a thumbs-up pose (1.25-1.87s). Finally, they strike their right thigh with their right hand, producing a sharp slap sound at exactly 4.00s. They remain still thereafter."
+}

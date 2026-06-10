@@ -1,0 +1,234 @@
+====================================================================================================
+METHOD
+====================================================================================================
+whisper
+
+====================================================================================================
+AXIS
+====================================================================================================
+AVB
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+FN
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+39
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_So_rel_sync_cnt
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v3
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+3
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_So_rel_sync_cnt/Sp_So_rel_sync_cnt_v3_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2/Sp_So_rel_sync_cnt/Sp_So_rel_sync_cnt_v3_raw.mp4
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (sounding)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+relative_sync_count
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+The speech audio lacks clear and synchronized visible lip motion, and the slap sound is temporally misaligned with the speech and binds to an incorrect clapping action instead of a thigh slap.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+The word 'help' occurs between 0.00s and 0.22s with almost no visible mouth movement. The impact sound at 1.00s aligns with a hand clap, completely separated from the speech, failing the simultaneous binding requirement.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+The person says 'help' once at the very beginning with minimal mouth movement. Later, the person claps their hands together and kicks their right leg up, accompanied by a single slap/clap sound. The synchronized event does not occur twice as requested.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+Although the required sound and speech are present in the audio, the video fails visual correctness due to the person clapping and kicking instead of slapping the thigh. Furthermore, the events are not synchronized and only occur once instead of the required two times.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+whisper
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room, a single seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible; the person starts seated on a chair with both hands resting on the knees or thighs. The person clearly says “help” while simultaneously striking the top of the right thigh with the right hand, making visible contact and a sharp slap sound exactly at each impact. This synchronized speech-plus-slap event happens exactly twice, with a brief reset between the two repetitions and no extra words or extra slap sounds. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_So_rel_sync_cnt
+- modality_combination: Speech + Action (sounding)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "sounding_action": {"actor": "person_A", "action": "slapping_the_thigh", "acting_body_side": "right", "acting_body_part": "hand", "target_body_side": "right", "target_body_part": "thigh", "target_sound": "sharp slap sound", "definition": "The person's right hand strikes the top of the person's right thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."}}
+- temporal_constraint: {"relation_type": "sync_count", "timing_type": "relative", "value": {"events": ["speech", "sounding_action"], "count": 2}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound
+
+Whisper ASR transcription (raw open-vocabulary speech evidence):
+- model: faster-whisper:large-v3-turbo
+- detected language: en (lang_prob=1.00)
+- audio duration (s): 5.01
+- has_speech (any segment with no_speech_prob<0.5): True
+- mean no_speech_prob across segments: 0.000
+- This is RAW ASR output. It is not a correctness label. Use it as one piece of evidence and defer to the audio itself if disagreement occurs.
+
+Segments:
+  [  0.00 -   0.22] (no_speech_prob=0.00, avg_logprob=-0.44) Help.
+    words: Help.@0.00-0.22
+
+Axis-specific criteria:
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+- The sound corresponding to the sounding action "slapping the thigh" must be clearly audible and appropriate for the prompt.
+
+2. Visual Event Correctness
+- The visible motion for the sounding action "slapping the thigh" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding
+- If the speaker is visible, visible speaking/lip motion should be temporally aligned with the spoken event "help". If the face/mouth is not visible but the prompt does not require it, judge based on available evidence and the prompt.
+- The visible action "slapping the thigh" must be temporally aligned with its corresponding sound; the sound should occur at the moment implied by the visible action.
+
+4. Temporal Constraint Satisfaction
+- Temporal constraint type: relative synchronized count.
+- The required target event/bundle should occur exactly 2 time(s): Event 1: says "help" + Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound.
+- Count only clear and completed target event occurrences.
+- If the number of target occurrences is different, the bundle is not synchronized when required, or the count is unclear, mark this axis as no.
+
+5. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_constraint_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+Whisper ASR transcription (raw open-vocabulary speech evidence):
+- model: faster-whisper:large-v3-turbo
+- detected language: en (lang_prob=1.00)
+- audio duration (s): 5.01
+- has_speech (any segment with no_speech_prob<0.5): True
+- mean no_speech_prob across segments: 0.000
+- This is RAW ASR output. It is not a correctness label. Use it as one piece of evidence and defer to the audio itself if disagreement occurs.
+
+Segments:
+  [  0.00 -   0.22] (no_speech_prob=0.00, avg_logprob=-0.44) Help.
+    words: Help.@0.00-0.22
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "The word 'help' is spoken, and a sharp slap-like sound is clearly audible, satisfying the presence of the required audio events.",
+    "evidence": "Whisper detects 'Help' from 0.00s to 0.22s. A sharp impact sound is heard at 1.00s."
+  },
+  "visual_event_correctness": {
+    "label": "no",
+    "reason": "The required visual action of the right hand striking the right thigh is not performed correctly. Instead, the person claps their hands together and kicks their right leg up.",
+    "evidence": "Video shows the person bringing both hands together in a clapping motion around 1.00s, while simultaneously lifting their right leg high into the air."
+  },
+  "audio_visual_binding": {
+    "label": "no",
+    "reason": "The speech audio lacks clear and synchronized visible lip motion, and the slap sound is temporally misaligned with the speech and binds to an incorrect clapping action instead of a thigh slap.",
+    "evidence": "The word 'help' occurs between 0.00s and 0.22s with almost no visible mouth movement. The impact sound at 1.00s aligns with a hand clap, completely separated from the speech, failing the simultaneous binding requirement."
+  },
+  "temporal_constraint_satisfaction": {
+    "label": "no",
+    "reason": "The prompt requires the synchronized speech-plus-slap event to happen exactly twice. In the video, the speech and sound only occur once, and they are completely unsynchronized.",
+    "evidence": "Speech occurs once at 0.00-0.22s. The impact sound occurs once at 1.00s. There is no synchronization, and there is no second occurrence."
+  },
+  "constraint_compliance": {
+    "label": "no",
+    "reason": "The video contains extra unprompted actions, violating the constraint against extra actions.",
+    "evidence": "The person kicks their right leg and claps their hands, neither of which were requested in the prompt."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "Although the required sound and speech are present in the audio, the video fails visual correctness due to the person clapping and kicking instead of slapping the thigh. Furthermore, the events are not synchronized and only occur once instead of the required two times.",
+  "observed_behavior_summary": "The person says 'help' once at the very beginning with minimal mouth movement. Later, the person claps their hands together and kicks their right leg up, accompanied by a single slap/clap sound. The synchronized event does not occur twice as requested."
+}

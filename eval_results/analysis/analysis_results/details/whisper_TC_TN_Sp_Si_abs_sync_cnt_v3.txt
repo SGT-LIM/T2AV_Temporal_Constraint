@@ -1,0 +1,233 @@
+====================================================================================================
+METHOD
+====================================================================================================
+whisper
+
+====================================================================================================
+AXIS
+====================================================================================================
+TC
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+TN
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+27
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_Si_abs_sync_cnt
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v3
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+3
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_Si_abs_sync_cnt/Sp_Si_abs_sync_cnt_v3_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2/Sp_Si_abs_sync_cnt/Sp_Si_abs_sync_cnt_v3_raw.mp4
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (silent)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+absolute_sync_count
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+The video fails to satisfy the specified temporal count and schedule. The prompt requires two synchronized occurrences of speech and the thumbs-up action at 1.5s and 3.5s. The video only contains one occurrence of the speech event starting late at 2.3s, and completely misses the second required occurrence.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+The first speech event happens at 2.32s instead of 1.5s. At 3.5s, there is no audible speech and no visible speaking motion, meaning the second required synchronized bundle is absent.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+A single person sits in a plain room and forms a right-hand thumbs-up around 2.0s, holding it throughout the rest of the video. The person says 'help' once from 2.32s to 2.96s with proper lip sync. The required second occurrence of the speech event at 3.5s does not happen.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+Although the individual audio and visual events are correct and properly bound for the first occurrence, the video completely fails the absolute timing and repetition count constraints, providing only one late occurrence instead of the two required events at 1.5s and 3.5s.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+whisper
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room, a single person sits on a chair facing the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible; both hands start resting on the knees or thighs. At 1.5 seconds, the person clearly says “help” while holding the right hand in a visible thumbs-up pose, with the thumb extended upward and the fist closed. At 3.5 seconds, the same synchronized speech and right-hand thumbs-up occur again, clearly audible and easy to distinguish, with no extra words spoken. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_Si_abs_sync_cnt
+- modality_combination: Speech + Action (silent)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "silent_action": {"actor": "person_A", "action": "thumbs_up", "body_side": "right", "body_part": "hand", "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."}}
+- temporal_constraint: {"relation_type": "sync_count", "timing_type": "absolute", "value": {"schedule": [{"time_sec": 1.5, "events": ["speech", "silent_action"]}, {"time_sec": 3.5, "events": ["speech", "silent_action"]}]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the silent visual action "thumbs up"
+
+Whisper ASR transcription (raw open-vocabulary speech evidence):
+- model: faster-whisper:large-v3-turbo
+- detected language: en (lang_prob=1.00)
+- audio duration (s): 5.01
+- has_speech (any segment with no_speech_prob<0.5): True
+- mean no_speech_prob across segments: 0.000
+- This is RAW ASR output. It is not a correctness label. Use it as one piece of evidence and defer to the audio itself if disagreement occurs.
+
+Segments:
+  [  2.32 -   2.96] (no_speech_prob=0.00, avg_logprob=-0.22) Help
+    words: Help@2.32-2.96
+
+Axis-specific criteria:
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+
+2. Visual Event Correctness
+- The visual silent action "thumbs up" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding
+- If the speaker is visible, visible speaking/lip motion should be temporally aligned with the spoken event "help". If the face/mouth is not visible but the prompt does not require it, judge based on available evidence and the prompt.
+
+4. Temporal Constraint Satisfaction
+- Temporal constraint type: absolute synchronized count.
+- The required target event/bundle should occur exactly 2 time(s): Event 1: says "help", Event 2: performs the silent visual action "thumbs up".
+- Count only clear and completed target event occurrences.
+- Required absolute repetition schedule: around 1.5 seconds: Event 1: says "help" + Event 2: performs the silent visual action "thumbs up"; around 3.5 seconds: Event 1: says "help" + Event 2: performs the silent visual action "thumbs up".
+- If the number of target occurrences is different, the bundle is not synchronized when required, or the count is unclear, mark this axis as no.
+
+5. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_constraint_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+Whisper ASR transcription (raw open-vocabulary speech evidence):
+- model: faster-whisper:large-v3-turbo
+- detected language: en (lang_prob=1.00)
+- audio duration (s): 5.01
+- has_speech (any segment with no_speech_prob<0.5): True
+- mean no_speech_prob across segments: 0.000
+- This is RAW ASR output. It is not a correctness label. Use it as one piece of evidence and defer to the audio itself if disagreement occurs.
+
+Segments:
+  [  2.32 -   2.96] (no_speech_prob=0.00, avg_logprob=-0.22) Help
+    words: Help@2.32-2.96
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "The required speech event 'help' is clearly audible and intelligible in the audio track.",
+    "evidence": "Whisper ASR and direct audio inspection confirm the word 'Help' is spoken around 2.32 to 2.96 seconds."
+  },
+  "visual_event_correctness": {
+    "label": "yes",
+    "reason": "The required visible action, a right-hand thumbs-up, is clearly performed, and the person's face and mouth are visible as required.",
+    "evidence": "The video shows the person raising their right hand into a clear thumbs-up pose around 2.0 seconds and holding it. Visible speaking motion is also present when the person speaks."
+  },
+  "audio_visual_binding": {
+    "label": "yes",
+    "reason": "The audible speech is temporally aligned with the visible mouth/lip speaking motion, and this occurs while the thumbs-up pose is held.",
+    "evidence": "From 2.3s to 2.9s, the person's mouth moves in sync with the audible word 'help' while the right hand is visibly held in a thumbs-up pose."
+  },
+  "temporal_constraint_satisfaction": {
+    "label": "no",
+    "reason": "The video fails to satisfy the specified temporal count and schedule. The prompt requires two synchronized occurrences of speech and the thumbs-up action at 1.5s and 3.5s. The video only contains one occurrence of the speech event starting late at 2.3s, and completely misses the second required occurrence.",
+    "evidence": "The first speech event happens at 2.32s instead of 1.5s. At 3.5s, there is no audible speech and no visible speaking motion, meaning the second required synchronized bundle is absent."
+  },
+  "constraint_compliance": {
+    "label": "yes",
+    "reason": "The video complies with the non-core constraints. The scene is a plain indoor room, the camera is a static medium shot, the person starts with hands resting on their thighs, and no extra words or unwarranted actions occur.",
+    "evidence": "Visual inspection confirms the setting, camera angle, starting pose, and lack of extra elements like text, background music, or additional gestures."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "Although the individual audio and visual events are correct and properly bound for the first occurrence, the video completely fails the absolute timing and repetition count constraints, providing only one late occurrence instead of the two required events at 1.5s and 3.5s.",
+  "observed_behavior_summary": "A single person sits in a plain room and forms a right-hand thumbs-up around 2.0s, holding it throughout the rest of the video. The person says 'help' once from 2.32s to 2.96s with proper lip sync. The required second occurrence of the speech event at 3.5s does not happen."
+}

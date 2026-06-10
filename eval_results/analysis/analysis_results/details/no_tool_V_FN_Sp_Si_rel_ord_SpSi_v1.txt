@@ -1,0 +1,210 @@
+====================================================================================================
+METHOD
+====================================================================================================
+no_tool
+
+====================================================================================================
+AXIS
+====================================================================================================
+V
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+FN
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+29
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_Si_rel_ord_SpSi
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v1
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+1
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_Si_rel_ord_SpSi/Sp_Si_rel_ord_SpSi_v1_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2/Sp_Si_rel_ord_SpSi/Sp_Si_rel_ord_SpSi_v1_raw.mp4
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (silent)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+relative_order
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+The prompt explicitly requires the full face and mouth to be clearly visible so that speaking behavior can be seen. However, the camera framing cuts off the person's head, making the face and mouth completely invisible.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+Throughout the video (00:00.000 - 00:05.000), the person's head is out of frame. The right-hand thumbs-up action is visible starting around 00:00.667, but the required facial visibility for the speech event is entirely missing.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+A person whose head is out of frame sits on a chair. The word 'help' is spoken in the audio from 00:00.000 to 00:00.500. Shortly after the audio ends, at 00:00.667, the person forms a thumbs-up with their right hand and holds it. The required facial visibility is entirely absent.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+While the audio and action events occur in the correct relative order, the visual event correctness and audio-visual binding fail because the person's face and mouth are cut out of the frame, preventing any verification of the required speaking motion.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible; they begin seated on a chair with both hands resting on the knees or thighs. First, the person clearly says the single word “help” in an audible, easy-to-distinguish voice. After that speech ends, the person forms and holds a clear thumbs-up with the right hand, with the fist closed and the thumb extended upward, while remaining seated and visible. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_Si_rel_ord_SpSi
+- modality_combination: Speech + Action (silent)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "silent_action": {"actor": "person_A", "action": "thumbs_up", "body_side": "right", "body_part": "hand", "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."}}
+- temporal_constraint: {"relation_type": "order", "timing_type": "relative", "value": {"sequence": ["speech", "silent_action"]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the silent visual action "thumbs up"
+
+Axis-specific criteria:
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+
+2. Visual Event Correctness
+- The visual silent action "thumbs up" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding
+- If the speaker is visible, visible speaking/lip motion should be temporally aligned with the spoken event "help". If the face/mouth is not visible but the prompt does not require it, judge based on available evidence and the prompt.
+
+4. Temporal Constraint Satisfaction
+- Temporal constraint type: relative order.
+- Required order: Event 1: says "help" -> Event 2: performs the silent visual action "thumbs up".
+- Each required event must appear clearly in that exact order.
+- If the order is reversed, mixed, overlapping when it should be sequential, missing, or unclear, mark this axis as no.
+
+5. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_constraint_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "The spoken word 'help' is clearly audible and intelligible, without any extra words.",
+    "evidence": "The word 'help' can be clearly heard from 00:00.000 to approximately 00:00.500."
+  },
+  "visual_event_correctness": {
+    "label": "no",
+    "reason": "The prompt explicitly requires the full face and mouth to be clearly visible so that speaking behavior can be seen. However, the camera framing cuts off the person's head, making the face and mouth completely invisible.",
+    "evidence": "Throughout the video (00:00.000 - 00:05.000), the person's head is out of frame. The right-hand thumbs-up action is visible starting around 00:00.667, but the required facial visibility for the speech event is entirely missing."
+  },
+  "audio_visual_binding": {
+    "label": "no",
+    "reason": "Although the speech audio 'help' is heard, there is no visible face or mouth to display the corresponding speaking and lip motion.",
+    "evidence": "The speech audio occurs between 00:00.000 and 00:00.500, but the face and mouth are not in the frame, so no synchronization between the audio and visible speaking behavior can be established."
+  },
+  "temporal_constraint_satisfaction": {
+    "label": "yes",
+    "reason": "The temporal sequence of the events is correct: the speech event occurs and concludes before the physical action begins.",
+    "evidence": "The spoken word 'help' ends by 00:00.500, and the right hand subsequently forms a thumbs-up starting around 00:00.667, maintaining the correct relative order."
+  },
+  "constraint_compliance": {
+    "label": "no",
+    "reason": "The video violates the strict camera and scene constraints. The prompt requires a static medium shot with the full face, mouth, upper body, both hands, and thighs clearly visible, but the person's head is entirely cropped out.",
+    "evidence": "The frame consistently cuts off above the person's neck from 00:00.000 to 00:05.000, violating the visibility constraints for the face and mouth."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "While the audio and action events occur in the correct relative order, the visual event correctness and audio-visual binding fail because the person's face and mouth are cut out of the frame, preventing any verification of the required speaking motion.",
+  "observed_behavior_summary": "A person whose head is out of frame sits on a chair. The word 'help' is spoken in the audio from 00:00.000 to 00:00.500. Shortly after the audio ends, at 00:00.667, the person forms a thumbs-up with their right hand and holds it. The required facial visibility is entirely absent."
+}

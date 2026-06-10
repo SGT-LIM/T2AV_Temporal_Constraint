@@ -1,0 +1,229 @@
+====================================================================================================
+METHOD
+====================================================================================================
+no_tool
+
+====================================================================================================
+AXIS
+====================================================================================================
+TC_REL
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+TN
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+6
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Si_So_rel_sync
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v1
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+1
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Si_So_rel_sync/Si_So_rel_sync_v1_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Action (silent) + Action (sounding)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+relative_synchronization
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+Hierarchical preconditions failed (visual and binding failed). Furthermore, the thumbs-up and the thigh slap are performed sequentially rather than simultaneously.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+The video shows a thumbs-up gesture followed by a separate downward slapping motion, rather than one synchronized event.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+The person performs an upward thumbs-up gesture and then slaps their thigh sequentially, repeating this three times. The slap sounds occur when the hand is resting, completely out of sync with the visible impacts.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+The video fails because the visual actions do not match the prompt's definition, the audio and visual components are severely misaligned, the actions are performed sequentially instead of simultaneously, and the sequence repeats multiple times.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room with a static medium shot, one seated person faces the camera on a chair with both hands initially resting on the knees or thighs, and the full face, mouth, upper body, both hands, and thighs clearly visible. At one moment, the person’s right hand is held in a clear thumbs-up pose while the same right hand simultaneously strikes the top of the right thigh, with visible contact and a sharp slap sound exactly at impact. The thumbs-up is the pose itself, not a separate lifting motion, and the synchronized thumb pose and thigh slap happen together as one event. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Si_So_rel_sync
+- modality_combination: Action (silent) + Action (sounding)
+- content: {"silent_action": {"actor": "person_A", "action": "thumbs_up", "body_side": "right", "body_part": "hand", "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."}, "sounding_action": {"actor": "person_A", "action": "slapping_the_thigh", "acting_body_side": "right", "acting_body_part": "hand", "target_body_side": "right", "target_body_part": "thigh", "target_sound": "sharp slap sound", "definition": "The person's right hand strikes the top of the person's right thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."}}
+- temporal_constraint: {"relation_type": "synchronization", "timing_type": "relative", "value": {"events": ["silent_action", "sounding_action"]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: performs the silent visual action "thumbs up"
+- Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound
+
+Axis-specific criteria (evaluate in this hierarchical order; a failure cascades downward):
+
+1. Audio Event Correctness
+- The sound corresponding to the sounding action "slapping the thigh" must be clearly audible and appropriate for the prompt.
+
+2. Visual Event Correctness
+- The visual silent action "thumbs up" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action "slapping the thigh" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding (WITHIN each event)
+- Audio-Visual Binding is evaluated WITHIN each event: whether that event's audio component and visual component are correctly bound (temporally and causally aligned), assuming both are present and correct.
+- Precondition (hierarchical): evaluate this axis only when the event's required audio (Audio Event Correctness) AND required visual component (Visual Event Correctness) are both correct. If either is incorrect or missing, mark this axis no.
+- For the sounding action "slapping the thigh": given a correct sound and a correctly performed visible motion, check that the sound occurs at the moment implied by the visible action. If either the sound or the visible action is wrong or missing, mark this axis no.
+
+4. Temporal Relation Satisfaction (BETWEEN events)
+- Relation type: relative synchronization.
+- Check whether the required target events are synchronized: Event 1: performs the silent visual action "thumbs up" + Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound.
+- The target events must occur simultaneously or with tight temporal alignment as specified by the original generation prompt.
+- If the required events are sequential instead of simultaneous, offset, disconnected, missing, or unclear, mark this sub-axis as no.
+- Precondition: evaluate this sub-axis only when Audio Event Correctness, Visual Event Correctness, and Audio-Visual Binding are all satisfied; otherwise mark it no.
+
+5. Temporal Count Satisfaction (number of occurrences)
+- This sub-axis checks the number of occurrences (counting / repetition), independent of the relation type.
+- The required synchronized bundle should occur exactly once. Count only clear, completed occurrences.
+- Any extra or spurious occurrence of a target action/sound/speech beyond the specified structure makes this sub-axis no.
+- This applies to every temporal type: even for order, synchronization, spacing, absolute-timing, rhythm, or start/stop prompts, verify each required event occurs the required number of times (default exactly once) with no extra repetitions, unless the prompt explicitly allows repetition.
+- If the number of occurrences differs from the requirement, or the count is unclear, mark this sub-axis as no.
+- Precondition: evaluate this sub-axis only when Audio Event Correctness, Visual Event Correctness, and Audio-Visual Binding are all satisfied; otherwise mark it no.
+
+6. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- Apply the hierarchical dependency: Audio-Visual Binding is "no" if either the required audio or visual component is incorrect/missing; both temporal sub-axes (relation and count) are "no" if audio, visual, or Audio-Visual Binding fails.
+- Output audio_event_correctness, visual_event_correctness, audio_visual_binding, temporal_relation_satisfaction, temporal_count_satisfaction, and constraint_compliance. Do NOT output a combined temporal_constraint_satisfaction; it is derived as relation AND count.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_relation_satisfaction AND temporal_count_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "Sharp slap sounds are clearly audible in the audio track.",
+    "evidence": "Slap sounds can be heard at approximately 0.0s, 1.0s, and 3.0s."
+  },
+  "visual_event_correctness": {
+    "label": "no",
+    "reason": "The visible actions do not match the prompt's strict definition; the person performs a thumbs-up with a separate lifting motion in the air, then opens the hand to slap the thigh, rather than striking the thigh while maintaining the thumbs-up pose.",
+    "evidence": "The right hand raises into a thumbs-up (e.g., 00:00.292 - 00:00.458), then loses the pose as it comes down to slap the thigh (e.g., impact at 00:00.583)."
+  },
+  "audio_visual_binding": {
+    "label": "no",
+    "reason": "The visual event is incorrect, so binding is not evaluable. Additionally, the audio and visual components are entirely out of sync.",
+    "evidence": "The slap sounds occur at 0.0s, 1.0s, and 3.0s when the hand is merely resting on the thigh, whereas the visible impacts occur later at approximately 0.583s, 1.542s, and 3.542s without corresponding audio."
+  },
+  "temporal_relation_satisfaction": {
+    "label": "no",
+    "reason": "Hierarchical preconditions failed (visual and binding failed). Furthermore, the thumbs-up and the thigh slap are performed sequentially rather than simultaneously.",
+    "evidence": "The video shows a thumbs-up gesture followed by a separate downward slapping motion, rather than one synchronized event."
+  },
+  "temporal_count_satisfaction": {
+    "label": "no",
+    "reason": "Hierarchical preconditions failed. Additionally, the required synchronized bundle does not occur exactly once as instructed.",
+    "evidence": "The sequential thumbs-up and slap actions repeat three times throughout the video."
+  },
+  "constraint_compliance": {
+    "label": "no",
+    "reason": "The video violates the post-event stillness constraint and the instruction against a separate lifting motion.",
+    "evidence": "The actor repeats the sequence three times instead of remaining still after the first occurrence, and the thumbs-up involves a distinct upward arm movement."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "The video fails because the visual actions do not match the prompt's definition, the audio and visual components are severely misaligned, the actions are performed sequentially instead of simultaneously, and the sequence repeats multiple times.",
+  "observed_behavior_summary": "The person performs an upward thumbs-up gesture and then slaps their thigh sequentially, repeating this three times. The slap sounds occur when the hand is resting, completely out of sync with the visible impacts."
+}

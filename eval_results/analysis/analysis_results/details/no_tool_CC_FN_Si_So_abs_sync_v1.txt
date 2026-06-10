@@ -1,0 +1,212 @@
+====================================================================================================
+METHOD
+====================================================================================================
+no_tool
+
+====================================================================================================
+AXIS
+====================================================================================================
+CC
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+FN
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+2
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Si_So_abs_sync
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v1
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+1
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Si_So_abs_sync/Si_So_abs_sync_v1_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2/Si_So_abs_sync/Si_So_abs_sync_v1_raw.mp4
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Action (silent) + Action (sounding)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+absolute_synchronization
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+The video includes extra, unprompted actions (pumping the arm in the air) and fails the strict instructions not to perform a separate hand-raising motion.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+Between 2.5 and 4.0 seconds, the person performs a continuous up-and-down pumping motion in the air with his right hand, which was not specified and violates the action constraints.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+The person sits still until 2.0s, then raises his right hand to form a thumbs-up at 2.5s. He pumps his fist in the air several times before bringing it down to strike his thigh at 4.2s with a relaxed hand, producing a synchronized slap sound.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+While the slap sound is bound to the physical strike, the visual action is incorrect (no thumbs-up during contact) and the temporal constraints are severely violated as the events are sequential and late rather than synchronized at 2.0 seconds.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room with a static medium shot, one seated person faces the camera on a chair with both hands initially resting on the knees or thighs, and the full face, mouth, upper body, both hands, and thighs stay visible. At 2.0 seconds, the person’s right hand is held in a clear thumbs-up pose while the same right hand strikes the top of the right thigh at the same moment, with visible contact and a sharp slap sound exactly at impact. The thumbs-up remains clearly recognizable during the contact moment, not as a separate hand-raising motion. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Si_So_abs_sync
+- modality_combination: Action (silent) + Action (sounding)
+- content: {"silent_action": {"actor": "person_A", "action": "thumbs_up", "body_side": "right", "body_part": "hand", "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."}, "sounding_action": {"actor": "person_A", "action": "slapping_the_thigh", "acting_body_side": "right", "acting_body_part": "hand", "target_body_side": "right", "target_body_part": "thigh", "target_sound": "sharp slap sound", "definition": "The person's right hand strikes the top of the person's right thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."}}
+- temporal_constraint: {"relation_type": "synchronization", "timing_type": "absolute", "value": {"schedule": [{"time_sec": 2.0, "events": ["silent_action", "sounding_action"]}]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: performs the silent visual action "thumbs up"
+- Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound
+
+Axis-specific criteria:
+
+1. Audio Event Correctness
+- The sound corresponding to the sounding action "slapping the thigh" must be clearly audible and appropriate for the prompt.
+
+2. Visual Event Correctness
+- The visual silent action "thumbs up" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action "slapping the thigh" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding
+- The visible action "slapping the thigh" must be temporally aligned with its corresponding sound; the sound should occur at the moment implied by the visible action.
+
+4. Temporal Constraint Satisfaction
+- Temporal constraint type: absolute synchronization.
+- Check whether the required target events are synchronized: Event 1: performs the silent visual action "thumbs up", Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound.
+- The target events must occur simultaneously or with tight temporal alignment as specified by the original generation prompt.
+- Required absolute synchronized schedule: around 2.0 seconds: Event 1: performs the silent visual action "thumbs up" + Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound.
+- If the required events are sequential instead of simultaneous, offset, disconnected, missing, or unclear, mark this axis as no.
+
+5. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_constraint_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "A sharp slap sound is clearly audible in the audio track.",
+    "evidence": "A clear slap sound is heard around 4.1-4.2 seconds."
+  },
+  "visual_event_correctness": {
+    "label": "no",
+    "reason": "The person forms a thumbs-up pose but raises his hand in the air and makes a pumping motion, rather than holding it while striking the thigh. When he eventually strikes the thigh, the hand is no longer in a thumbs-up pose.",
+    "evidence": "The right hand forms a thumbs-up around 2.5 seconds and pumps in the air. The hand then strikes the thigh at 4.2 seconds with a relaxed or open hand, failing the requirement to maintain the thumbs-up during contact."
+  },
+  "audio_visual_binding": {
+    "label": "yes",
+    "reason": "The visible action of the hand striking the thigh is temporally aligned with the audible slap sound.",
+    "evidence": "The person's right hand strikes the thigh at 4.2 seconds, exactly when the slap sound is heard."
+  },
+  "temporal_constraint_satisfaction": {
+    "label": "no",
+    "reason": "The events are not synchronized as required, and they do not occur at 2.0 seconds. The thumbs-up and the slap occur sequentially rather than simultaneously.",
+    "evidence": "The person makes a thumbs-up gesture in the air starting around 2.5 seconds, and does not strike the thigh until 4.2 seconds, failing both the absolute timing constraint (2.0s) and the synchronization constraint."
+  },
+  "constraint_compliance": {
+    "label": "no",
+    "reason": "The video includes extra, unprompted actions (pumping the arm in the air) and fails the strict instructions not to perform a separate hand-raising motion.",
+    "evidence": "Between 2.5 and 4.0 seconds, the person performs a continuous up-and-down pumping motion in the air with his right hand, which was not specified and violates the action constraints."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "While the slap sound is bound to the physical strike, the visual action is incorrect (no thumbs-up during contact) and the temporal constraints are severely violated as the events are sequential and late rather than synchronized at 2.0 seconds.",
+  "observed_behavior_summary": "The person sits still until 2.0s, then raises his right hand to form a thumbs-up at 2.5s. He pumps his fist in the air several times before bringing it down to strike his thigh at 4.2s with a relaxed hand, producing a synchronized slap sound."
+}

@@ -1,0 +1,214 @@
+====================================================================================================
+METHOD
+====================================================================================================
+no_tool
+
+====================================================================================================
+AXIS
+====================================================================================================
+CC
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+TN
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+16
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_Si_So_rel_ord_SiSoSp
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v2
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+2
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_Si_So_rel_ord_SiSoSp/Sp_Si_So_rel_ord_SiSoSp_v2_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2/Sp_Si_So_rel_ord_SiSoSp/Sp_Si_So_rel_ord_SiSoSp_v2_raw.mp4
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (silent) + Action (sounding)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+relative_order
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+The video fails several starting pose and specific action constraints, including the initial hand position, the laterality of the thumbs-up, and the target location of the slap.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+The prompt requires starting with hands on the thighs, but the video starts at 00:00.000 with both hands already in a thumbs-up. The thumbs-up is performed with both hands instead of just the right. The right hand slaps the left arm/wrist at 00:01.625 instead of the top of the right thigh.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+The video begins with the person already holding both hands in a thumbs-up pose while simultaneously saying 'help'. The hands then drop to the lap, and the right hand subsequently strikes the left forearm/wrist, producing a slap sound. The person then remains mostly still.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+Although the audio events are correct and properly synchronized with the visual actions, the video fails because the visual actions themselves are incorrect (wrong starting pose, wrong slap target) and the sequence of events completely violates the required chronological order.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room, a single seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and both thighs clearly visible. The person starts seated on a chair with both hands resting on the knees or thighs. First, the person forms and holds a clear thumbs-up pose with the right hand, with the thumb extended upward and the fist closed. After that, the person uses the right hand to strike the top of the right thigh once, making visible contact and producing a sharp slap sound at the moment of impact. After that, the person clearly says the single word “help” and nothing else. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_Si_So_rel_ord_SiSoSp
+- modality_combination: Speech + Action (silent) + Action (sounding)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "silent_action": {"actor": "person_A", "action": "thumbs_up", "body_side": "right", "body_part": "hand", "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."}, "sounding_action": {"actor": "person_A", "action": "slapping_the_thigh", "acting_body_side": "right", "acting_body_part": "hand", "target_body_side": "right", "target_body_part": "thigh", "target_sound": "sharp slap sound", "definition": "The person's right hand strikes the top of the person's right thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."}}
+- temporal_constraint: {"relation_type": "order", "timing_type": "relative", "value": {"sequence": ["silent_action", "sounding_action", "speech"]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the silent visual action "thumbs up"
+- Event 3: performs the sounding action "slapping the thigh" with corresponding visible motion and sound
+
+Axis-specific criteria:
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+- The sound corresponding to the sounding action "slapping the thigh" must be clearly audible and appropriate for the prompt.
+
+2. Visual Event Correctness
+- The visual silent action "thumbs up" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action "slapping the thigh" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding
+- If the speaker is visible, visible speaking/lip motion should be temporally aligned with the spoken event "help". If the face/mouth is not visible but the prompt does not require it, judge based on available evidence and the prompt.
+- The visible action "slapping the thigh" must be temporally aligned with its corresponding sound; the sound should occur at the moment implied by the visible action.
+
+4. Temporal Constraint Satisfaction
+- Temporal constraint type: relative order.
+- Required order: Event 2: performs the silent visual action "thumbs up" -> Event 3: performs the sounding action "slapping the thigh" with corresponding visible motion and sound -> Event 1: says "help".
+- Each required event must appear clearly in that exact order.
+- If the order is reversed, mixed, overlapping when it should be sequential, missing, or unclear, mark this axis as no.
+
+5. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_constraint_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "The spoken word 'help' and a sharp slap sound are both clearly audible in the audio track.",
+    "evidence": "The word 'help' is clearly heard from 00:00.000 to 00:00.500, and a distinct slap sound is present around 00:01.625."
+  },
+  "visual_event_correctness": {
+    "label": "no",
+    "reason": "The visual actions do not match the prompt. The person starts with both hands already in a thumbs-up pose rather than resting on the thighs, and the striking action targets the left arm/wrist rather than the right thigh.",
+    "evidence": "At 00:00.000, both hands are already forming a thumbs-up pose. At 00:01.625, the right hand strikes the left forearm/wrist resting on the lap, completely missing the requested target of the right thigh."
+  },
+  "audio_visual_binding": {
+    "label": "yes",
+    "reason": "The audible events are correctly synchronized with the visible candidate actions in the video.",
+    "evidence": "The speech 'help' aligns with the visible mouth movements from 00:00.000 to 00:00.500, and the slap sound at 00:01.625 perfectly matches the moment the right hand impacts the left arm."
+  },
+  "temporal_constraint_satisfaction": {
+    "label": "no",
+    "reason": "The required event order (thumbs-up, then slap, then speech) is completely violated.",
+    "evidence": "The speech and thumbs-up actions occur simultaneously at the very beginning of the video (00:00.000 - 00:00.500), and the slapping action occurs afterward at 00:01.625."
+  },
+  "constraint_compliance": {
+    "label": "no",
+    "reason": "The video fails several starting pose and specific action constraints, including the initial hand position, the laterality of the thumbs-up, and the target location of the slap.",
+    "evidence": "The prompt requires starting with hands on the thighs, but the video starts at 00:00.000 with both hands already in a thumbs-up. The thumbs-up is performed with both hands instead of just the right. The right hand slaps the left arm/wrist at 00:01.625 instead of the top of the right thigh."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "Although the audio events are correct and properly synchronized with the visual actions, the video fails because the visual actions themselves are incorrect (wrong starting pose, wrong slap target) and the sequence of events completely violates the required chronological order.",
+  "observed_behavior_summary": "The video begins with the person already holding both hands in a thumbs-up pose while simultaneously saying 'help'. The hands then drop to the lap, and the right hand subsequently strikes the left forearm/wrist, producing a slap sound. The person then remains mostly still."
+}

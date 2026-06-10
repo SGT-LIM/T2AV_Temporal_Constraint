@@ -1,0 +1,270 @@
+====================================================================================================
+METHOD
+====================================================================================================
+clap
+
+====================================================================================================
+AXIS
+====================================================================================================
+CC
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+TN
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+31
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_Si_rel_sync_cnt
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v2
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+2
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_Si_rel_sync_cnt/Sp_Si_rel_sync_cnt_v2_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2/Sp_Si_rel_sync_cnt/Sp_Si_rel_sync_cnt_v2_raw.mp4
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (silent)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+relative_sync_count
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+The video fails to meet the framing and initial state constraints. The full face is not visible, and the person does not start with their right hand resting on their knee or thigh.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+The top half of the person's face (from the nose up) is cropped out of the frame for the entire duration, violating the 'full face clearly visible' requirement. Additionally, at 0.000s, the right hand is already raised in motion rather than starting from a resting position.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+A seated person, whose upper face is cropped out of the frame, raises their right hand into a thumbs-up pose and says 'help' at the very beginning of the video. They then lower their hand and remain still. The required action bundle is performed only once, failing the repetition constraint.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+Although the individual speech and visual actions are present, correctly formed, and synchronized, the generation fails the relative count temporal constraint because the target bundle occurs only once instead of the required two times.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+clap
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room, a single seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. The person begins seated on a chair with both hands resting on the knees or thighs, then performs the synchronized bundle two times: while clearly saying the single word “help,” the right hand forms and holds a recognizable thumbs-up pose with the thumb extended upward. Between the two repetitions, there is only a brief natural reset to the initial resting position, and both repetitions are easy to see and hear. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_Si_rel_sync_cnt
+- modality_combination: Speech + Action (silent)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "silent_action": {"actor": "person_A", "action": "thumbs_up", "body_side": "right", "body_part": "hand", "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."}}
+- temporal_constraint: {"relation_type": "sync_count", "timing_type": "relative", "value": {"events": ["speech", "silent_action"], "count": 2}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the silent visual action "thumbs up"
+
+CLAP open-vocabulary sound-event evidence (raw text-audio similarity):
+- model: transformers-clap:laion/clap-htsat-unfused
+- audio duration (s): 5.01
+- mode: temporal
+- queries: ['a person speaking']
+- negative queries: ['silence', 'background noise', 'white noise']
+- These are RAW cosine similarities, not correctness labels.
+- Higher cosine generally means closer audio-text match, but absolute thresholds are unreliable.
+- Compare positive queries against negative anchors and against other plausible competing queries.
+- Sliding-window scores are approximate chunk-level evidence. A high score means the queried sound may occur somewhere in that window, not exactly at the window center.
+
+Sliding-window similarities:
+  [  0.00 -   0.75] positives: "a person speaking"=-0.074 | negatives: "silence"=0.002, "background noise"=-0.104, "white noise"=-0.131
+  [  0.25 -   1.00] positives: "a person speaking"=-0.111 | negatives: "silence"=0.024, "background noise"=-0.057, "white noise"=-0.099
+  [  0.50 -   1.25] positives: "a person speaking"=-0.063 | negatives: "silence"=0.053, "background noise"=-0.034, "white noise"=-0.089
+  [  0.75 -   1.50] positives: "a person speaking"=0.028 | negatives: "silence"=0.127, "background noise"=0.042, "white noise"=-0.008
+  [  1.00 -   1.75] positives: "a person speaking"=0.219 | negatives: "silence"=0.397, "background noise"=0.222, "white noise"=0.199
+  [  1.25 -   2.00] positives: "a person speaking"=0.218 | negatives: "silence"=0.424, "background noise"=0.264, "white noise"=0.202
+  [  1.50 -   2.25] positives: "a person speaking"=0.190 | negatives: "silence"=0.422, "background noise"=0.268, "white noise"=0.231
+  [  1.75 -   2.50] positives: "a person speaking"=0.220 | negatives: "silence"=0.459, "background noise"=0.267, "white noise"=0.293
+  [  2.00 -   2.75] positives: "a person speaking"=0.175 | negatives: "silence"=0.414, "background noise"=0.238, "white noise"=0.255
+  [  2.25 -   3.00] positives: "a person speaking"=0.147 | negatives: "silence"=0.370, "background noise"=0.204, "white noise"=0.216
+  [  2.50 -   3.25] positives: "a person speaking"=0.241 | negatives: "silence"=0.437, "background noise"=0.245, "white noise"=0.261
+  [  2.75 -   3.50] positives: "a person speaking"=0.266 | negatives: "silence"=0.429, "background noise"=0.260, "white noise"=0.250
+  [  3.00 -   3.75] positives: "a person speaking"=0.224 | negatives: "silence"=0.447, "background noise"=0.280, "white noise"=0.245
+  [  3.25 -   4.00] positives: "a person speaking"=0.196 | negatives: "silence"=0.430, "background noise"=0.293, "white noise"=0.314
+  [  3.50 -   4.25] positives: "a person speaking"=0.260 | negatives: "silence"=0.525, "background noise"=0.424, "white noise"=0.365
+  [  3.75 -   4.50] positives: "a person speaking"=0.202 | negatives: "silence"=0.464, "background noise"=0.321, "white noise"=0.341
+  [  4.00 -   4.75] positives: "a person speaking"=0.217 | negatives: "silence"=0.471, "background noise"=0.342, "white noise"=0.357
+  [  4.25 -   5.00] positives: "a person speaking"=0.250 | negatives: "silence"=0.504, "background noise"=0.408, "white noise"=0.358
+
+Axis-specific criteria:
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+
+2. Visual Event Correctness
+- The visual silent action "thumbs up" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding
+- If the speaker is visible, visible speaking/lip motion should be temporally aligned with the spoken event "help". If the face/mouth is not visible but the prompt does not require it, judge based on available evidence and the prompt.
+
+4. Temporal Constraint Satisfaction
+- Temporal constraint type: relative synchronized count.
+- The required target event/bundle should occur exactly 2 time(s): Event 1: says "help" + Event 2: performs the silent visual action "thumbs up".
+- Count only clear and completed target event occurrences.
+- If the number of target occurrences is different, the bundle is not synchronized when required, or the count is unclear, mark this axis as no.
+
+5. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_constraint_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+CLAP open-vocabulary sound-event evidence (raw text-audio similarity):
+- model: transformers-clap:laion/clap-htsat-unfused
+- audio duration (s): 5.01
+- mode: temporal
+- queries: ['a person speaking']
+- negative queries: ['silence', 'background noise', 'white noise']
+- These are RAW cosine similarities, not correctness labels.
+- Higher cosine generally means closer audio-text match, but absolute thresholds are unreliable.
+- Compare positive queries against negative anchors and against other plausible competing queries.
+- Sliding-window scores are approximate chunk-level evidence. A high score means the queried sound may occur somewhere in that window, not exactly at the window center.
+
+Sliding-window similarities:
+  [  0.00 -   0.75] positives: "a person speaking"=-0.074 | negatives: "silence"=0.002, "background noise"=-0.104, "white noise"=-0.131
+  [  0.25 -   1.00] positives: "a person speaking"=-0.111 | negatives: "silence"=0.024, "background noise"=-0.057, "white noise"=-0.099
+  [  0.50 -   1.25] positives: "a person speaking"=-0.063 | negatives: "silence"=0.053, "background noise"=-0.034, "white noise"=-0.089
+  [  0.75 -   1.50] positives: "a person speaking"=0.028 | negatives: "silence"=0.127, "background noise"=0.042, "white noise"=-0.008
+  [  1.00 -   1.75] positives: "a person speaking"=0.219 | negatives: "silence"=0.397, "background noise"=0.222, "white noise"=0.199
+  [  1.25 -   2.00] positives: "a person speaking"=0.218 | negatives: "silence"=0.424, "background noise"=0.264, "white noise"=0.202
+  [  1.50 -   2.25] positives: "a person speaking"=0.190 | negatives: "silence"=0.422, "background noise"=0.268, "white noise"=0.231
+  [  1.75 -   2.50] positives: "a person speaking"=0.220 | negatives: "silence"=0.459, "background noise"=0.267, "white noise"=0.293
+  [  2.00 -   2.75] positives: "a person speaking"=0.175 | negatives: "silence"=0.414, "background noise"=0.238, "white noise"=0.255
+  [  2.25 -   3.00] positives: "a person speaking"=0.147 | negatives: "silence"=0.370, "background noise"=0.204, "white noise"=0.216
+  [  2.50 -   3.25] positives: "a person speaking"=0.241 | negatives: "silence"=0.437, "background noise"=0.245, "white noise"=0.261
+  [  2.75 -   3.50] positives: "a person speaking"=0.266 | negatives: "silence"=0.429, "background noise"=0.260, "white noise"=0.250
+  [  3.00 -   3.75] positives: "a person speaking"=0.224 | negatives: "silence"=0.447, "background noise"=0.280, "white noise"=0.245
+  [  3.25 -   4.00] positives: "a person speaking"=0.196 | negatives: "silence"=0.430, "background noise"=0.293, "white noise"=0.314
+  [  3.50 -   4.25] positives: "a person speaking"=0.260 | negatives: "silence"=0.525, "background noise"=0.424, "white noise"=0.365
+  [  3.75 -   4.50] positives: "a person speaking"=0.202 | negatives: "silence"=0.464, "background noise"=0.321, "white noise"=0.341
+  [  4.00 -   4.75] positives: "a person speaking"=0.217 | negatives: "silence"=0.471, "background noise"=0.342, "white noise"=0.357
+  [  4.25 -   5.00] positives: "a person speaking"=0.250 | negatives: "silence"=0.504, "background noise"=0.408, "white noise"=0.358
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "The required word 'help' is clearly spoken and easily intelligible in the audio track.",
+    "evidence": "The word 'help' is distinctly heard right at the beginning of the video, matching the required speech content."
+  },
+  "visual_event_correctness": {
+    "label": "yes",
+    "reason": "The person visibly performs the required thumbs-up action with their right hand, and appropriate mouth movements are shown for the speech event.",
+    "evidence": "From the start of the video (0.000s) until around 0.500s, the right hand forms a closed fist with the thumb extended upward while the mouth simultaneously articulates."
+  },
+  "audio_visual_binding": {
+    "label": "yes",
+    "reason": "The spoken word 'help' is correctly synchronized with both the visible mouth articulation and the concurrent thumbs-up action.",
+    "evidence": "The audible speech 'help' aligns precisely with the visible lip movement and the execution of the right-handed thumbs-up between 0.000s and 0.500s."
+  },
+  "temporal_constraint_satisfaction": {
+    "label": "no",
+    "reason": "The prompt requires the synchronized bundle (saying 'help' while doing a thumbs-up) to be performed exactly two times, but it is only performed once.",
+    "evidence": "The speech and thumbs-up action occur together a single time at the very beginning of the video (0.000s - 0.500s). The person remains mostly still for the rest of the clip, and no second repetition takes place."
+  },
+  "constraint_compliance": {
+    "label": "no",
+    "reason": "The video fails to meet the framing and initial state constraints. The full face is not visible, and the person does not start with their right hand resting on their knee or thigh.",
+    "evidence": "The top half of the person's face (from the nose up) is cropped out of the frame for the entire duration, violating the 'full face clearly visible' requirement. Additionally, at 0.000s, the right hand is already raised in motion rather than starting from a resting position."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "Although the individual speech and visual actions are present, correctly formed, and synchronized, the generation fails the relative count temporal constraint because the target bundle occurs only once instead of the required two times.",
+  "observed_behavior_summary": "A seated person, whose upper face is cropped out of the frame, raises their right hand into a thumbs-up pose and says 'help' at the very beginning of the video. They then lower their hand and remain still. The required action bundle is performed only once, failing the repetition constraint."
+}

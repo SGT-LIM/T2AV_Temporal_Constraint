@@ -1,0 +1,2432 @@
+====================================================================================================
+METHOD
+====================================================================================================
+mediapipe
+
+====================================================================================================
+AXIS
+====================================================================================================
+CC
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+TP
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+18
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_Si_So_rel_ord_SoSiSp
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v1
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+1
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_Si_So_rel_ord_SoSiSp/Sp_Si_So_rel_ord_SoSiSp_v1_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (silent) + Action (sounding)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+relative_order
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+The video satisfies all scene, camera, and specific action constraints.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+The scene is a plain indoor room with a static medium shot. The person starts with hands on thighs. No extra words or sounds are produced. The person remains mostly still after the final speech event.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+The person, seated in a plain room, first raises their right hand and slaps their right thigh at 00:01.000. They then form a right-hand thumbs-up pose at 00:02.000. Finally, they say the word 'help' at 00:03.000, after which they return their hand to their lap.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+All required audio and visual events are present, correctly bound, and occur in the exact specified order exactly once.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+focused_raw
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room, a single seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. The person starts seated on a chair with both hands resting on the knees or thighs. First, the person’s right hand strikes the top of the right thigh once, making a visible contact and a sharp slap sound. After that is completed, the person forms and holds a clear thumbs-up pose with the right hand, with the fist closed and thumb extended upward. After that, the person clearly says the single word “help” with no extra words. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_Si_So_rel_ord_SoSiSp
+- modality_combination: Speech + Action (silent) + Action (sounding)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "silent_action": {"actor": "person_A", "action": "thumbs_up", "body_side": "right", "body_part": "hand", "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."}, "sounding_action": {"actor": "person_A", "action": "slapping_the_thigh", "acting_body_side": "right", "acting_body_part": "hand", "target_body_side": "right", "target_body_part": "thigh", "target_sound": "sharp slap sound", "definition": "The person's right hand strikes the top of the person's right thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."}}
+- temporal_constraint: {"relation_type": "order", "timing_type": "relative", "value": {"sequence": ["sounding_action", "silent_action", "speech"]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the silent visual action "thumbs up"
+- Event 3: performs the sounding action "slapping the thigh" with corresponding visible motion and sound
+
+Agentic focused raw MediaPipe Holistic output (Gemini-planned landmark subset; sampled at 8.0 fps over 5.04s; included 40/41 sampled frames):
+
+Focus planner summary: Evaluating the right hand slapping the right thigh, followed by a right hand thumbs-up pose, and finally speaking the word 'help'.
+Selected pose landmarks: ['nose', 'left_shoulder', 'right_shoulder', 'left_hip', 'right_hip', 'mouth_left', 'mouth_right', 'left_elbow', 'right_elbow', 'left_wrist', 'right_wrist', 'left_knee', 'right_knee']
+Selected left-hand landmarks: ['wrist', 'thumb_tip', 'index_tip', 'pinky_tip']
+Selected right-hand landmarks: ['wrist', 'thumb_cmc', 'thumb_mcp', 'thumb_ip', 'thumb_tip', 'index_mcp', 'index_pip', 'index_dip', 'index_tip', 'middle_mcp', 'middle_pip', 'middle_dip', 'middle_tip', 'ring_mcp', 'ring_pip', 'ring_dip', 'ring_tip', 'pinky_mcp', 'pinky_pip', 'pinky_dip', 'pinky_tip']
+Selection reason: Mouth landmarks are selected to detect speech. Right arm, hip, and knee landmarks are selected to verify the right hand moving toward and contacting the right thigh. Full right hand landmarks are selected to confirm the thumbs-up hand shape (extended thumb, closed fingers).
+Contrastive reason: Left arm, hip, knee, and basic left hand landmarks are included to ensure the left side remains resting and does not perform the actions intended for the right side.
+Temporal reason: These landmarks must be tracked across all frames to ensure the correct sequence: first the slap (right wrist meeting right thigh), then the thumbs-up (right hand shape change), and finally the speech (mouth movement).
+Planner error/fallback note: 
+
+Important note: This section is a prompt-conditioned subset of raw MediaPipe landmarks. The first Gemini call selected landmark names only from the fixed MediaPipe catalog; Python filtered the raw coordinates accordingly. This section contains no action labels, no interval summaries, no proximity computations, and no natural-language motion interpretation. Use it only as auxiliary low-level evidence for Visual Event Correctness and Temporal Constraint Satisfaction. The video/audio and original prompt remain primary.
+
+Focused raw JSON:
+{
+  "evidence_type": "agentic_focused_raw_mediapipe_holistic_landmarks",
+  "coordinate_system": {
+    "x": "normalized image coordinate; left=0, right=1",
+    "y": "normalized image coordinate; top=0, bottom=1",
+    "z": "MediaPipe relative depth; scale is model-dependent",
+    "visibility": "MediaPipe pose visibility when available; hand landmarks do not include visibility"
+  },
+  "video_meta": {
+    "native_fps": 24.0,
+    "sample_fps": 8.0,
+    "requested_sample_fps": 8.0,
+    "duration_sec": 5.042,
+    "n_total_frames": 121,
+    "n_sampled_frames": 41,
+    "width": 768,
+    "height": 512,
+    "mediapipe_model_complexity": 1,
+    "pose_detected_frames": 41,
+    "left_hand_landmarks_detected_frames": 41,
+    "right_hand_landmarks_detected_frames": 35
+  },
+  "raw_frame_count_before_truncation": 41,
+  "raw_frame_count_included": 40,
+  "focused_frame_count_included": 40,
+  "max_frames": 40,
+  "focus_plan": {
+    "focus_summary": "Evaluating the right hand slapping the right thigh, followed by a right hand thumbs-up pose, and finally speaking the word 'help'.",
+    "selected_pose_landmarks": [
+      "nose",
+      "left_shoulder",
+      "right_shoulder",
+      "left_hip",
+      "right_hip",
+      "mouth_left",
+      "mouth_right",
+      "left_elbow",
+      "right_elbow",
+      "left_wrist",
+      "right_wrist",
+      "left_knee",
+      "right_knee"
+    ],
+    "selected_left_hand_landmarks": [
+      "wrist",
+      "thumb_tip",
+      "index_tip",
+      "pinky_tip"
+    ],
+    "selected_right_hand_landmarks": [
+      "wrist",
+      "thumb_cmc",
+      "thumb_mcp",
+      "thumb_ip",
+      "thumb_tip",
+      "index_mcp",
+      "index_pip",
+      "index_dip",
+      "index_tip",
+      "middle_mcp",
+      "middle_pip",
+      "middle_dip",
+      "middle_tip",
+      "ring_mcp",
+      "ring_pip",
+      "ring_dip",
+      "ring_tip",
+      "pinky_mcp",
+      "pinky_pip",
+      "pinky_dip",
+      "pinky_tip"
+    ],
+    "selection_reason": "Mouth landmarks are selected to detect speech. Right arm, hip, and knee landmarks are selected to verify the right hand moving toward and contacting the right thigh. Full right hand landmarks are selected to confirm the thumbs-up hand shape (extended thumb, closed fingers).",
+    "contrastive_reason": "Left arm, hip, knee, and basic left hand landmarks are included to ensure the left side remains resting and does not perform the actions intended for the right side.",
+    "temporal_reason": "These landmarks must be tracked across all frames to ensure the correct sequence: first the slap (right wrist meeting right thigh), then the thumbs-up (right hand shape change), and finally the speech (mouth movement).",
+    "planner_error": "",
+    "planner_too_empty_fallback_used": false
+  },
+  "sampled_frames": [
+    {
+      "sample_index": 0,
+      "t": 0.0,
+      "pose_landmarks": {
+        "nose": {
+          "x": 0.5165,
+          "y": 0.1609,
+          "z": -0.5636,
+          "visibility": 1.0
+        },
+        "left_shoulder": {
+          "x": 0.6341,
+          "y": 0.4022,
+          "z": -0.1798,
+          "visibility": 1.0
+        },
+        "right_shoulder": {
+          "x": 0.3926,
+          "y": 0.3859,
+          "z": -0.208,
+          "visibility": 0.9999
+        },
+        "left_hip": {
+          "x": 0.5814,
+          "y": 0.8838,
+          "z": 0.0235,
+          "visibility": 0.9963
+        },
+        "right_hip": {
+          "x": 0.4441,
+          "y": 0.8967,
+          "z": -0.0233,
+          "visibility": 0.996
+        },
+        "mouth_left": {
+          "x": 0.5359,
+          "y": 0.2053,
+          "z": -0.4808,
+          "visibility": 1.0
+        },
+        "mouth_right": {
+          "x": 0.4951,
+          "y": 0.2033,
+          "z": -0.4832,
+          "visibility": 1.0
+        },
+        "left_elbow": {
+          "x": 0.702,
+          "y": 0.6567,
+          "z": -0.1506,
+          "visibility": 0.9956
+        },
+        "right_elbow": {
+          "x": 0.3406,
+          "y": 0.6563,
+          "z": -0.2446,
+          "visibility": 0.9924
+        },
+        "left_wrist": {
+          "x": 0.6971,
+          "y": 0.8536,
+          "z": -0.4432,
+          "visibility": 0.9924
+        },
+        "right_wrist": {
+          "x": 0.3748,
+          "y": 0.8572,
+          "z": -0.5411,
+          "visibility": 0.9833
+        },
+        "left_knee": {
+          "x": 0.7234,
+          "y": 1.0897,
+          "z": -0.3998,
+          "visibility": 0.6699
+        },
+        "right_knee": {
+          "x": 0.4063,
+          "y": 1.1093,
+          "z": -0.5179,
+          "visibility": 0.7132
+        }
+      },
+      "left_hand_landmarks": {
+        "wrist": {
+          "x": 0.6994,
+          "y": 0.8603,
+          "z": 0.0
+        },
+        "thumb_tip": {
+          "x": 0.6545,
+          "y": 0.9719,
+          "z": -0.0599
+        },
+        "index_tip": {
+          "x": 0.7048,
+          "y": 1.0217,
+          "z": -0.0806
+        },
+        "pinky_tip": {
+          "x": 0.7749,
+          "y": 1.0047,
+          "z": -0.0552
+        }
+      },
+      "right_hand_landmarks": {
+        "wrist": {
+          "x": 0.36,
+          "y": 0.8474,
+          "z": 0.0
+        },
+        "thumb_cmc": {
+          "x": 0.392,
+          "y": 0.8643,
+          "z": -0.0167
+        },
+        "thumb_mcp": {
+          "x": 0.4107,
+          "y": 0.8984,
+          "z": -0.0262
+        },
+        "thumb_ip": {
+          "x": 0.4131,
+          "y": 0.9324,
+          "z": -0.0323
+        },
+        "thumb_tip": {
+          "x": 0.4091,
+          "y": 0.9568,
+          "z": -0.0375
+        },
+        "index_mcp": {
+          "x": 0.3726,
+          "y": 0.8952,
+          "z": -0.0317
+        },
+        "index_pip": {
+          "x": 0.3697,
+          "y": 0.9301,
+          "z": -0.0424
+        },
+        "index_dip": {
+          "x": 0.3725,
+          "y": 0.9563,
+          "z": -0.0478
+        },
+        "index_tip": {
+          "x": 0.3742,
+          "y": 0.9812,
+          "z": -0.0514
+        },
+        "middle_mcp": {
+          "x": 0.3492,
+          "y": 0.8994,
+          "z": -0.0284
+        },
+        "middle_pip": {
+          "x": 0.3353,
+          "y": 0.9315,
+          "z": -0.0386
+        },
+        "middle_dip": {
+          "x": 0.3288,
+          "y": 0.9606,
+          "z": -0.0417
+        },
+        "middle_tip": {
+          "x": 0.3225,
+          "y": 0.9854,
+          "z": -0.0447
+        },
+        "ring_mcp": {
+          "x": 0.3354,
+          "y": 0.9072,
+          "z": -0.0255
+        },
+        "ring_pip": {
+          "x": 0.3211,
+          "y": 0.9406,
+          "z": -0.0373
+        },
+        "ring_dip": {
+          "x": 0.3132,
+          "y": 0.9702,
+          "z": -0.0404
+        },
+        "ring_tip": {
+          "x": 0.3061,
+          "y": 0.9952,
+          "z": -0.0415
+        },
+        "pinky_mcp": {
+          "x": 0.3303,
+          "y": 0.9159,
+          "z": -0.0233
+        },
+        "pinky_pip": {
+          "x": 0.3144,
+          "y": 0.9494,
+          "z": -0.0332
+        },
+        "pinky_dip": {
+          "x": 0.3053,
+          "y": 0.9758,
+          "z": -0.0362
+        },
+        "pinky_tip": {
+          "x": 0.2974,
+          "y": 0.9985,
+          "z": -0.0378
+        }
+      }
+    },
+    {
+      "sample_index": 1,
+      "t": 0.125,
+      "pose_landmarks": {
+        "nose": {
+          "x": 0.5173,
+          "y": 0.1608,
+          "z": -0.5596,
+          "visibility": 1.0
+        },
+        "left_shoulder": {
+          "x": 0.6351,
+          "y": 0.4036,
+          "z": -0.1782,
+          "visibility": 1.0
+        },
+        "right_shoulder": {
+          "x": 0.3926,
+          "y": 0.3864,
+          "z": -0.1805,
+          "visibility": 0.9999
+        },
+        "left_hip": {
+          "x": 0.583,
+          "y": 0.8881,
+          "z": 0.0104,
+          "visibility": 0.9958
+        },
+        "right_hip": {
+          "x": 0.4398,
+          "y": 0.8991,
+          "z": -0.0099,
+          "visibility": 0.995
+        },
+        "mouth_left": {
+          "x": 0.5365,
+          "y": 0.2054,
+          "z": -0.477,
+          "visibility": 1.0
+        },
+        "mouth_right": {
+          "x": 0.4965,
+          "y": 0.2047,
+          "z": -0.4773,
+          "visibility": 1.0
+        },
+        "left_elbow": {
+          "x": 0.7014,
+          "y": 0.6577,
+          "z": -0.1536,
+          "visibility": 0.9952
+        },
+        "right_elbow": {
+          "x": 0.3269,
+          "y": 0.6586,
+          "z": -0.2375,
+          "visibility": 0.992
+        },
+        "left_wrist": {
+          "x": 0.6957,
+          "y": 0.8539,
+          "z": -0.4638,
+          "visibility": 0.9912
+        },
+        "right_wrist": {
+          "x": 0.3753,
+          "y": 0.8523,
+          "z": -0.5433,
+          "visibility": 0.9815
+        },
+        "left_knee": {
+          "x": 0.7204,
+          "y": 1.0346,
+          "z": -0.4375,
+          "visibility": 0.6729
+        },
+        "right_knee": {
+          "x": 0.4109,
+          "y": 1.1701,
+          "z": -0.3043,
+          "visibility": 0.6935
+        }
+      },
+      "left_hand_landmarks": {
+        "wrist": {
+          "x": 0.695,
+          "y": 0.8582,
+          "z": 0.0
+        },
+        "thumb_tip": {
+          "x": 0.636,
+          "y": 0.9588,
+          "z": -0.066
+        },
+        "index_tip": {
+          "x": 0.6784,
+          "y": 0.9889,
+          "z": -0.0891
+        },
+        "pinky_tip": {
+          "x": 0.7531,
+          "y": 1.0053,
+          "z": -0.0566
+        }
+      },
+      "right_hand_landmarks": {
+        "wrist": {
+          "x": 0.3805,
+          "y": 0.842,
+          "z": 0.0
+        },
+        "thumb_cmc": {
+          "x": 0.4072,
+          "y": 0.8597,
+          "z": -0.0072
+        },
+        "thumb_mcp": {
+          "x": 0.4307,
+          "y": 0.8832,
+          "z": -0.0142
+        },
+        "thumb_ip": {
+          "x": 0.4452,
+          "y": 0.9096,
+          "z": -0.02
+        },
+        "thumb_tip": {
+          "x": 0.4515,
+          "y": 0.9353,
+          "z": -0.0255
+        },
+        "index_mcp": {
+          "x": 0.4209,
+          "y": 0.8613,
+          "z": -0.0263
+        },
+        "index_pip": {
+          "x": 0.4409,
+          "y": 0.8844,
+          "z": -0.038
+        },
+        "index_dip": {
+          "x": 0.4501,
+          "y": 0.9081,
+          "z": -0.0439
+        },
+        "index_tip": {
+          "x": 0.4564,
+          "y": 0.9295,
+          "z": -0.0476
+        },
+        "middle_mcp": {
+          "x": 0.403,
+          "y": 0.8642,
+          "z": -0.0287
+        },
+        "middle_pip": {
+          "x": 0.4146,
+          "y": 0.8888,
+          "z": -0.0402
+        },
+        "middle_dip": {
+          "x": 0.424,
+          "y": 0.9139,
+          "z": -0.0439
+        },
+        "middle_tip": {
+          "x": 0.4318,
+          "y": 0.9338,
+          "z": -0.0465
+        },
+        "ring_mcp": {
+          "x": 0.3831,
+          "y": 0.8704,
+          "z": -0.0308
+        },
+        "ring_pip": {
+          "x": 0.3868,
+          "y": 0.8949,
+          "z": -0.0422
+        },
+        "ring_dip": {
+          "x": 0.393,
+          "y": 0.9204,
+          "z": -0.0446
+        },
+        "ring_tip": {
+          "x": 0.3996,
+          "y": 0.9389,
+          "z": -0.0455
+        },
+        "pinky_mcp": {
+          "x": 0.3635,
+          "y": 0.8776,
+          "z": -0.0331
+        },
+        "pinky_pip": {
+          "x": 0.3623,
+          "y": 0.9033,
+          "z": -0.0432
+        },
+        "pinky_dip": {
+          "x": 0.3665,
+          "y": 0.9223,
+          "z": -0.0456
+        },
+        "pinky_tip": {
+          "x": 0.3714,
+          "y": 0.9377,
+          "z": -0.0465
+        }
+      }
+    },
+    {
+      "sample_index": 2,
+      "t": 0.25,
+      "pose_landmarks": {
+        "nose": {
+          "x": 0.5181,
+          "y": 0.1598,
+          "z": -0.6183,
+          "visibility": 1.0
+        },
+        "left_shoulder": {
+          "x": 0.6368,
+          "y": 0.404,
+          "z": -0.2163,
+          "visibility": 1.0
+        },
+        "right_shoulder": {
+          "x": 0.3929,
+          "y": 0.3865,
+          "z": -0.2031,
+          "visibility": 0.9999
+        },
+        "left_hip": {
+          "x": 0.5861,
+          "y": 0.8904,
+          "z": 0.0072,
+          "visibility": 0.9957
+        },
+        "right_hip": {
+          "x": 0.4398,
+          "y": 0.8991,
+          "z": -0.0067,
+          "visibility": 0.9949
+        },
+        "mouth_left": {
+          "x": 0.5371,
+          "y": 0.2049,
+          "z": -0.5309,
+          "visibility": 1.0
+        },
+        "mouth_right": {
+          "x": 0.4975,
+          "y": 0.2047,
+          "z": -0.5274,
+          "visibility": 1.0
+        },
+        "left_elbow": {
+          "x": 0.7008,
+          "y": 0.6579,
+          "z": -0.2031,
+          "visibility": 0.9948
+        },
+        "right_elbow": {
+          "x": 0.3241,
+          "y": 0.6589,
+          "z": -0.2547,
+          "visibility": 0.9921
+        },
+        "left_wrist": {
+          "x": 0.6881,
+          "y": 0.8545,
+          "z": -0.5086,
+          "visibility": 0.9904
+        },
+        "right_wrist": {
+          "x": 0.3785,
+          "y": 0.8507,
+          "z": -0.5632,
+          "visibility": 0.9817
+        },
+        "left_knee": {
+          "x": 0.715,
+          "y": 1.0108,
+          "z": -0.568,
+          "visibility": 0.6812
+        },
+        "right_knee": {
+          "x": 0.4041,
+          "y": 1.1565,
+          "z": -0.5673,
+          "visibility": 0.6986
+        }
+      },
+      "left_hand_landmarks": {
+        "wrist": {
+          "x": 0.6862,
+          "y": 0.8557,
+          "z": 0.0
+        },
+        "thumb_tip": {
+          "x": 0.6238,
+          "y": 0.9576,
+          "z": -0.0507
+        },
+        "index_tip": {
+          "x": 0.6648,
+          "y": 0.9859,
+          "z": -0.0691
+        },
+        "pinky_tip": {
+          "x": 0.742,
+          "y": 0.9944,
+          "z": -0.0444
+        }
+      },
+      "right_hand_landmarks": {
+        "wrist": {
+          "x": 0.3881,
+          "y": 0.8375,
+          "z": 0.0
+        },
+        "thumb_cmc": {
+          "x": 0.4132,
+          "y": 0.8617,
+          "z": -0.0077
+        },
+        "thumb_mcp": {
+          "x": 0.436,
+          "y": 0.8902,
+          "z": -0.0156
+        },
+        "thumb_ip": {
+          "x": 0.4507,
+          "y": 0.919,
+          "z": -0.0224
+        },
+        "thumb_tip": {
+          "x": 0.4601,
+          "y": 0.9442,
+          "z": -0.029
+        },
+        "index_mcp": {
+          "x": 0.4315,
+          "y": 0.8669,
+          "z": -0.0294
+        },
+        "index_pip": {
+          "x": 0.4536,
+          "y": 0.8888,
+          "z": -0.044
+        },
+        "index_dip": {
+          "x": 0.4646,
+          "y": 0.9141,
+          "z": -0.0522
+        },
+        "index_tip": {
+          "x": 0.4713,
+          "y": 0.9375,
+          "z": -0.0575
+        },
+        "middle_mcp": {
+          "x": 0.4151,
+          "y": 0.8676,
+          "z": -0.0329
+        },
+        "middle_pip": {
+          "x": 0.4274,
+          "y": 0.889,
+          "z": -0.0487
+        },
+        "middle_dip": {
+          "x": 0.4353,
+          "y": 0.9134,
+          "z": -0.0544
+        },
+        "middle_tip": {
+          "x": 0.4402,
+          "y": 0.9339,
+          "z": -0.0579
+        },
+        "ring_mcp": {
+          "x": 0.3946,
+          "y": 0.8713,
+          "z": -0.0363
+        },
+        "ring_pip": {
+          "x": 0.3992,
+          "y": 0.8923,
+          "z": -0.0509
+        },
+        "ring_dip": {
+          "x": 0.4049,
+          "y": 0.9153,
+          "z": -0.0543
+        },
+        "ring_tip": {
+          "x": 0.4097,
+          "y": 0.9339,
+          "z": -0.0557
+        },
+        "pinky_mcp": {
+          "x": 0.3734,
+          "y": 0.8768,
+          "z": -0.0399
+        },
+        "pinky_pip": {
+          "x": 0.3723,
+          "y": 0.9,
+          "z": -0.0524
+        },
+        "pinky_dip": {
+          "x": 0.375,
+          "y": 0.9193,
+          "z": -0.0558
+        },
+        "pinky_tip": {
+          "x": 0.3777,
+          "y": 0.9378,
+          "z": -0.0575
+        }
+      }
+    },
+    {
+      "sample_index": 3,
+      "t": 0.375,
+      "pose_landmarks": {
+        "nose": {
+          "x": 0.5193,
+          "y": 0.1598,
+          "z": -0.6082,
+          "visibility": 1.0
+        },
+        "left_shoulder": {
+          "x": 0.6389,
+          "y": 0.405,
+          "z": -0.2085,
+          "visibility": 1.0
+        },
+        "right_shoulder": {
+          "x": 0.3942,
+          "y": 0.3865,
+          "z": -0.1984,
+          "visibility": 0.9999
+        },
+        "left_hip": {
+          "x": 0.5875,
+          "y": 0.8959,
+          "z": 0.0059,
+          "visibility": 0.9956
+        },
+        "right_hip": {
+          "x": 0.4394,
+          "y": 0.8996,
+          "z": -0.0054,
+          "visibility": 0.9948
+        },
+        "mouth_left": {
+          "x": 0.5381,
+          "y": 0.2051,
+          "z": -0.5218,
+          "visibility": 1.0
+        },
+        "mouth_right": {
+          "x": 0.4989,
+          "y": 0.2051,
+          "z": -0.5268,
+          "visibility": 1.0
+        },
+        "left_elbow": {
+          "x": 0.7001,
+          "y": 0.6599,
+          "z": -0.2022,
+          "visibility": 0.9945
+        },
+        "right_elbow": {
+          "x": 0.3221,
+          "y": 0.6584,
+          "z": -0.2702,
+          "visibility": 0.9924
+        },
+        "left_wrist": {
+          "x": 0.6852,
+          "y": 0.8549,
+          "z": -0.5106,
+          "visibility": 0.99
+        },
+        "right_wrist": {
+          "x": 0.3813,
+          "y": 0.8431,
+          "z": -0.5956,
+          "visibility": 0.9822
+        },
+        "left_knee": {
+          "x": 0.7153,
+          "y": 1.0173,
+          "z": -0.5004,
+          "visibility": 0.6863
+        },
+        "right_knee": {
+          "x": 0.3996,
+          "y": 1.1516,
+          "z": -0.5079,
+          "visibility": 0.7003
+        }
+      },
+      "left_hand_landmarks": {
+        "wrist": {
+          "x": 0.6884,
+          "y": 0.8557,
+          "z": 0.0
+        },
+        "thumb_tip": {
+          "x": 0.6287,
+          "y": 0.9577,
+          "z": -0.0488
+        },
+        "index_tip": {
+          "x": 0.6691,
+          "y": 0.9861,
+          "z": -0.0686
+        },
+        "pinky_tip": {
+          "x": 0.7494,
+          "y": 0.9891,
+          "z": -0.045
+        }
+      },
+      "right_hand_landmarks": {
+        "wrist": {
+          "x": 0.3878,
+          "y": 0.8387,
+          "z": 0.0
+        },
+        "thumb_cmc": {
+          "x": 0.4125,
+          "y": 0.8573,
+          "z": -0.0074
+        },
+        "thumb_mcp": {
+          "x": 0.4349,
+          "y": 0.8814,
+          "z": -0.014
+        },
+        "thumb_ip": {
+          "x": 0.4498,
+          "y": 0.9064,
+          "z": -0.0196
+        },
+        "thumb_tip": {
+          "x": 0.4556,
+          "y": 0.9328,
+          "z": -0.0247
+        },
+        "index_mcp": {
+          "x": 0.4217,
+          "y": 0.8692,
+          "z": -0.0227
+        },
+        "index_pip": {
+          "x": 0.4319,
+          "y": 0.8983,
+          "z": -0.034
+        },
+        "index_dip": {
+          "x": 0.4362,
+          "y": 0.9247,
+          "z": -0.0394
+        },
+        "index_tip": {
+          "x": 0.4383,
+          "y": 0.947,
+          "z": -0.0424
+        },
+        "middle_mcp": {
+          "x": 0.4047,
+          "y": 0.8691,
+          "z": -0.0243
+        },
+        "middle_pip": {
+          "x": 0.4096,
+          "y": 0.8959,
+          "z": -0.0343
+        },
+        "middle_dip": {
+          "x": 0.4141,
+          "y": 0.9229,
+          "z": -0.0371
+        },
+        "middle_tip": {
+          "x": 0.4173,
+          "y": 0.9447,
+          "z": -0.0391
+        },
+        "ring_mcp": {
+          "x": 0.3868,
+          "y": 0.8709,
+          "z": -0.026
+        },
+        "ring_pip": {
+          "x": 0.3842,
+          "y": 0.8936,
+          "z": -0.037
+        },
+        "ring_dip": {
+          "x": 0.387,
+          "y": 0.9196,
+          "z": -0.0395
+        },
+        "ring_tip": {
+          "x": 0.3903,
+          "y": 0.9406,
+          "z": -0.0402
+        },
+        "pinky_mcp": {
+          "x": 0.369,
+          "y": 0.8744,
+          "z": -0.0279
+        },
+        "pinky_pip": {
+          "x": 0.3637,
+          "y": 0.8978,
+          "z": -0.0374
+        },
+        "pinky_dip": {
+          "x": 0.3633,
+          "y": 0.9191,
+          "z": -0.0396
+        },
+        "pinky_tip": {
+          "x": 0.3633,
+          "y": 0.9381,
+          "z": -0.0401
+        }
+      }
+    },
+    {
+      "sample_index": 4,
+      "t": 0.5,
+      "pose_landmarks": {
+        "nose": {
+          "x": 0.5204,
+          "y": 0.1603,
+          "z": -0.5359,
+          "visibility": 1.0
+        },
+        "left_shoulder": {
+          "x": 0.6405,
+          "y": 0.4079,
+          "z": -0.0638,
+          "visibility": 1.0
+        },
+        "right_shoulder": {
+          "x": 0.3952,
+          "y": 0.3868,
+          "z": -0.1601,
+          "visibility": 0.9999
+        },
+        "left_hip": {
+          "x": 0.5868,
+          "y": 0.8998,
+          "z": 0.0339,
+          "visibility": 0.9958
+        },
+        "right_hip": {
+          "x": 0.4368,
+          "y": 0.8996,
+          "z": -0.0338,
+          "visibility": 0.9951
+        },
+        "mouth_left": {
+          "x": 0.5387,
+          "y": 0.2065,
+          "z": -0.4348,
+          "visibility": 1.0
+        },
+        "mouth_right": {
+          "x": 0.4999,
+          "y": 0.2063,
+          "z": -0.4445,
+          "visibility": 1.0
+        },
+        "left_elbow": {
+          "x": 0.6993,
+          "y": 0.6632,
+          "z": -0.0421,
+          "visibility": 0.9939
+        },
+        "right_elbow": {
+          "x": 0.3051,
+          "y": 0.6484,
+          "z": -0.4186,
+          "visibility": 0.9927
+        },
+        "left_wrist": {
+          "x": 0.6856,
+          "y": 0.8592,
+          "z": -0.3155,
+          "visibility": 0.99
+        },
+        "right_wrist": {
+          "x": 0.393,
+          "y": 0.6029,
+          "z": -0.8959,
+          "visibility": 0.9838
+        },
+        "left_knee": {
+          "x": 0.7349,
+          "y": 1.1425,
+          "z": -0.4861,
+          "visibility": 0.7116
+        },
+        "right_knee": {
+          "x": 0.3968,
+          "y": 1.0319,
+          "z": -0.7692,
+          "visibility": 0.7258
+        }
+      },
+      "left_hand_landmarks": {
+        "wrist": {
+          "x": 0.6902,
+          "y": 0.859,
+          "z": 0.0
+        },
+        "thumb_tip": {
+          "x": 0.6339,
+          "y": 0.9666,
+          "z": -0.0523
+        },
+        "index_tip": {
+          "x": 0.6793,
+          "y": 0.9948,
+          "z": -0.0716
+        },
+        "pinky_tip": {
+          "x": 0.7573,
+          "y": 0.9874,
+          "z": -0.0484
+        }
+      },
+      "right_hand_landmarks": null
+    },
+    {
+      "sample_index": 5,
+      "t": 0.625,
+      "pose_landmarks": {
+        "nose": {
+          "x": 0.5191,
+          "y": 0.1607,
+          "z": -0.4861,
+          "visibility": 1.0
+        },
+        "left_shoulder": {
+          "x": 0.6404,
+          "y": 0.4066,
+          "z": -0.0956,
+          "visibility": 0.9999
+        },
+        "right_shoulder": {
+          "x": 0.3991,
+          "y": 0.3806,
+          "z": -0.1335,
+          "visibility": 0.9998
+        },
+        "left_hip": {
+          "x": 0.5867,
+          "y": 0.8997,
+          "z": 0.0319,
+          "visibility": 0.9959
+        },
+        "right_hip": {
+          "x": 0.4367,
+          "y": 0.8918,
+          "z": -0.0317,
+          "visibility": 0.9954
+        },
+        "mouth_left": {
+          "x": 0.5373,
+          "y": 0.2069,
+          "z": -0.3942,
+          "visibility": 1.0
+        },
+        "mouth_right": {
+          "x": 0.4998,
+          "y": 0.2066,
+          "z": -0.3957,
+          "visibility": 1.0
+        },
+        "left_elbow":
+... [TRUNCATED focused_raw JSON due to max_chars limit]
+
+Axis-specific criteria (evaluate in this hierarchical order; a failure cascades downward):
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+- The sound corresponding to the sounding action "slapping the thigh" must be clearly audible and appropriate for the prompt.
+
+2. Visual Event Correctness
+- The visual silent action "thumbs up" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action "slapping the thigh" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding (WITHIN each event)
+- Audio-Visual Binding is evaluated WITHIN each event: whether that event's audio component and visual component are correctly bound (temporally and causally aligned), assuming both are present and correct.
+- Precondition (hierarchical): evaluate this axis only when the event's required audio (Audio Event Correctness) AND required visual component (Visual Event Correctness) are both correct. If either is incorrect or missing, mark this axis no.
+- For the speech event "help": given correct spoken audio and correct visible mouth/lip motion, check that the audible speech is temporally aligned with that visible mouth/lip motion. If the spoken word is wrong or the visible speaking motion is wrong/absent, mark this axis no.
+- For the sounding action "slapping the thigh": given a correct sound and a correctly performed visible motion, check that the sound occurs at the moment implied by the visible action. If either the sound or the visible action is wrong or missing, mark this axis no.
+
+4. Temporal Relation Satisfaction (BETWEEN events)
+- Relation type: relative order.
+- Required order: Event 3: performs the sounding action "slapping the thigh" with corresponding visible motion and sound -> Event 2: performs the silent visual action "thumbs up" -> Event 1: says "help".
+- Each required event must appear clearly in that exact order.
+- If the order is reversed, mixed, overlapping when it should be sequential, missing, or unclear, mark this sub-axis as no.
+- Precondition: evaluate this sub-axis only when Audio Event Correctness, Visual Event Correctness, and Audio-Visual Binding are all satisfied; otherwise mark it no.
+
+5. Temporal Count Satisfaction (number of occurrences)
+- This sub-axis checks the number of occurrences (counting / repetition), independent of the relation type.
+- The required target event should occur exactly once. Count only clear, completed occurrences.
+- Any extra or spurious occurrence of a target action/sound/speech beyond the specified structure makes this sub-axis no.
+- This applies to every temporal type: even for order, synchronization, spacing, absolute-timing, rhythm, or start/stop prompts, verify each required event occurs the required number of times (default exactly once) with no extra repetitions, unless the prompt explicitly allows repetition.
+- If the number of occurrences differs from the requirement, or the count is unclear, mark this sub-axis as no.
+- Precondition: evaluate this sub-axis only when Audio Event Correctness, Visual Event Correctness, and Audio-Visual Binding are all satisfied; otherwise mark it no.
+
+6. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- Apply the hierarchical dependency: Audio-Visual Binding is "no" if either the required audio or visual component is incorrect/missing; both temporal sub-axes (relation and count) are "no" if audio, visual, or Audio-Visual Binding fails.
+- Output audio_event_correctness, visual_event_correctness, audio_visual_binding, temporal_relation_satisfaction, temporal_count_satisfaction, and constraint_compliance. Do NOT output a combined temporal_constraint_satisfaction; it is derived as relation AND count.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_relation_satisfaction AND temporal_count_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+Agentic focused raw MediaPipe Holistic output (Gemini-planned landmark subset; sampled at 8.0 fps over 5.04s; included 40/41 sampled frames):
+
+Focus planner summary: Evaluating the right hand slapping the right thigh, followed by a right hand thumbs-up pose, and finally speaking the word 'help'.
+Selected pose landmarks: ['nose', 'left_shoulder', 'right_shoulder', 'left_hip', 'right_hip', 'mouth_left', 'mouth_right', 'left_elbow', 'right_elbow', 'left_wrist', 'right_wrist', 'left_knee', 'right_knee']
+Selected left-hand landmarks: ['wrist', 'thumb_tip', 'index_tip', 'pinky_tip']
+Selected right-hand landmarks: ['wrist', 'thumb_cmc', 'thumb_mcp', 'thumb_ip', 'thumb_tip', 'index_mcp', 'index_pip', 'index_dip', 'index_tip', 'middle_mcp', 'middle_pip', 'middle_dip', 'middle_tip', 'ring_mcp', 'ring_pip', 'ring_dip', 'ring_tip', 'pinky_mcp', 'pinky_pip', 'pinky_dip', 'pinky_tip']
+Selection reason: Mouth landmarks are selected to detect speech. Right arm, hip, and knee landmarks are selected to verify the right hand moving toward and contacting the right thigh. Full right hand landmarks are selected to confirm the thumbs-up hand shape (extended thumb, closed fingers).
+Contrastive reason: Left arm, hip, knee, and basic left hand landmarks are included to ensure the left side remains resting and does not perform the actions intended for the right side.
+Temporal reason: These landmarks must be tracked across all frames to ensure the correct sequence: first the slap (right wrist meeting right thigh), then the thumbs-up (right hand shape change), and finally the speech (mouth movement).
+Planner error/fallback note: 
+
+Important note: This section is a prompt-conditioned subset of raw MediaPipe landmarks. The first Gemini call selected landmark names only from the fixed MediaPipe catalog; Python filtered the raw coordinates accordingly. This section contains no action labels, no interval summaries, no proximity computations, and no natural-language motion interpretation. Use it only as auxiliary low-level evidence for Visual Event Correctness and Temporal Constraint Satisfaction. The video/audio and original prompt remain primary.
+
+Focused raw JSON:
+{
+  "evidence_type": "agentic_focused_raw_mediapipe_holistic_landmarks",
+  "coordinate_system": {
+    "x": "normalized image coordinate; left=0, right=1",
+    "y": "normalized image coordinate; top=0, bottom=1",
+    "z": "MediaPipe relative depth; scale is model-dependent",
+    "visibility": "MediaPipe pose visibility when available; hand landmarks do not include visibility"
+  },
+  "video_meta": {
+    "native_fps": 24.0,
+    "sample_fps": 8.0,
+    "requested_sample_fps": 8.0,
+    "duration_sec": 5.042,
+    "n_total_frames": 121,
+    "n_sampled_frames": 41,
+    "width": 768,
+    "height": 512,
+    "mediapipe_model_complexity": 1,
+    "pose_detected_frames": 41,
+    "left_hand_landmarks_detected_frames": 41,
+    "right_hand_landmarks_detected_frames": 35
+  },
+  "raw_frame_count_before_truncation": 41,
+  "raw_frame_count_included": 40,
+  "focused_frame_count_included": 40,
+  "max_frames": 40,
+  "focus_plan": {
+    "focus_summary": "Evaluating the right hand slapping the right thigh, followed by a right hand thumbs-up pose, and finally speaking the word 'help'.",
+    "selected_pose_landmarks": [
+      "nose",
+      "left_shoulder",
+      "right_shoulder",
+      "left_hip",
+      "right_hip",
+      "mouth_left",
+      "mouth_right",
+      "left_elbow",
+      "right_elbow",
+      "left_wrist",
+      "right_wrist",
+      "left_knee",
+      "right_knee"
+    ],
+    "selected_left_hand_landmarks": [
+      "wrist",
+      "thumb_tip",
+      "index_tip",
+      "pinky_tip"
+    ],
+    "selected_right_hand_landmarks": [
+      "wrist",
+      "thumb_cmc",
+      "thumb_mcp",
+      "thumb_ip",
+      "thumb_tip",
+      "index_mcp",
+      "index_pip",
+      "index_dip",
+      "index_tip",
+      "middle_mcp",
+      "middle_pip",
+      "middle_dip",
+      "middle_tip",
+      "ring_mcp",
+      "ring_pip",
+      "ring_dip",
+      "ring_tip",
+      "pinky_mcp",
+      "pinky_pip",
+      "pinky_dip",
+      "pinky_tip"
+    ],
+    "selection_reason": "Mouth landmarks are selected to detect speech. Right arm, hip, and knee landmarks are selected to verify the right hand moving toward and contacting the right thigh. Full right hand landmarks are selected to confirm the thumbs-up hand shape (extended thumb, closed fingers).",
+    "contrastive_reason": "Left arm, hip, knee, and basic left hand landmarks are included to ensure the left side remains resting and does not perform the actions intended for the right side.",
+    "temporal_reason": "These landmarks must be tracked across all frames to ensure the correct sequence: first the slap (right wrist meeting right thigh), then the thumbs-up (right hand shape change), and finally the speech (mouth movement).",
+    "planner_error": "",
+    "planner_too_empty_fallback_used": false
+  },
+  "sampled_frames": [
+    {
+      "sample_index": 0,
+      "t": 0.0,
+      "pose_landmarks": {
+        "nose": {
+          "x": 0.5165,
+          "y": 0.1609,
+          "z": -0.5636,
+          "visibility": 1.0
+        },
+        "left_shoulder": {
+          "x": 0.6341,
+          "y": 0.4022,
+          "z": -0.1798,
+          "visibility": 1.0
+        },
+        "right_shoulder": {
+          "x": 0.3926,
+          "y": 0.3859,
+          "z": -0.208,
+          "visibility": 0.9999
+        },
+        "left_hip": {
+          "x": 0.5814,
+          "y": 0.8838,
+          "z": 0.0235,
+          "visibility": 0.9963
+        },
+        "right_hip": {
+          "x": 0.4441,
+          "y": 0.8967,
+          "z": -0.0233,
+          "visibility": 0.996
+        },
+        "mouth_left": {
+          "x": 0.5359,
+          "y": 0.2053,
+          "z": -0.4808,
+          "visibility": 1.0
+        },
+        "mouth_right": {
+          "x": 0.4951,
+          "y": 0.2033,
+          "z": -0.4832,
+          "visibility": 1.0
+        },
+        "left_elbow": {
+          "x": 0.702,
+          "y": 0.6567,
+          "z": -0.1506,
+          "visibility": 0.9956
+        },
+        "right_elbow": {
+          "x": 0.3406,
+          "y": 0.6563,
+          "z": -0.2446,
+          "visibility": 0.9924
+        },
+        "left_wrist": {
+          "x": 0.6971,
+          "y": 0.8536,
+          "z": -0.4432,
+          "visibility": 0.9924
+        },
+        "right_wrist": {
+          "x": 0.3748,
+          "y": 0.8572,
+          "z": -0.5411,
+          "visibility": 0.9833
+        },
+        "left_knee": {
+          "x": 0.7234,
+          "y": 1.0897,
+          "z": -0.3998,
+          "visibility": 0.6699
+        },
+        "right_knee": {
+          "x": 0.4063,
+          "y": 1.1093,
+          "z": -0.5179,
+          "visibility": 0.7132
+        }
+      },
+      "left_hand_landmarks": {
+        "wrist": {
+          "x": 0.6994,
+          "y": 0.8603,
+          "z": 0.0
+        },
+        "thumb_tip": {
+          "x": 0.6545,
+          "y": 0.9719,
+          "z": -0.0599
+        },
+        "index_tip": {
+          "x": 0.7048,
+          "y": 1.0217,
+          "z": -0.0806
+        },
+        "pinky_tip": {
+          "x": 0.7749,
+          "y": 1.0047,
+          "z": -0.0552
+        }
+      },
+      "right_hand_landmarks": {
+        "wrist": {
+          "x": 0.36,
+          "y": 0.8474,
+          "z": 0.0
+        },
+        "thumb_cmc": {
+          "x": 0.392,
+          "y": 0.8643,
+          "z": -0.0167
+        },
+        "thumb_mcp": {
+          "x": 0.4107,
+          "y": 0.8984,
+          "z": -0.0262
+        },
+        "thumb_ip": {
+          "x": 0.4131,
+          "y": 0.9324,
+          "z": -0.0323
+        },
+        "thumb_tip": {
+          "x": 0.4091,
+          "y": 0.9568,
+          "z": -0.0375
+        },
+        "index_mcp": {
+          "x": 0.3726,
+          "y": 0.8952,
+          "z": -0.0317
+        },
+        "index_pip": {
+          "x": 0.3697,
+          "y": 0.9301,
+          "z": -0.0424
+        },
+        "index_dip": {
+          "x": 0.3725,
+          "y": 0.9563,
+          "z": -0.0478
+        },
+        "index_tip": {
+          "x": 0.3742,
+          "y": 0.9812,
+          "z": -0.0514
+        },
+        "middle_mcp": {
+          "x": 0.3492,
+          "y": 0.8994,
+          "z": -0.0284
+        },
+        "middle_pip": {
+          "x": 0.3353,
+          "y": 0.9315,
+          "z": -0.0386
+        },
+        "middle_dip": {
+          "x": 0.3288,
+          "y": 0.9606,
+          "z": -0.0417
+        },
+        "middle_tip": {
+          "x": 0.3225,
+          "y": 0.9854,
+          "z": -0.0447
+        },
+        "ring_mcp": {
+          "x": 0.3354,
+          "y": 0.9072,
+          "z": -0.0255
+        },
+        "ring_pip": {
+          "x": 0.3211,
+          "y": 0.9406,
+          "z": -0.0373
+        },
+        "ring_dip": {
+          "x": 0.3132,
+          "y": 0.9702,
+          "z": -0.0404
+        },
+        "ring_tip": {
+          "x": 0.3061,
+          "y": 0.9952,
+          "z": -0.0415
+        },
+        "pinky_mcp": {
+          "x": 0.3303,
+          "y": 0.9159,
+          "z": -0.0233
+        },
+        "pinky_pip": {
+          "x": 0.3144,
+          "y": 0.9494,
+          "z": -0.0332
+        },
+        "pinky_dip": {
+          "x": 0.3053,
+          "y": 0.9758,
+          "z": -0.0362
+        },
+        "pinky_tip": {
+          "x": 0.2974,
+          "y": 0.9985,
+          "z": -0.0378
+        }
+      }
+    },
+    {
+      "sample_index": 1,
+      "t": 0.125,
+      "pose_landmarks": {
+        "nose": {
+          "x": 0.5173,
+          "y": 0.1608,
+          "z": -0.5596,
+          "visibility": 1.0
+        },
+        "left_shoulder": {
+          "x": 0.6351,
+          "y": 0.4036,
+          "z": -0.1782,
+          "visibility": 1.0
+        },
+        "right_shoulder": {
+          "x": 0.3926,
+          "y": 0.3864,
+          "z": -0.1805,
+          "visibility": 0.9999
+        },
+        "left_hip": {
+          "x": 0.583,
+          "y": 0.8881,
+          "z": 0.0104,
+          "visibility": 0.9958
+        },
+        "right_hip": {
+          "x": 0.4398,
+          "y": 0.8991,
+          "z": -0.0099,
+          "visibility": 0.995
+        },
+        "mouth_left": {
+          "x": 0.5365,
+          "y": 0.2054,
+          "z": -0.477,
+          "visibility": 1.0
+        },
+        "mouth_right": {
+          "x": 0.4965,
+          "y": 0.2047,
+          "z": -0.4773,
+          "visibility": 1.0
+        },
+        "left_elbow": {
+          "x": 0.7014,
+          "y": 0.6577,
+          "z": -0.1536,
+          "visibility": 0.9952
+        },
+        "right_elbow": {
+          "x": 0.3269,
+          "y": 0.6586,
+          "z": -0.2375,
+          "visibility": 0.992
+        },
+        "left_wrist": {
+          "x": 0.6957,
+          "y": 0.8539,
+          "z": -0.4638,
+          "visibility": 0.9912
+        },
+        "right_wrist": {
+          "x": 0.3753,
+          "y": 0.8523,
+          "z": -0.5433,
+          "visibility": 0.9815
+        },
+        "left_knee": {
+          "x": 0.7204,
+          "y": 1.0346,
+          "z": -0.4375,
+          "visibility": 0.6729
+        },
+        "right_knee": {
+          "x": 0.4109,
+          "y": 1.1701,
+          "z": -0.3043,
+          "visibility": 0.6935
+        }
+      },
+      "left_hand_landmarks": {
+        "wrist": {
+          "x": 0.695,
+          "y": 0.8582,
+          "z": 0.0
+        },
+        "thumb_tip": {
+          "x": 0.636,
+          "y": 0.9588,
+          "z": -0.066
+        },
+        "index_tip": {
+          "x": 0.6784,
+          "y": 0.9889,
+          "z": -0.0891
+        },
+        "pinky_tip": {
+          "x": 0.7531,
+          "y": 1.0053,
+          "z": -0.0566
+        }
+      },
+      "right_hand_landmarks": {
+        "wrist": {
+          "x": 0.3805,
+          "y": 0.842,
+          "z": 0.0
+        },
+        "thumb_cmc": {
+          "x": 0.4072,
+          "y": 0.8597,
+          "z": -0.0072
+        },
+        "thumb_mcp": {
+          "x": 0.4307,
+          "y": 0.8832,
+          "z": -0.0142
+        },
+        "thumb_ip": {
+          "x": 0.4452,
+          "y": 0.9096,
+          "z": -0.02
+        },
+        "thumb_tip": {
+          "x": 0.4515,
+          "y": 0.9353,
+          "z": -0.0255
+        },
+        "index_mcp": {
+          "x": 0.4209,
+          "y": 0.8613,
+          "z": -0.0263
+        },
+        "index_pip": {
+          "x": 0.4409,
+          "y": 0.8844,
+          "z": -0.038
+        },
+        "index_dip": {
+          "x": 0.4501,
+          "y": 0.9081,
+          "z": -0.0439
+        },
+        "index_tip": {
+          "x": 0.4564,
+          "y": 0.9295,
+          "z": -0.0476
+        },
+        "middle_mcp": {
+          "x": 0.403,
+          "y": 0.8642,
+          "z": -0.0287
+        },
+        "middle_pip": {
+          "x": 0.4146,
+          "y": 0.8888,
+          "z": -0.0402
+        },
+        "middle_dip": {
+          "x": 0.424,
+          "y": 0.9139,
+          "z": -0.0439
+        },
+        "middle_tip": {
+          "x": 0.4318,
+          "y": 0.9338,
+          "z": -0.0465
+        },
+        "ring_mcp": {
+          "x": 0.3831,
+          "y": 0.8704,
+          "z": -0.0308
+        },
+        "ring_pip": {
+          "x": 0.3868,
+          "y": 0.8949,
+          "z": -0.0422
+        },
+        "ring_dip": {
+          "x": 0.393,
+          "y": 0.9204,
+          "z": -0.0446
+        },
+        "ring_tip": {
+          "x": 0.3996,
+          "y": 0.9389,
+          "z": -0.0455
+        },
+        "pinky_mcp": {
+          "x": 0.3635,
+          "y": 0.8776,
+          "z": -0.0331
+        },
+        "pinky_pip": {
+          "x": 0.3623,
+          "y": 0.9033,
+          "z": -0.0432
+        },
+        "pinky_dip": {
+          "x": 0.3665,
+          "y": 0.9223,
+          "z": -0.0456
+        },
+        "pinky_tip": {
+          "x": 0.3714,
+          "y": 0.9377,
+          "z": -0.0465
+        }
+      }
+    },
+    {
+      "sample_index": 2,
+      "t": 0.25,
+      "pose_landmarks": {
+        "nose": {
+          "x": 0.5181,
+          "y": 0.1598,
+          "z": -0.6183,
+          "visibility": 1.0
+        },
+        "left_shoulder": {
+          "x": 0.6368,
+          "y": 0.404,
+          "z": -0.2163,
+          "visibility": 1.0
+        },
+        "right_shoulder": {
+          "x": 0.3929,
+          "y": 0.3865,
+          "z": -0.2031,
+          "visibility": 0.9999
+        },
+        "left_hip": {
+          "x": 0.5861,
+          "y": 0.8904,
+          "z": 0.0072,
+          "visibility": 0.9957
+        },
+        "right_hip": {
+          "x": 0.4398,
+          "y": 0.8991,
+          "z": -0.0067,
+          "visibility": 0.9949
+        },
+        "mouth_left": {
+          "x": 0.5371,
+          "y": 0.2049,
+          "z": -0.5309,
+          "visibility": 1.0
+        },
+        "mouth_right": {
+          "x": 0.4975,
+          "y": 0.2047,
+          "z": -0.5274,
+          "visibility": 1.0
+        },
+        "left_elbow": {
+          "x": 0.7008,
+          "y": 0.6579,
+          "z": -0.2031,
+          "visibility": 0.9948
+        },
+        "right_elbow": {
+          "x": 0.3241,
+          "y": 0.6589,
+          "z": -0.2547,
+          "visibility": 0.9921
+        },
+        "left_wrist": {
+          "x": 0.6881,
+          "y": 0.8545,
+          "z": -0.5086,
+          "visibility": 0.9904
+        },
+        "right_wrist": {
+          "x": 0.3785,
+          "y": 0.8507,
+          "z": -0.5632,
+          "visibility": 0.9817
+        },
+        "left_knee": {
+          "x": 0.715,
+          "y": 1.0108,
+          "z": -0.568,
+          "visibility": 0.6812
+        },
+        "right_knee": {
+          "x": 0.4041,
+          "y": 1.1565,
+          "z": -0.5673,
+          "visibility": 0.6986
+        }
+      },
+      "left_hand_landmarks": {
+        "wrist": {
+          "x": 0.6862,
+          "y": 0.8557,
+          "z": 0.0
+        },
+        "thumb_tip": {
+          "x": 0.6238,
+          "y": 0.9576,
+          "z": -0.0507
+        },
+        "index_tip": {
+          "x": 0.6648,
+          "y": 0.9859,
+          "z": -0.0691
+        },
+        "pinky_tip": {
+          "x": 0.742,
+          "y": 0.9944,
+          "z": -0.0444
+        }
+      },
+      "right_hand_landmarks": {
+        "wrist": {
+          "x": 0.3881,
+          "y": 0.8375,
+          "z": 0.0
+        },
+        "thumb_cmc": {
+          "x": 0.4132,
+          "y": 0.8617,
+          "z": -0.0077
+        },
+        "thumb_mcp": {
+          "x": 0.436,
+          "y": 0.8902,
+          "z": -0.0156
+        },
+        "thumb_ip": {
+          "x": 0.4507,
+          "y": 0.919,
+          "z": -0.0224
+        },
+        "thumb_tip": {
+          "x": 0.4601,
+          "y": 0.9442,
+          "z": -0.029
+        },
+        "index_mcp": {
+          "x": 0.4315,
+          "y": 0.8669,
+          "z": -0.0294
+        },
+        "index_pip": {
+          "x": 0.4536,
+          "y": 0.8888,
+          "z": -0.044
+        },
+        "index_dip": {
+          "x": 0.4646,
+          "y": 0.9141,
+          "z": -0.0522
+        },
+        "index_tip": {
+          "x": 0.4713,
+          "y": 0.9375,
+          "z": -0.0575
+        },
+        "middle_mcp": {
+          "x": 0.4151,
+          "y": 0.8676,
+          "z": -0.0329
+        },
+        "middle_pip": {
+          "x": 0.4274,
+          "y": 0.889,
+          "z": -0.0487
+        },
+        "middle_dip": {
+          "x": 0.4353,
+          "y": 0.9134,
+          "z": -0.0544
+        },
+        "middle_tip": {
+          "x": 0.4402,
+          "y": 0.9339,
+          "z": -0.0579
+        },
+        "ring_mcp": {
+          "x": 0.3946,
+          "y": 0.8713,
+          "z": -0.0363
+        },
+        "ring_pip": {
+          "x": 0.3992,
+          "y": 0.8923,
+          "z": -0.0509
+        },
+        "ring_dip": {
+          "x": 0.4049,
+          "y": 0.9153,
+          "z": -0.0543
+        },
+        "ring_tip": {
+          "x": 0.4097,
+          "y": 0.9339,
+          "z": -0.0557
+        },
+        "pinky_mcp": {
+          "x": 0.3734,
+          "y": 0.8768,
+          "z": -0.0399
+        },
+        "pinky_pip": {
+          "x": 0.3723,
+          "y": 0.9,
+          "z": -0.0524
+        },
+        "pinky_dip": {
+          "x": 0.375,
+          "y": 0.9193,
+          "z": -0.0558
+        },
+        "pinky_tip": {
+          "x": 0.3777,
+          "y": 0.9378,
+          "z": -0.0575
+        }
+      }
+    },
+    {
+      "sample_index": 3,
+      "t": 0.375,
+      "pose_landmarks": {
+        "nose": {
+          "x": 0.5193,
+          "y": 0.1598,
+          "z": -0.6082,
+          "visibility": 1.0
+        },
+        "left_shoulder": {
+          "x": 0.6389,
+          "y": 0.405,
+          "z": -0.2085,
+          "visibility": 1.0
+        },
+        "right_shoulder": {
+          "x": 0.3942,
+          "y": 0.3865,
+          "z": -0.1984,
+          "visibility": 0.9999
+        },
+        "left_hip": {
+          "x": 0.5875,
+          "y": 0.8959,
+          "z": 0.0059,
+          "visibility": 0.9956
+        },
+        "right_hip": {
+          "x": 0.4394,
+          "y": 0.8996,
+          "z": -0.0054,
+          "visibility": 0.9948
+        },
+        "mouth_left": {
+          "x": 0.5381,
+          "y": 0.2051,
+          "z": -0.5218,
+          "visibility": 1.0
+        },
+        "mouth_right": {
+          "x": 0.4989,
+          "y": 0.2051,
+          "z": -0.5268,
+          "visibility": 1.0
+        },
+        "left_elbow": {
+          "x": 0.7001,
+          "y": 0.6599,
+          "z": -0.2022,
+          "visibility": 0.9945
+        },
+        "right_elbow": {
+          "x": 0.3221,
+          "y": 0.6584,
+          "z": -0.2702,
+          "visibility": 0.9924
+        },
+        "left_wrist": {
+          "x": 0.6852,
+          "y": 0.8549,
+          "z": -0.5106,
+          "visibility": 0.99
+        },
+        "right_wrist": {
+          "x": 0.3813,
+          "y": 0.8431,
+          "z": -0.5956,
+          "visibility": 0.9822
+        },
+        "left_knee": {
+          "x": 0.7153,
+          "y": 1.0173,
+          "z": -0.5004,
+          "visibility": 0.6863
+        },
+        "right_knee": {
+          "x": 0.3996,
+          "y": 1.1516,
+          "z": -0.5079,
+          "visibility": 0.7003
+        }
+      },
+      "left_hand_landmarks": {
+        "wrist": {
+          "x": 0.6884,
+          "y": 0.8557,
+          "z": 0.0
+        },
+        "thumb_tip": {
+          "x": 0.6287,
+          "y": 0.9577,
+          "z": -0.0488
+        },
+        "index_tip": {
+          "x": 0.6691,
+          "y": 0.9861,
+          "z": -0.0686
+        },
+        "pinky_tip": {
+          "x": 0.7494,
+          "y": 0.9891,
+          "z": -0.045
+        }
+      },
+      "right_hand_landmarks": {
+        "wrist": {
+          "x": 0.3878,
+          "y": 0.8387,
+          "z": 0.0
+        },
+        "thumb_cmc": {
+          "x": 0.4125,
+          "y": 0.8573,
+          "z": -0.0074
+        },
+        "thumb_mcp": {
+          "x": 0.4349,
+          "y": 0.8814,
+          "z": -0.014
+        },
+        "thumb_ip": {
+          "x": 0.4498,
+          "y": 0.9064,
+          "z": -0.0196
+        },
+        "thumb_tip": {
+          "x": 0.4556,
+          "y": 0.9328,
+          "z": -0.0247
+        },
+        "index_mcp": {
+          "x": 0.4217,
+          "y": 0.8692,
+          "z": -0.0227
+        },
+        "index_pip": {
+          "x": 0.4319,
+          "y": 0.8983,
+          "z": -0.034
+        },
+        "index_dip": {
+          "x": 0.4362,
+          "y": 0.9247,
+          "z": -0.0394
+        },
+        "index_tip": {
+          "x": 0.4383,
+          "y": 0.947,
+          "z": -0.0424
+        },
+        "middle_mcp": {
+          "x": 0.4047,
+          "y": 0.8691,
+          "z": -0.0243
+        },
+        "middle_pip": {
+          "x": 0.4096,
+          "y": 0.8959,
+          "z": -0.0343
+        },
+        "middle_dip": {
+          "x": 0.4141,
+          "y": 0.9229,
+          "z": -0.0371
+        },
+        "middle_tip": {
+          "x": 0.4173,
+          "y": 0.9447,
+          "z": -0.0391
+        },
+        "ring_mcp": {
+          "x": 0.3868,
+          "y": 0.8709,
+          "z": -0.026
+        },
+        "ring_pip": {
+          "x": 0.3842,
+          "y": 0.8936,
+          "z": -0.037
+        },
+        "ring_dip": {
+          "x": 0.387,
+          "y": 0.9196,
+          "z": -0.0395
+        },
+        "ring_tip": {
+          "x": 0.3903,
+          "y": 0.9406,
+          "z": -0.0402
+        },
+        "pinky_mcp": {
+          "x": 0.369,
+          "y": 0.8744,
+          "z": -0.0279
+        },
+        "pinky_pip": {
+          "x": 0.3637,
+          "y": 0.8978,
+          "z": -0.0374
+        },
+        "pinky_dip": {
+          "x": 0.3633,
+          "y": 0.9191,
+          "z": -0.0396
+        },
+        "pinky_tip": {
+          "x": 0.3633,
+          "y": 0.9381,
+          "z": -0.0401
+        }
+      }
+    },
+    {
+      "sample_index": 4,
+      "t": 0.5,
+      "pose_landmarks": {
+        "nose": {
+          "x": 0.5204,
+          "y": 0.1603,
+          "z": -0.5359,
+          "visibility": 1.0
+        },
+        "left_shoulder": {
+          "x": 0.6405,
+          "y": 0.4079,
+          "z": -0.0638,
+          "visibility": 1.0
+        },
+        "right_shoulder": {
+          "x": 0.3952,
+          "y": 0.3868,
+          "z": -0.1601,
+          "visibility": 0.9999
+        },
+        "left_hip": {
+          "x": 0.5868,
+          "y": 0.8998,
+          "z": 0.0339,
+          "visibility": 0.9958
+        },
+        "right_hip": {
+          "x": 0.4368,
+          "y": 0.8996,
+          "z": -0.0338,
+          "visibility": 0.9951
+        },
+        "mouth_left": {
+          "x": 0.5387,
+          "y": 0.2065,
+          "z": -0.4348,
+          "visibility": 1.0
+        },
+        "mouth_right": {
+          "x": 0.4999,
+          "y": 0.2063,
+          "z": -0.4445,
+          "visibility": 1.0
+        },
+        "left_elbow": {
+          "x": 0.6993,
+          "y": 0.6632,
+          "z": -0.0421,
+          "visibility": 0.9939
+        },
+        "right_elbow": {
+          "x": 0.3051,
+          "y": 0.6484,
+          "z": -0.4186,
+          "visibility": 0.9927
+        },
+        "left_wrist": {
+          "x": 0.6856,
+          "y": 0.8592,
+          "z": -0.3155,
+          "visibility": 0.99
+        },
+        "right_wrist": {
+          "x": 0.393,
+          "y": 0.6029,
+          "z": -0.8959,
+          "visibility": 0.9838
+        },
+        "left_knee": {
+          "x": 0.7349,
+          "y": 1.1425,
+          "z": -0.4861,
+          "visibility": 0.7116
+        },
+        "right_knee": {
+          "x": 0.3968,
+          "y": 1.0319,
+          "z": -0.7692,
+          "visibility": 0.7258
+        }
+      },
+      "left_hand_landmarks": {
+        "wrist": {
+          "x": 0.6902,
+          "y": 0.859,
+          "z": 0.0
+        },
+        "thumb_tip": {
+          "x": 0.6339,
+          "y": 0.9666,
+          "z": -0.0523
+        },
+        "index_tip": {
+          "x": 0.6793,
+          "y": 0.9948,
+          "z": -0.0716
+        },
+        "pinky_tip": {
+          "x": 0.7573,
+          "y": 0.9874,
+          "z": -0.0484
+        }
+      },
+      "right_hand_landmarks": null
+    },
+    {
+      "sample_index": 5,
+      "t": 0.625,
+      "pose_landmarks": {
+        "nose": {
+          "x": 0.5191,
+          "y": 0.1607,
+          "z": -0.4861,
+          "visibility": 1.0
+        },
+        "left_shoulder": {
+          "x": 0.6404,
+          "y": 0.4066,
+          "z": -0.0956,
+          "visibility": 0.9999
+        },
+        "right_shoulder": {
+          "x": 0.3991,
+          "y": 0.3806,
+          "z": -0.1335,
+          "visibility": 0.9998
+        },
+        "left_hip": {
+          "x": 0.5867,
+          "y": 0.8997,
+          "z": 0.0319,
+          "visibility": 0.9959
+        },
+        "right_hip": {
+          "x": 0.4367,
+          "y": 0.8918,
+          "z": -0.0317,
+          "visibility": 0.9954
+        },
+        "mouth_left": {
+          "x": 0.5373,
+          "y": 0.2069,
+          "z": -0.3942,
+          "visibility": 1.0
+        },
+        "mouth_right": {
+          "x": 0.4998,
+          "y": 0.2066,
+          "z": -0.3957,
+          "visibility": 1.0
+        },
+        "left_elbow":
+... [TRUNCATED focused_raw JSON due to max_chars limit]
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "The audio contains a clear slap sound and the spoken word 'help'.",
+    "evidence": "A sharp slap sound is heard at 00:01.000. The word 'help' is clearly spoken around 00:03.000."
+  },
+  "visual_event_correctness": {
+    "label": "yes",
+    "reason": "The video shows the person slapping their right thigh with their right hand, forming a right-hand thumbs-up pose, and visibly speaking the word 'help'.",
+    "evidence": "Right hand raises and strikes right thigh at 00:00.958. Right hand forms a clear thumbs-up pose at 00:02.000. Mouth moves to say 'help' starting at 00:02.958."
+  },
+  "audio_visual_binding": {
+    "label": "yes",
+    "reason": "Both the sounding action and the speech event are correctly synchronized.",
+    "evidence": "The slap sound at 00:01.000 perfectly aligns with the visible impact on the thigh. The audio for 'help' at 00:03.000 aligns with the visible mouth movements."
+  },
+  "temporal_relation_satisfaction": {
+    "label": "yes",
+    "reason": "The events occur in the correct relative sequence: slap, then thumbs-up, then speech.",
+    "evidence": "Slap at 00:01.000, followed by thumbs-up at 00:02.000, followed by speech at 00:03.000."
+  },
+  "temporal_count_satisfaction": {
+    "label": "yes",
+    "reason": "Each required event occurs exactly once with no repetitions.",
+    "evidence": "There is only one slap, one thumbs-up pose, and one instance of the word 'help'."
+  },
+  "constraint_compliance": {
+    "label": "yes",
+    "reason": "The video satisfies all scene, camera, and specific action constraints.",
+    "evidence": "The scene is a plain indoor room with a static medium shot. The person starts with hands on thighs. No extra words or sounds are produced. The person remains mostly still after the final speech event."
+  },
+  "overall_temporal_success": "yes",
+  "overall_reason": "All required audio and visual events are present, correctly bound, and occur in the exact specified order exactly once.",
+  "observed_behavior_summary": "The person, seated in a plain room, first raises their right hand and slaps their right thigh at 00:01.000. They then form a right-hand thumbs-up pose at 00:02.000. Finally, they say the word 'help' at 00:03.000, after which they return their hand to their lap."
+}

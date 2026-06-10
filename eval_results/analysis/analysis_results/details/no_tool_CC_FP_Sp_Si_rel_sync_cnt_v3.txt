@@ -1,0 +1,210 @@
+====================================================================================================
+METHOD
+====================================================================================================
+no_tool
+
+====================================================================================================
+AXIS
+====================================================================================================
+CC
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+FP
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+31
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_Si_rel_sync_cnt
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v3
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+3
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_Si_rel_sync_cnt/Sp_Si_rel_sync_cnt_v3_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2/Sp_Si_rel_sync_cnt/Sp_Si_rel_sync_cnt_v3_raw.mp4
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (silent)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+relative_sync_count
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+yes
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+The video successfully adheres to the scene and camera constraints, featuring a single seated person in a static medium shot with no extra sounds, speech, or actions.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+The person is centered in a plain indoor setting, the shot is a static medium view, and there are no subtitles, background music, or subsequent actions after the second event window.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+A seated male subject is shown in a static medium shot. A synthesized voice says 'help' twice, but the subject's face remains entirely still with no lip movement. The subject's right hand forms a thumbs-up during the first audio event, lowers, and then raises as a loose fist without a thumb extension during the second audio event.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+Although the audio contains the target word twice, the video completely lacks visible speaking motion, fails to clearly execute the second thumbs-up, and therefore fails visual correctness, audio-visual binding, and the temporal constraint.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room, a single seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. The person begins seated on a chair with both hands resting on the knees or thighs, then performs the synchronized bundle two times: while clearly saying the single word “help,” the right hand forms and holds a recognizable thumbs-up pose with the thumb extended upward. Between the two repetitions, there is only a brief natural reset to the initial resting position, and both repetitions are easy to see and hear. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_Si_rel_sync_cnt
+- modality_combination: Speech + Action (silent)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "silent_action": {"actor": "person_A", "action": "thumbs_up", "body_side": "right", "body_part": "hand", "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."}}
+- temporal_constraint: {"relation_type": "sync_count", "timing_type": "relative", "value": {"events": ["speech", "silent_action"], "count": 2}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the silent visual action "thumbs up"
+
+Axis-specific criteria:
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+
+2. Visual Event Correctness
+- The visual silent action "thumbs up" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding
+- If the speaker is visible, visible speaking/lip motion should be temporally aligned with the spoken event "help". If the face/mouth is not visible but the prompt does not require it, judge based on available evidence and the prompt.
+
+4. Temporal Constraint Satisfaction
+- Temporal constraint type: relative synchronized count.
+- The required target event/bundle should occur exactly 2 time(s): Event 1: says "help" + Event 2: performs the silent visual action "thumbs up".
+- Count only clear and completed target event occurrences.
+- If the number of target occurrences is different, the bundle is not synchronized when required, or the count is unclear, mark this axis as no.
+
+5. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_constraint_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "The word 'help' is clearly spoken twice in the audio track.",
+    "evidence": "Speech audio saying 'help' is heard at approximately 00:00.000-00:00.500 and again at 00:01.000-00:01.500."
+  },
+  "visual_event_correctness": {
+    "label": "no",
+    "reason": "The person's mouth remains completely closed and static throughout the entire video, lacking the required visible speaking behavior. Additionally, while the right hand forms a thumbs-up the first time, the second attempt is merely a lifted loose fist without a clear thumb extension.",
+    "evidence": "Video inspection shows the face is entirely still from 00:00.000 to 00:05.000 with no lip movement. The right hand shows a thumbs-up at 00:00.000 but only lifts in a fist around 00:01.000."
+  },
+  "audio_visual_binding": {
+    "label": "no",
+    "reason": "The spoken words 'help' have no corresponding visible mouth or lip movement in the video, completely failing to bind the speech audio to the visual speaker.",
+    "evidence": "Audio of the word 'help' occurs twice, but the visible subject's mouth never opens or moves."
+  },
+  "temporal_constraint_satisfaction": {
+    "label": "no",
+    "reason": "The required synchronized bundle of speaking 'help' with visible lip motion and forming a thumbs-up pose does not occur twice as requested, due to missing lip movement and an incomplete second visual action.",
+    "evidence": "The temporal constraint of two synchronized repetitions is broken because the visible speaking component is absent both times and the right hand fails to form a clear thumbs-up the second time (around 00:01.000)."
+  },
+  "constraint_compliance": {
+    "label": "yes",
+    "reason": "The video successfully adheres to the scene and camera constraints, featuring a single seated person in a static medium shot with no extra sounds, speech, or actions.",
+    "evidence": "The person is centered in a plain indoor setting, the shot is a static medium view, and there are no subtitles, background music, or subsequent actions after the second event window."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "Although the audio contains the target word twice, the video completely lacks visible speaking motion, fails to clearly execute the second thumbs-up, and therefore fails visual correctness, audio-visual binding, and the temporal constraint.",
+  "observed_behavior_summary": "A seated male subject is shown in a static medium shot. A synthesized voice says 'help' twice, but the subject's face remains entirely still with no lip movement. The subject's right hand forms a thumbs-up during the first audio event, lowers, and then raises as a loose fist without a thumb extension during the second audio event."
+}

@@ -1,0 +1,212 @@
+====================================================================================================
+METHOD
+====================================================================================================
+no_tool
+
+====================================================================================================
+AXIS
+====================================================================================================
+V
+
+====================================================================================================
+ERROR_TYPE
+====================================================================================================
+TN
+
+====================================================================================================
+HUMAN_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+VIDEO_ID
+====================================================================================================
+37
+
+====================================================================================================
+ITEM_ID
+====================================================================================================
+Sp_So_rel_ord_SpSo
+
+====================================================================================================
+VARIANT
+====================================================================================================
+v1
+
+====================================================================================================
+VARIANT_IDX
+====================================================================================================
+1
+
+====================================================================================================
+VIDEO_RELPATH
+====================================================================================================
+Sp_So_rel_ord_SpSo/Sp_So_rel_ord_SpSo_v1_raw.mp4
+
+====================================================================================================
+FULL_VIDEO_PATH
+====================================================================================================
+/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2/Sp_So_rel_ord_SpSo/Sp_So_rel_ord_SpSo_v1_raw.mp4
+
+====================================================================================================
+MODALITY_COMBINATION
+====================================================================================================
+Speech + Action (sounding)
+
+====================================================================================================
+TEMPORAL_TYPE
+====================================================================================================
+relative_order
+
+====================================================================================================
+HUMAN_FAILURE_REASON
+====================================================================================================
+
+
+====================================================================================================
+GEMINI_AXIS_RAW_LABEL
+====================================================================================================
+no
+
+====================================================================================================
+GEMINI_AXIS_REASON
+====================================================================================================
+While the visible speaking motion is correct, the visible action of slapping the right thigh is not properly executed; the person slowly raises their right hand and lowers it gently without making a visible striking impact.
+
+====================================================================================================
+GEMINI_AXIS_EVIDENCE
+====================================================================================================
+Appropriate mouth movement is visible at the beginning of the video. However, from 00:03.042 to 00:04.292, the right hand is raised and then softly placed back on the knee, with no fast striking motion or visible impact observed.
+
+====================================================================================================
+OBSERVED_BEHAVIOR_SUMMARY
+====================================================================================================
+The person says 'help' correctly at the start. At 00:03.000, a loud slap sound is heard while the person's hands are motionless on their thighs. Immediately after the sound, the person slowly raises their right hand high in the air and gently lowers it back to their knee.
+
+====================================================================================================
+OVERALL_REASON
+====================================================================================================
+Although the audio events are correct and ordered, the video fails to visually depict the thigh-slapping action, and the slap sound is completely misaligned with the visual motion.
+
+====================================================================================================
+POSE_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+AUDIO_EVIDENCE_MODE
+====================================================================================================
+none
+
+====================================================================================================
+MEDIA_FPS
+====================================================================================================
+24.0
+
+====================================================================================================
+USER_PROMPT_SENT_TO_GEMINI
+====================================================================================================
+Task: Evaluate this generated video using the redefined axis-level T2AV temporal metric.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. The person begins seated on a chair with both hands resting on the knees or thighs. First, the person clearly says the single word “help,” audible and easy to distinguish, with no extra words. After that speech ends, the person lifts the right hand and slaps the top of the right thigh once, making visible contact and producing a sharp slap sound at the moment of impact. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: Sp_So_rel_ord_SpSo
+- modality_combination: Speech + Action (sounding)
+- content: {"speech": {"actor": "person_A", "text": "help", "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."}, "sounding_action": {"actor": "person_A", "action": "slapping_the_thigh", "acting_body_side": "right", "acting_body_part": "hand", "target_body_side": "right", "target_body_part": "thigh", "target_sound": "sharp slap sound", "definition": "The person's right hand strikes the top of the person's right thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."}}
+- temporal_constraint: {"relation_type": "order", "timing_type": "relative", "value": {"sequence": ["speech", "sounding_action"]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says "help"
+- Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound
+
+Axis-specific criteria:
+
+1. Audio Event Correctness
+- The speech event "help" must be clearly audible and intelligible.
+- The sound corresponding to the sounding action "slapping the thigh" must be clearly audible and appropriate for the prompt.
+
+2. Visual Event Correctness
+- The visible motion for the sounding action "slapping the thigh" must be clearly visible and correctly performed according to the original generation prompt.
+
+3. Audio-Visual Binding
+- If the speaker is visible, visible speaking/lip motion should be temporally aligned with the spoken event "help". If the face/mouth is not visible but the prompt does not require it, judge based on available evidence and the prompt.
+- The visible action "slapping the thigh" must be temporally aligned with its corresponding sound; the sound should occur at the moment implied by the visible action.
+
+4. Temporal Constraint Satisfaction
+- Temporal constraint type: relative order.
+- Required order: Event 1: says "help" -> Event 2: performs the sounding action "slapping the thigh" with corresponding visible motion and sound.
+- Each required event must appear clearly in that exact order.
+- If the order is reversed, mixed, overlapping when it should be sequential, missing, or unclear, mark this axis as no.
+
+5. Constraint Compliance / Prompt Compliance
+- Evaluate non-core prompt constraints separately from the main temporal score.
+- Check scene, setting, camera, shot type, people count, subtitles/on-screen text, background music, extra sounds, extra speech, extra gestures/actions, and post-event stillness according to the original generation prompt.
+- If the original prompt says the person should become still after the target event, then any additional speech, gesture, slap, or salient action after the target event should make this axis no.
+- If the original prompt says no other people, no subtitles, no on-screen text, no background music, or no extra sounds, enforce those constraints here.
+- Scene hint to enforce when visible: plain indoor room.
+- Camera/shot hint to enforce when visible: static medium shot.
+- Do not use this axis when computing overall_temporal_success.
+
+
+Decision rules:
+- For each axis, output label "yes" only if that axis is clearly satisfied.
+- If evidence is missing, ambiguous, weak, mismatched, or contradicted, output "no" for the relevant axis.
+- The generic body-pose evidence, if present, is not an action classifier. It is only low-level auxiliary evidence.
+- Constraint Compliance is reported separately as prompt compliance / quality control.
+- overall_temporal_success must be: audio_event_correctness AND visual_event_correctness AND audio_visual_binding AND temporal_constraint_satisfaction.
+- Do not include constraint_compliance in overall_temporal_success.
+- Keep reasons concise but specific.
+- Return the JSON object only.
+
+====================================================================================================
+MEDIAPIPE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+AUDIO_EVIDENCE_SUMMARY
+====================================================================================================
+
+
+====================================================================================================
+RAW_GEMINI_OUTPUT
+====================================================================================================
+{
+  "audio_event_correctness": {
+    "label": "yes",
+    "reason": "The required speech event 'help' and the sharp slap sound are both clearly audible and distinct.",
+    "evidence": "The word 'help' is heard between 00:00.000 and 00:00.500. A sharp slap sound is heard at 00:03.000."
+  },
+  "visual_event_correctness": {
+    "label": "no",
+    "reason": "While the visible speaking motion is correct, the visible action of slapping the right thigh is not properly executed; the person slowly raises their right hand and lowers it gently without making a visible striking impact.",
+    "evidence": "Appropriate mouth movement is visible at the beginning of the video. However, from 00:03.042 to 00:04.292, the right hand is raised and then softly placed back on the knee, with no fast striking motion or visible impact observed."
+  },
+  "audio_visual_binding": {
+    "label": "no",
+    "reason": "The audio-visual binding for the slap event is entirely broken, as the slap sound occurs while the hands are completely motionless.",
+    "evidence": "The sharp slap sound plays at exactly 00:03.000, but at this timestamp, both hands are resting statically on the person's thighs. The subsequent hand movement produces no sound."
+  },
+  "temporal_constraint_satisfaction": {
+    "label": "no",
+    "reason": "The required sequence of events is not satisfied because the second event (slapping the thigh) is visually missing and temporally disconnected from its sound.",
+    "evidence": "The failure to produce a visually correct slap and the misalignment of the slap sound with any visible contact means the ordered sequence of two distinct audiovisual events is incomplete."
+  },
+  "constraint_compliance": {
+    "label": "yes",
+    "reason": "The video satisfies the scene, camera, and initial setup constraints without introducing any extra words, background music, or unprompted actions after the intended target events.",
+    "evidence": "The video displays a static medium shot of a seated person in a plain room. The person speaks only the single required word, and remains still after placing the hand back down."
+  },
+  "overall_temporal_success": "no",
+  "overall_reason": "Although the audio events are correct and ordered, the video fails to visually depict the thigh-slapping action, and the slap sound is completely misaligned with the visual motion.",
+  "observed_behavior_summary": "The person says 'help' correctly at the start. At 00:03.000, a loud slap sound is heard while the person's hands are motionless on their thighs. Immediately after the sound, the person slowly raises their right hand high in the air and gently lowers it back to their knee."
+}
