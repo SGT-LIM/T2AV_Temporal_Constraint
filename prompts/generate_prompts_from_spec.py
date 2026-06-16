@@ -17,11 +17,11 @@ from openai import OpenAI
 # python generate_single_modality_prompts.py
 
 MODEL_NAME = "gpt-5.4-mini"
-BASE_DIR = Path("/home/coder/T2V_Gen/prompts")
-GUIDE_PATH = BASE_DIR / "may26_prompt_guideline.md"
-SPECS_PATH = BASE_DIR / "may26_jsonl_spec.jsonl"
-OUTPUT_JSONL_PATH = BASE_DIR / "generated/5-comb_temporal_selected_specs_prompts.jsonl"
-OUTPUT_JSON_PATH = BASE_DIR / "generated/5-comb_temporal_selected_specs_prompts.json"
+BASE_DIR = Path("/home/coder/T2AV/prompts")
+GUIDE_PATH = BASE_DIR / "guidelines/may26_prompt_guideline.md"
+SPECS_PATH = BASE_DIR / "specs/jun15_spec.jsonl"
+OUTPUT_JSONL_PATH = BASE_DIR / "generated/6-comb_temporal_selected_specs_prompts.jsonl"
+OUTPUT_JSON_PATH = BASE_DIR / "generated/6-comb_temporal_selected_specs_prompts.json"
 
 MAX_RETRIES = 3
 RETRY_SLEEP_SEC = 3

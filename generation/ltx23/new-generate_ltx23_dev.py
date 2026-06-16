@@ -216,6 +216,7 @@ def write_metadata_txt(
     item: dict[str, Any],
     seed: int,
     command: list[str],
+    compact_item_id: str,
 ) -> None:
     lines = [
         f"index: {index}",
@@ -411,6 +412,7 @@ def main() -> int:
                         item=item,
                         seed=seed,
                         command=command,
+                        compact_item_id=compact_item_id,
                     )
                     print(f"       wrote missing metadata: {txt_path}")
                 skipped_jobs += 1
@@ -435,6 +437,7 @@ def main() -> int:
                 item=item,
                 seed=seed,
                 command=command,
+                compact_item_id=compact_item_id,
             )
             print(f"[DONE] {mp4_path}")
             print(f"       {txt_path}")

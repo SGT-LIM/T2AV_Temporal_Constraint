@@ -61,15 +61,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Audio contains the word 'help' at roughly 00:00.6 and 00:01.2, but no slapping sounds are audible at any point.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_A_FN_Sp_Si_So_rel_sync_cnt_v1.txt`
 
-#### FN — Si_So_abs_ord_SoSi v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The required sharp slap sound corresponding to the thigh strike is missing.
-- Gemini evidence: No audible slap sound can be identified around the 1.5-second mark.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_A_FN_Si_So_abs_ord_SoSi_v1.txt`
-
 #### FN — Sp_Si_So_rel_ord_SoSpSi v1
 
 - Human: `yes` / Gemini: `no`
@@ -79,16 +70,16 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Speech 'help' is heard at the start of the video, but no thigh slap sound occurs anywhere.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_A_FN_Sp_Si_So_rel_ord_SoSpSi_v1.txt`
 
+#### FN — Sp_Si_rel_sync_cnt v1
+
+- Human: `yes` / Gemini: `no`
+- Temporal type: `relative_sync_count`
+- Modality: `Speech + Action (silent)`
+- Gemini reason: The audio track is completely silent. The required word 'help' is not spoken.
+- Gemini evidence: No speech audio is heard throughout the video.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_A_FN_Sp_Si_rel_sync_cnt_v1.txt`
+
 ### V
-
-#### TP — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The required visual actions, including the thumbs-up pose and the thigh slap using the specified body side, are clearly visible.
-- Gemini evidence: The person's right hand (viewer's left) forms a thumbs-up between 3.4s and 3.8s, and then strikes the right thigh around 4.0s.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_V_TP_Si_So_abs_ord_SiSo_v1.txt`
 
 #### TP — Sp_Si_So_rel_ord_SpSiSo v1
 
@@ -107,6 +98,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The visible actions of the right hand slapping the right thigh, forming a thumbs-up, and the mouth moving to speak are correctly presented.
 - Gemini evidence: The right hand visually strikes the right thigh at 00:01.000 and 00:01.375, a thumbs-up is formed at 00:02.000, and mouth motion is visible at 00:03.000.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_V_TP_Sp_Si_So_rel_ord_SoSiSp_v1.txt`
+
+#### TP — Si_So_rel_sync_cnt v1
+
+- Human: `yes` / Gemini: `yes`
+- Temporal type: `relative_sync_count`
+- Modality: `Action (silent) + Action (sounding)`
+- Gemini reason: The right hand forms a clear thumbs-up pose and visibly strikes the right thigh.
+- Gemini evidence: Visible hand-to-thigh impacts occur with a thumbs-up pose.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_V_TP_Si_So_rel_sync_cnt_v1.txt`
 
 #### TN — Sp_Si_So_rel_ord_SpSoSi v1
 
@@ -290,14 +290,14 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The spoken word 'help' at 0:00.000 has no corresponding visible lip movement to bind to.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_AVB_FN_Sp_Si_So_rel_ord_SiSpSo_v1.txt`
 
-#### FN — Si_So_abs_ord_SoSi v1
+#### FN — Sp_Si_So_rel_sync_cnt v1
 
 - Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The visual component for the slap event is missing, so binding cannot be evaluated and fails.
-- Gemini evidence: Because there is no visible motion of the right hand striking the thigh, audio-visual alignment cannot be established.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_AVB_FN_Si_So_abs_ord_SoSi_v1.txt`
+- Temporal type: `relative_sync_count`
+- Modality: `Speech + Action (silent) + Action (sounding)`
+- Gemini reason: Both the visual and audio components of the thigh slap are missing, making audio-visual binding not evaluable.
+- Gemini evidence: The required thigh-slapping motion and its corresponding slap sound do not occur.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_AVB_FN_Sp_Si_So_rel_sync_cnt_v1.txt`
 
 ### TC_REL
 
@@ -392,15 +392,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_TC_REL_FN_Sp_Si_rel_ord_SpSi_v1.txt`
 
 ### TC_COUNT
-
-#### TP — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: Each target event occurs exactly once as required.
-- Gemini evidence: The video shows a single thumbs-up followed by a single slap, with no extra occurrences.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_TC_COUNT_TP_Si_So_abs_ord_SiSo_v1.txt`
 
 #### TP — Sp_Si_rel_ord_SiSp v1
 
@@ -584,14 +575,14 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The actor repeats the sequence three times instead of remaining still after the first occurrence, and the thumbs-up involves a distinct upward arm movement.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_CC_FN_Si_So_rel_sync_v1.txt`
 
-#### FN — Si_So_abs_ord_SoSi v1
+#### FN — Sp_So_rel_sync_cnt v1
 
 - Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The video fails to comply with the camera/framing constraint requiring the full face and mouth to be visible.
-- Gemini evidence: Throughout the video, the person's head is cropped out above the chin, making the face and mouth entirely invisible.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_CC_FN_Si_So_abs_ord_SoSi_v1.txt`
+- Temporal type: `relative_sync_count`
+- Modality: `Speech + Action (sounding)`
+- Gemini reason: The video contains extra actions and sounds, violating the prompt's strict constraints.
+- Gemini evidence: The person performs four thigh slaps instead of the requested two, violating the 'no extra slap sounds' and 'no new target action' constraints.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/no_tool_CC_FN_Sp_So_rel_sync_cnt_v1.txt`
 
 ## mediapipe
 
@@ -642,15 +633,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: While a slap sound is audible around 1.38s, there is no spoken word 'help' heard at any point in the video.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_A_TN_Sp_So_rel_sync_v1.txt`
 
-#### FN — Si_So_abs_ord_SoSi v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: There is no evidence of a required slap sound occurring at the specified time.
-- Gemini evidence: Without a visual slapping action occurring around 1.5 seconds, there is no physical source to generate the required sharp slap sound.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_A_FN_Si_So_abs_ord_SoSi_v1.txt`
-
 #### FN — Sp_Si_So_rel_sync v1
 
 - Human: `yes` / Gemini: `no`
@@ -668,6 +650,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The required speech event 'help' is not present in the audio.
 - Gemini evidence: Throughout the video, only faint breath sounds or sighs are heard; the word 'help' is never spoken.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_A_FN_Sp_Si_rel_sync_cnt_v1.txt`
+
+#### FN — Sp_Si_So_rel_ord_SpSiSo v1
+
+- Human: `yes` / Gemini: `no`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (silent) + Action (sounding)`
+- Gemini reason: Audio evidence is missing, so speech and slap sounds cannot be verified.
+- Gemini evidence: No Whisper or CLAP tool outputs provided.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_A_FN_Sp_Si_So_rel_ord_SpSiSo_v1.txt`
 
 ### V
 
@@ -689,14 +680,14 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Visible mouth movements match speaking at the beginning of the video, followed by the right hand forming and holding a clear thumbs-up pose from approximately 0.75 seconds to the end of the video.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_V_TP_Sp_Si_rel_ord_SpSi_v1.txt`
 
-#### TP — Si_So_abs_ord_SiSo v1
+#### TP — Sp_Si_So_rel_ord_SoSiSp v1
 
 - Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The visible actions match the requested events: a right-hand thumbs-up and a right-hand slap on the right thigh.
-- Gemini evidence: The person forms a thumbs-up pose with their right hand starting around 3.5 seconds, holds it, and then visually strikes their right thigh around 4.3 seconds.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_V_TP_Si_So_abs_ord_SiSo_v1.txt`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (silent) + Action (sounding)`
+- Gemini reason: The video shows the person slapping their right thigh with their right hand, forming a right-hand thumbs-up pose, and visibly speaking the word 'help'.
+- Gemini evidence: Right hand raises and strikes right thigh at 00:00.958. Right hand forms a clear thumbs-up pose at 00:02.000. Mouth moves to say 'help' starting at 00:02.958.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_V_TP_Sp_Si_So_rel_ord_SoSiSp_v1.txt`
 
 #### TN — Sp_Si_rel_sync_cnt v1
 
@@ -715,6 +706,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The person does not visibly speak, and the thumbs-up pose is not maintained while striking the thigh.
 - Gemini evidence: There is no visible mouth movement for the word 'help'. The right hand forms a thumbs-up around 0.25s but the fingers open up before the hand strikes the thigh at 0.5s.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_V_TN_Sp_Si_So_rel_sync_v1.txt`
+
+#### TN — Sp_So_rel_ord_SoSp v1
+
+- Human: `no` / Gemini: `no`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (sounding)`
+- Gemini reason: The person visibly slaps his right thigh, but the required visible speaking motion for the word 'help' does not occur.
+- Gemini evidence: The person's right hand swings out and slaps his right thigh at 00:01.000. Afterward, his mouth remains closed for the rest of the video.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_V_TN_Sp_So_rel_ord_SoSp_v1.txt`
 
 #### FP — Sp_Si_So_rel_ord_SpSoSi v1
 
@@ -752,23 +752,14 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The right hand is raised into a thumbs-up in the air at 00:00.292, 00:01.292, and 00:03.250. When the hand strikes the thigh at 00:00.542, 00:01.542, and 00:03.542, it is open rather than in the required thumbs-up pose.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_V_FN_Si_So_rel_sync_v1.txt`
 
-#### FN — Si_So_abs_ord_SoSi v1
+#### FN — Sp_So_rel_sync v1
 
 - Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The required action of the right hand slapping the right thigh is completely absent. Additionally, the thumbs-up is performed by significantly raising the arm, which violates the prompt's instructions.
-- Gemini evidence: Video frames show the hands remaining perfectly still on the knees from 0.0s to 2.6s, missing the slap at 1.5s. The right arm then lifts from the thigh to chest level between 2.6s and 3.5s to form the thumbs-up pose.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_V_FN_Si_So_abs_ord_SoSi_v1.txt`
-
-#### FN — Sp_So_rel_ord_SoSp v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `relative_order`
+- Temporal type: `relative_synchronization`
 - Modality: `Speech + Action (sounding)`
-- Gemini reason: The person visibly slaps his right thigh, but the required visible speaking motion for the word 'help' does not occur.
-- Gemini evidence: The person's right hand swings out and slaps his right thigh at 00:01.000. Afterward, his mouth remains closed for the rest of the video.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_V_FN_Sp_So_rel_ord_SoSp_v1.txt`
+- Gemini reason: The visible speaking motion for the word 'help' is absent.
+- Gemini evidence: The video shows the right hand slapping the right thigh, but the person's mouth remains completely closed and static throughout the entire video.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_V_FN_Sp_So_rel_sync_v1.txt`
 
 ### AVB
 
@@ -853,15 +844,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The slap sound and the visible strike both occur exactly at 00:01.000.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_AVB_FP_Si_So_rel_ord_SoSi_v1.txt`
 
-#### FN — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The slap sound is not synchronized with the visible impact of the hand on the thigh.
-- Gemini evidence: The slap sound occurs exactly at 4.000 seconds, while the right hand is still raised in the air holding the thumbs-up pose. The visible impact on the thigh does not occur until approximately 4.333 seconds.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_AVB_FN_Si_So_abs_ord_SiSo_v1.txt`
-
 #### FN — Si_So_rel_sync v1
 
 - Human: `yes` / Gemini: `no`
@@ -871,14 +853,14 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Although the open-hand slaps are synchronized with the slap sounds, the required visual action (striking the thigh while maintaining a thumbs-up pose) is missing.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_AVB_FN_Si_So_rel_sync_v1.txt`
 
-#### FN — Si_So_abs_ord_SoSi v1
+#### FN — Sp_Si_So_rel_ord_SpSiSo v1
 
 - Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The visual component of the slapping event is missing, so binding is not evaluable.
-- Gemini evidence: No slapping motion occurs at 1.5 seconds, making it impossible to bind a slap sound to a visual impact.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_AVB_FN_Si_So_abs_ord_SoSi_v1.txt`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (silent) + Action (sounding)`
+- Gemini reason: Audio component is unverified, so binding is not evaluable.
+- Gemini evidence: Audio event correctness is marked no.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_AVB_FN_Sp_Si_So_rel_ord_SpSiSo_v1.txt`
 
 ### TC_REL
 
@@ -909,15 +891,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Slap at 00:01.000, followed by thumbs-up at 00:02.000, followed by speech at 00:03.000.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_TC_REL_TP_Sp_Si_So_rel_ord_SoSiSp_v1.txt`
 
-#### TN — Si_So_abs_ord_SiSo v1
-
-- Human: `no` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: Audio-visual binding failed, so temporal relation cannot be satisfied. Additionally, the events occur at the wrong absolute times.
-- Gemini evidence: Because the slap sound and visible impact are misaligned, the binding precondition fails. Furthermore, the thumbs-up occurs around 3.5 seconds instead of the requested 1.5 seconds, and the slap occurs around 4.0-4.3 seconds instead of 3.5 seconds.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_TC_REL_TN_Si_So_abs_ord_SiSo_v1.txt`
-
 #### TN — Si_So_rel_sync v1
 
 - Human: `no` / Gemini: `no`
@@ -935,6 +908,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The required sequence of events is incorrect. The prompt requires the thigh slap to occur first, followed by the speech. However, the video shows the speech occurring before the thigh slap.
 - Gemini evidence: The person says 'help' between 00:00.000 and 00:00.167, and only strikes the thigh afterward around 00:00.417. The thumbs-up follows correctly, but the initial order is reversed.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_TC_REL_TN_Sp_Si_So_rel_ord_SoSpSi_v1.txt`
+
+#### TN — Sp_Si_So_rel_ord_SiSpSo v1
+
+- Human: `no` / Gemini: `no`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (silent) + Action (sounding)`
+- Gemini reason: The required order of events is violated. The speech occurs before the thumbs-up, rather than after it as specified.
+- Gemini evidence: The person says 'help' at the very beginning (0.0s), before forming the thumbs-up pose (0.6s). The sequence should have been thumbs-up, then 'help', then slap.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_TC_REL_TN_Sp_Si_So_rel_ord_SiSpSo_v1.txt`
 
 #### FP — Sp_Si_So_rel_sync_cnt v1
 
@@ -1046,15 +1028,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: There is only one slap event and one transition into the final thumbs-up pose.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_TC_COUNT_FP_Si_So_rel_ord_SoSi_v1.txt`
 
-#### FN — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: Audio-visual binding failed, so temporal count cannot be satisfied.
-- Gemini evidence: The failure in audio-visual binding cascades down to fail the temporal count precondition.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_TC_COUNT_FN_Si_So_abs_ord_SiSo_v1.txt`
-
 #### FN — Sp_Si_rel_sync v1
 
 - Human: `yes` / Gemini: `no`
@@ -1156,15 +1129,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Between 00:03.000 and 00:03.500, the left hand lifts and slaps the left thigh, which is not part of the prompted action. The early double-hand slap is an extra gesture.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_CC_FN_Sp_So_rel_ord_SpSo_v1.txt`
 
-#### FN — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The video fails the framing constraint requiring the full face to be visible.
-- Gemini evidence: The prompt explicitly requires the 'full face, mouth, upper body' to be visible, but the person's head is cropped entirely out of the frame, showing only the neck and lower chin.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_CC_FN_Si_So_abs_ord_SiSo_v1.txt`
-
 #### FN — Si_So_rel_ord_SiSo v1
 
 - Human: `yes` / Gemini: `no`
@@ -1173,6 +1137,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The prompt requires the person's full face and mouth to be visible, but the framing cuts off the top of the person's head.
 - Gemini evidence: Throughout the video, the person's head is partially cropped out of the top of the frame (supported by MediaPipe nose y-coordinates being negative), violating the 'full face visible' constraint.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_CC_FN_Si_So_rel_ord_SiSo_v1.txt`
+
+#### FN — Si_So_rel_sync v1
+
+- Human: `yes` / Gemini: `no`
+- Temporal type: `relative_synchronization`
+- Modality: `Action (silent) + Action (sounding)`
+- Gemini reason: The prompt requires that no new target action occurs after the final event, but the video repeats the actions multiple times.
+- Gemini evidence: The person performs the sequence of raising the hand and slapping the thigh three distinct times instead of remaining still after the first occurrence.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_CC_FN_Si_So_rel_sync_v1.txt`
 
 ## whisper
 
@@ -1232,15 +1205,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Whisper detects 'help' only from 0.00 to 0.22 seconds, and direct audio inspection confirms no second 'help' or any slap sounds occur.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_A_FN_Sp_Si_So_rel_sync_cnt_v1.txt`
 
-#### FN — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The required sharp slap sound is entirely missing, as the audio track is completely silent.
-- Gemini evidence: No slap sound can be heard during the video; the audio is silent.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_A_FN_Si_So_abs_ord_SiSo_v1.txt`
-
 #### FN — Sp_Si_So_rel_ord_SpSiSo v1
 
 - Human: `yes` / Gemini: `no`
@@ -1270,14 +1234,14 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The video shows the right hand striking the right thigh at 1.0s, a clear right-hand thumbs-up pose starting at 1.8s, and visible mouth movement corresponding to 'help' at 2.8s.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_V_TP_Sp_Si_So_rel_ord_SoSiSp_v1.txt`
 
-#### TP — Si_So_abs_ord_SiSo v1
+#### TP — Sp_Si_So_rel_ord_SiSoSp v1
 
 - Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The person's right hand successfully forms a thumbs-up pose and subsequently strikes the right thigh.
-- Gemini evidence: The person's right hand (viewer's left) forms a thumbs-up at 3.4 seconds and strikes the right thigh at 4.2 seconds.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_V_TP_Si_So_abs_ord_SiSo_v1.txt`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (silent) + Action (sounding)`
+- Gemini reason: The required visible actions (thumbs-up, thigh slap, and speaking motion) are all clearly performed.
+- Gemini evidence: The person forms a right-hand thumbs-up around 00:00.5, slaps the right thigh with the right hand at 00:02.0, and has visible lip movement corresponding to speech at 00:03.5.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_V_TP_Sp_Si_So_rel_ord_SiSoSp_v1.txt`
 
 #### TN — Sp_Si_So_rel_sync v1
 
@@ -1380,14 +1344,14 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The slap sound at 1.0s aligns precisely with the visible hand impact, and the spoken word 'help' matches the visible lip movements starting at 2.86s.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_AVB_TP_Sp_Si_So_rel_ord_SoSiSp_v1.txt`
 
-#### TP — Si_So_abs_ord_SoSi v1
+#### TP — Sp_Si_So_rel_ord_SiSpSo v1
 
 - Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The slap sound is perfectly synchronized with the visible impact of the hand on the thigh.
-- Gemini evidence: At 1.5 seconds, the visual strike and the audible slap sound align exactly.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_AVB_TP_Si_So_abs_ord_SoSi_v1.txt`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (silent) + Action (sounding)`
+- Gemini reason: Both the speech and the slapping action are correctly bound to their respective visible motions.
+- Gemini evidence: The audible 'help' aligns precisely with the visible lip movement at the beginning, and the slap sound aligns with the hand striking the thigh at 3.0s.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_AVB_TP_Sp_Si_So_rel_ord_SiSpSo_v1.txt`
 
 #### TN — Sp_So_rel_sync v1
 
@@ -1461,14 +1425,14 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The required synchronized visual pose (thumbs-up during the slap) is missing, failing the precondition for binding.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_AVB_FN_Si_So_rel_sync_cnt_v1.txt`
 
-#### FN — Si_So_abs_ord_SiSo v1
+#### FN — Sp_Si_So_rel_sync_cnt v1
 
 - Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The audio component is missing, so audio-visual binding is not evaluable and fails.
-- Gemini evidence: The required slap sound is absent.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_AVB_FN_Si_So_abs_ord_SiSo_v1.txt`
+- Temporal type: `relative_sync_count`
+- Modality: `Speech + Action (silent) + Action (sounding)`
+- Gemini reason: The required audio and visual components are missing or incomplete, so binding is not evaluable.
+- Gemini evidence: The slap sound, thigh slap motion, and the second 'help' speech event are absent.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_AVB_FN_Sp_Si_So_rel_sync_cnt_v1.txt`
 
 ### TC_REL
 
@@ -1508,15 +1472,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The speech is heard at 0.00s, while the visual slap impact occurs at 00:01.458. Furthermore, the missing audio and visual components force this sub-axis to fail.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_TC_REL_TN_Sp_So_rel_sync_v1.txt`
 
-#### TN — Si_So_abs_ord_SiSo v1
-
-- Human: `no` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: Fails hierarchical precondition due to missing audio. Additionally, the visual timing is incorrect.
-- Gemini evidence: Missing audio event; visual actions occur late (thumbs-up at 3.4s, slap at 4.2s) rather than at the requested 1.5s and 3.5s.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_TC_REL_TN_Si_So_abs_ord_SiSo_v1.txt`
-
 #### TN — Sp_So_rel_sync_cnt v1
 
 - Human: `no` / Gemini: `no`
@@ -1525,6 +1480,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: Audio-visual binding and visual correctness preconditions failed. Furthermore, the speech and slaps are not synchronized.
 - Gemini evidence: Fails AVB precondition. The spoken word 'help' occurs early (0.00-0.28s), while the slaps occur sequentially afterward at 1.00s, 3.00s, and 4.60s.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_TC_REL_TN_Sp_So_rel_sync_cnt_v1.txt`
+
+#### TN — Sp_So_rel_ord_SoSp v1
+
+- Human: `no` / Gemini: `no`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (sounding)`
+- Gemini reason: The prompt required the thigh slap to occur first, followed by the spoken word 'help'. The generated video reverses this order.
+- Gemini evidence: The speech 'help' occurs at 0.00s, before the thigh slap which happens at 1.04s.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_TC_REL_TN_Sp_So_rel_ord_SoSp_v1.txt`
 
 #### FP — Si_So_rel_ord_SiSo v1
 
@@ -1653,15 +1617,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: Each required event occurs exactly once, with no spurious repetitions.
 - Gemini evidence: The word 'help' is said once, the slap occurs once, and the thumbs-up is formed and held without repetition.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_TC_COUNT_FP_Sp_Si_So_rel_ord_SpSoSi_v1.txt`
-
-#### FN — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: Fails hierarchical precondition due to missing audio.
-- Gemini evidence: The required sounding action is not completely present.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_TC_COUNT_FN_Si_So_abs_ord_SiSo_v1.txt`
 
 #### FN — Sp_Si_rel_sync v1
 
@@ -1878,14 +1833,23 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Video shows mouth movement from 0.00s to 0.41s, followed by the right hand forming a thumbs-up at 0.83s which is held until the end of the video.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_V_TP_Sp_Si_rel_ord_SpSi_v1.txt`
 
-#### TP — Si_So_abs_ord_SiSo v1
+#### TP — Sp_Si_So_rel_ord_SoSiSp v1
 
 - Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: Both the thumbs-up and the thigh slap actions are clearly visible and correctly performed by the specified hand.
-- Gemini evidence: The right hand holds a thumbs-up from 3.0 to 4.1 seconds, and then strikes the right thigh at 4.3 seconds.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_V_TP_Si_So_abs_ord_SiSo_v1.txt`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (silent) + Action (sounding)`
+- Gemini reason: The visible actions correctly correspond to the prompt: a right thigh slap, a right-hand thumbs-up, and speaking motion.
+- Gemini evidence: The right hand slaps the thigh at 00:01.000, holds a thumbs-up pose from 00:01.833 to 00:02.917, and lip movement is visible at 00:03.000.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_V_TP_Sp_Si_So_rel_ord_SoSiSp_v1.txt`
+
+#### TN — Sp_So_rel_ord_SoSp v1
+
+- Human: `no` / Gemini: `no`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (sounding)`
+- Gemini reason: The person uses their left hand to slap their left thigh instead of the required right hand and right thigh, and there is no visible mouth movement for the required speech event.
+- Gemini evidence: At 0.5s-1.0s, the person lifts the arm on the viewer's right (their left arm) and slaps the thigh on the viewer's right (their left thigh). The person's mouth remains closed throughout the entire video, with no speaking motion.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_V_TN_Sp_So_rel_ord_SoSp_v1.txt`
 
 #### TN — Sp_Si_So_rel_sync v1
 
@@ -1904,15 +1868,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The person performs the slap and the thumbs-up with their left hand on their left thigh, failing the explicit prompt requirement to use the right hand and right thigh.
 - Gemini evidence: Starting around 2.1s, the arm on the viewer's right (the person's left arm) moves to strike the thigh and then forms the thumbs-up pose.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_V_TN_Sp_Si_So_rel_ord_SpSoSi_v1.txt`
-
-#### TN — Sp_So_rel_sync_cnt v1
-
-- Human: `no` / Gemini: `no`
-- Temporal type: `relative_sync_count`
-- Modality: `Speech + Action (sounding)`
-- Gemini reason: The required visible mouth movement for speaking is missing.
-- Gemini evidence: The person performs the right-hand thigh-slapping action, but their mouth remains closed throughout the entire video.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_V_TN_Sp_So_rel_sync_cnt_v1.txt`
 
 #### FP — Sp_Si_So_rel_ord_SoSpSi v1
 
@@ -1950,15 +1905,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: In the video, the right hand lifts and forms a thumbs-up between 0.2s and 0.4s, and then moves down to slap the thigh at 0.5s. The pose is not held during the slap, and the actions are sequential rather than simultaneous.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_V_FN_Si_So_rel_sync_v1.txt`
 
-#### FN — Sp_So_rel_ord_SoSp v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `relative_order`
-- Modality: `Speech + Action (sounding)`
-- Gemini reason: The person uses their left hand to slap their left thigh instead of the required right hand and right thigh, and there is no visible mouth movement for the required speech event.
-- Gemini evidence: At 0.5s-1.0s, the person lifts the arm on the viewer's right (their left arm) and slaps the thigh on the viewer's right (their left thigh). The person's mouth remains closed throughout the entire video, with no speaking motion.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_V_FN_Sp_So_rel_ord_SoSp_v1.txt`
-
 #### FN — Sp_Si_So_rel_sync_cnt v1
 
 - Human: `yes` / Gemini: `no`
@@ -1968,16 +1914,16 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Video frames show the lips firmly closed from 00:00.000 to 00:05.000. The right hand performs a thumbs-up at 00:00.583 and 00:01.375 but does not strike the thigh simultaneously as required.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_V_FN_Sp_Si_So_rel_sync_cnt_v1.txt`
 
+#### FN — Sp_So_rel_ord_SpSo v1
+
+- Human: `yes` / Gemini: `no`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (sounding)`
+- Gemini reason: The visible slapping motion is incorrect. Instead of the right hand slapping the right thigh, the right hand crosses the body to slap the left thigh.
+- Gemini evidence: From 03.000 to 03.375, the right hand (viewer's left) moves across the chest and strikes the opposite (left) thigh. This violates the prompt's requirement for the right hand to strike the right thigh.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_V_FN_Sp_So_rel_ord_SpSo_v1.txt`
+
 ### AVB
-
-#### TP — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The slap sound is correctly synchronized with the visible physical impact.
-- Gemini evidence: The visual impact of the hand on the thigh and the audible slap sound both occur precisely at 4.3 seconds.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_AVB_TP_Si_So_abs_ord_SiSo_v1.txt`
 
 #### TP — Si_So_rel_sync_cnt v1
 
@@ -1996,6 +1942,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: Both the sounding action and the speech event are temporally synchronized across audio and video modalities.
 - Gemini evidence: The slap impact visually aligns with the slap sound at 00:01.000, and the mouth movement aligns with the spoken word 'help' at 00:03.000.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_AVB_TP_Sp_Si_So_rel_ord_SoSiSp_v1.txt`
+
+#### TP — Sp_Si_rel_ord_SiSp v1
+
+- Human: `yes` / Gemini: `yes`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (silent)`
+- Gemini reason: The spoken audio is correctly synchronized with the visible mouth movement.
+- Gemini evidence: The audible word 'help' matches the lip articulation precisely at 2.0s.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_AVB_TP_Sp_Si_rel_ord_SiSp_v1.txt`
 
 #### TN — Sp_So_rel_ord_SoSp v1
 
@@ -2116,15 +2071,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The prompt requires the sounding action to be followed by the speech event, but only the sounding action (with incorrect visual laterality) occurs.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_TC_REL_TN_Sp_So_rel_ord_SoSp_v1.txt`
 
-#### TN — Si_So_abs_ord_SiSo v1
-
-- Human: `no` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The absolute timing of the events deviates significantly from the required schedule.
-- Gemini evidence: The thumbs-up starts at 3.0 seconds instead of the required 1.5 seconds, and the slap occurs at 4.3 seconds instead of 3.5 seconds.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_TC_REL_TN_Si_So_abs_ord_SiSo_v1.txt`
-
 #### TN — Sp_Si_So_rel_ord_SpSoSi v1
 
 - Human: `no` / Gemini: `no`
@@ -2133,6 +2079,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: Hierarchical precondition not met; temporal relation cannot be evaluated because the required visual events and binding failed.
 - Gemini evidence: Fails the hierarchical precondition due to Audio-Visual Binding being 'no'.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_TC_REL_TN_Sp_Si_So_rel_ord_SpSoSi_v1.txt`
+
+#### TN — Si_So_rel_sync v1
+
+- Human: `no` / Gemini: `no`
+- Temporal type: `relative_synchronization`
+- Modality: `Action (silent) + Action (sounding)`
+- Gemini reason: Preconditions failed; the required visual event and audio-visual binding are incorrect. Furthermore, the events are performed sequentially rather than synchronized.
+- Gemini evidence: Audio-Visual Binding is 'no'.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_TC_REL_TN_Si_So_rel_sync_v1.txt`
 
 #### FP — Sp_Si_So_rel_ord_SoSpSi v1
 
@@ -2189,15 +2144,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_TC_REL_FN_Sp_So_rel_ord_SpSo_v1.txt`
 
 ### TC_COUNT
-
-#### TP — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: Each required target event occurs exactly once with no extra or spurious repetitions.
-- Gemini evidence: The video shows one thumbs-up followed by one thigh slap, matching the expected count.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/clap_TC_COUNT_TP_Si_So_abs_ord_SiSo_v1.txt`
 
 #### TP — Sp_Si_rel_ord_SiSp v1
 
@@ -2540,6 +2486,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Mouth movement is visible at the start, the right hand makes contact with the right thigh around 0.50 seconds, and a clear right-hand thumbs-up is held starting from approximately 1.66 seconds.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_V_FP_Sp_Si_So_rel_ord_SoSpSi_v1.txt`
 
+#### FP — Sp_So_rel_ord_SoSp v1
+
+- Human: `no` / Gemini: `yes`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (sounding)`
+- Gemini reason: The person's mouth visibly moves to form the word 'help', and the right hand is shown lifting and striking the right thigh.
+- Gemini evidence: Visible mouth movement occurs from 0.00s to 0.20s. The right arm lifts starting around 0.50s, swings back, and the hand makes visible contact with the right thigh at 1.00s.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_V_FP_Sp_So_rel_ord_SoSp_v1.txt`
+
 #### FP — Sp_Si_So_rel_ord_SpSoSi v1
 
 - Human: `no` / Gemini: `yes`
@@ -2548,15 +2503,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The person visibly speaks, performs the sounding action of slapping the right thigh, and successfully forms and holds a thumbs-up pose.
 - Gemini evidence: Visible mouth movement at the start of the video. The right hand lifts and strikes the right thigh at approximately 2.4s, followed by forming a thumbs-up pose starting around 2.5s and holding it until the end of the video.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_V_FP_Sp_Si_So_rel_ord_SpSoSi_v1.txt`
-
-#### FP — Si_So_rel_ord_SiSo v1
-
-- Human: `no` / Gemini: `yes`
-- Temporal type: `relative_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The required silent and sounding actions are clearly visible and performed by the correct hand.
-- Gemini evidence: The person's right hand (viewer's left) forms a thumbs-up pose from approximately 1.000s to 2.500s, then strikes the right thigh at 3.000s.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_V_FP_Si_So_rel_ord_SiSo_v1.txt`
 
 #### FN — Sp_So_rel_sync v1
 
@@ -2567,15 +2513,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The video framing cuts off the person's head from the nose up. The mouth is barely visible at the very top edge of the frame, failing the core visual requirement for the speech event. The visual action of the right hand striking the right thigh is clearly visible around 1.16s.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_V_FN_Sp_So_rel_sync_v1.txt`
 
-#### FN — Si_So_abs_ord_SoSi v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The required visible slapping action is missing. The right hand never strikes the right thigh.
-- Gemini evidence: From 0.0s to 2.6s, the right hand remains completely stationary resting on the right thigh. It then drops off the thigh around 2.7s before raising to form a thumbs-up pose at 3.5s. The slap impact is completely absent.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_V_FN_Si_So_abs_ord_SoSi_v1.txt`
-
 #### FN — Sp_Si_So_rel_sync_cnt v1
 
 - Human: `yes` / Gemini: `no`
@@ -2584,6 +2521,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The person visibly speaks only once, and while the right hand forms a thumbs-up pose, it does not perform a clear downward striking motion onto the thigh.
 - Gemini evidence: Visible mouth movement occurs only at the very beginning of the video. The right hand forms a thumbs-up but only gently lowers or gestures rather than executing a distinct slapping motion.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_V_FN_Sp_Si_So_rel_sync_cnt_v1.txt`
+
+#### FN — Sp_Si_rel_sync v1
+
+- Human: `yes` / Gemini: `no`
+- Temporal type: `relative_synchronization`
+- Modality: `Speech + Action (silent)`
+- Gemini reason: The visual component is incorrect because the person uses the wrong hand for the requested action.
+- Gemini evidence: The prompt specifies the right hand should form the thumbs-up pose, but the video shows the person's left hand (on the viewer's right) performing the action, while the right hand remains resting on the thigh.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_V_FN_Sp_Si_rel_sync_v1.txt`
 
 ### AVB
 
@@ -2798,15 +2744,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The word 'help' is spoken once, and the thumbs-up is formed and held once without any extra or repeated occurrences throughout the video.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_TC_COUNT_TP_Sp_Si_rel_ord_SpSi_v1.txt`
 
-#### TP — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: Each required event occurs exactly once with no extra repetitions.
-- Gemini evidence: The right hand performs exactly one thumbs-up and exactly one thigh slap, satisfying the count requirement.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_TC_COUNT_TP_Si_So_abs_ord_SiSo_v1.txt`
-
 #### TP — Sp_Si_So_rel_ord_SiSpSo v1
 
 - Human: `yes` / Gemini: `yes`
@@ -2815,6 +2752,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: Each required event occurs exactly once, with no extra repetitions.
 - Gemini evidence: The person says 'help' once, forms a thumbs-up once, and slaps the thigh exactly once.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_TC_COUNT_TP_Sp_Si_So_rel_ord_SiSpSo_v1.txt`
+
+#### TP — Sp_Si_rel_ord_SiSp v1
+
+- Human: `yes` / Gemini: `yes`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (silent)`
+- Gemini reason: Both required events occur exactly once, with no extra occurrences.
+- Gemini evidence: The right-hand thumbs-up is formed once and held. The word 'help' is spoken exactly once.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_TC_COUNT_TP_Sp_Si_rel_ord_SiSp_v1.txt`
 
 #### TN — Sp_So_rel_ord_SpSo v1
 
@@ -2962,15 +2908,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The camera remains static, the subject's required body parts remain in frame, and no background music or extra speech is present.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_CC_FP_Sp_Si_So_rel_sync_cnt_v1.txt`
 
-#### FN — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The prompt requires the full face to be visible, but the video frame crops the person's head, showing only the lower chin.
-- Gemini evidence: Throughout the video, the camera framing cuts off the upper head, eyes, and nose, violating the 'full face' and 'mouth' visibility constraint.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_CC_FN_Si_So_abs_ord_SiSo_v1.txt`
-
 #### FN — Si_So_rel_sync v1
 
 - Human: `yes` / Gemini: `no`
@@ -2980,14 +2917,23 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: After the first sequence is completed around 0.4s, the person repeats the slapping and thumbs-up actions multiple times instead of remaining still.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_CC_FN_Si_So_rel_sync_v1.txt`
 
-#### FN — Si_So_abs_ord_SoSi v1
+#### FN — Sp_So_rel_ord_SpSo v1
 
 - Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (sounding)`
+- Gemini reason: The video contains an extra, unprompted slapping action, violating the constraint against extra actions/gestures.
+- Gemini evidence: The person performs a slap with their left hand on their left thigh at ~3.25s, which was not requested.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_CC_FN_Sp_So_rel_ord_SpSo_v1.txt`
+
+#### FN — Si_So_rel_ord_SiSo v1
+
+- Human: `yes` / Gemini: `no`
+- Temporal type: `relative_order`
 - Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The video does not satisfy the framing constraints. The prompt requires the full face to be visible, but the person's head is cropped.
-- Gemini evidence: The static medium shot cuts off the top half of the person's head, showing only the mouth and lower nose area.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_CC_FN_Si_So_abs_ord_SoSi_v1.txt`
+- Gemini reason: The prompt requires the full face and mouth to be visible, but the person's head is cropped out of the frame.
+- Gemini evidence: The framing only shows the person from the neck down, omitting the face entirely.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_whisper_CC_FN_Si_So_rel_ord_SiSo_v1.txt`
 
 ## mediapipe_clap
 
@@ -3002,15 +2948,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: A sharp slap sound occurs at exactly 1.000s, and the spoken word 'help' is heard clearly around 3.000s.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_A_TP_Sp_Si_So_rel_ord_SoSiSp_v1.txt`
 
-#### TP — Si_So_abs_ord_SoSi v1
-
-- Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: A sharp slap sound is clearly heard in the audio, matching the requirement for the sounding action.
-- Gemini evidence: A distinct slap sound occurs around 3.1 seconds, which is supported by the peak CLAP scores for 'slapping_the_thigh' in the 2.75-4.00s windows.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_A_TP_Si_So_abs_ord_SoSi_v1.txt`
-
 #### TP — Sp_Si_So_rel_sync_cnt v1
 
 - Human: `yes` / Gemini: `yes`
@@ -3019,6 +2956,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The spoken word 'help' and a sharp slap sound are both clearly audible multiple times in the audio track.
 - Gemini evidence: Audio contains 'help' and a slap sound repeating approximately every second starting at 00:00.000.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_A_TP_Sp_Si_So_rel_sync_cnt_v1.txt`
+
+#### TP — Si_So_rel_ord_SiSo v1
+
+- Human: `yes` / Gemini: `yes`
+- Temporal type: `relative_order`
+- Modality: `Action (silent) + Action (sounding)`
+- Gemini reason: The required sharp slap sound is clearly audible and matches the prompt description.
+- Gemini evidence: A distinct slap sound is heard at 00:03.000, supported by CLAP window similarities peaking between 2.50s and 3.50s.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_A_TP_Si_So_rel_ord_SiSo_v1.txt`
 
 #### TN — Sp_So_rel_ord_SoSp v1
 
@@ -3076,15 +3022,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The person's right hand strikes the right thigh at 1.000s. The right hand then raises and forms a thumbs-up pose starting at 1.833s. The mouth visibly moves at 3.000s.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_V_TP_Sp_Si_So_rel_ord_SoSiSp_v1.txt`
 
-#### TP — Si_So_abs_ord_SoSi v1
-
-- Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The required visual actions are correctly performed: the person strikes their right thigh with their right hand, and subsequently forms a clear right-hand thumbs-up pose.
-- Gemini evidence: The video shows the right hand striking the right thigh around 3.0-3.1 seconds, and then the right hand forms a thumbs-up pose around 3.4-3.5 seconds.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_V_TP_Si_So_abs_ord_SoSi_v1.txt`
-
 #### TP — Si_So_rel_sync_cnt v1
 
 - Human: `yes` / Gemini: `yes`
@@ -3094,6 +3031,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: A clear thumbs-up is formed around 00:00.333 and 00:01.875. The right hand makes visible contact with the right thigh around 00:00.625 and 00:02.042.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_V_TP_Si_So_rel_sync_cnt_v1.txt`
 
+#### TP — Sp_Si_rel_sync v1
+
+- Human: `yes` / Gemini: `yes`
+- Temporal type: `relative_synchronization`
+- Modality: `Speech + Action (silent)`
+- Gemini reason: The person performs the required silent action, forming and holding a thumbs-up pose with their right hand.
+- Gemini evidence: Video inspection shows the person resting their hands on their thighs initially, then at 3.250s, the right hand forms a thumbs-up pose, holding it until the end of the video.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_V_TP_Sp_Si_rel_sync_v1.txt`
+
 #### TN — Sp_Si_rel_sync_cnt v1
 
 - Human: `no` / Gemini: `no`
@@ -3102,6 +3048,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The visible components of the required events are incorrect. The person's mouth remains closed, showing no articulation of the word 'help'. Furthermore, while the right hand is raised, it does not form a recognizable thumbs-up pose (the thumb is not clearly extended upward).
 - Gemini evidence: Video inspection shows the mouth is entirely static. The right hand raises between 0:00-0:01 and 0:02-0:03, but the fingers form a loose grip without an upward-extended thumb.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_V_TN_Sp_Si_rel_sync_cnt_v1.txt`
+
+#### TN — Sp_So_rel_ord_SoSp v1
+
+- Human: `no` / Gemini: `no`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (sounding)`
+- Gemini reason: The visible action of the right hand slapping the right thigh is performed correctly, but there is no visible mouth movement for the required speech event.
+- Gemini evidence: The right hand is seen lifting and striking the right thigh at 00:01.000, but the person's mouth remains closed for the rest of the video with no speaking motion.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_V_TN_Sp_So_rel_ord_SoSp_v1.txt`
 
 #### TN — Sp_So_rel_sync_cnt v1
 
@@ -3186,14 +3141,14 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The visible thigh strikes at 00:00.625 and 00:02.042 temporally coincide with the slap sounds heard at 00:00.600 and 00:02.000.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_AVB_TP_Si_So_rel_sync_cnt_v1.txt`
 
-#### TP — Si_So_abs_ord_SoSi v1
+#### TP — Sp_So_rel_ord_SpSo v1
 
 - Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The visible slapping motion and the audible slap sound are temporally and causally aligned.
-- Gemini evidence: The moment of physical impact on the thigh at 3.1 seconds exactly matches the occurrence of the sharp slap sound in the audio track.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_AVB_TP_Si_So_abs_ord_SoSi_v1.txt`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (sounding)`
+- Gemini reason: The audio and visual components for both events are correctly synchronized.
+- Gemini evidence: The spoken audio 'help' perfectly matches the timing of the visible lip movements. Later, the sharp slap sound occurs exactly at the moment the right hand makes contact with the right thigh.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_AVB_TP_Sp_So_rel_ord_SpSo_v1.txt`
 
 #### TN — Sp_So_rel_sync v1
 
@@ -3305,15 +3260,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The speech event 'help' occurs and concludes between 0.0s and 0.25s, whereas the striking of the thigh and the corresponding slap sound do not occur until 0.5s, violating the synchronization constraint.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_TC_REL_TN_Sp_Si_So_rel_sync_v1.txt`
 
-#### TN — Si_So_abs_ord_SoSi v1
-
-- Human: `no` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The absolute timing requirement is violated. The thigh slap occurs significantly later than specified.
-- Gemini evidence: The prompt requires the thigh slap to occur at exactly 1.5 seconds, but the video and audio show the slap occurring around 3.1 seconds. The thumbs-up occurs near the correct time (3.5 seconds), but the overall absolute schedule fails.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_TC_REL_TN_Si_So_abs_ord_SoSi_v1.txt`
-
 #### TN — Sp_Si_So_rel_sync_cnt v1
 
 - Human: `no` / Gemini: `no`
@@ -3322,6 +3268,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The audio-visual binding precondition failed, meaning the synchronized relation of the specified bundle cannot be evaluated.
 - Gemini evidence: Because the visual actions are incorrect and audio-visual binding is 'no', this axis is forced to 'no'.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_TC_REL_TN_Sp_Si_So_rel_sync_cnt_v1.txt`
+
+#### TN — Si_So_rel_sync v1
+
+- Human: `no` / Gemini: `no`
+- Temporal type: `relative_synchronization`
+- Modality: `Action (silent) + Action (sounding)`
+- Gemini reason: Audio-visual binding failed, so the temporal relation cannot be evaluated. Additionally, the actions were sequential rather than synchronized.
+- Gemini evidence: The thumbs-up pose and the thigh slap occur at different times (e.g., thumbs-up in the air at 00:00.375, flat-hand slap at 00:00.583) instead of being a single simultaneous event.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_TC_REL_TN_Si_So_rel_sync_v1.txt`
 
 #### FP — Si_So_rel_ord_SiSo v1
 
@@ -3561,14 +3516,14 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The top half of the person's head, including the eyes and forehead, is cropped out of the top of the frame throughout the video (corroborated by negative y-coordinates for the nose in the MediaPipe data).
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_CC_FN_Si_So_rel_ord_SiSo_v1.txt`
 
-#### FN — Si_So_abs_ord_SoSi v1
+#### FN — Sp_Si_So_rel_ord_SpSiSo v1
 
 - Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The prompt requires the person's full face to be visible, but the framing cuts off the upper half of the head.
-- Gemini evidence: Throughout the video, the static medium shot is framed too low, showing only the lower face and chin while the eyes and upper head remain outside the frame.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_CC_FN_Si_So_abs_ord_SoSi_v1.txt`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (silent) + Action (sounding)`
+- Gemini reason: The video contains extra unprompted actions and lacks post-event stillness.
+- Gemini evidence: The person raises and lowers their right hand multiple times (e.g., around 02.500-03.500 and 04.200-04.600) rather than following the strict single sequence requested, violating the constraint of no extra gestures.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/mediapipe_clap_CC_FN_Sp_Si_So_rel_ord_SpSiSo_v1.txt`
 
 ## whisper_clap
 
@@ -3657,6 +3612,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The right hand slaps the thigh making contact at 1.0s, forms a thumbs-up from 1.7s to 2.8s, and the mouth moves at 2.8s.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_clap_V_TP_Sp_Si_So_rel_ord_SoSiSp_v1.txt`
 
+#### TN — Sp_So_rel_ord_SoSp v1
+
+- Human: `no` / Gemini: `no`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (sounding)`
+- Gemini reason: The visible slap action is present, but the person's mouth remains completely closed with no visible speaking motion when the speech is heard.
+- Gemini evidence: Video inspection shows the right hand slapping the right thigh at 1.0s, but the lips do not move during the spoken word 'help' from 0.00s to 0.22s.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_clap_V_TN_Sp_So_rel_ord_SoSp_v1.txt`
+
 #### TN — Sp_So_rel_sync_cnt v1
 
 - Human: `no` / Gemini: `no`
@@ -3674,15 +3638,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The person uses their left hand instead of the required right hand for the thumbs-up and slapping actions. Additionally, the full face is not visible.
 - Gemini evidence: The hand on the viewer's right (the person's left hand) performs the thumbs-up and strikes the thigh. The video frame also crops out the top half of the person's face.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_clap_V_TN_Sp_Si_So_rel_sync_v1.txt`
-
-#### TN — Sp_Si_rel_sync_cnt v1
-
-- Human: `no` / Gemini: `no`
-- Temporal type: `relative_sync_count`
-- Modality: `Speech + Action (silent)`
-- Gemini reason: The person performs the thumbs-up action with their left hand instead of the required right hand.
-- Gemini evidence: Video shows the person's left hand (viewer's right) raising to form a thumbs-up at 0.00 and again around 2.25, while the right hand remains resting on the thigh.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_clap_V_TN_Sp_Si_rel_sync_cnt_v1.txt`
 
 #### FP — Si_So_rel_ord_SoSi v1
 
@@ -3711,15 +3666,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Video shows the right hand forming a thumbs-up between 0.6s and 2.5s, then striking the thigh at 3.0s.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_clap_V_FP_Si_So_rel_ord_SiSo_v1.txt`
 
-#### FN — Sp_So_rel_ord_SoSp v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `relative_order`
-- Modality: `Speech + Action (sounding)`
-- Gemini reason: The visible slap action is present, but the person's mouth remains completely closed with no visible speaking motion when the speech is heard.
-- Gemini evidence: Video inspection shows the right hand slapping the right thigh at 1.0s, but the lips do not move during the spoken word 'help' from 0.00s to 0.22s.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_clap_V_FN_Sp_So_rel_ord_SoSp_v1.txt`
-
 #### FN — Sp_Si_So_rel_ord_SpSiSo v1
 
 - Human: `yes` / Gemini: `no`
@@ -3737,6 +3683,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The person's head and face are completely cropped out of the frame, making it impossible to observe the required visible mouth and lip motion for the speech event.
 - Gemini evidence: The video framing shows only the torso and legs throughout the entire duration; the face is never visible.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_clap_V_FN_Sp_So_rel_sync_v1.txt`
+
+#### FN — Sp_Si_So_rel_sync_cnt v1
+
+- Human: `yes` / Gemini: `no`
+- Temporal type: `relative_sync_count`
+- Modality: `Speech + Action (silent) + Action (sounding)`
+- Gemini reason: The person forms a thumbs-up pose but never strikes their thigh; the required visible slapping action is entirely missing.
+- Gemini evidence: Video shows the right hand raising into a thumbs-up pose twice (at 0.00s and 1.00s) but it never strikes the thigh.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_clap_V_FN_Sp_Si_So_rel_sync_cnt_v1.txt`
 
 ### AVB
 
@@ -3830,15 +3785,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The right hand visibly strikes the thigh at 2.25s, but the slap sound is not heard until 3.00s, while the person is sitting completely still.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_clap_AVB_FN_Sp_Si_So_rel_ord_SiSoSp_v1.txt`
 
-#### FN — Si_So_abs_ord_SoSi v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The visual component of the slapping event is missing, so binding cannot be evaluated and fails.
-- Gemini evidence: While a slap sound is heard at 3.1 seconds, the right hand is merely lifting upward in the video with no contact or striking motion.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_clap_AVB_FN_Si_So_abs_ord_SoSi_v1.txt`
-
 #### FN — Sp_Si_So_rel_sync_cnt v1
 
 - Human: `yes` / Gemini: `no`
@@ -3847,6 +3793,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: Both the audio and visual components of the thigh slap are missing, and the speech event is missing its second occurrence, so binding is not evaluable.
 - Gemini evidence: Audio and visual preconditions failed.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_clap_AVB_FN_Sp_Si_So_rel_sync_cnt_v1.txt`
+
+#### FN — Sp_Si_So_rel_ord_SpSiSo v1
+
+- Human: `yes` / Gemini: `no`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (silent) + Action (sounding)`
+- Gemini reason: The visual component for the thumbs-up event is incorrect, so audio-visual binding is not evaluable and fails by default.
+- Gemini evidence: Missing thumbs-up visual action forces this axis to 'no'.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/whisper_clap_AVB_FN_Sp_Si_So_rel_ord_SpSiSo_v1.txt`
 
 ### TC_REL
 
@@ -4218,14 +4173,14 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Whisper detects 'Help' at 0.00-0.24s, but listening to the audio confirms there is no sharp slap sound present at any point.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/all_tools_A_FN_Sp_Si_So_rel_ord_SoSpSi_v1.txt`
 
-#### FN — Si_So_abs_ord_SoSi v1
+#### FN — Si_So_rel_sync v1
 
 - Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
+- Temporal type: `relative_synchronization`
 - Modality: `Action (silent) + Action (sounding)`
 - Gemini reason: The required sharp slap sound is missing from the audio track.
-- Gemini evidence: Direct audio inspection reveals no sharp slap sound around 1.5 seconds or anywhere else in the video. CLAP scores for 'slapping_the_thigh' remain very low throughout.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/all_tools_A_FN_Si_So_abs_ord_SoSi_v1.txt`
+- Gemini evidence: CLAP scores for 'slapping_the_thigh' remain very low throughout, and negative anchors like 'silence' are high, confirming the absence of a slap sound.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/all_tools_A_FN_Si_So_rel_sync_v1.txt`
 
 ### V
 
@@ -4438,14 +4393,14 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: Because Visual Event Correctness fails for the thumbs-up event, this axis must be marked 'no' according to the hierarchical dependency.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/all_tools_AVB_FN_Sp_Si_So_rel_ord_SpSiSo_v1.txt`
 
-#### FN — Si_So_abs_ord_SoSi v1
+#### FN — Si_So_rel_sync v1
 
 - Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
+- Temporal type: `relative_synchronization`
 - Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: Both the audio and visual components for the thigh slap are missing, so binding cannot be evaluated.
-- Gemini evidence: Since the slap sound is not heard and the striking motion is not seen, audio-visual binding fails by prerequisite.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/all_tools_AVB_FN_Si_So_abs_ord_SoSi_v1.txt`
+- Gemini reason: Both the required audio and visual components are missing or incorrect, making binding not evaluable.
+- Gemini evidence: Neither the thigh-slap motion nor the sharp slap sound occurs.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/all_tools_AVB_FN_Si_So_rel_sync_v1.txt`
 
 ### TC_REL
 
@@ -4541,15 +4496,6 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini evidence: The video contains exactly one instance of the word 'help', one thumbs-up pose, and one slap action. No other target actions are repeated.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/all_tools_TC_COUNT_TP_Sp_Si_So_rel_ord_SiSpSo_v1.txt`
 
-#### TP — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `yes`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The thumbs-up and the thigh slap each occur exactly once, with no extra occurrences.
-- Gemini evidence: The video displays a single thumbs-up gesture followed by a single thigh slap, adhering to the default single-occurrence requirement.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/all_tools_TC_COUNT_TP_Si_So_abs_ord_SiSo_v1.txt`
-
 #### TP — Sp_Si_rel_ord_SiSp v1
 
 - Human: `yes` / Gemini: `yes`
@@ -4558,6 +4504,15 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: Each required event occurs exactly once, with no extra or spurious occurrences.
 - Gemini evidence: The person forms the thumbs-up once and speaks the word 'help' exactly once. No repetitions are observed.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/all_tools_TC_COUNT_TP_Sp_Si_rel_ord_SiSp_v1.txt`
+
+#### TP — Sp_Si_rel_ord_SpSi v1
+
+- Human: `yes` / Gemini: `yes`
+- Temporal type: `relative_order`
+- Modality: `Speech + Action (silent)`
+- Gemini reason: Both the speech event and the visual action occur exactly once with no spurious repetitions.
+- Gemini evidence: The word 'help' is spoken a single time, and the thumbs-up pose is formed once and held until the end of the video.
+- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/all_tools_TC_COUNT_TP_Sp_Si_rel_ord_SpSi_v1.txt`
 
 #### TN — Sp_Si_So_rel_sync_cnt v1
 
@@ -4722,12 +4677,3 @@ FP = Gemini yes / human no. FN = Gemini no / human yes.
 - Gemini reason: The person repeats the thumbs-up action multiple times, violating the constraint that no new target action occurs after the final event.
 - Gemini evidence: Video shows repeated thumbs-up lifting motions at 00:01.208 and 00:03.250 after the initial action, failing the post-event stillness requirement.
 - Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/all_tools_CC_FN_Si_So_rel_sync_v1.txt`
-
-#### FN — Si_So_abs_ord_SiSo v1
-
-- Human: `yes` / Gemini: `no`
-- Temporal type: `absolute_order`
-- Modality: `Action (silent) + Action (sounding)`
-- Gemini reason: The video does not satisfy the constraint requiring the full face to be visible.
-- Gemini evidence: The camera framing cuts off the top half of the person's head, making the eyes and forehead invisible throughout the video.
-- Detail file: `/home/coder/T2AV/eval_results/analysis/new-results/details/all_tools_CC_FN_Si_So_abs_ord_SiSo_v1.txt`

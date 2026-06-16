@@ -1,0 +1,3001 @@
+[
+  {
+    "item_id": "speech_action_silent_rel_sync",
+    "modality_combination": "Speech + Action (silent)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "synchronization",
+      "timing_type": "relative",
+      "value": {
+        "events": [
+          "speech",
+          "silent_action"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs, then at one synchronized moment the person clearly says the single word “help” while at the same time the right hand forms and holds a clear thumbs-up pose with the thumb extended upward. The speech is audible and easy to distinguish, and the right-hand thumbs-up is clearly recognizable as a pose rather than a hand-raising motion. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_rel_sync_count",
+    "modality_combination": "Speech + Action (silent)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "sync_count",
+      "timing_type": "relative",
+      "value": {
+        "events": [
+          "speech",
+          "silent_action"
+        ],
+        "count": 2
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs visible, and both hands initially resting on the knees or thighs. The person performs the synchronized bundle twice: each time, the person clearly says the single word “help” while the right hand forms and holds a clearly recognizable thumbs-up pose with the thumb extended upward. The two synchronized repetitions are distinct, with a brief reset between them if needed, and no other words are spoken. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_rel_order_speech_then_silent_action",
+    "modality_combination": "Speech + Action (silent)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "relative",
+      "value": {
+        "sequence": [
+          "speech",
+          "silent_action"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a single seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs visible. Person A starts seated on a chair with both hands resting on the knees or thighs. First, Person A clearly says the single word “help” in an audible, easy-to-distinguish voice. After that speech ends, Person A forms and holds a clear thumbs-up pose with the right hand, with the fist closed and the thumb extended upward. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_rel_order_silent_action_then_speech",
+    "modality_combination": "Speech + Action (silent)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "relative",
+      "value": {
+        "sequence": [
+          "silent_action",
+          "speech"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot, with a full view of the face, mouth, upper body, both hands, and thighs; they begin seated on a chair with both hands resting on the knees or thighs. First, Person A forms and holds a clear thumbs-up pose with the right hand, with the fist closed and the thumb extended upward, while staying seated. After that gesture is clearly visible, Person A clearly says the single word “help” in an audible, easy-to-distinguish voice. The thumbs-up comes before the speech, and the speech contains no extra words. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_abs_sync",
+    "modality_combination": "Speech + Action (silent)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "synchronization",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 2.0,
+            "events": [
+              "speech",
+              "silent_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs visible. The person starts seated on a chair with both hands resting on the knees or thighs. At 2.0 seconds, the person clearly says the single word “help” while at the same moment the right hand forms and holds a clear thumbs-up pose, with the fist closed and the thumb extended upward. The speech and the right-hand thumbs-up happen in synchronization and are easy to observe. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_abs_sync_count",
+    "modality_combination": "Speech + Action (silent)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "sync_count",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.5,
+            "events": [
+              "speech",
+              "silent_action"
+            ]
+          },
+          {
+            "time_sec": 3.5,
+            "events": [
+              "speech",
+              "silent_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person facing the camera sits on a chair with both hands initially resting on the knees or thighs, and the full face, mouth, upper body, both hands, and thighs stay clearly visible in a static medium shot. At 1.5 seconds, the person clearly says “help” while the right hand simultaneously forms a clear thumbs-up pose with the thumb extended upward. The same synchronized speech and right-hand thumbs-up happen again at 3.5 seconds, with the word “help” spoken once each time and no extra words. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_abs_order_speech_then_silent_action",
+    "modality_combination": "Speech + Action (silent)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.5,
+            "events": [
+              "speech"
+            ]
+          },
+          {
+            "time_sec": 3.5,
+            "events": [
+              "silent_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room with a static medium shot, one seated person faces the camera on a chair with both hands initially resting on the knees or thighs, and the full face, mouth, upper body, both hands, and thighs stay visible. At 1.5 seconds, the person clearly says the single word “help” once, with the mouth fully visible and no extra words. At 3.5 seconds, the person’s right hand forms and holds a clear thumbs-up pose, with the thumb extended upward and the fist closed, without requiring a separate upward waving motion. The speech ends before the thumbs-up begins, and the two events do not overlap. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_abs_order_silent_action_then_speech",
+    "modality_combination": "Speech + Action (silent)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.5,
+            "events": [
+              "silent_action"
+            ]
+          },
+          {
+            "time_sec": 3.5,
+            "events": [
+              "speech"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room with a static medium shot, one seated person faces the camera on a chair, with full face, mouth, upper body, both hands, and thighs visible; both hands start resting on the knees or thighs. At 1.5 seconds, the person’s right hand forms and holds a clear thumbs-up pose with the thumb extended upward while the fist stays closed, and this pose is clearly visible. At 3.5 seconds, after the thumbs-up is established, the person clearly says the single word “help” in an audible voice, with the mouth visible. The thumbs-up remains recognizable through the speech, and no extra words are spoken. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_sounding_rel_sync",
+    "modality_combination": "Speech + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "synchronization",
+      "timing_type": "relative",
+      "value": {
+        "events": [
+          "speech",
+          "sounding_action"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot with full face, mouth, upper body, both hands, and thighs visible, and both hands initially resting on the knees or thighs. The person clearly says the single word “help” while at the same moment the person’s left hand strikes the top of the left thigh, producing a sharp slap sound exactly at impact. The speech and the thigh slap occur synchronized as one event, with the mouth clearly visible during the word and the contact point clearly visible at the left thigh. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_sounding_rel_sync_count",
+    "modality_combination": "Speech + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "sync_count",
+      "timing_type": "relative",
+      "value": {
+        "events": [
+          "speech",
+          "sounding_action"
+        ],
+        "count": 2
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room with a static medium shot, one seated person faces the camera on a chair with both hands initially resting on the knees or thighs, and the full face, mouth, upper body, both hands, and thighs stay clearly visible. The person clearly says the single word “help” while the left hand strikes the top of the left thigh at the same moment, making visible contact and a sharp slap sound exactly at impact. This synchronized speech-plus-slap action happens exactly twice, with a brief reset between the two repetitions so the second pair can be seen and heard clearly. No extra words are spoken and no extra target sounds occur. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_sounding_rel_order_speech_then_sounding_action",
+    "modality_combination": "Speech + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "relative",
+      "value": {
+        "sequence": [
+          "speech",
+          "sounding_action"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "A single seated person faces the camera in a plain indoor room, shown in a static medium shot with the full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. Person A clearly says the single word “help,” with the mouth visible and no extra words. After that speech finishes, Person A lifts the left hand and slaps the top of the left thigh, making visible contact and producing one sharp slap sound at the moment of impact. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_sounding_rel_order_sounding_action_then_speech",
+    "modality_combination": "Speech + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "relative",
+      "value": {
+        "sequence": [
+          "sounding_action",
+          "speech"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a single seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. The person starts seated on a chair with both hands resting on the knees or thighs. First, the person lifts the left hand and slaps the top of the left thigh, making clear visible contact and a sharp slap sound. After that action is completed, the person clearly says the single word “help” once, audibly and without any extra words. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_sounding_abs_sync",
+    "modality_combination": "Speech + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "synchronization",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 2.0,
+            "events": [
+              "speech",
+              "sounding_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "A plain indoor room is shown in a static medium shot with one seated person facing the camera, and the full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. At 2.0 seconds, Person A clearly says the single word “help” while simultaneously striking the top of the left thigh with the left hand, making visible contact and producing a sharp slap sound exactly at impact. No extra words are spoken and no additional target sounds occur. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_sounding_abs_sync_count",
+    "modality_combination": "Speech + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "sync_count",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.5,
+            "events": [
+              "speech",
+              "sounding_action"
+            ]
+          },
+          {
+            "time_sec": 3.5,
+            "events": [
+              "speech",
+              "sounding_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "A single seated person faces the camera in a plain indoor room in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. The person starts seated on a chair with both hands resting on the knees or thighs. At 1.5 seconds, the person simultaneously says “help” and slaps the top of the left thigh with the left hand, making a sharp slap sound at the moment of impact. At 3.5 seconds, the same synchronized speech and left-hand-on-left-thigh slap happen again exactly once. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_sounding_abs_order_speech_then_sounding_action",
+    "modality_combination": "Speech + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.5,
+            "events": [
+              "speech"
+            ]
+          },
+          {
+            "time_sec": 3.5,
+            "events": [
+              "sounding_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a single seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. The person starts seated on a chair with both hands resting on the knees or thighs. At 1.5 seconds, the person clearly says the single word “help” and nothing else. At 3.5 seconds, the person’s left hand strikes the top of the left thigh, with visible contact and a sharp slap sound at the exact moment of impact. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_sounding_abs_order_sounding_action_then_speech",
+    "modality_combination": "Speech + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.5,
+            "events": [
+              "sounding_action"
+            ]
+          },
+          {
+            "time_sec": 3.5,
+            "events": [
+              "speech"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "A single seated person faces the camera in a plain indoor room, shown in a static medium shot with full face, mouth, upper body, both hands, and thighs visible. The person starts seated on a chair with both hands resting on the knees or thighs. At 1.5 seconds, the person’s left hand slaps the top of the left thigh, making clear visible contact and a sharp slap sound exactly at impact. At 3.5 seconds, the person clearly says the single word “help” and nothing else. The thigh slap happens before the speech, and after the final event, no new target action occurs."
+  },
+  {
+    "item_id": "action_silent_action_sounding_rel_sync",
+    "modality_combination": "Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "synchronization",
+      "timing_type": "relative",
+      "value": {
+        "events": [
+          "silent_action",
+          "sounding_action"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs visible. The person begins seated on a chair with both hands resting on the knees or thighs. At one synchronized moment, the right hand holds a clear thumbs-up pose with the thumb extended upward while the left hand strikes the top of the left thigh, making visible contact and producing a sharp slap sound at the instant of impact. The thumbs-up is held clearly during the slap so both required events are visible together. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "action_silent_action_sounding_rel_sync_count",
+    "modality_combination": "Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "sync_count",
+      "timing_type": "relative",
+      "value": {
+        "events": [
+          "silent_action",
+          "sounding_action"
+        ],
+        "count": 2
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot with full face, mouth, upper body, both hands, and thighs visible, and both hands start resting on the knees or thighs. The person makes a clear right-hand thumbs-up pose, with the right hand held as a closed fist and the thumb extended upward, while the left hand strikes the top of the left thigh so the contact is visible and a sharp slap sound occurs at the same moment. This synchronized thumbs-up and thigh-slap bundle happens exactly twice, with a brief reset between the two repetitions while keeping the pose and contact easy to see and hear. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "action_silent_action_sounding_rel_order_silent_action_then_sounding_action",
+    "modality_combination": "Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "relative",
+      "value": {
+        "sequence": [
+          "silent_action",
+          "sounding_action"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible; they start with both hands resting on their thighs. First, the person forms and holds a clear right-handed thumbs-up pose, with the right fist closed and the thumb extended upward, and this pose is clearly visible before anything else happens. After that completed pose, the person brings the left hand down to strike the top of the left thigh once, making visible contact and producing a sharp slap sound at the moment of impact. The thumbs-up is not repeated during the slap, and the slap happens only after the thumbs-up is already established. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "action_silent_action_sounding_rel_order_sounding_action_then_silent_action",
+    "modality_combination": "Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "relative",
+      "value": {
+        "sequence": [
+          "sounding_action",
+          "silent_action"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. The person starts seated on a chair with both hands resting on the knees or thighs. First, the left hand strikes the top of the left thigh once, making clear visible contact and a sharp slap sound at the moment of impact. After that action is completed, the right hand forms and holds a clear thumbs-up pose with the thumb extended upward. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "action_silent_action_sounding_abs_sync",
+    "modality_combination": "Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "synchronization",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 2.0,
+            "events": [
+              "silent_action",
+              "sounding_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs visible. The person starts seated on a chair with both hands resting on the knees or thighs. At exactly 2.0 seconds, the person holds the right hand in a clear thumbs-up pose while the left hand strikes the top of the left thigh, making visible contact and producing one sharp slap sound at the moment of impact. The thumbs-up is the held pose, not a separate hand-raising motion, and the two actions happen simultaneously. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "action_silent_action_sounding_abs_sync_count",
+    "modality_combination": "Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "sync_count",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.5,
+            "events": [
+              "silent_action",
+              "sounding_action"
+            ]
+          },
+          {
+            "time_sec": 3.5,
+            "events": [
+              "silent_action",
+              "sounding_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room with a static medium shot, one seated person faces the camera with both hands initially resting on the knees or thighs, and the full face, mouth, upper body, both hands, and thighs are visible. At 1.5 seconds, the person’s right hand is held in a clear thumbs-up pose while the left hand strikes the top of the left thigh, making visible contact and a sharp slap sound at the instant of impact. The same synchronized pair of actions happens again at 3.5 seconds: the right hand shows the thumbs-up pose while the left hand slaps the left thigh with the sharp slap sound exactly on contact. Between the two moments, natural reset motion is allowed, but no other target action occurs. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "action_silent_action_sounding_abs_order_silent_action_then_sounding_action",
+    "modality_combination": "Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.5,
+            "events": [
+              "silent_action"
+            ]
+          },
+          {
+            "time_sec": 3.5,
+            "events": [
+              "sounding_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs visible. The person begins with both hands resting on the knees or thighs. At 1.5 seconds, the person’s right hand forms and holds a clear thumbs-up pose, with the fist closed and the thumb extended upward. At 3.5 seconds, the person’s left hand strikes the top of the left thigh, making visible contact and producing a sharp slap sound exactly at impact. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "action_silent_action_sounding_abs_order_sounding_action_then_silent_action",
+    "modality_combination": "Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.5,
+            "events": [
+              "sounding_action"
+            ]
+          },
+          {
+            "time_sec": 3.5,
+            "events": [
+              "silent_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible; both hands start resting on the knees or thighs. At 1.5 seconds, the person’s left hand strikes the top of the left thigh once, making visible contact and a sharp slap sound at the moment of impact. At 3.5 seconds, the person holds the right hand in a clear thumbs-up pose, with the fist closed and the thumb extended upward, and this pose is the target, not a hand-raising motion. The two events occur in this exact order with the first completed before the second begins. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_rel_sync",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "synchronization",
+      "timing_type": "relative",
+      "value": {
+        "events": [
+          "speech",
+          "silent_action",
+          "sounding_action"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a single seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. The person starts seated on a chair with both hands resting on the knees or thighs, then performs all three target events at the same time: clearly says the word “help,” holds the right hand in a visible thumbs-up pose, and strikes the top of the left thigh with the left hand so the slap is seen and a sharp slap sound occurs exactly at impact. The speech is only the single word “help,” with no extra words. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_rel_sync_count",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "sync_count",
+      "timing_type": "relative",
+      "value": {
+        "events": [
+          "speech",
+          "silent_action",
+          "sounding_action"
+        ],
+        "count": 2
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room with a static medium shot, one seated person facing the camera is visible with the full face, mouth, upper body, both hands, and thighs clearly in view, and both hands start resting on the knees or thighs. The person performs a synchronized bundle twice: saying the single word “help” clearly and audibly while holding the right hand in a recognizable thumbs-up pose, and at the same moment the left hand strikes the top of the left thigh to produce a sharp slap sound. Between the two repetitions, there is only a brief natural reset, and the same three events happen together again with the same timing and visibility. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_rel_order_speech_then_silent_action_then_sounding_action",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "relative",
+      "value": {
+        "sequence": [
+          "speech",
+          "silent_action",
+          "sounding_action"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room with a static medium shot, one seated person faces the camera on a chair with both hands initially resting on the knees or thighs, and the full face, mouth, upper body, both hands, and thighs stay clearly visible. First, the person clearly says the single word “help” with no extra words. After that speech is completed, the person forms and holds a clear thumbs-up with the right hand, with the thumb extended upward. After that pose is visible, the left hand strikes the top of the left thigh once, making visible contact and a sharp slap sound at the moment of impact. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_rel_order_speech_then_sounding_action_then_silent_action",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "relative",
+      "value": {
+        "sequence": [
+          "speech",
+          "sounding_action",
+          "silent_action"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a single seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. The person starts seated on a chair with both hands resting on the thighs or knees. First, the person clearly says “help” once and only once. After that finishes, the person’s left hand strikes the top of the left thigh exactly once, with a visible impact and a sharp slap sound at the moment of contact. After that, the person forms and holds a clear thumbs-up pose with the right hand, showing a closed fist with the thumb extended upward. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_rel_order_silent_action_then_speech_then_sounding_action",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "relative",
+      "value": {
+        "sequence": [
+          "silent_action",
+          "speech",
+          "sounding_action"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a single seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs visible; the person starts seated on a chair with both hands resting on the knees or thighs. First, the person forms and holds a clear thumbs-up with the right hand, with the fist closed and thumb extended upward. After that pose is complete, the person clearly says “help” and nothing else. After the speech ends, the person strikes the top of the left thigh with the left hand, making visible contact and producing one sharp slap sound at the moment of impact. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_rel_order_silent_action_then_sounding_action_then_speech",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "relative",
+      "value": {
+        "sequence": [
+          "silent_action",
+          "sounding_action",
+          "speech"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room with a static medium shot, one seated person faces the camera on a chair, with the full face, mouth, upper body, both hands, and thighs visible, and both hands initially resting on the knees or thighs. The person first holds a clear thumbs-up pose with the right hand, with the fist closed and the thumb extended upward. After that pose is completed, the person uses the left hand to slap the top of the left thigh, making visible contact and producing a sharp slap sound exactly at impact. After that, the person clearly says the single word “help” with no extra words. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_rel_order_sounding_action_then_speech_then_silent_action",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "relative",
+      "value": {
+        "sequence": [
+          "sounding_action",
+          "speech",
+          "silent_action"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a single seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. The person starts seated on a chair with both hands resting on the knees or thighs. First, the person’s left hand strikes the top of the left thigh once, making visible contact and a sharp slap sound. After that, the person clearly says “help” and nothing else. Then the person forms and holds a clear thumbs-up with the right hand, with the thumb extended upward. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_rel_order_sounding_action_then_silent_action_then_speech",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "relative",
+      "value": {
+        "sequence": [
+          "sounding_action",
+          "silent_action",
+          "speech"
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room with a static medium shot, one seated person faces the camera on a chair with both hands initially resting on the knees or thighs, and the full face, mouth, upper body, both hands, and thighs are clearly visible. First, the person’s left hand strikes the top of the left thigh once with visible contact and a sharp slap sound. After that is completed, the person forms and holds a clear thumbs-up with the right hand, with the thumb extended upward. After that, the person clearly says the single word “help” and nothing else. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_abs_sync",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "synchronization",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 2.0,
+            "events": [
+              "speech",
+              "silent_action",
+              "sounding_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room with a static medium shot, one seated person faces the camera on a chair with both hands initially resting on the knees or thighs, and the full face, mouth, upper body, both hands, and thighs stay clearly visible. At 2.0 seconds, the person simultaneously says the single word “help,” holds the right hand in a clear thumbs-up pose, and strikes the top of the left thigh with the left hand so the impact is visible and produces a sharp slap sound at that exact moment. The speech is audible and easy to distinguish, and no extra words are spoken. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_abs_sync_count",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "sync_count",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.5,
+            "events": [
+              "speech",
+              "silent_action",
+              "sounding_action"
+            ]
+          },
+          {
+            "time_sec": 3.5,
+            "events": [
+              "speech",
+              "silent_action",
+              "sounding_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a single seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs visible, and both hands initially resting on the knees or thighs. At 1.5 seconds, the person clearly says “help” while the right hand holds a clearly visible thumbs-up pose and the left hand strikes the top of the left thigh, producing a sharp slap sound at the moment of contact. The same combined event happens again at 3.5 seconds: the person says “help” once, the right hand again shows the thumbs-up pose, and the left hand again slaps the left thigh with the sharp slap sound exactly on impact. No extra words or target sounds occur beyond these two synchronized repetitions. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_abs_order_speech_then_silent_action_then_sounding_action",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.0,
+            "events": [
+              "speech"
+            ]
+          },
+          {
+            "time_sec": 2.5,
+            "events": [
+              "silent_action"
+            ]
+          },
+          {
+            "time_sec": 4.0,
+            "events": [
+              "sounding_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs visible; they begin with both hands resting on their knees or thighs. At 1.0 seconds, the person clearly says “help” and no extra words are spoken. At 2.5 seconds, the person’s right hand is held in a clear thumbs-up pose, with the thumb extended upward and the fist closed. At 4.0 seconds, the person’s left hand strikes the top of the left thigh, making visible contact and a sharp slap sound at the moment of impact. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_abs_order_speech_then_sounding_action_then_silent_action",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.0,
+            "events": [
+              "speech"
+            ]
+          },
+          {
+            "time_sec": 2.5,
+            "events": [
+              "sounding_action"
+            ]
+          },
+          {
+            "time_sec": 4.0,
+            "events": [
+              "silent_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room with a static medium shot, one seated person faces the camera on a chair, with full face, mouth, upper body, both hands, and thighs clearly visible, and both hands initially resting on the knees or thighs. At 1.0 seconds, the person clearly says the single word “help” and nothing else. At 2.5 seconds, the person’s left hand strikes the top of the left thigh, making visible contact with a sharp slap sound at the moment of impact. At 4.0 seconds, the person’s right hand forms and holds a clear thumbs-up pose with the thumb extended upward. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_abs_order_silent_action_then_speech_then_sounding_action",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.0,
+            "events": [
+              "silent_action"
+            ]
+          },
+          {
+            "time_sec": 2.5,
+            "events": [
+              "speech"
+            ]
+          },
+          {
+            "time_sec": 4.0,
+            "events": [
+              "sounding_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a single seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible; the person starts seated on a chair with both hands resting on the knees or thighs. At 1.0 seconds, the person forms and holds a clear thumbs-up with the right hand, with the thumb extended upward and the fist closed. At 2.5 seconds, the person clearly says the single word “help” and nothing else. At 4.0 seconds, the person strikes the top of the left thigh with the left hand, making visible contact and a sharp slap sound at the moment of impact. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_abs_order_silent_action_then_sounding_action_then_speech",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.0,
+            "events": [
+              "silent_action"
+            ]
+          },
+          {
+            "time_sec": 2.5,
+            "events": [
+              "sounding_action"
+            ]
+          },
+          {
+            "time_sec": 4.0,
+            "events": [
+              "speech"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room with a static medium shot, one seated person faces the camera on a chair, with the full face, mouth, upper body, both hands, and thighs visible, and both hands initially resting on the knees or thighs. At 1.0 seconds, the person forms and holds a clear thumbs-up with the right hand, with the fist closed and thumb extended upward. At 2.5 seconds, the left hand strikes the top of the left thigh, making visible contact and a sharp slap sound at the moment of impact. At 4.0 seconds, the person clearly says the single word “help” and nothing else. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_abs_order_sounding_action_then_speech_then_silent_action",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.0,
+            "events": [
+              "sounding_action"
+            ]
+          },
+          {
+            "time_sec": 2.5,
+            "events": [
+              "speech"
+            ]
+          },
+          {
+            "time_sec": 4.0,
+            "events": [
+              "silent_action"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room, a single seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs visible, and both hands initially resting on the knees or thighs. At 1.0 seconds, the person’s left hand strikes the top of the left thigh once, making visible contact and a sharp slap sound. At 2.5 seconds, after that action is completed, the person clearly says the single word “help” and no other words. At 4.0 seconds, after the speech ends, the person forms and holds a clear thumbs-up pose with the right hand, with the thumb extended upward. After the final event, no new target action occurs."
+  },
+  {
+    "item_id": "speech_action_silent_action_sounding_abs_order_sounding_action_then_silent_action_then_speech",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "subjects": [
+      {
+        "id": "person_A",
+        "description": "one seated person facing the camera",
+        "initial_pose": "seated on a chair with both hands initially resting on the knees or thighs",
+        "visibility": "full face, mouth, upper body, both hands, and thighs visible during target events"
+      }
+    ],
+    "events": [
+      {
+        "id": "speech",
+        "modality": "speech",
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      {
+        "id": "silent_action",
+        "modality": "silent_action",
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      {
+        "id": "sounding_action",
+        "modality": "sounding_action",
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    ],
+    "content": {
+      "speech": {
+        "actor": "person_A",
+        "text": "help",
+        "definition": "The person clearly says the single word \"help\". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required."
+      },
+      "silent_action": {
+        "actor": "person_A",
+        "action": "thumbs_up",
+        "body_side": "right",
+        "body_part": "hand",
+        "definition": "The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable as a thumbs-up. The target is the pose, not a separate upward hand-raising motion."
+      },
+      "sounding_action": {
+        "actor": "person_A",
+        "action": "slapping_the_thigh",
+        "acting_body_side": "left",
+        "acting_body_part": "hand",
+        "target_body_side": "left",
+        "target_body_part": "thigh",
+        "target_sound": "sharp slap sound",
+        "definition": "The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact."
+      }
+    },
+    "temporal_constraint": {
+      "relation_type": "order",
+      "timing_type": "absolute",
+      "value": {
+        "schedule": [
+          {
+            "time_sec": 1.0,
+            "events": [
+              "sounding_action"
+            ]
+          },
+          {
+            "time_sec": 2.5,
+            "events": [
+              "silent_action"
+            ]
+          },
+          {
+            "time_sec": 4.0,
+            "events": [
+              "speech"
+            ]
+          }
+        ]
+      }
+    },
+    "scene_hint": "plain indoor room",
+    "camera_hint": "static medium shot",
+    "generated_prompt": "In a plain indoor room with a static medium shot, one seated person faces the camera on a chair with both hands initially resting on the knees or thighs, and the full face, mouth, upper body, both hands, and thighs stay visible. At 1.0 seconds, the person’s left hand strikes the top of the left thigh, making clear visible contact and a sharp slap sound. At 2.5 seconds, the person forms and holds a clear thumbs-up with the right hand, with the thumb extended upward and no extra hand-raising required. At 4.0 seconds, the person clearly says the single word “help” and nothing else. After the final event, no new target action occurs."
+  }
+]
