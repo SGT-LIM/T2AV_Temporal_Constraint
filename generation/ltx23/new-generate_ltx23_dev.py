@@ -27,12 +27,12 @@ from typing import Any
 DEFAULT_PROMPT_JSON = Path(
     # "/home/coder/T2V_Gen/prompt_gen/output/3-comb_temporal_selected_specs_prompts.json"
     # "/home/coder/T2V_Gen/prompt_gen/output/4-comb_temporal_selected_specs_prompts.json"
-    "/home/coder/T2V_Gen/prompts/generated/5-comb_temporal_selected_specs_prompts.json"
+    "/home/coder/T2AV/prompts/generated/6-comb_temporal_selected_specs_prompts.json"
 )
 DEFAULT_OUTPUT_ROOT = Path(
     # "/home/coder/T2V_Gen/hf_datasets/T2AV_TemporalConstraint/"
     # "LTX-2.3/3-seed42-dev_outputs-comb-temporal_reorganized-test"
-    "/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver2"
+    "/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver3"
 )
 DEFAULT_PYTHON_BIN = Path("/home/coder/miniforge3/envs/ltx23/bin/python")
 DEFAULT_LTX_REPO = Path("/home/coder/T2V_Gen/LTX-2")
