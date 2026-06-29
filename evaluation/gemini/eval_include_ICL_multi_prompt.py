@@ -161,7 +161,7 @@ CSV_FIELDNAMES = [
     "constraint_compliance_evidence",
     "overall_temporal_success",
     "overall_reason",
-    "observed_behavior_summary",
+    # "observed_behavior_summary",
     "model",
     "media_fps",
     "thinking_level",
@@ -464,7 +464,7 @@ RESULT_SCHEMA = {
         "constraint_compliance": AXIS_RESULT_SCHEMA,
         "overall_temporal_success": {"type": "string", "enum": ["yes", "no"]},
         "overall_reason": {"type": "string"},
-        "observed_behavior_summary": {"type": "string"},
+        # "observed_behavior_summary": {"type": "string"},
     },
     "required": [
         "audio_event_correctness",
@@ -475,7 +475,7 @@ RESULT_SCHEMA = {
         "constraint_compliance",
         "overall_temporal_success",
         "overall_reason",
-        "observed_behavior_summary",
+        # "observed_behavior_summary",
     ],
 }
 
@@ -1639,7 +1639,7 @@ def normalize_result(obj: dict, item_meta: dict) -> dict:
             result["overall_reason"]
             + f" [Post-processed: model overall was {model_overall!r}, but the required AND rule gives {computed_overall!r}.]"
         ).strip()
-    result["observed_behavior_summary"] = clean_text(obj.get("observed_behavior_summary"))
+    # result["observed_behavior_summary"] = clean_text(obj.get("observed_behavior_summary"))
     return result
 
 
@@ -1791,6 +1791,58 @@ ICL_EXAMPLE_DESCRIPTION = (
 # Teaching points: every per-event audio/visual/binding entry passes, so the
 # temporal sub-axes are evaluated -- and BOTH fail (relation: not synchronized;
 # count: bundle should occur twice but help=1, thumbs-up=1, slap=3).
+ICL_EXAMPLE_PROMPT = (
+    "In a plain indoor room with a static medium shot, one seated person faces the camera on a "
+    "chair with both hands initially resting on the knees or thighs, and the full face, mouth, "
+    "upper body, both hands, and thighs stay visible. The person clearly says the single word "
+    "\u201chelp\u201d while the right hand forms a clear thumbs-up pose and the right hand "
+    "simultaneously strikes the top of the right thigh, producing a sharp slap sound exactly at "
+    "impact. This synchronized combination of Sp, the right-hand thumbs-up pose, and the "
+    "right-thigh slap happens exactly twice, with a brief reset between the two repetitions. "
+    "No extra words or extra target sounds occur. After the final event, no new target action occurs."
+)
+
+# Raw item in the same schema as prompt_json entries, so it renders through the
+# exact same make_user_text path as a real query.
+ICL_EXAMPLE_RAW_ITEM = {
+    "item_id": "Sp_Si_So_rel_sync_cnt",
+    "modality_combination": "Speech + Action (silent) + Action (sounding)",
+    "generated_prompt": ICL_EXAMPLE_PROMPT,
+    "content": {
+        "speech": "help",
+        "silent_action": "thumbs up",
+        "sounding_action": "slapping the thigh",
+    },
+    # relative synchronized-repetition, required count = 2 (the bundle twice).
+    "temporal_constraint": {
+        "timing_type": "relative",
+        "relation_type": "sync_count",
+        "value": {"count": 2},
+    },
+    "scene_hint": "a plain indoor room",
+    "camera_hint": "static medium shot",
+}
+
+# Text description used by --icl-mode described (no clip in the request).
+ICL_EXAMPLE_DESCRIPTION = (
+    "A single person sits on a chair in a plain indoor room (static medium shot), "
+    "facing the camera with both hands initially resting on the thighs; only the lower part of the face (including the mouth), "
+    "along with the upper body, hands, and thighs, stays visible. "
+    "Near 00:00 the person clearly says \u201chelp\u201d with visible "
+    "mouth motion. The right hand then strikes the top of the right thigh with a sharp, audible "
+    "slap around 1s. Around 2s, the right hand forms a clear thumbs-up pose. The right "
+    "hand strikes the right thigh again around 2.5s and once more around 3s (three thigh "
+    "slaps in total). Between these, the right hand is raised with an open palm a couple of times "
+    "(NOT thumbs-up poses). The spoken word and the slaps are clearly audible; there are no "
+    "subtitles, no background music, and no extra speech. Critically, the three target signals "
+    "(speech, the thumbs-up pose, and the thigh slap) never BEGIN at the same moment \u2014 they "
+    "occur sequentially and separately."
+)
+
+# Correct, hand-verified evaluation of the example clip, in RESULT_SCHEMA order.
+# Teaching points: every per-event audio/visual/binding entry passes, so the
+# temporal sub-axes are evaluated -- and BOTH fail (relation: not synchronized;
+# count: bundle should occur twice but help=1, thumbs-up=1, slap=3).
 ICL_EXAMPLE_EXPECTED = {
     "audio_event_correctness": {
         "per_event": [
@@ -1798,13 +1850,13 @@ ICL_EXAMPLE_EXPECTED = {
                 "event_id": "event_1",
                 "label": "yes",
                 "reason": "The single word \u201chelp\u201d is clearly spoken and intelligible.",
-                "evidence": "Speech audio containing 'help' is heard near 00:00.",
+                "evidence": "Speech audio containing 'help' is heard near the beginning of the clip.",
             },
             {
                 "event_id": "event_3",
                 "label": "yes",
                 "reason": "A sharp slap sound is clearly audible at each thigh impact.",
-                "evidence": "Distinct slap transients are heard around 00:01.3, 00:02.5, and 00:03.6.",
+                "evidence": "Distinct slap transients are heard around 1s, 2.5s, and 3.5s",
             },
         ]
     },
@@ -1813,20 +1865,20 @@ ICL_EXAMPLE_EXPECTED = {
             {
                 "event_id": "event_1",
                 "label": "yes",
-                "reason": "The face/mouth is visible and shows plausible speaking motion for 'help'.",
-                "evidence": "Visible lip movement near 00:00 while the face stays in frame.",
+                "reason": "The lower face/mouth is visible and shows plausible speaking motion for 'help'.",
+                "evidence": "Visible lip movement appears near the beginning while the lower face stays in frame."
             },
             {
                 "event_id": "event_2",
                 "label": "yes",
                 "reason": "The right hand forms a clear thumbs-up pose (fist closed, thumb up).",
-                "evidence": "A distinct right-hand thumbs-up is visible around 00:02.2; the other raised-hand moments are open-palm, not thumbs-up.",
+                "evidence": "A distinct right-hand thumbs-up is visible around 2s; the other raised-hand moments are open-palm, not thumbs-up.",
             },
             {
                 "event_id": "event_3",
                 "label": "yes",
                 "reason": "The right hand visibly strikes the top of the right thigh.",
-                "evidence": "Visible right-hand-to-right-thigh contact around 00:01.3, 00:02.5, and 00:03.6.",
+                "evidence": "Visible right-hand-to-right-thigh contact around 00:01, 00:02.5, and 00:03.5.",
             },
         ]
     },
@@ -1836,13 +1888,13 @@ ICL_EXAMPLE_EXPECTED = {
                 "event_id": "event_1",
                 "label": "yes",
                 "reason": "The spoken 'help' and the visible mouth motion begin together.",
-                "evidence": "Audio onset and lip motion coincide near 00:00.",
+                "evidence": "Audio onset and visible lip motion coincide at the speech onset."
             },
             {
                 "event_id": "event_3",
                 "label": "yes",
                 "reason": "Each slap sound coincides with the visible thigh-contact moment.",
-                "evidence": "Slap transients align with the visible impacts at ~00:01.3, ~00:02.5, ~00:03.6.",
+                "evidence": "Slap transients align with the visible impacts at ~00:01, ~00:02.5, ~00:03.5.",
             },
         ]
     },
@@ -1858,13 +1910,13 @@ ICL_EXAMPLE_EXPECTED = {
                 "event_id": "event_2",
                 "observed_count": 1,
                 "reason": "A single clear thumbs-up pose is formed.",
-                "evidence": "One right-hand thumbs-up around 00:02.2; the other raised-hand moments are open-palm.",
+                "evidence": "One clear right-hand thumbs-up appears around the middle of the clip; other raised-hand moments are open-palm."
             },
             {
                 "event_id": "event_3",
                 "observed_count": 3,
                 "reason": "The thigh is slapped three times.",
-                "evidence": "Three slap impacts at ~00:01.3, ~00:02.5, and ~00:03.6.",
+                "evidence": "Three slap impacts at ~00:01.5, ~00:02.5, and ~00:03.6.",
             },
         ]
     },
@@ -1876,16 +1928,22 @@ ICL_EXAMPLE_EXPECTED = {
             "and separately (help, then a slap, then a thumbs-up, then more slaps). They never "
             "co-onset, so synchronization fails."
         ),
-        "evidence": "Event-start order: 'help' ~00:00, slap ~00:01.3, thumbs-up ~00:02.2, slap ~00:02.5, slap ~00:03.6 \u2014 no co-onset.",
+        "evidence": (
+            "Observed onset order: speech first, then a slap, then a thumbs-up, followed by additional slaps; no simultaneous co-onset occurs."
+        )
     },
     "constraint_compliance": {
-        "label": "yes",
+        "label": "no",
         "reason": (
-            "Scene (plain indoor room), static medium shot, single seated person, and visible "
-            "face/upper body/hands/thighs all hold; no subtitles, music, or extra speech. The extra "
-            "slap repetition is a count error scored under Temporal Count, not double-counted here."
+            "The prompt requires the full face, upper body, hands, and thighs to remain visible, "
+            "but only the lower part of the face is visible in the clip, violating the visibility "
+            "constraint. There are no subtitles, music, or extra speech, but the framing constraint "
+            "is not satisfied."
         ),
-        "evidence": "Static framing throughout; only the target speech and slap sounds are present.",
+        "evidence": (
+            "Static framing throughout, but the upper part of the face is cropped out; "
+            "only the lower face/mouth remains visible."
+        ),
     },
     "overall_temporal_success": "no",
     "overall_reason": (
@@ -1894,11 +1952,6 @@ ICL_EXAMPLE_EXPECTED = {
         "never occurs; the events are sequential) and Temporal Count fails (the synchronized bundle "
         "must occur exactly twice, but observed counts are help=1, thumbs-up=1, slap=3). Therefore "
         "overall temporal success is no."
-    ),
-    "observed_behavior_summary": (
-        "A seated person says 'help' (~00:00), then performs a thigh slap (~00:01.3), a right-hand "
-        "thumbs-up (~00:02.2), and two more thigh slaps (~00:02.5, ~00:03.6), with open-hand raises "
-        "in between. The three target signals never co-occur as a synchronized bundle."
     ),
 }
 
@@ -2251,7 +2304,7 @@ def add_result_to_row(row: dict, result: dict) -> dict:
 
     row["overall_temporal_success"] = result["overall_temporal_success"]
     row["overall_reason"] = result["overall_reason"]
-    row["observed_behavior_summary"] = result["observed_behavior_summary"]
+    # row["observed_behavior_summary"] = result["observed_behavior_summary"]
     row["pose_evidence_mode"] = result.get("pose_evidence_mode", "")
     row["mediapipe_hint_used"] = str(result.get("mediapipe_hint_used", ""))
     row["mediapipe_error"] = result.get("mediapipe_error", "")
@@ -2277,7 +2330,7 @@ def add_error_to_row(row: dict, error: Exception, item_meta: dict, body_pose_sec
     row["_per_event_long"] = []
     row["overall_temporal_success"] = ""
     row["overall_reason"] = f"ERROR: {type(error).__name__}: {error}"
-    row["observed_behavior_summary"] = ""
+    # row["observed_behavior_summary"] = ""
     row["pose_evidence_mode"] = ""
     row["mediapipe_hint_used"] = str(bool(body_pose_section))
     row["mediapipe_error"] = mediapipe_error

@@ -1,0 +1,87 @@
+{
+  "source": "default_predefined_codebook",
+  "note": "For publication/reporting, inspect this codebook and rerun with TAXONOMY_MODE='codebook' and TAXONOMY_CODEBOOK_PATH pointing to the approved frozen JSON.",
+  "codebook": [
+    {
+      "label": "laterality_left_right",
+      "display_name": "Left/right or side confusion",
+      "definition": "The reason indicates confusion about left/right hand, actor-centered side, body side, thigh/leg side, or opposite-side mapping.",
+      "include_when": "Mentions left, right, side, hand side, thigh/leg side, or actor/viewer orientation.",
+      "exclude_when": "The reason only mentions a hand/action without a side-specific error.",
+      "example_ids": [],
+      "rationale": ""
+    },
+    {
+      "label": "slap_contact_overacceptance",
+      "display_name": "Contact over-accepted as slap",
+      "definition": "The reason treats ambiguous contact, hit, impact, or hand-body motion as a valid slap, or hallucinates a slap-like action.",
+      "include_when": "Mentions slap/slapping/hit/strike/contact/impact/thigh in a way that explains an incorrect accept/reject judgment.",
+      "exclude_when": "The reason is about count/order only and does not discuss whether a slap/contact occurred.",
+      "example_ids": [],
+      "rationale": ""
+    },
+    {
+      "label": "speech_visual_or_mouth_motion",
+      "display_name": "Visible speech or mouth-motion judgment",
+      "definition": "The reason concerns whether the mouth/lips/person visibly speaks, talks, or moves the mouth.",
+      "include_when": "Mentions mouth, lips, visible speaking, talking, or visual speech behavior.",
+      "exclude_when": "The reason only concerns transcript/audio content without visual speech behavior.",
+      "example_ids": [],
+      "rationale": ""
+    },
+    {
+      "label": "timing_order_or_sync",
+      "display_name": "Timing, order, or synchrony",
+      "definition": "The reason concerns before/after order, simultaneous/synchronized occurrence, onset alignment, or temporal relation.",
+      "include_when": "Mentions before, after, order, sequence, sync, simultaneous, aligned, onset, timing, temporal relation.",
+      "exclude_when": "The reason only says an event exists/does not exist with no temporal claim.",
+      "example_ids": [],
+      "rationale": ""
+    },
+    {
+      "label": "count_or_repetition",
+      "display_name": "Count or repetition",
+      "definition": "The reason concerns number of occurrences, once/twice/multiple times, or repeated actions.",
+      "include_when": "Mentions count, once, twice, single, multiple, repeated, repetition, number of events.",
+      "exclude_when": "The reason concerns temporal order but not the number of occurrences.",
+      "example_ids": [],
+      "rationale": ""
+    },
+    {
+      "label": "audio_or_speech_content",
+      "display_name": "Audio or speech-content evidence",
+      "definition": "The reason concerns whether sound/speech/audio content was present, heard, transcribed, or matched the requested phrase.",
+      "include_when": "Mentions audio, sound, heard, transcript, speech content, spoken words, Whisper, CLAP, or cue from audio.",
+      "exclude_when": "The reason only concerns mouth motion without audio content.",
+      "example_ids": [],
+      "rationale": ""
+    },
+    {
+      "label": "action_identity_or_visibility",
+      "display_name": "Action identity or visual visibility",
+      "definition": "The reason concerns whether the requested action/gesture/pose is visually present, clear, occluded, or correctly identified.",
+      "include_when": "Mentions visible/visibility/gesture/action/pose/thumbs-up/raise/occluded/unclear as the reason for the judgment.",
+      "exclude_when": "The reason is only about left/right side or timing without action identity/visibility.",
+      "example_ids": [],
+      "rationale": ""
+    },
+    {
+      "label": "tool_artifact_or_uncertainty",
+      "display_name": "Tool artifact or uncertainty",
+      "definition": "The reason explicitly attributes the judgment to tool outputs, landmarks, transcripts, CLAP/Whisper/MediaPipe, or expresses uncertainty/ambiguity.",
+      "include_when": "Mentions MediaPipe, landmark, CLAP, Whisper, tool, confidence, uncertain, ambiguous, likely, appears.",
+      "exclude_when": "The reason merely uses normal evidence without tool/uncertainty language.",
+      "example_ids": [],
+      "rationale": ""
+    },
+    {
+      "label": "other_unclear",
+      "display_name": "Other or unclear",
+      "definition": "The reason does not fit the approved codebook or is too vague to tag confidently.",
+      "include_when": "Use when no specific label is supported by the reason text.",
+      "exclude_when": "Do not use together with a specific label unless the reason is partially unclassifiable.",
+      "example_ids": [],
+      "rationale": ""
+    }
+  ]
+}

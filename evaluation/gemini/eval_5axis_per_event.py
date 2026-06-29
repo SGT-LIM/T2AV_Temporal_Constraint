@@ -1816,6 +1816,8 @@ def evaluate_video(
         "response_mime_type": "application/json",
         "response_json_schema": RESULT_SCHEMA,
         "system_instruction": build_system_prompt(pose_evidence_mode, audio_evidence_mode),
+        "temperature": 0.0,
+        "seed": 42,
     }
 
     if thinking_level and thinking_level.lower() != "none":

@@ -1,0 +1,100 @@
+{
+  "source": "llm_induced_from_observed_reasons",
+  "note": "For publication/reporting, inspect this codebook and rerun with TAXONOMY_MODE='codebook' and TAXONOMY_CODEBOOK_PATH pointing to the approved frozen JSON.",
+  "codebook": [
+    {
+      "label": "missing_audio",
+      "display_name": "Missing Audio",
+      "definition": "The required sound or speech is completely absent from the audio track.",
+      "include_when": "The reason explicitly states that the required sound (e.g., slap, speech) is not heard, absent, or the video is silent.",
+      "exclude_when": "The audio is present but incorrect, or the failure is primarily visual.",
+      "example_ids": [
+        "R0001",
+        "R0003",
+        "R0004",
+        "R0006",
+        "R0061",
+        "R0062",
+        "R0064"
+      ],
+      "rationale": "A common failure mode where the model fails to generate the expected audio component of an event."
+    },
+    {
+      "label": "missing_visual",
+      "display_name": "Missing Visual",
+      "definition": "The required visual action or motion is completely absent from the video.",
+      "include_when": "The reason states that the required visual action (e.g., slapping motion, mouth movement) does not occur or the body part remains resting/static.",
+      "exclude_when": "The action occurs but is performed incorrectly (e.g., wrong hand, wrong target).",
+      "example_ids": [
+        "R0052",
+        "R0053",
+        "R0054",
+        "R0104",
+        "R0108"
+      ],
+      "rationale": "Identifies cases where the model fails to generate the expected visual action."
+    },
+    {
+      "label": "incorrect_visual_execution",
+      "display_name": "Incorrect Visual Execution",
+      "definition": "The visual action is performed, but incorrectly, such as using the wrong body part, striking the wrong target, or severe anatomical deformation.",
+      "include_when": "The reason describes an action being performed with the wrong hand, hitting the wrong object, or failing due to anatomical deformation.",
+      "exclude_when": "The action is completely missing or the failure is purely audio-related.",
+      "example_ids": [
+        "R0049",
+        "R0050",
+        "R0051",
+        "R0103",
+        "R0105",
+        "R0107"
+      ],
+      "rationale": "Captures errors where the model attempts the action but fails on specific visual constraints (e.g., laterality, target, anatomy)."
+    },
+    {
+      "label": "avb_precondition_failed",
+      "display_name": "AVB Precondition Failed",
+      "definition": "Audio-visual binding cannot be evaluated because either the audio or visual component of the event is missing or incorrect.",
+      "include_when": "The reason explicitly states that binding is not evaluable due to a precondition failure (missing/incorrect audio or visual).",
+      "exclude_when": "Binding fails despite both components being present and correct (e.g., out of sync).",
+      "example_ids": [
+        "R0013",
+        "R0014",
+        "R0015",
+        "R0016",
+        "R0073",
+        "R0074",
+        "R0078"
+      ],
+      "rationale": "A specific, recurring failure mode in AVB evaluation where the dependency on individual A/V correctness is not met."
+    },
+    {
+      "label": "sequence_incomplete",
+      "display_name": "Sequence Incomplete",
+      "definition": "A temporal sequence fails because one or more required events in the sequence are missing.",
+      "include_when": "The reason states that a sequence cannot be completed or evaluated because an event (e.g., speech) is missing.",
+      "exclude_when": "All events are present but occur in the wrong order.",
+      "example_ids": [
+        "R0037",
+        "R0038",
+        "R0040",
+        "R0041",
+        "R0042"
+      ],
+      "rationale": "Highlights temporal relation failures caused by the absence of constituent events rather than ordering errors."
+    },
+    {
+      "label": "other_unclear",
+      "display_name": "Other / Unclear",
+      "definition": "The failure reason does not fit into the other defined categories, or the reason is ambiguous.",
+      "include_when": "The reason is unique, unclear, or describes a failure mode not covered by the main labels.",
+      "exclude_when": "The reason clearly fits into one of the specific semantic failure labels.",
+      "example_ids": [
+        "R0025",
+        "R0075",
+        "R0076",
+        "R0106"
+      ],
+      "rationale": "A catch-all category required to ensure all data can be coded even if it doesn't match recurring patterns."
+    }
+  ]
+}

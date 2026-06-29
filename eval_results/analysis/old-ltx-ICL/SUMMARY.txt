@@ -1,0 +1,18 @@
+=== yes/no summary (per condition) ===
+condition    axis     n  accuracy  balanced_accuracy
+  NoTools OVERALL 132.0     0.788              0.741
+  NoTools   MACRO   NaN     0.791              0.687
+
+=== error skew by axis  (SYSTEMATIC = one-sided >=4 errors) ===
+condition        axis  n_err  over_reject  over_accept          skew
+  NoTools           A      7            5            2  leans strict
+  NoTools           V      9            4            5 leans lenient
+  NoTools         AVB      9            5            4  leans strict
+  NoTools TC-Relation      3            1            2 leans lenient
+
+=== TC-Count numeric summary ===
+condition      event_kind  n  exact_match_rate   MAE  signed_bias
+  NoTools             ALL 47             0.681 0.489       -0.106
+  NoTools   silent_action 15             0.867 0.133        0.000
+  NoTools sounding_action 16             0.438 1.062       -0.438
+  NoTools          speech 16             0.750 0.250        0.125

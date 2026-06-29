@@ -25,14 +25,14 @@ from typing import Any
 
 
 DEFAULT_PROMPT_JSON = Path(
-    # "/home/coder/T2V_Gen/prompt_gen/output/3-comb_temporal_selected_specs_prompts.json"
-    # "/home/coder/T2V_Gen/prompt_gen/output/4-comb_temporal_selected_specs_prompts.json"
-    "/home/coder/T2AV/prompts/generated/6-comb_temporal_selected_specs_prompts.json"
+    # "/home/coder/T2AV/prompts/generated/6-comb_temporal_selected_specs_prompts.json"
+    "/home/coder/T2AV/new_prompts/generated/relative_50_v3_prompts.json"
 )
 DEFAULT_OUTPUT_ROOT = Path(
     # "/home/coder/T2V_Gen/hf_datasets/T2AV_TemporalConstraint/"
     # "LTX-2.3/3-seed42-dev_outputs-comb-temporal_reorganized-test"
-    "/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver3"
+    # "/home/coder/T2V_Gen/LTX-2/outputs/refined_prompt_ver3"
+    "./outputs/50_prompts"
 )
 DEFAULT_PYTHON_BIN = Path("/home/coder/miniforge3/envs/ltx23/bin/python")
 DEFAULT_LTX_REPO = Path("/home/coder/T2V_Gen/LTX-2")
@@ -337,11 +337,28 @@ def main() -> int:
         default="",
         help='Extra args appended to ltx_pipelines, e.g. "--num-inference-steps 50"',
     )
+    parser.add_argument(
+        "--manual-prompt",
+        type=str,
+        default=None,
+        help="Directly provide a prompt string instead of loading from JSON"
+    )
     args = parser.parse_args()
 
     validate_generation_args(args)
 
-    items = load_items(args.prompt_json)
+    # items = load_items(args.prompt_json)
+    if args.manual_prompt is not None:
+        items = [{
+            "item_id": "manual_prompt",
+            "generated_prompt": args.manual_prompt,
+            "modality_combination": "manual",
+            "events": [],
+            "content": {},
+            "temporal_constraint": {},
+        }]
+    else:
+        items = load_items(args.prompt_json)
     item_filter = parse_item_filter(args.item_id)
 
     if not args.dry_run:
