@@ -1,0 +1,1708 @@
+video_relpath,video_file,item_id,variant_index,label_name,label_type,modality_combination,event_summary,temporal_type,event_id,event_kind,event_label,visual_event_correctness,visual_event_correctness_reason,visual_event_correctness_evidence,model,backend,media_fps,temperature,seed,uploaded_file_name,uploaded_file_uri,user_prompt,raw_output
+clap_palm__open_palm_clap_rel_ord_clapping_hands_raise_open_palm/clap_palm__open_palm_clap_rel_ord_clapping_hands_raise_open_palm_v1_raw.mp4,clap_palm__open_palm_clap_rel_ord_clapping_hands_raise_open_palm_v1_raw.mp4,clap_palm__open_palm_clap_rel_ord_clapping_hands_raise_open_palm,1,"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the silent visual action ""raise open palm""",silent_plus_sounding_action,Action (silent) + Action (sounding),"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the silent visual action ""raise open palm""",relative_order,event_1,sounding_action,clapping_hands,no,The person does not clap their hands.,"The left hand remains on the thigh throughout the video, and no hand-to-hand contact occurs.",gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/am9x4kkhv3ab,https://generativelanguage.googleapis.com/v1beta/files/am9x4kkhv3ab,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. First, the person claps both hands together once (visible contact, sharp clap sound). After that is complete, the person holds the right hand in a clear open-palm pose (palm facing the camera). Each event finishes before the next begins, the events do not overlap, and no event is repeated. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: clap_palm__open_palm_clap_rel_ord_clapping_hands_raise_open_palm
+- modality_combination: Action (silent) + Action (sounding)
+- content: {""sounding_action"": {""actor"": ""person_A"", ""action"": ""clapping_hands"", ""acting_body_side"": ""both"", ""acting_body_part"": ""hand"", ""target_body_side"": ""both"", ""target_body_part"": ""hand"", ""target_sound"": ""sharp clap sound"", ""definition"": ""The person brings both hands together in front of the torso to clap, with visible hand-to-hand contact and a single sharp clap sound at the moment of impact.""}, ""silent_action"": {""actor"": ""person_A"", ""action"": ""raise_open_palm"", ""body_side"": ""right"", ""body_part"": ""hand"", ""definition"": ""The person's right hand is raised to about shoulder height with the palm open and facing the camera, fingers together and extended, held clearly as a recognizable open-palm pose. The target is the held pose, not a separate raising motion.""}}
+- temporal_constraint: {""relation_type"": ""order"", ""timing_type"": ""relative"", ""value"": {""sequence"": [""sounding_action"", ""silent_action""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound
+- Event 2: performs the silent visual action ""raise open palm""
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (sounding action): ""clapping hands""
+- event_2 (silent action): ""raise open palm""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- The visual silent action ""raise open palm"" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action ""clapping hands"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""no"",
+        ""reason"": ""The person does not clap their hands."",
+        ""evidence"": ""The left hand remains on the thigh throughout the video, and no hand-to-hand contact occurs.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""yes"",
+        ""reason"": ""The person successfully performs the open-palm pose."",
+        ""evidence"": ""The person raises their right hand with the palm open and facing the camera multiple times.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person repeatedly raises their right hand in an open-palm pose but never claps their hands.""
+}"
+clap_palm__open_palm_clap_rel_ord_clapping_hands_raise_open_palm/clap_palm__open_palm_clap_rel_ord_clapping_hands_raise_open_palm_v1_raw.mp4,clap_palm__open_palm_clap_rel_ord_clapping_hands_raise_open_palm_v1_raw.mp4,clap_palm__open_palm_clap_rel_ord_clapping_hands_raise_open_palm,1,"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the silent visual action ""raise open palm""",silent_plus_sounding_action,Action (silent) + Action (sounding),"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the silent visual action ""raise open palm""",relative_order,event_2,silent_action,raise_open_palm,yes,The person successfully performs the open-palm pose.,The person raises their right hand with the palm open and facing the camera multiple times.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/am9x4kkhv3ab,https://generativelanguage.googleapis.com/v1beta/files/am9x4kkhv3ab,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. First, the person claps both hands together once (visible contact, sharp clap sound). After that is complete, the person holds the right hand in a clear open-palm pose (palm facing the camera). Each event finishes before the next begins, the events do not overlap, and no event is repeated. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: clap_palm__open_palm_clap_rel_ord_clapping_hands_raise_open_palm
+- modality_combination: Action (silent) + Action (sounding)
+- content: {""sounding_action"": {""actor"": ""person_A"", ""action"": ""clapping_hands"", ""acting_body_side"": ""both"", ""acting_body_part"": ""hand"", ""target_body_side"": ""both"", ""target_body_part"": ""hand"", ""target_sound"": ""sharp clap sound"", ""definition"": ""The person brings both hands together in front of the torso to clap, with visible hand-to-hand contact and a single sharp clap sound at the moment of impact.""}, ""silent_action"": {""actor"": ""person_A"", ""action"": ""raise_open_palm"", ""body_side"": ""right"", ""body_part"": ""hand"", ""definition"": ""The person's right hand is raised to about shoulder height with the palm open and facing the camera, fingers together and extended, held clearly as a recognizable open-palm pose. The target is the held pose, not a separate raising motion.""}}
+- temporal_constraint: {""relation_type"": ""order"", ""timing_type"": ""relative"", ""value"": {""sequence"": [""sounding_action"", ""silent_action""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound
+- Event 2: performs the silent visual action ""raise open palm""
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (sounding action): ""clapping hands""
+- event_2 (silent action): ""raise open palm""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- The visual silent action ""raise open palm"" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action ""clapping hands"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""no"",
+        ""reason"": ""The person does not clap their hands."",
+        ""evidence"": ""The left hand remains on the thigh throughout the video, and no hand-to-hand contact occurs.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""yes"",
+        ""reason"": ""The person successfully performs the open-palm pose."",
+        ""evidence"": ""The person raises their right hand with the palm open and facing the camera multiple times.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person repeatedly raises their right hand in an open-palm pose but never claps their hands.""
+}"
+clap_slap__slap_clap_rel_ord_clapping_hands_slapping_the_thigh/clap_slap__slap_clap_rel_ord_clapping_hands_slapping_the_thigh_v1_raw.mp4,clap_slap__slap_clap_rel_ord_clapping_hands_slapping_the_thigh_v1_raw.mp4,clap_slap__slap_clap_rel_ord_clapping_hands_slapping_the_thigh,1,"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",sounding_action,Action (sounding),"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",relative_order,event_1,sounding_action,clapping_hands,yes,The person clearly brings both hands together to perform a clapping motion.,Visible clapping occurs multiple times between 00:00.125 and 00:02.250.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/d3v6r50a31e9,https://generativelanguage.googleapis.com/v1beta/files/d3v6r50a31e9,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. First, the person claps both hands together once (visible contact, sharp clap sound). After that is complete, the person strikes the top of the left thigh with the left hand (visible contact, sharp slap sound). Each event finishes before the next begins, the events do not overlap, and no event is repeated. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: clap_slap__slap_clap_rel_ord_clapping_hands_slapping_the_thigh
+- modality_combination: Action (sounding)
+- content: {""sounding_action"": {""actor"": ""person_A"", ""action"": ""slapping_the_thigh"", ""acting_body_side"": ""left"", ""acting_body_part"": ""hand"", ""target_body_side"": ""left"", ""target_body_part"": ""thigh"", ""target_sound"": ""sharp slap sound"", ""definition"": ""The person's left hand strikes the top of the left thigh, with visible contact and a sharp slap sound at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""order"", ""timing_type"": ""relative"", ""value"": {""sequence"": [""sounding_action"", ""sounding_action""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound
+- Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (sounding action): ""clapping hands""
+- event_2 (sounding action): ""slapping the thigh""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- The visible motion for the sounding action ""clapping hands"" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action ""slapping the thigh"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person clearly brings both hands together to perform a clapping motion."",
+        ""evidence"": ""Visible clapping occurs multiple times between 00:00.125 and 00:02.250.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""no"",
+        ""reason"": ""The person does not strike their left thigh with their left hand."",
+        ""evidence"": ""The left hand remains resting on the thigh throughout the second half of the video; instead, the person lifts their right knee around 00:03.000.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person claps their hands multiple times in two separate sequences. Afterwards, they lift their right knee, but they never perform the required action of slapping their left thigh with their left hand.""
+}"
+clap_slap__slap_clap_rel_ord_clapping_hands_slapping_the_thigh/clap_slap__slap_clap_rel_ord_clapping_hands_slapping_the_thigh_v1_raw.mp4,clap_slap__slap_clap_rel_ord_clapping_hands_slapping_the_thigh_v1_raw.mp4,clap_slap__slap_clap_rel_ord_clapping_hands_slapping_the_thigh,1,"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",sounding_action,Action (sounding),"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",relative_order,event_2,sounding_action,slapping_the_thigh,no,The person does not strike their left thigh with their left hand.,"The left hand remains resting on the thigh throughout the second half of the video; instead, the person lifts their right knee around 00:03.000.",gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/d3v6r50a31e9,https://generativelanguage.googleapis.com/v1beta/files/d3v6r50a31e9,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. First, the person claps both hands together once (visible contact, sharp clap sound). After that is complete, the person strikes the top of the left thigh with the left hand (visible contact, sharp slap sound). Each event finishes before the next begins, the events do not overlap, and no event is repeated. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: clap_slap__slap_clap_rel_ord_clapping_hands_slapping_the_thigh
+- modality_combination: Action (sounding)
+- content: {""sounding_action"": {""actor"": ""person_A"", ""action"": ""slapping_the_thigh"", ""acting_body_side"": ""left"", ""acting_body_part"": ""hand"", ""target_body_side"": ""left"", ""target_body_part"": ""thigh"", ""target_sound"": ""sharp slap sound"", ""definition"": ""The person's left hand strikes the top of the left thigh, with visible contact and a sharp slap sound at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""order"", ""timing_type"": ""relative"", ""value"": {""sequence"": [""sounding_action"", ""sounding_action""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound
+- Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (sounding action): ""clapping hands""
+- event_2 (sounding action): ""slapping the thigh""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- The visible motion for the sounding action ""clapping hands"" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action ""slapping the thigh"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person clearly brings both hands together to perform a clapping motion."",
+        ""evidence"": ""Visible clapping occurs multiple times between 00:00.125 and 00:02.250.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""no"",
+        ""reason"": ""The person does not strike their left thigh with their left hand."",
+        ""evidence"": ""The left hand remains resting on the thigh throughout the second half of the video; instead, the person lifts their right knee around 00:03.000.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person claps their hands multiple times in two separate sequences. Afterwards, they lift their right knee, but they never perform the required action of slapping their left thigh with their left hand.""
+}"
+clap_thumb__clap_x1_thumbs_up_x2_v4_rel_ord_cnt/clap_thumb__clap_x1_thumbs_up_x2_v4_rel_ord_cnt_v1_raw.mp4,clap_thumb__clap_x1_thumbs_up_x2_v4_rel_ord_cnt_v1_raw.mp4,clap_thumb__clap_x1_thumbs_up_x2_v4_rel_ord_cnt,1,"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the silent visual action ""thumbs up""",unknown,Action (sounding) + Action (silent),"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the silent visual action ""thumbs up""",relative_order_count,event_1,sounding_action,clapping_hands,yes,The person successfully claps both hands together.,Visible hand-to-hand contact is clearly shown.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/5skecqalpam2,https://generativelanguage.googleapis.com/v1beta/files/5skecqalpam2,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. First, the person must clap both hands together once, producing one sharp clap sound at impact once. After all clap repetitions are complete, the person must make a clear right-hand thumbs-up pose exactly 2 times. The order must be strict: all repetitions of the first event happen before any repetition of the second event begins. No extra target events, extra words, or extra target sounds occur. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: clap_thumb__clap_x1_thumbs_up_x2_v4_rel_ord_cnt
+- modality_combination: Action (sounding) + Action (silent)
+- content: {""clap"": {""id"": ""clap"", ""modality"": ""sounding_action"", ""actor"": ""person_A"", ""action"": ""clapping_hands"", ""acting_body_side"": ""both"", ""acting_body_part"": ""hand"", ""target_body_side"": ""both"", ""target_body_part"": ""hand"", ""target_sound"": ""sharp clap sound"", ""definition"": ""The person brings both hands together in front of the torso to clap, with visible hand-to-hand contact and a single sharp clap sound at the moment of impact.""}, ""thumbs_up"": {""id"": ""thumbs_up"", ""modality"": ""silent_action"", ""actor"": ""person_A"", ""action"": ""thumbs_up"", ""body_side"": ""right"", ""body_part"": ""hand"", ""definition"": ""The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable. The target is the pose, not a separate hand-raising motion.""}}
+- temporal_constraint: {""relation_type"": ""order_count"", ""timing_type"": ""relative"", ""value"": {""ordered_events"": [""clap"", ""thumbs_up""], ""event_counts"": {""clap"": 1, ""thumbs_up"": 2}, ""expanded_sequence"": [""clap"", ""thumbs_up"", ""thumbs_up""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound
+- Event 2: performs the silent visual action ""thumbs up""
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (sounding action): ""clapping hands""
+- event_2 (silent action): ""thumbs up""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- The visual silent action ""thumbs up"" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action ""clapping hands"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person successfully claps both hands together."",
+        ""evidence"": ""Visible hand-to-hand contact is clearly shown.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""yes"",
+        ""reason"": ""The person successfully forms a thumbs-up pose with their right hand."",
+        ""evidence"": ""The person's right hand is clearly seen making a thumbs-up gesture.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person claps their hands three times and then performs a right-hand thumbs-up pose once.""
+}"
+clap_thumb__clap_x1_thumbs_up_x2_v4_rel_ord_cnt/clap_thumb__clap_x1_thumbs_up_x2_v4_rel_ord_cnt_v1_raw.mp4,clap_thumb__clap_x1_thumbs_up_x2_v4_rel_ord_cnt_v1_raw.mp4,clap_thumb__clap_x1_thumbs_up_x2_v4_rel_ord_cnt,1,"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the silent visual action ""thumbs up""",unknown,Action (sounding) + Action (silent),"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the silent visual action ""thumbs up""",relative_order_count,event_2,silent_action,thumbs_up,yes,The person successfully forms a thumbs-up pose with their right hand.,The person's right hand is clearly seen making a thumbs-up gesture.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/5skecqalpam2,https://generativelanguage.googleapis.com/v1beta/files/5skecqalpam2,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. First, the person must clap both hands together once, producing one sharp clap sound at impact once. After all clap repetitions are complete, the person must make a clear right-hand thumbs-up pose exactly 2 times. The order must be strict: all repetitions of the first event happen before any repetition of the second event begins. No extra target events, extra words, or extra target sounds occur. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: clap_thumb__clap_x1_thumbs_up_x2_v4_rel_ord_cnt
+- modality_combination: Action (sounding) + Action (silent)
+- content: {""clap"": {""id"": ""clap"", ""modality"": ""sounding_action"", ""actor"": ""person_A"", ""action"": ""clapping_hands"", ""acting_body_side"": ""both"", ""acting_body_part"": ""hand"", ""target_body_side"": ""both"", ""target_body_part"": ""hand"", ""target_sound"": ""sharp clap sound"", ""definition"": ""The person brings both hands together in front of the torso to clap, with visible hand-to-hand contact and a single sharp clap sound at the moment of impact.""}, ""thumbs_up"": {""id"": ""thumbs_up"", ""modality"": ""silent_action"", ""actor"": ""person_A"", ""action"": ""thumbs_up"", ""body_side"": ""right"", ""body_part"": ""hand"", ""definition"": ""The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable. The target is the pose, not a separate hand-raising motion.""}}
+- temporal_constraint: {""relation_type"": ""order_count"", ""timing_type"": ""relative"", ""value"": {""ordered_events"": [""clap"", ""thumbs_up""], ""event_counts"": {""clap"": 1, ""thumbs_up"": 2}, ""expanded_sequence"": [""clap"", ""thumbs_up"", ""thumbs_up""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound
+- Event 2: performs the silent visual action ""thumbs up""
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (sounding action): ""clapping hands""
+- event_2 (silent action): ""thumbs up""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- The visual silent action ""thumbs up"" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action ""clapping hands"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person successfully claps both hands together."",
+        ""evidence"": ""Visible hand-to-hand contact is clearly shown.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""yes"",
+        ""reason"": ""The person successfully forms a thumbs-up pose with their right hand."",
+        ""evidence"": ""The person's right hand is clearly seen making a thumbs-up gesture.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person claps their hands three times and then performs a right-hand thumbs-up pose once.""
+}"
+clap_thumb__clap_x2_thumbs_up_x1_v4_rel_ord_cnt/clap_thumb__clap_x2_thumbs_up_x1_v4_rel_ord_cnt_v1_raw.mp4,clap_thumb__clap_x2_thumbs_up_x1_v4_rel_ord_cnt_v1_raw.mp4,clap_thumb__clap_x2_thumbs_up_x1_v4_rel_ord_cnt,1,"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the silent visual action ""thumbs up""",unknown,Action (sounding) + Action (silent),"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the silent visual action ""thumbs up""",relative_order_count,event_1,sounding_action,clapping_hands,yes,The person clearly brings both hands together to clap.,Visible hand-to-hand contact is seen twice between 00:00.000 and 00:00.375.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/tq3md17jr2ij,https://generativelanguage.googleapis.com/v1beta/files/tq3md17jr2ij,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. First, the person must clap both hands together once, producing one sharp clap sound at impact exactly 2 times. After all clap repetitions are complete, the person must make a clear right-hand thumbs-up pose once. The order must be strict: all repetitions of the first event happen before any repetition of the second event begins. No extra target events, extra words, or extra target sounds occur. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: clap_thumb__clap_x2_thumbs_up_x1_v4_rel_ord_cnt
+- modality_combination: Action (sounding) + Action (silent)
+- content: {""clap"": {""id"": ""clap"", ""modality"": ""sounding_action"", ""actor"": ""person_A"", ""action"": ""clapping_hands"", ""acting_body_side"": ""both"", ""acting_body_part"": ""hand"", ""target_body_side"": ""both"", ""target_body_part"": ""hand"", ""target_sound"": ""sharp clap sound"", ""definition"": ""The person brings both hands together in front of the torso to clap, with visible hand-to-hand contact and a single sharp clap sound at the moment of impact.""}, ""thumbs_up"": {""id"": ""thumbs_up"", ""modality"": ""silent_action"", ""actor"": ""person_A"", ""action"": ""thumbs_up"", ""body_side"": ""right"", ""body_part"": ""hand"", ""definition"": ""The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable. The target is the pose, not a separate hand-raising motion.""}}
+- temporal_constraint: {""relation_type"": ""order_count"", ""timing_type"": ""relative"", ""value"": {""ordered_events"": [""clap"", ""thumbs_up""], ""event_counts"": {""clap"": 2, ""thumbs_up"": 1}, ""expanded_sequence"": [""clap"", ""clap"", ""thumbs_up""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound
+- Event 2: performs the silent visual action ""thumbs up""
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (sounding action): ""clapping hands""
+- event_2 (silent action): ""thumbs up""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- The visual silent action ""thumbs up"" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action ""clapping hands"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person clearly brings both hands together to clap."",
+        ""evidence"": ""Visible hand-to-hand contact is seen twice between 00:00.000 and 00:00.375.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""yes"",
+        ""reason"": ""The person clearly forms a thumbs-up pose with their right hand."",
+        ""evidence"": ""The right hand is raised and forms a clear thumbs-up pose starting around 00:02.375 and held until the end of the video.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person claps their hands twice, rests them on their thighs, and then raises their right hand to form a thumbs-up pose.""
+}"
+clap_thumb__clap_x2_thumbs_up_x1_v4_rel_ord_cnt/clap_thumb__clap_x2_thumbs_up_x1_v4_rel_ord_cnt_v1_raw.mp4,clap_thumb__clap_x2_thumbs_up_x1_v4_rel_ord_cnt_v1_raw.mp4,clap_thumb__clap_x2_thumbs_up_x1_v4_rel_ord_cnt,1,"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the silent visual action ""thumbs up""",unknown,Action (sounding) + Action (silent),"Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound | Event 2: performs the silent visual action ""thumbs up""",relative_order_count,event_2,silent_action,thumbs_up,yes,The person clearly forms a thumbs-up pose with their right hand.,The right hand is raised and forms a clear thumbs-up pose starting around 00:02.375 and held until the end of the video.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/tq3md17jr2ij,https://generativelanguage.googleapis.com/v1beta/files/tq3md17jr2ij,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with the full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. First, the person must clap both hands together once, producing one sharp clap sound at impact exactly 2 times. After all clap repetitions are complete, the person must make a clear right-hand thumbs-up pose once. The order must be strict: all repetitions of the first event happen before any repetition of the second event begins. No extra target events, extra words, or extra target sounds occur. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: clap_thumb__clap_x2_thumbs_up_x1_v4_rel_ord_cnt
+- modality_combination: Action (sounding) + Action (silent)
+- content: {""clap"": {""id"": ""clap"", ""modality"": ""sounding_action"", ""actor"": ""person_A"", ""action"": ""clapping_hands"", ""acting_body_side"": ""both"", ""acting_body_part"": ""hand"", ""target_body_side"": ""both"", ""target_body_part"": ""hand"", ""target_sound"": ""sharp clap sound"", ""definition"": ""The person brings both hands together in front of the torso to clap, with visible hand-to-hand contact and a single sharp clap sound at the moment of impact.""}, ""thumbs_up"": {""id"": ""thumbs_up"", ""modality"": ""silent_action"", ""actor"": ""person_A"", ""action"": ""thumbs_up"", ""body_side"": ""right"", ""body_part"": ""hand"", ""definition"": ""The person's right hand forms or holds a thumbs-up pose: a fist closed with the thumb extended upward, clearly recognizable. The target is the pose, not a separate hand-raising motion.""}}
+- temporal_constraint: {""relation_type"": ""order_count"", ""timing_type"": ""relative"", ""value"": {""ordered_events"": [""clap"", ""thumbs_up""], ""event_counts"": {""clap"": 2, ""thumbs_up"": 1}, ""expanded_sequence"": [""clap"", ""clap"", ""thumbs_up""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: performs the sounding action ""clapping hands"" with corresponding visible motion and sound
+- Event 2: performs the silent visual action ""thumbs up""
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (sounding action): ""clapping hands""
+- event_2 (silent action): ""thumbs up""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- The visual silent action ""thumbs up"" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action ""clapping hands"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person clearly brings both hands together to clap."",
+        ""evidence"": ""Visible hand-to-hand contact is seen twice between 00:00.000 and 00:00.375.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""yes"",
+        ""reason"": ""The person clearly forms a thumbs-up pose with their right hand."",
+        ""evidence"": ""The right hand is raised and forms a clear thumbs-up pose starting around 00:02.375 and held until the end of the video.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person claps their hands twice, rests them on their thighs, and then raises their right hand to form a thumbs-up pose.""
+}"
+help_clap__help_clap_rel_sync/help_clap__help_clap_rel_sync_v1_raw.mp4,help_clap__help_clap_rel_sync_v1_raw.mp4,help_clap__help_clap_rel_sync,1,"Event 1: says ""help"" | Event 2: performs the sounding action ""clapping hands"" with corresponding visible motion and sound",speech_plus_sounding_action,Speech + Action (sounding),"Event 1: says ""help"" | Event 2: performs the sounding action ""clapping hands"" with corresponding visible motion and sound",relative_synchronization,event_1,speech,help,yes,The person's mouth is clearly visible and shows plausible speaking motion.,The person opens their mouth and moves their lips at the beginning of the video.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/s4mvp0dqxy5n,https://generativelanguage.googleapis.com/v1beta/files/s4mvp0dqxy5n,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. At one synchronized moment, the person clearly says the single word “help” while at the same time claps both hands together once with a sharp clap sound exactly at contact. No additional words or target sounds occur beyond the required ones. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_clap__help_clap_rel_sync
+- modality_combination: Speech + Action (sounding)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""sounding_action"": {""actor"": ""person_A"", ""action"": ""clapping_hands"", ""acting_body_side"": ""both"", ""acting_body_part"": ""hand"", ""target_body_side"": ""both"", ""target_body_part"": ""hand"", ""target_sound"": ""sharp clap sound"", ""definition"": ""The person brings both hands together in front of the torso to clap, with visible hand-to-hand contact and a single sharp clap sound at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""synchronization"", ""timing_type"": ""relative"", ""value"": {""events"": [""speech"", ""sounding_action""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the sounding action ""clapping hands"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (sounding action): ""clapping hands""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visible motion for the sounding action ""clapping hands"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person's mouth is clearly visible and shows plausible speaking motion."",
+        ""evidence"": ""The person opens their mouth and moves their lips at the beginning of the video.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""yes"",
+        ""reason"": ""The person clearly brings both hands together to clap."",
+        ""evidence"": ""The person lifts their hands from their thighs and claps them together in front of their torso.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person is seated and faces the camera. They first move their mouth to speak, and later bring their hands together to clap once.""
+}"
+help_clap__help_clap_rel_sync/help_clap__help_clap_rel_sync_v1_raw.mp4,help_clap__help_clap_rel_sync_v1_raw.mp4,help_clap__help_clap_rel_sync,1,"Event 1: says ""help"" | Event 2: performs the sounding action ""clapping hands"" with corresponding visible motion and sound",speech_plus_sounding_action,Speech + Action (sounding),"Event 1: says ""help"" | Event 2: performs the sounding action ""clapping hands"" with corresponding visible motion and sound",relative_synchronization,event_2,sounding_action,clapping_hands,yes,The person clearly brings both hands together to clap.,The person lifts their hands from their thighs and claps them together in front of their torso.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/s4mvp0dqxy5n,https://generativelanguage.googleapis.com/v1beta/files/s4mvp0dqxy5n,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. At one synchronized moment, the person clearly says the single word “help” while at the same time claps both hands together once with a sharp clap sound exactly at contact. No additional words or target sounds occur beyond the required ones. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_clap__help_clap_rel_sync
+- modality_combination: Speech + Action (sounding)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""sounding_action"": {""actor"": ""person_A"", ""action"": ""clapping_hands"", ""acting_body_side"": ""both"", ""acting_body_part"": ""hand"", ""target_body_side"": ""both"", ""target_body_part"": ""hand"", ""target_sound"": ""sharp clap sound"", ""definition"": ""The person brings both hands together in front of the torso to clap, with visible hand-to-hand contact and a single sharp clap sound at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""synchronization"", ""timing_type"": ""relative"", ""value"": {""events"": [""speech"", ""sounding_action""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the sounding action ""clapping hands"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (sounding action): ""clapping hands""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visible motion for the sounding action ""clapping hands"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person's mouth is clearly visible and shows plausible speaking motion."",
+        ""evidence"": ""The person opens their mouth and moves their lips at the beginning of the video.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""yes"",
+        ""reason"": ""The person clearly brings both hands together to clap."",
+        ""evidence"": ""The person lifts their hands from their thighs and claps them together in front of their torso.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person is seated and faces the camera. They first move their mouth to speak, and later bring their hands together to clap once.""
+}"
+help_palm__help_open_palm_rel_sync_cnt/help_palm__help_open_palm_rel_sync_cnt_v1_raw.mp4,help_palm__help_open_palm_rel_sync_cnt_v1_raw.mp4,help_palm__help_open_palm_rel_sync_cnt,1,"Event 1: says ""help"" | Event 2: performs the silent visual action ""raise open palm""",speech_plus_silent_action,Speech + Action (silent),"Event 1: says ""help"" | Event 2: performs the silent visual action ""raise open palm""",relative_sync_count,event_1,speech,help,yes,The person's mouth is clearly visible and shows plausible speaking motion.,"From 00:00.000 to 00:00.250, the person's mouth opens and moves as if speaking.",gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/s9q8rad6phxc,https://generativelanguage.googleapis.com/v1beta/files/s9q8rad6phxc,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. The person performs one synchronized bundle and then repeats it, so the bundle happens exactly 2 times, with only a brief natural reset between repetitions. In each repetition, the person clearly says the single word “help” while at the same moment holds the right hand in a clear open-palm pose with the palm facing the camera. No listed event occurs alone outside the synchronized repetitions, and no extra words or target sounds occur. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_palm__help_open_palm_rel_sync_cnt
+- modality_combination: Speech + Action (silent)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""silent_action"": {""actor"": ""person_A"", ""action"": ""raise_open_palm"", ""body_side"": ""right"", ""body_part"": ""hand"", ""definition"": ""The person's right hand is raised to about shoulder height with the palm open and facing the camera, fingers together and extended, held clearly as a recognizable open-palm pose. The target is the held pose, not a separate raising motion.""}}
+- temporal_constraint: {""relation_type"": ""sync_count"", ""timing_type"": ""relative"", ""value"": {""events"": [""speech"", ""silent_action""], ""count"": 2}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the silent visual action ""raise open palm""
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (silent action): ""raise open palm""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visual silent action ""raise open palm"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person's mouth is clearly visible and shows plausible speaking motion."",
+        ""evidence"": ""From 00:00.000 to 00:00.250, the person's mouth opens and moves as if speaking.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""yes"",
+        ""reason"": ""The person raises their right hand in an open-palm pose facing the camera."",
+        ""evidence"": ""From 00:00.000 to 00:00.375, the person's right hand (viewer's left) is raised with the palm open and facing the camera.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person begins the video with both hands raised in an open-palm pose while showing speaking motion. They then lower their hands to their thighs. Later in the video, they raise their left hand in an open-palm pose, but no speaking motion is observed.""
+}"
+help_palm__help_open_palm_rel_sync_cnt/help_palm__help_open_palm_rel_sync_cnt_v1_raw.mp4,help_palm__help_open_palm_rel_sync_cnt_v1_raw.mp4,help_palm__help_open_palm_rel_sync_cnt,1,"Event 1: says ""help"" | Event 2: performs the silent visual action ""raise open palm""",speech_plus_silent_action,Speech + Action (silent),"Event 1: says ""help"" | Event 2: performs the silent visual action ""raise open palm""",relative_sync_count,event_2,silent_action,raise_open_palm,yes,The person raises their right hand in an open-palm pose facing the camera.,"From 00:00.000 to 00:00.375, the person's right hand (viewer's left) is raised with the palm open and facing the camera.",gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/s9q8rad6phxc,https://generativelanguage.googleapis.com/v1beta/files/s9q8rad6phxc,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. The person performs one synchronized bundle and then repeats it, so the bundle happens exactly 2 times, with only a brief natural reset between repetitions. In each repetition, the person clearly says the single word “help” while at the same moment holds the right hand in a clear open-palm pose with the palm facing the camera. No listed event occurs alone outside the synchronized repetitions, and no extra words or target sounds occur. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_palm__help_open_palm_rel_sync_cnt
+- modality_combination: Speech + Action (silent)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""silent_action"": {""actor"": ""person_A"", ""action"": ""raise_open_palm"", ""body_side"": ""right"", ""body_part"": ""hand"", ""definition"": ""The person's right hand is raised to about shoulder height with the palm open and facing the camera, fingers together and extended, held clearly as a recognizable open-palm pose. The target is the held pose, not a separate raising motion.""}}
+- temporal_constraint: {""relation_type"": ""sync_count"", ""timing_type"": ""relative"", ""value"": {""events"": [""speech"", ""silent_action""], ""count"": 2}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the silent visual action ""raise open palm""
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (silent action): ""raise open palm""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visual silent action ""raise open palm"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person's mouth is clearly visible and shows plausible speaking motion."",
+        ""evidence"": ""From 00:00.000 to 00:00.250, the person's mouth opens and moves as if speaking.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""yes"",
+        ""reason"": ""The person raises their right hand in an open-palm pose facing the camera."",
+        ""evidence"": ""From 00:00.000 to 00:00.375, the person's right hand (viewer's left) is raised with the palm open and facing the camera.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person begins the video with both hands raised in an open-palm pose while showing speaking motion. They then lower their hands to their thighs. Later in the video, they raise their left hand in an open-palm pose, but no speaking motion is observed.""
+}"
+help_palm_slap__help_open_palm_slap_rel_sync_cnt/help_palm_slap__help_open_palm_slap_rel_sync_cnt_v1_raw.mp4,help_palm_slap__help_open_palm_slap_rel_sync_cnt_v1_raw.mp4,help_palm_slap__help_open_palm_slap_rel_sync_cnt,1,"Event 1: says ""help"" | Event 2: performs the silent visual action ""raise open palm"" | Event 3: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",speech_plus_silent_plus_sounding_action,Speech + Action (silent) + Action (sounding),"Event 1: says ""help"" | Event 2: performs the silent visual action ""raise open palm"" | Event 3: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",relative_sync_count,event_1,speech,help,yes,The person's mouth is clearly visible and shows plausible speaking motion.,The person's lips move synchronously with the other actions throughout the video.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/517r53dvfdf2,https://generativelanguage.googleapis.com/v1beta/files/517r53dvfdf2,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. The person performs one synchronized bundle and then repeats it, so the bundle happens exactly 2 times, with only a brief natural reset between repetitions. In each repetition, the person clearly says the single word “help”, holds the right hand in a clear open-palm pose with the palm facing the camera, and strikes the top of the left thigh with the left hand, producing a sharp slap sound exactly at impact all at the same moment. No listed event occurs alone outside the synchronized repetitions, and no extra words or target sounds occur. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_palm_slap__help_open_palm_slap_rel_sync_cnt
+- modality_combination: Speech + Action (silent) + Action (sounding)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""silent_action"": {""actor"": ""person_A"", ""action"": ""raise_open_palm"", ""body_side"": ""right"", ""body_part"": ""hand"", ""definition"": ""The person's right hand is raised to about shoulder height with the palm open and facing the camera, fingers together and extended, held clearly as a recognizable open-palm pose. The target is the held pose, not a separate raising motion.""}, ""sounding_action"": {""actor"": ""person_A"", ""action"": ""slapping_the_thigh"", ""acting_body_side"": ""left"", ""acting_body_part"": ""hand"", ""target_body_side"": ""left"", ""target_body_part"": ""thigh"", ""target_sound"": ""sharp slap sound"", ""definition"": ""The person's left hand strikes the top of the left thigh, with visible contact and a sharp slap sound at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""sync_count"", ""timing_type"": ""relative"", ""value"": {""events"": [""speech"", ""silent_action"", ""sounding_action""], ""count"": 2}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the silent visual action ""raise open palm""
+- Event 3: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (silent action): ""raise open palm""
+- event_3 (sounding action): ""slapping the thigh""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visual silent action ""raise open palm"" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action ""slapping the thigh"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person's mouth is clearly visible and shows plausible speaking motion."",
+        ""evidence"": ""The person's lips move synchronously with the other actions throughout the video.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""no"",
+        ""reason"": ""The person raises the wrong hand."",
+        ""evidence"": ""The video shows the person raising their left hand (viewer's right) instead of the required right hand.""
+      },
+      {
+        ""event_id"": ""event_3"",
+        ""label"": ""no"",
+        ""reason"": ""The person slaps the wrong thigh with the wrong hand."",
+        ""evidence"": ""The video shows the person striking their right thigh with their right hand (viewer's left) instead of the required left hand and left thigh.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person exhibits visible speaking motion while raising their left hand in an open-palm pose and slapping their right thigh with their right hand. The laterality for both the open-palm pose and the thigh slap is reversed compared to the prompt's requirements.""
+}"
+help_palm_slap__help_open_palm_slap_rel_sync_cnt/help_palm_slap__help_open_palm_slap_rel_sync_cnt_v1_raw.mp4,help_palm_slap__help_open_palm_slap_rel_sync_cnt_v1_raw.mp4,help_palm_slap__help_open_palm_slap_rel_sync_cnt,1,"Event 1: says ""help"" | Event 2: performs the silent visual action ""raise open palm"" | Event 3: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",speech_plus_silent_plus_sounding_action,Speech + Action (silent) + Action (sounding),"Event 1: says ""help"" | Event 2: performs the silent visual action ""raise open palm"" | Event 3: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",relative_sync_count,event_2,silent_action,raise_open_palm,no,The person raises the wrong hand.,The video shows the person raising their left hand (viewer's right) instead of the required right hand.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/517r53dvfdf2,https://generativelanguage.googleapis.com/v1beta/files/517r53dvfdf2,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. The person performs one synchronized bundle and then repeats it, so the bundle happens exactly 2 times, with only a brief natural reset between repetitions. In each repetition, the person clearly says the single word “help”, holds the right hand in a clear open-palm pose with the palm facing the camera, and strikes the top of the left thigh with the left hand, producing a sharp slap sound exactly at impact all at the same moment. No listed event occurs alone outside the synchronized repetitions, and no extra words or target sounds occur. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_palm_slap__help_open_palm_slap_rel_sync_cnt
+- modality_combination: Speech + Action (silent) + Action (sounding)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""silent_action"": {""actor"": ""person_A"", ""action"": ""raise_open_palm"", ""body_side"": ""right"", ""body_part"": ""hand"", ""definition"": ""The person's right hand is raised to about shoulder height with the palm open and facing the camera, fingers together and extended, held clearly as a recognizable open-palm pose. The target is the held pose, not a separate raising motion.""}, ""sounding_action"": {""actor"": ""person_A"", ""action"": ""slapping_the_thigh"", ""acting_body_side"": ""left"", ""acting_body_part"": ""hand"", ""target_body_side"": ""left"", ""target_body_part"": ""thigh"", ""target_sound"": ""sharp slap sound"", ""definition"": ""The person's left hand strikes the top of the left thigh, with visible contact and a sharp slap sound at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""sync_count"", ""timing_type"": ""relative"", ""value"": {""events"": [""speech"", ""silent_action"", ""sounding_action""], ""count"": 2}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the silent visual action ""raise open palm""
+- Event 3: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (silent action): ""raise open palm""
+- event_3 (sounding action): ""slapping the thigh""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visual silent action ""raise open palm"" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action ""slapping the thigh"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person's mouth is clearly visible and shows plausible speaking motion."",
+        ""evidence"": ""The person's lips move synchronously with the other actions throughout the video.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""no"",
+        ""reason"": ""The person raises the wrong hand."",
+        ""evidence"": ""The video shows the person raising their left hand (viewer's right) instead of the required right hand.""
+      },
+      {
+        ""event_id"": ""event_3"",
+        ""label"": ""no"",
+        ""reason"": ""The person slaps the wrong thigh with the wrong hand."",
+        ""evidence"": ""The video shows the person striking their right thigh with their right hand (viewer's left) instead of the required left hand and left thigh.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person exhibits visible speaking motion while raising their left hand in an open-palm pose and slapping their right thigh with their right hand. The laterality for both the open-palm pose and the thigh slap is reversed compared to the prompt's requirements.""
+}"
+help_palm_slap__help_open_palm_slap_rel_sync_cnt/help_palm_slap__help_open_palm_slap_rel_sync_cnt_v1_raw.mp4,help_palm_slap__help_open_palm_slap_rel_sync_cnt_v1_raw.mp4,help_palm_slap__help_open_palm_slap_rel_sync_cnt,1,"Event 1: says ""help"" | Event 2: performs the silent visual action ""raise open palm"" | Event 3: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",speech_plus_silent_plus_sounding_action,Speech + Action (silent) + Action (sounding),"Event 1: says ""help"" | Event 2: performs the silent visual action ""raise open palm"" | Event 3: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",relative_sync_count,event_3,sounding_action,slapping_the_thigh,no,The person slaps the wrong thigh with the wrong hand.,The video shows the person striking their right thigh with their right hand (viewer's left) instead of the required left hand and left thigh.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/517r53dvfdf2,https://generativelanguage.googleapis.com/v1beta/files/517r53dvfdf2,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. The person performs one synchronized bundle and then repeats it, so the bundle happens exactly 2 times, with only a brief natural reset between repetitions. In each repetition, the person clearly says the single word “help”, holds the right hand in a clear open-palm pose with the palm facing the camera, and strikes the top of the left thigh with the left hand, producing a sharp slap sound exactly at impact all at the same moment. No listed event occurs alone outside the synchronized repetitions, and no extra words or target sounds occur. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_palm_slap__help_open_palm_slap_rel_sync_cnt
+- modality_combination: Speech + Action (silent) + Action (sounding)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""silent_action"": {""actor"": ""person_A"", ""action"": ""raise_open_palm"", ""body_side"": ""right"", ""body_part"": ""hand"", ""definition"": ""The person's right hand is raised to about shoulder height with the palm open and facing the camera, fingers together and extended, held clearly as a recognizable open-palm pose. The target is the held pose, not a separate raising motion.""}, ""sounding_action"": {""actor"": ""person_A"", ""action"": ""slapping_the_thigh"", ""acting_body_side"": ""left"", ""acting_body_part"": ""hand"", ""target_body_side"": ""left"", ""target_body_part"": ""thigh"", ""target_sound"": ""sharp slap sound"", ""definition"": ""The person's left hand strikes the top of the left thigh, with visible contact and a sharp slap sound at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""sync_count"", ""timing_type"": ""relative"", ""value"": {""events"": [""speech"", ""silent_action"", ""sounding_action""], ""count"": 2}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the silent visual action ""raise open palm""
+- Event 3: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (silent action): ""raise open palm""
+- event_3 (sounding action): ""slapping the thigh""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visual silent action ""raise open palm"" must be clearly visible and correctly performed according to the original generation prompt.
+- The visible motion for the sounding action ""slapping the thigh"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person's mouth is clearly visible and shows plausible speaking motion."",
+        ""evidence"": ""The person's lips move synchronously with the other actions throughout the video.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""no"",
+        ""reason"": ""The person raises the wrong hand."",
+        ""evidence"": ""The video shows the person raising their left hand (viewer's right) instead of the required right hand.""
+      },
+      {
+        ""event_id"": ""event_3"",
+        ""label"": ""no"",
+        ""reason"": ""The person slaps the wrong thigh with the wrong hand."",
+        ""evidence"": ""The video shows the person striking their right thigh with their right hand (viewer's left) instead of the required left hand and left thigh.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person exhibits visible speaking motion while raising their left hand in an open-palm pose and slapping their right thigh with their right hand. The laterality for both the open-palm pose and the thigh slap is reversed compared to the prompt's requirements.""
+}"
+help_slap__Sp_So_rel_ord_SoSp/help_slap__Sp_So_rel_ord_SoSp_v1_raw.mp4,help_slap__Sp_So_rel_ord_SoSp_v1_raw.mp4,help_slap__Sp_So_rel_ord_SoSp,1,"Event 1: says ""help"" | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",speech_plus_sounding_action,Speech + Action (sounding),"Event 1: says ""help"" | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",relative_order,event_1,speech,help,yes,"The person's mouth clearly opens and moves, showing plausible speaking motion.",Visible mouth movement occurs between 00:02.000 and 00:02.500.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/jw1ev2grupdg,https://generativelanguage.googleapis.com/v1beta/files/jw1ev2grupdg,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a single seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. The person starts seated on a chair with both hands resting on the knees or thighs. First, the person lifts the left hand and slaps the top of the left thigh, making clear visible contact and a sharp slap sound. After that action is completed, the person clearly says the single word “help” once, audibly and without any extra words. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_slap__Sp_So_rel_ord_SoSp
+- modality_combination: Speech + Action (sounding)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""sounding_action"": {""actor"": ""person_A"", ""action"": ""slapping_the_thigh"", ""acting_body_side"": ""left"", ""acting_body_part"": ""hand"", ""target_body_side"": ""left"", ""target_body_part"": ""thigh"", ""target_sound"": ""sharp slap sound"", ""definition"": ""The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""order"", ""timing_type"": ""relative"", ""value"": {""sequence"": [""sounding_action"", ""speech""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (sounding action): ""slapping the thigh""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visible motion for the sounding action ""slapping the thigh"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person's mouth clearly opens and moves, showing plausible speaking motion."",
+        ""evidence"": ""Visible mouth movement occurs between 00:02.000 and 00:02.500.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""no"",
+        ""reason"": ""The person uses the incorrect hand and slaps the incorrect thigh."",
+        ""evidence"": ""The person lifts their right hand (viewer's left) and slaps their right thigh, failing the requirement to use the left hand and left thigh.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person sits still, then lifts their right hand and slaps their right thigh. Following this, the person's mouth moves as if speaking.""
+}"
+help_slap__Sp_So_rel_ord_SoSp/help_slap__Sp_So_rel_ord_SoSp_v1_raw.mp4,help_slap__Sp_So_rel_ord_SoSp_v1_raw.mp4,help_slap__Sp_So_rel_ord_SoSp,1,"Event 1: says ""help"" | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",speech_plus_sounding_action,Speech + Action (sounding),"Event 1: says ""help"" | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",relative_order,event_2,sounding_action,slapping_the_thigh,no,The person uses the incorrect hand and slaps the incorrect thigh.,"The person lifts their right hand (viewer's left) and slaps their right thigh, failing the requirement to use the left hand and left thigh.",gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/jw1ev2grupdg,https://generativelanguage.googleapis.com/v1beta/files/jw1ev2grupdg,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a single seated person faces the camera in a static medium shot, with full face, mouth, upper body, both hands, and thighs clearly visible. The person starts seated on a chair with both hands resting on the knees or thighs. First, the person lifts the left hand and slaps the top of the left thigh, making clear visible contact and a sharp slap sound. After that action is completed, the person clearly says the single word “help” once, audibly and without any extra words. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_slap__Sp_So_rel_ord_SoSp
+- modality_combination: Speech + Action (sounding)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""sounding_action"": {""actor"": ""person_A"", ""action"": ""slapping_the_thigh"", ""acting_body_side"": ""left"", ""acting_body_part"": ""hand"", ""target_body_side"": ""left"", ""target_body_part"": ""thigh"", ""target_sound"": ""sharp slap sound"", ""definition"": ""The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""order"", ""timing_type"": ""relative"", ""value"": {""sequence"": [""sounding_action"", ""speech""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (sounding action): ""slapping the thigh""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visible motion for the sounding action ""slapping the thigh"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person's mouth clearly opens and moves, showing plausible speaking motion."",
+        ""evidence"": ""Visible mouth movement occurs between 00:02.000 and 00:02.500.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""no"",
+        ""reason"": ""The person uses the incorrect hand and slaps the incorrect thigh."",
+        ""evidence"": ""The person lifts their right hand (viewer's left) and slaps their right thigh, failing the requirement to use the left hand and left thigh.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person sits still, then lifts their right hand and slaps their right thigh. Following this, the person's mouth moves as if speaking.""
+}"
+help_slap__Sp_So_rel_ord_SpSo/help_slap__Sp_So_rel_ord_SpSo_v1_raw.mp4,help_slap__Sp_So_rel_ord_SpSo_v1_raw.mp4,help_slap__Sp_So_rel_ord_SpSo,1,"Event 1: says ""help"" | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",speech_plus_sounding_action,Speech + Action (sounding),"Event 1: says ""help"" | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",relative_order,event_1,speech,help,no,"The person's mouth is not visible in the frame, making it impossible to observe any speaking motion.",The framing cuts off the person's head above the mouth throughout the entire video.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/j41x88b99szy,https://generativelanguage.googleapis.com/v1beta/files/j41x88b99szy,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+A single seated person faces the camera in a plain indoor room, shown in a static medium shot with the full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. Person A clearly says the single word “help,” with the mouth visible and no extra words. After that speech finishes, Person A lifts the left hand and slaps the top of the left thigh, making visible contact and producing one sharp slap sound at the moment of impact. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_slap__Sp_So_rel_ord_SpSo
+- modality_combination: Speech + Action (sounding)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""sounding_action"": {""actor"": ""person_A"", ""action"": ""slapping_the_thigh"", ""acting_body_side"": ""left"", ""acting_body_part"": ""hand"", ""target_body_side"": ""left"", ""target_body_part"": ""thigh"", ""target_sound"": ""sharp slap sound"", ""definition"": ""The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""order"", ""timing_type"": ""relative"", ""value"": {""sequence"": [""speech"", ""sounding_action""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (sounding action): ""slapping the thigh""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visible motion for the sounding action ""slapping the thigh"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""no"",
+        ""reason"": ""The person's mouth is not visible in the frame, making it impossible to observe any speaking motion."",
+        ""evidence"": ""The framing cuts off the person's head above the mouth throughout the entire video.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""no"",
+        ""reason"": ""The person uses the incorrect hand and slaps the incorrect thigh."",
+        ""evidence"": ""The person lifts their right hand and slaps their right thigh, but the prompt specifically requires the left hand and left thigh.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The video shows a seated person whose face is partially cropped out, hiding the mouth. The person lifts their right hand and slaps their right thigh.""
+}"
+help_slap__Sp_So_rel_ord_SpSo/help_slap__Sp_So_rel_ord_SpSo_v1_raw.mp4,help_slap__Sp_So_rel_ord_SpSo_v1_raw.mp4,help_slap__Sp_So_rel_ord_SpSo,1,"Event 1: says ""help"" | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",speech_plus_sounding_action,Speech + Action (sounding),"Event 1: says ""help"" | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",relative_order,event_2,sounding_action,slapping_the_thigh,no,The person uses the incorrect hand and slaps the incorrect thigh.,"The person lifts their right hand and slaps their right thigh, but the prompt specifically requires the left hand and left thigh.",gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/j41x88b99szy,https://generativelanguage.googleapis.com/v1beta/files/j41x88b99szy,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+A single seated person faces the camera in a plain indoor room, shown in a static medium shot with the full face, mouth, upper body, both hands, and thighs clearly visible. Person A starts seated on a chair with both hands resting on the knees or thighs. Person A clearly says the single word “help,” with the mouth visible and no extra words. After that speech finishes, Person A lifts the left hand and slaps the top of the left thigh, making visible contact and producing one sharp slap sound at the moment of impact. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_slap__Sp_So_rel_ord_SpSo
+- modality_combination: Speech + Action (sounding)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""sounding_action"": {""actor"": ""person_A"", ""action"": ""slapping_the_thigh"", ""acting_body_side"": ""left"", ""acting_body_part"": ""hand"", ""target_body_side"": ""left"", ""target_body_part"": ""thigh"", ""target_sound"": ""sharp slap sound"", ""definition"": ""The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""order"", ""timing_type"": ""relative"", ""value"": {""sequence"": [""speech"", ""sounding_action""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (sounding action): ""slapping the thigh""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visible motion for the sounding action ""slapping the thigh"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""no"",
+        ""reason"": ""The person's mouth is not visible in the frame, making it impossible to observe any speaking motion."",
+        ""evidence"": ""The framing cuts off the person's head above the mouth throughout the entire video.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""no"",
+        ""reason"": ""The person uses the incorrect hand and slaps the incorrect thigh."",
+        ""evidence"": ""The person lifts their right hand and slaps their right thigh, but the prompt specifically requires the left hand and left thigh.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The video shows a seated person whose face is partially cropped out, hiding the mouth. The person lifts their right hand and slaps their right thigh.""
+}"
+help_slap__Sp_So_rel_sync/help_slap__Sp_So_rel_sync_v1_raw.mp4,help_slap__Sp_So_rel_sync_v1_raw.mp4,help_slap__Sp_So_rel_sync,1,"Event 1: says ""help"" | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",speech_plus_sounding_action,Speech + Action (sounding),"Event 1: says ""help"" | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",relative_synchronization,event_1,speech,help,yes,The person's mouth is clearly visible and shows plausible speaking motion.,Visible mouth movement occurs around 00:00.750 to 00:01.125.,gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/yjbim2gz5dcb,https://generativelanguage.googleapis.com/v1beta/files/yjbim2gz5dcb,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot with full face, mouth, upper body, both hands, and thighs visible, and both hands initially resting on the knees or thighs. The person clearly says the single word “help” while at the same moment the person’s left hand strikes the top of the left thigh, producing a sharp slap sound exactly at impact. The speech and the thigh slap occur synchronized as one event, with the mouth clearly visible during the word and the contact point clearly visible at the left thigh. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_slap__Sp_So_rel_sync
+- modality_combination: Speech + Action (sounding)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""sounding_action"": {""actor"": ""person_A"", ""action"": ""slapping_the_thigh"", ""acting_body_side"": ""left"", ""acting_body_part"": ""hand"", ""target_body_side"": ""left"", ""target_body_part"": ""thigh"", ""target_sound"": ""sharp slap sound"", ""definition"": ""The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""synchronization"", ""timing_type"": ""relative"", ""value"": {""events"": [""speech"", ""sounding_action""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (sounding action): ""slapping the thigh""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visible motion for the sounding action ""slapping the thigh"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person's mouth is clearly visible and shows plausible speaking motion."",
+        ""evidence"": ""Visible mouth movement occurs around 00:00.750 to 00:01.125.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""no"",
+        ""reason"": ""The person uses the incorrect hand and strikes the incorrect thigh."",
+        ""evidence"": ""The person lifts their right hand (viewer's left) and strikes their right thigh, rather than using the required left hand on the left thigh.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person exhibits visible speaking motion, but performs the thigh slap using their right hand on their right thigh instead of the required left hand on the left thigh.""
+}"
+help_slap__Sp_So_rel_sync/help_slap__Sp_So_rel_sync_v1_raw.mp4,help_slap__Sp_So_rel_sync_v1_raw.mp4,help_slap__Sp_So_rel_sync,1,"Event 1: says ""help"" | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",speech_plus_sounding_action,Speech + Action (sounding),"Event 1: says ""help"" | Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound",relative_synchronization,event_2,sounding_action,slapping_the_thigh,no,The person uses the incorrect hand and strikes the incorrect thigh.,"The person lifts their right hand (viewer's left) and strikes their right thigh, rather than using the required left hand on the left thigh.",gemini-3.1-pro-preview,gemini,8.0,0.0,42,files/yjbim2gz5dcb,https://generativelanguage.googleapis.com/v1beta/files/yjbim2gz5dcb,"Task: Evaluate ONLY the V-axis / visual_event_correctness for this generated video.
+
+Original generation prompt:
+In a plain indoor room, a seated person faces the camera in a static medium shot with full face, mouth, upper body, both hands, and thighs visible, and both hands initially resting on the knees or thighs. The person clearly says the single word “help” while at the same moment the person’s left hand strikes the top of the left thigh, producing a sharp slap sound exactly at impact. The speech and the thigh slap occur synchronized as one event, with the mouth clearly visible during the word and the contact point clearly visible at the left thigh. After the final event, no new target action occurs.
+
+Item metadata:
+- item_id: help_slap__Sp_So_rel_sync
+- modality_combination: Speech + Action (sounding)
+- content: {""speech"": {""actor"": ""person_A"", ""text"": ""help"", ""definition"": ""The person clearly says the single word \""help\"". The speech is audible and easy to distinguish. No extra words are spoken unless explicitly required.""}, ""sounding_action"": {""actor"": ""person_A"", ""action"": ""slapping_the_thigh"", ""acting_body_side"": ""left"", ""acting_body_part"": ""hand"", ""target_body_side"": ""left"", ""target_body_part"": ""thigh"", ""target_sound"": ""sharp slap sound"", ""definition"": ""The person's left hand strikes the top of the person's left thigh. Visible contact is made with the thigh, and a sharp slap sound occurs exactly at the moment of impact.""}}
+- temporal_constraint: {""relation_type"": ""synchronization"", ""timing_type"": ""relative"", ""value"": {""events"": [""speech"", ""sounding_action""]}}
+- scene_hint: plain indoor room
+- camera_hint: static medium shot
+
+Target events inferred from content:
+- Event 1: says ""help""
+- Event 2: performs the sounding action ""slapping the thigh"" with corresponding visible motion and sound
+
+Per-event V-axis scoring targets. Use these exact event_id strings:
+- event_1 (speech): ""help""
+- event_2 (sounding action): ""slapping the thigh""
+
+Shared visual-relevant definitions:
+Shared evaluation definitions (apply these EXACTLY; they match the human-evaluation guideline):
+
+Event start time (the basis for ALL between-event temporal judgments: synchronization, order, absolute timing):
+- Speech or sound: when the target audio begins.
+- Held pose or state: when the target pose/state first becomes clearly established.
+- Contact or impact: the actual contact moment.
+- Other action: when the required action visibly begins.
+- For a sounding contact/impact action (e.g., a slap), use the contact/impact moment as the event start time.
+
+Synchronization:
+- PASS only when the relevant events appear to BEGIN at the same moment.
+- Simple overlap of their durations is NOT sufficient (e.g., a pose already held for a while while speech begins later = Sync FAIL).
+
+Order:
+- Judge by event START times only. The earlier event does NOT need to end before the next begins; duration overlap IS allowed.
+- FAIL if the events begin simultaneously, the order is wrong, or the order cannot be clearly distinguished.
+
+Absolute timing:
+- PASS when the event starts within about +/-0.3 seconds of the required timestamp.
+
+Count (number of occurrences):
+- A continuously held pose counts as ONE occurrence; releasing and forming the pose again creates another occurrence.
+- Each distinct speech utterance, sound, contact, or action repetition counts separately.
+- A count/repetition error is scored under Temporal Count ONLY; do NOT double-count it as an extra action under Constraint Compliance.
+
+Constraint Compliance:
+- Allowed natural motion that must NOT fail this axis: blinking, breathing, minor posture adjustment, necessary preparation, and natural reset motion.
+- Post-event stillness is required ONLY when the prompt explicitly states it.
+
+
+V-axis criteria:
+- For the speech event ""help"": the speaker's mouth/lips must be visible (when required by the prompt) and show plausible speaking motion. Judge ONLY the visible speaking behavior here, NOT whether the spoken word is correct (that belongs to Audio Event Correctness).
+- The visible motion for the sounding action ""slapping the thigh"" must be clearly visible and correctly performed according to the original generation prompt.
+
+Decision rules:
+- Return one visual_event_correctness entry for every target event_id above.
+- For speech, judge visible speaking/mouth/lip motion only, not speech audio/content.
+- For sounding actions, judge visible motion/contact only, not sound.
+- If visual evidence is missing, ambiguous, wrong side/wrong body part, incomplete, or unclear, label that event ""no"".
+- Return JSON only.","{
+  ""visual_event_correctness"": {
+    ""per_event"": [
+      {
+        ""event_id"": ""event_1"",
+        ""label"": ""yes"",
+        ""reason"": ""The person's mouth is clearly visible and shows plausible speaking motion."",
+        ""evidence"": ""Visible mouth movement occurs around 00:00.750 to 00:01.125.""
+      },
+      {
+        ""event_id"": ""event_2"",
+        ""label"": ""no"",
+        ""reason"": ""The person uses the incorrect hand and strikes the incorrect thigh."",
+        ""evidence"": ""The person lifts their right hand (viewer's left) and strikes their right thigh, rather than using the required left hand on the left thigh.""
+      }
+    ]
+  },
+  ""observed_behavior_summary"": ""The person exhibits visible speaking motion, but performs the thigh slap using their right hand on their right thigh instead of the required left hand on the left thigh.""
+}"
