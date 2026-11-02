@@ -21,13 +21,19 @@ class FakeOpenAI:
                                         '"action": "flam", "window": [1.0, 3.0], "question": "close drawer", "stop": false}'))])
 
 
-def test_config_openai_unset_values_refuse(monkeypatch):
-    monkeypatch.setenv("OPENAI_API_KEY", "k")
+def test_config_openai_values():
     cfg = CT.load_config()["openai"]
-    assert cfg["key_env"] == "OPENAI_API_KEY" and cfg["service_tier"] is None
-    if cfg["model"] is None or cfg["reasoning_effort"] is None:
-        with pytest.raises(ValueError):
-            CT.make("openai")
+    assert cfg["model"] == "gpt-6-astra" and cfg["model_listed"] == "2026-08-27" and cfg["reasoning_effort"] == "low"
+    assert cfg["key_env"] == "OPENAI_API_KEY" and cfg["service_tier"] is None and "temperature" not in cfg and "seed" not in cfg
+    kw = OpenAIController(dict(cfg), client=FakeOpenAI()).request("s", "u", CT.STAGE3_SCHEMA) if __import__("os").environ.get("OPENAI_API_KEY") else None
+    if kw is not None:
+        assert kw["model"] == "gpt-6-astra" and kw["reasoning_effort"] == "low" and "temperature" not in kw and "service_tier" not in kw
+
+
+def test_listing_date_goes_to_the_run_readme(monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "k")
+    c = OpenAIController(dict(CT.load_config()["openai"]), client=FakeOpenAI())
+    assert c.describe()["model_listed"] == "2026-08-27"
 
 
 def test_openai_request_and_choose(monkeypatch):
