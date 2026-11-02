@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/evidence/captions.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Dense-caption evidence for the agentic T2AV evaluator.
 
 Implements the "dense caption as tool evidence" ablation rows from the 08/05

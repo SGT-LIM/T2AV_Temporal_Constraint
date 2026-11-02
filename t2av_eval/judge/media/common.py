@@ -508,7 +508,7 @@ def build_context(client: genai.Client, video_path: Path, item_meta: dict, args)
     if caption_mode in (None, "", "none"):
         caption_section, caption_error = "", ""
     else:
-        import caption_evidence as CE
+        from t2av_eval.evidence import captions as CE
         caption_section, caption_error = CE.build_caption_evidence_section(
             client=client,
             uploaded=uploaded,
