@@ -19,7 +19,6 @@ Modes:
 
 from __future__ import annotations
 
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 from typing import Dict, List, Optional, Tuple
 
 try:
@@ -29,12 +28,7 @@ except Exception:  # pragma: no cover
     format_whisper_as_section = None
 
 try:
-    from .clap_audio import (
-        extract_clap_evidence,
-        format_clap_as_section,
-        derive_queries_from_item_meta,
-        DEFAULT_NEGATIVE_QUERIES,
-    )
+    from t2av_eval.evidence.audio.clap import extract_clap_evidence, format_clap_as_section, derive_queries_from_item_meta, DEFAULT_NEGATIVE_QUERIES
 except Exception:  # pragma: no cover
     extract_clap_evidence = None
     format_clap_as_section = None
