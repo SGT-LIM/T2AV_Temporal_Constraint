@@ -23,7 +23,7 @@ import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy module
 from typing import Dict, List, Optional, Tuple
 
 try:
-    from .whisper_audio import extract_whisper_evidence, format_whisper_as_section
+    from t2av_eval.evidence.audio.whisper import extract_whisper_evidence, format_whisper_as_section
 except Exception:  # pragma: no cover
     extract_whisper_evidence = None
     format_whisper_as_section = None
