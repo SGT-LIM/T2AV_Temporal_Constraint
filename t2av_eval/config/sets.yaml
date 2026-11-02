@@ -1,0 +1,53 @@
+# Evaluation sets and the exact launch settings of the recorded runs (HD-EPIC: launch_hdepic_main_1101.sh, 11/01;
+# generated: launch_gen_block_1030.sh, 10/30). Paths: "data:" = paths.DATA, "inputs:" = paths.INPUTS.
+# tests/test_conditions.py rebuilds the recorded commands from this file and requires them to be identical.
+# axes: --axes of the recorded runs (default all; the mute_anchor A sets ran --axes a). mute_anchor sets: row 1 and the A stage 2 only.
+sets:
+  hdepic_p12:   {family: hdepic, group: P01P02, stage2_source: hm_hdepic, shards: 3,
+                 prompts: "data:real_av/eval/hdepic_medium_prompts_v2.json", videos: "data:real_av/eval/hdepic_main_1101/hdepic_p12",
+                 captions: "data:real_av/eval/hdepic_main_1101_captions/hdepic_p12.json"}
+  hdfoot_p12:   {family: hdepic, group: P01P02-hdfoot, stage2_source: hm_hdfoot, shards: 1,
+                 prompts: "data:real_av/eval/hdepic_medium_prompts.json", videos: "data:real_av/eval/hdepic_main_1101/hdfoot_p12",
+                 captions: "data:real_av/eval/hdepic_main_1101_captions/hdfoot_p12.json"}
+  hdmove_p12:   {family: hdepic, group: P01P02, shards: 2,
+                 prompts: "data:real_av/eval/hdepic_move_prompts.json", videos: "data:real_av/eval/hdepic_main_1101/hdmove_p12",
+                 captions: "data:real_av/eval/hdepic_main_1101_captions/hdmove_p12.json"}
+  p3p9:         {family: hdepic, group: P03P09, stage2_source: hm_p3p9, shards: 24,
+                 prompts: "data:real_av_holdout_p3p9_1028/prompts_hdepic_p3p9.json", videos: "data:real_av/eval/hdepic_main_1101/p3p9",
+                 captions: "data:real_av/eval/hdepic_main_1101_captions/p3p9.json"}
+  ltx220:       {family: generated, group: 220-LTX, model: LTX_2p3, stage2_source: g220ltx, shards: 5,
+                 prompts: "inputs:new_prompts/generated/relative_500_v5_fixed.json", videos: "data:eval_subsets/min3/LTX_2p3",
+                 captions: "inputs:evaluation/ablation/captions/avocado_fps8_plain_v3_LTX_2p3.json"}
+  mova220:      {family: generated, group: 220-MOVA, model: MOVA, stage2_source: g220mova, shards: 5,
+                 prompts: "inputs:new_prompts/generated/relative_500_v5_fixed.json", videos: "data:eval_subsets/min3/MOVA",
+                 captions: "inputs:evaluation/ablation/captions/avocado_fps8_plain_v3_MOVA.json"}
+  gen149:       {family: generated, group: 149-LTX, model: LTX_2p3, stage2_source: g149, shards: 7,
+                 prompts: "data:gen_holdout_149_1030/prompts_gen149.json", videos: "data:gen_holdout_149_1030/videos",
+                 captions: "inputs:evaluation/ablation/captions/avocado_fps8_plain_v3_gen149.json"}
+  ma_p12:       {family: hdepic, group: P01P02-ma, stage2_source: hm_ma, mute_anchor: true, axes: a, shards: 4,   # 10/28 set, 78 anchors
+                 prompts: "data:real_av/hdepic/hdepic_mute_anchor_1028/prompts.json", videos: "data:real_av/hdepic/hdepic_mute_anchor_1028/eval"}
+  ma_p3p9:      {family: hdepic, group: P03P09-ma, stage2_source: hm_ma39, mute_anchor: true, axes: a, shards: 3,  # 11/01 set, 40 anchors
+                 prompts: "data:real_av_holdout_p3p9_1028/mute_anchor_1101/prompts.json", videos: "data:real_av_holdout_p3p9_1028/mute_anchor_1101/eval"}
+sync_sections:   # Synchformer section map read by all_tools (T2AV_SYNC_EVIDENCE_JSON)
+  hdepic: "data:tools/synchformer_action_1030/hdepic_main_sync_sections_1101.json"
+  generated: "data:tools/synchformer_gen_1030/sync_sections_oncall.json"
+judge_args: [--model, gemini-3.6-flash, --thinking-level, high, --pose-evidence-mode, none]   # + --axes all
+conditions:      # full-video conditions (one run_agentic_eval call per axis); per family: args and env
+  media_only:   # row 1
+    hdepic:    {args: [--audio-evidence-mode, none, --caption-evidence-mode, none], env: {}}
+    generated: {args: [--audio-evidence-mode, none, --caption-evidence-mode, none], env: {T2AV_EVENT_TIME_FIELD: "1"}}
+  all_tools:    # row 2: Whisper + FLAM, AVoCaDO caption, Synchformer section
+    hdepic:    {args: [--audio-evidence-mode, whisper_flam, --flam-hop-sec, "5", --caption-evidence-mode, external, --caption-style, plain,
+                       --caption-external-json, "{captions}"], env: {T2AV_AUDIO_EVIDENCE_CACHE_ONLY: "1", T2AV_SYNC_EVIDENCE_JSON: "{sync}"}}
+    generated: {args: [--audio-evidence-mode, whisper_flam, --caption-evidence-mode, external, --caption-style, plain,
+                       --caption-external-json, "{captions}"], env: {T2AV_AUDIO_EVIDENCE_CACHE_ONLY: "1", T2AV_SYNC_EVIDENCE_JSON: "{sync}"}}
+  routing:      # row 3: A media + Whisper + FLAM, V media + caption, AVB / TCR / TCC media only
+    hdepic:    {args: [--audio-evidence-mode, whisper_flam, --flam-hop-sec, "5", --caption-evidence-mode, external, --caption-style, plain,
+                       --caption-external-json, "{captions}", --no-binding-tools, --no-temporal-tools], env: {T2AV_AUDIO_EVIDENCE_CACHE_ONLY: "1"},
+                note: "not run on HD-EPIC before; HD-EPIC tool settings of row 2 with the routing flags of the 10/30 generated row 3"}
+    generated: {args: [--audio-evidence-mode, whisper_flam, --caption-evidence-mode, external, --caption-style, plain,
+                       --caption-external-json, "{captions}", --no-binding-tools, --no-temporal-tools], env: {T2AV_AUDIO_EVIDENCE_CACHE_ONLY: "1"}}
+stage2_conditions:   # text-only KEEP / REVISE calls on a media_only run (judge.stage2.hdepic / judge.stage2.generated)
+  two_stage_ungated: {needs: []}                          # row 4: the tool text always shown
+  gated: {needs: [two_stage_ungated]}                     # row 5: recipe_v4 gates; reuses row 4 calls with the same text
+  framing: {needs: [two_stage_ungated]}                   # framing b / c on the rows where the AVB rule fires or the caption misses a V event

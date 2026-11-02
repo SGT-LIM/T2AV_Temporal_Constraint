@@ -81,9 +81,14 @@ class FakeClient:
 import google.genai as genai
 genai.Client = FakeClient
 import importlib
-if a.code == "package":
+if a.code in ("package", "cli"):
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
     entry = "t2av_eval.judge.media.runner"
+    if a.code == "cli":                     # the CLI shard path: paced client + stop hooks active, as in a real run
+        run_dir = Path(a.workdir).resolve().parent / "run"
+        run_dir.mkdir(parents=True, exist_ok=True)
+        os.environ.update(T2AV_RUN_DIR=str(run_dir), T2AV_SHARD="replay", T2AV_KEY_ID="GEMINI_API_KEY:replay00",
+                          T2AV_CALLS_PER_HOUR="100000")
 else:
     sys.path.insert(0, a.code)
     entry = "run_agentic_eval"
@@ -107,8 +112,18 @@ for NE in cores:
         NE.build_audio_evidence_section = _rec
 
 sys.argv = ["run_agentic_eval.py"] + argv
+rc = 0
 try:
-    RAE.main()
+    if a.code == "cli":
+        from t2av_eval.run import shard as SH
+        rc = SH.main(argv)
+    else:
+        RAE.main()
 finally:
-    json.dump(dict(served=served, unmatched=unmatched, n_stored_prompts=len(SERVE), entry=RAE.__file__,
-                   cores=sorted(m.__file__ for m in cores)), open(a.report, "w"), indent=1)
+    extra = {}
+    if a.code == "cli":
+        from t2av_eval.run.client import limiter_from_env
+        extra = dict(pace_count=limiter_from_env().count(), stop_file=(run_dir / "STOP").exists())
+    json.dump(dict(served=served, unmatched=unmatched, n_stored_prompts=len(SERVE), entry=RAE.__file__, rc=rc,
+                   cores=sorted(m.__file__ for m in cores), **extra), open(a.report, "w"), indent=1)
+sys.exit(rc)

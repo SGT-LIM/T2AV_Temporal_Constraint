@@ -6,8 +6,8 @@ every file it was cut from). Rows: 3 per axis.
                                    text of the stored call whose user prompt is identical (so prompts are checked too); system
                                    prompt and schema md5 must equal the pinned values (expected/call_settings.json)
   stage 2     A, V, AVB            rows 4 / 5 / 5-rule / framing b, c from the call cache through the real stage_score()
-Code under test: every implementation in T2AV_REPLAY_CODE (comma list; default "legacy,package"): legacy =
-legacy/evaluation/ablation, package = t2av_eval. A package case is skipped only while its entry module has not been moved yet.
+Code under test: every implementation in T2AV_REPLAY_CODE (comma list; default "legacy,package,cli"): legacy =
+legacy/evaluation/ablation, package = t2av_eval, cli = t2av_eval through the CLI shard entry (paced client, stop hooks). A package case is skipped only while its entry module has not been moved yet.
 
   pytest tests/test_replay_1101.py -v
 """
@@ -20,13 +20,15 @@ import pytest
 REPO = Path(__file__).resolve().parents[1]
 FX = REPO / "tests/fixtures/replay_1101"
 LEGACY = REPO / "legacy/evaluation/ablation"
-IMPLS = os.environ.get("T2AV_REPLAY_CODE", "legacy,package").split(",")
+IMPLS = os.environ.get("T2AV_REPLAY_CODE", "legacy,package,cli").split(",")
 ENTRY = {"rows": "t2av_eval/judge/media/runner.py", "stage2": "t2av_eval/judge/stage2/hdepic.py"}
 
 
 def code_for(impl, what):
     if impl == "legacy":
         return LEGACY
+    if impl == "cli":
+        return "cli"
     if not (REPO / ENTRY[what]).exists():
         pytest.skip(f"{ENTRY[what]} not moved yet")
     return "package"
@@ -79,6 +81,8 @@ def test_rows_replay(row, s, impl, tmp_path):
     r = json.load(open(rep))
     assert r["unmatched"] == [], f"prompts with no identical 11/01 prompt: {r['unmatched']}"
     assert len(r["served"]) == r["n_stored_prompts"], "not every stored call was replayed"
+    if impl == "cli":
+        assert r["pace_count"] == len(r["served"]) and not r["stop_file"] and r["rc"] == 0
     assert {(x["model"], x["temperature"], x["seed"], x["thinking"]) for x in r["served"]} == {("gemini-3.6-flash", 0.0, 42, "high")}
     for x in r["served"]:
         assert dict(system_md5=x["system_md5"], schema_md5=x["schema_md5"]) == SETTINGS[f"{row}|{x['key']}"], f"system prompt / schema: {row} {x['key']}"
@@ -103,7 +107,7 @@ def test_rows_replay(row, s, impl, tmp_path):
         assert RS.row_label(df, iid, ax, gt[e.uid]) == e.pred, f"{row} {e.uid}"
 
 
-@pytest.mark.parametrize("impl", IMPLS)
+@pytest.mark.parametrize("impl", [i for i in IMPLS if i != "cli"])     # stage-2 replay makes no calls: no CLI-specific path
 def test_stage2_replay(impl, tmp_path):
     code = code_for(impl, "stage2")
     fx = tmp_path / "fx"
