@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/screening/clap.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Tool screening: CLAP on the A axis (10/31). GPU, env t2av_eval. No judge calls.
 
 Per sounding_action event of the row: query = the event's first pipeline FLAM query (flam_audio._queries_for_label), CLAP
