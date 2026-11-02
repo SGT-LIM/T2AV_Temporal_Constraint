@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/media/orchestrator.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Agentic orchestrator: runs the per-axis evaluators in hierarchical order and
 assembles a `result` dict compatible with the CSV writers in agentic_common
 (add_result_to_row / build_per_event_long_rows).

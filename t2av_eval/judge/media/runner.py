@@ -32,7 +32,7 @@ MAX_RETRIES = 3
 import new_eval as NE
 import agentic_common as AC
 from agentic_common import build_context
-from agentic_orchestrator import evaluate_video_agentic
+from t2av_eval.judge.media.orchestrator import evaluate_video_agentic
 
 
 def build_arg_parser() -> argparse.ArgumentParser:
