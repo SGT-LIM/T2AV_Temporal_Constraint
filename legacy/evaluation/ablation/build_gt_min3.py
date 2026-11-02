@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/data/generated_gt.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Build video-level majority-vote GT for the min3 eval subset from the
 dghadiya/t2av_eval_annotations JSON files.
 
