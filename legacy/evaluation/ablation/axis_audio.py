@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/media/axes/audio.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """A-axis: Audio Event Correctness. Per-event, over events with an audio component."""
 
 from __future__ import annotations
