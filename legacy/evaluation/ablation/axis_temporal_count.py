@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/media/axes/temporal_count.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """TC-Count axis: Temporal Count Satisfaction.
 
 A WITHIN-EVENT judgment: for each eligible target event, how many clear,
