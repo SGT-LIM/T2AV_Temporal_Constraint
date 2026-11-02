@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/media/axes/compliance.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """CC-axis: Constraint Compliance. Single overall judgment, independent of the
 hierarchy and excluded from overall_temporal_success."""
 

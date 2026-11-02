@@ -33,7 +33,7 @@ from t2av_eval.judge.media.axes import visual as axis_visual
 from t2av_eval.judge.media.axes import binding as axis_binding
 from t2av_eval.judge.media.axes import temporal_relation as axis_temporal_relation
 from t2av_eval.judge.media.axes import temporal_count as axis_temporal_count
-import axis_compliance
+from t2av_eval.judge.media.axes import compliance as axis_compliance
 
 
 def _skipped_relation() -> dict:
