@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/stage2/hdepic.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """HD-EPIC main table, stage 2 (rows 4, 5 and framing), 11/01. Text-only KEEP/REVISE calls through obs_judge_1028 (same OBS_RULES,
 stage-1 block and call settings as B30 / HO30 / G4: gemini-3.6-flash, thinking high, temperature 0, seed 42).
 Stage 1 = the 11/01 HD-EPIC row 1 anchor (results/hdepic_main_row1_anchor_g36_1101).
