@@ -41,3 +41,6 @@ output folder would send writes back into the main checkout. Copy a cache (`cp -
   checkout as edited 11/02 11:45. Opt-in: without the variable nothing is deleted. `new_eval.py` and `run_agentic_eval.py`
   now equal the main checkout apart from the pointer line. Other 11/02 launcher edits in the main checkout (MAXPAR pacing,
   resume phases, `auto_resume_1102.sh`) are not copied.
+- 11/02: the AVoCaDO caption job scripts (`captions/*.sh`, from `evaluation/ablation/captions/` of the main checkout; md5 in
+  `captions/SOURCE.md5`), with a pointer line and `cd $LEGACY_CODE` instead of the main-checkout path; their outputs land in
+  `legacy/evaluation/ablation/captions/` (gitignored). The package version is `t2av_eval/evidence/captions_gen`.

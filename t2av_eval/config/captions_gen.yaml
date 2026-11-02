@@ -1,0 +1,33 @@
+# AVoCaDO dense captions (t2av_eval.evidence.captions_gen), from the recorded caption jobs of 10/30-11/02
+# (legacy/evaluation/ablation/captions/*.sh). Captions are greedy unless a sample seed is given; a same-GPU repeat is
+# byte-identical, but captions differ across GPU hardware (10/31 memory test: similarity .16-.91 to captions made on other
+# hardware), so every run README records the GPU it ran on.
+python: /projectnb/ivc-ml/youngsun/conda_envs/qwen3_cap/bin/python     # transformers >= 4.57, qwen-vl-utils, qwen-omni-utils
+hf_home: /projectnb/ivc-ml/youngsun/hf_cache
+ffmpeg: /share/pkg.8/ffmpeg/8.1/install          # bin/ and lib/ (as module load ffmpeg/8.1; qrsh shells have no module command)
+cuda_lib: /share/pkg.8/cuda/12.8/install/lib64
+runner_args: [--backend, avocado, --caption-style, plain]                # model AVoCaDO-Captioner/AVoCaDO, full frame (512*28*28 px)
+targets:          # videos (data: = paths.DATA), fps, the file name of the recorded captions the tables used
+  gen220_ltx:   {videos: "data:eval_subsets/min3/LTX_2p3", fps: 8, recorded: avocado_fps8_plain_v3_LTX_2p3.json,
+                 note: "the 220 captions; hardware not recorded in their log"}
+  gen220_mova:  {videos: "data:eval_subsets/min3/MOVA", fps: 8, recorded: avocado_fps8_plain_v3_MOVA.json,
+                 note: "the 220 captions; hardware not recorded in their log"}
+  gen149:       {videos: "data:gen_holdout_149_1030/videos", fps: 8, recorded: avocado_fps8_plain_v3_gen149.json,
+                 note: "A100 80 GB, job 8362236 (10/31); the A6000 set (_a6000) is kept on disk and not used"}
+  hdepic_p3p9_clips: {videos: "data:real_av_holdout_p3p9_1028/clips865_1031", fps: 2, recorded: avocado_fps2_plain_v3_hdepic_p3p9_clips.json,
+                 note: "865 P03-P09 clips; A100 80 GB, job 8370297 (10/31 15:34-17:33); the A6000 set is not used"}
+  hdmove_p12:   {videos: "data:real_av/eval/hdepic_main_1101/hdmove_p12", fps: 2, recorded: avocado_fps2_plain_v3_hdmove_p12_fallback48g.json,
+                 note: "142 movement-set items; the 48 GB fallback (job 8386642, L40S) was used for row 2; the later A100 run is not used"}
+hardware:         # recorded settings per GPU class
+  a100_80g:
+    recorded: "hosts scc-212 (NVIDIA A100 80GB PCIe), jobs 8362236 / 8370297 (10/31) and the 11/02 04:39 hdmove run; the qrsh request line was not recorded"
+    qrsh: null
+    env: {}
+  gpu_48g:
+    recorded: "job 8386642 (11/01): qrsh -pe omp 4 -l gpu_memory=48G -l gpu_c=8.0; ran on scc-502, NVIDIA L40S 46068 MiB"
+    qrsh: "qrsh -pe omp 4 -l gpu_memory=48G -l gpu_c=8.0"
+    env: {PYTORCH_CUDA_ALLOC_CONF: "expandable_segments:True"}
+  a6000_session:
+    recorded: "10/31 fallback in an interactive GPU session: NVIDIA RTX A6000 46 GB, peak 19.6-20.4 GB in the 5-clip test, OMP 2"
+    qrsh: null
+    env: {PYTORCH_CUDA_ALLOC_CONF: "expandable_segments:True", OMP_NUM_THREADS: "2"}

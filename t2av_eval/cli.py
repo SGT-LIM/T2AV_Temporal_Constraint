@@ -14,7 +14,7 @@ PASS = {
     "data": {"hdepic-items": "t2av_eval.data.build_items", "gt-v3": "t2av_eval.data.gt_v3", "mute-class": "t2av_eval.data.mute_class",
              "mute-anchor": "t2av_eval.data.mute_anchor", "mute-anchor-reselect": "t2av_eval.data.mute_anchor_reselect",
              "gen149": "t2av_eval.data.generated149", "gen220-gt": "t2av_eval.data.generated_gt"},
-    "evidence": {"records": "t2av_eval.evidence.gen_evidence", "synchformer-action": "t2av_eval.evidence.synchformer_action",
+    "evidence": {"captions": "t2av_eval.evidence.captions_gen.job", "records": "t2av_eval.evidence.gen_evidence", "synchformer-action": "t2av_eval.evidence.synchformer_action",
                  "synchformer-gen": "t2av_eval.evidence.synchformer_gen", "panel": "t2av_eval.evidence.panel"},
     "gate": {"calibrate": "t2av_eval.gate.reliability", "derive-avb-rule": "t2av_eval.gate.avb_rule_derive",
              "holdout": "t2av_eval.gate.avb_rule_holdout", "drift-check": "t2av_eval.gate.drift_check",
