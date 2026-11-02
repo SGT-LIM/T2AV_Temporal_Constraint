@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/evidence/gen_evidence.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Tool evidence for the generated sets (220 = min3 LTX_2p3 + MOVA, 149 = gen_holdout_149_1030), 10/30. GPU, env t2av_eval. No Gemini calls.
 
   python gepa_stage2/gen_evidence_1030.py threshold        # FLAM "no detection" threshold from P01/P02 originals (recorded first)
