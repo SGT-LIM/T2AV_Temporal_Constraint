@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/media/axes/temporal_relation.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """TC-Relation axis: Temporal Relation Satisfaction.
 
 A BETWEEN-EVENT judgment: whether different target events satisfy the

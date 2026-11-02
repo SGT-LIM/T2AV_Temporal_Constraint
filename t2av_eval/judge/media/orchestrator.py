@@ -31,7 +31,7 @@ from agentic_common import EvalContext, CORE_AXIS_KEYS
 from t2av_eval.judge.media.axes import audio as axis_audio
 from t2av_eval.judge.media.axes import visual as axis_visual
 from t2av_eval.judge.media.axes import binding as axis_binding
-import axis_temporal_relation
+from t2av_eval.judge.media.axes import temporal_relation as axis_temporal_relation
 import axis_temporal_count
 import axis_compliance
 
