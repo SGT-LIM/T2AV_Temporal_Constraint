@@ -1,0 +1,11 @@
+# Run control for every API command (t2av_eval.run).
+pacing:
+  calls_per_hour_per_key: 2000      # generate_content attempts (retries included) per key, shared by all shards of a run
+stop:
+  rule: "a call that fails after all its retries with 429 / RESOURCE_EXHAUSTED writes STOP; every shard exits at its next call"
+uploads:
+  delete_after_use: true            # sets T2AV_DELETE_UPLOADS=1 (new_eval.maybe_delete_upload)
+  files_cap_gb: 20.0                # Gemini Files storage per project
+  files_margin_gb: 0.3              # launch only if free >= needed + margin, checked per key before launch
+workers:
+  stage2: 4                         # text-call threads per stage-2 set (11/02: 4 workers ~ 450 calls / hour each)
