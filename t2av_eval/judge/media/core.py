@@ -69,7 +69,7 @@ except Exception:  # pragma: no cover - useful when running Gemini-only
     format_focused_raw_mediapipe_as_section = None
 
 try:
-    from Tool_Use.audio_evidence_flam import build_audio_evidence_section as _build_audio_evidence_section_raw
+    from t2av_eval.evidence.audio.section import build_audio_evidence_section as _build_audio_evidence_section_raw
 except Exception:  # pragma: no cover - useful when running without audio tools
     _build_audio_evidence_section_raw = None
 
