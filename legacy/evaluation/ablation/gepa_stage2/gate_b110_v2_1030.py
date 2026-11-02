@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/gate/avb_rule_derive.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Data-defined AVB admission rule from the P01/P02 B rows (Synchformer ACTION-WINDOW mode), 10/30. No judge calls.
 
 Row reading: each B row (anchor_1030 verdict present, 95 rows) is represented by the binding-event reading with the largest
