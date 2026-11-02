@@ -190,7 +190,8 @@ def main():
         args[args.index("--caption-external-json") + 1] = str(r2 / "captions" / f"{s}.json")
         env = {**os.environ, **c["env"], "T2AV_SYNC_EVIDENCE_JSON": str(r2 / "sync_sections.json"), "T2AV_AUDIO_EVIDENCE_CACHE": str(live_cache)}
         p = subprocess.run([PY, str(Path(__file__).parent / "run_rows.py"), "--code", str(LEG), "--stored-csv", str(fx / "rows/row2" / f"{s}.csv"),
-                            "--report", str(work / f"record_row2_{s}.json"), "--record-audio-keys", str(keyfile), "--",
+                            "--report", str(work / f"record_row2_{s}.json"), "--workdir", str(work / f"record_cwd_{s}"),
+                            "--record-audio-keys", str(keyfile), "--",
                             *args, "--output-csv", str(work / f"record_row2_{s}.csv")], env=env, capture_output=True, text=True)
         if p.returncode:
             sys.exit(f"record run failed for {s}:\n{p.stdout[-3000:]}\n{p.stderr[-3000:]}")
@@ -290,7 +291,8 @@ def pin(fx, work):
         for line in open(src(d / "README.md")):
             m = re.match(r"^([0-9a-f]{32})  ([a-z_]+\.py)$", line.strip())
             if m:
-                now = hashlib.md5((LEG / m.group(2)).read_bytes()).hexdigest()
+                body = re.sub(rb"(?m)^# Replaced by t2av_eval.*\n", b"", (LEG / m.group(2)).read_bytes(), count=1)  # pointer line of step 3
+                now = hashlib.md5(body).hexdigest()
                 check[f"{row}|{m.group(2)}"] = dict(run=m.group(1), legacy=now, same=m.group(1) == now)
     bad = [k for k, v in check.items() if not v["same"]]
     if not check or bad:

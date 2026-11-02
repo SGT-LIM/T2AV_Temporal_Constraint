@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Replay one recorded run_agentic_eval command (row 1 or row 2 of the 11/01 HD-EPIC table) with zero Gemini calls.
 
-The code under test is the module directory given by --code (legacy/evaluation/ablation, later the package shim). Only the
-network edge is replaced:
+The code under test is --code: a legacy module directory (legacy/evaluation/ablation) or "package" (t2av_eval). Only the
+network edge is replaced, on every loaded copy of the core module:
   - google.genai.Client -> a fake whose generate_content serves the stored raw text of the axis whose stored user prompt is
     identical to the prompt the code just built. A prompt with no identical stored prompt is an error (prompt drift).
   - new_eval.upload_and_wait -> a stub handle (no upload).
@@ -20,6 +20,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--code", required=True)
 ap.add_argument("--stored-csv", required=True, help="the stored 11/01 rows of the items being replayed")
 ap.add_argument("--report", required=True)
+ap.add_argument("--workdir", required=True, help="cwd of the run (cwd-relative defaults such as caption_cache/ land here)")
 ap.add_argument("--record-audio-keys", default=None, help="append the audio-evidence cache files used to this file")
 a, argv = ap.parse_known_args()
 argv = [x for x in argv if x != "--"]
@@ -79,26 +80,34 @@ class FakeClient:
 
 import google.genai as genai
 genai.Client = FakeClient
-sys.path.insert(0, a.code)
-os.chdir(a.code)
-import new_eval as NE
+import importlib
+if a.code == "package":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+    entry = "t2av_eval.judge.media.runner"
+else:
+    sys.path.insert(0, a.code)
+    entry = "run_agentic_eval"
+os.makedirs(a.workdir, exist_ok=True)
+os.chdir(a.workdir)
+RAE = importlib.import_module(entry)
 
-NE.upload_and_wait = lambda client, video_path, **k: _types.SimpleNamespace(name="files/replay", uri="replay://" + Path(video_path).name,
-                                                                          mime_type="video/mp4")
-NE.find_video_files = lambda outputs_dir: sorted(Path(outputs_dir).rglob("*.mp4"))
-if a.record_audio_keys:
-    _orig = NE.build_audio_evidence_section
-
-    def _rec(video_path, item_meta, **kwargs):
-        with open(a.record_audio_keys, "a") as f:
-            f.write(NE._audio_evidence_cache_key(video_path, item_meta, kwargs) + ".json\n")
-        return _orig(video_path=video_path, item_meta=item_meta, **kwargs)
-    NE.build_audio_evidence_section = _rec
-
-import run_agentic_eval as RAE
+# patch the network edge on every loaded copy of the core module (legacy new_eval and/or t2av_eval.judge.media.core)
+cores = [m for m in list(sys.modules.values()) if all(hasattr(m, x) for x in ("upload_and_wait", "find_video_files", "_audio_evidence_cache_key"))]
+assert cores, "core module not found"
+for NE in cores:
+    NE.upload_and_wait = lambda client, video_path, **k: _types.SimpleNamespace(name="files/replay", uri="replay://" + Path(video_path).name,
+                                                                              mime_type="video/mp4")
+    NE.find_video_files = lambda outputs_dir: sorted(Path(outputs_dir).rglob("*.mp4"))
+    if a.record_audio_keys:
+        def _rec(video_path, item_meta, _NE=NE, _orig=NE.build_audio_evidence_section, **kwargs):
+            with open(a.record_audio_keys, "a") as f:
+                f.write(_NE._audio_evidence_cache_key(video_path, item_meta, kwargs) + ".json\n")
+            return _orig(video_path=video_path, item_meta=item_meta, **kwargs)
+        NE.build_audio_evidence_section = _rec
 
 sys.argv = ["run_agentic_eval.py"] + argv
 try:
     RAE.main()
 finally:
-    json.dump(dict(served=served, unmatched=unmatched, n_stored_prompts=len(SERVE)), open(a.report, "w"), indent=1)
+    json.dump(dict(served=served, unmatched=unmatched, n_stored_prompts=len(SERVE), entry=RAE.__file__,
+                   cores=sorted(m.__file__ for m in cores)), open(a.report, "w"), indent=1)

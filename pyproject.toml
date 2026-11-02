@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "t2av-eval"
+version = "0.4.0"
+description = "Agentic evaluation of text-to-audio-video generation (pipeline v4): media-only anchor, tool evidence, gated stage 2"
+requires-python = ">=3.11"
+dependencies = ["google-genai", "numpy", "pandas", "pyyaml"]
+
+[project.optional-dependencies]
+tools = ["torch", "faster-whisper", "librosa", "soundfile"]
+dev = ["pytest"]
+
+[project.scripts]
+t2av-eval = "t2av_eval.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["t2av_eval*"]
+
+[tool.setuptools.package-data]
+t2av_eval = ["config/*.yaml", "config/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

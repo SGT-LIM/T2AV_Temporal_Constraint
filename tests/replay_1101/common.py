@@ -25,7 +25,7 @@ def rows_cmd(fx, code, row, s, cmd, out_csv, report):
         env.update(T2AV_SYNC_EVIDENCE_JSON=str(fx / "row2_inputs/sync_sections.json"),
                    T2AV_AUDIO_EVIDENCE_CACHE=str(fx / "row2_inputs/audio_cache"))
     argv = [sys.executable, str(HERE / "run_rows.py"), "--code", str(code), "--stored-csv", str(fx / "rows" / row / f"{s}.csv"),
-            "--report", str(report), "--", *args, "--output-csv", str(out_csv)]
+            "--report", str(report), "--workdir", str(Path(out_csv).parent / "cwd"), "--", *args, "--output-csv", str(out_csv)]
     return argv, env
 
 

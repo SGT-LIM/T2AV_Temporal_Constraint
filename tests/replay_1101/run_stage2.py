@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Replay stage 2 of the 11/01 HD-EPIC table (rows 4, 5, 5-rule and framing b / c) from the call cache, with zero Gemini calls.
 
-The code under test (legacy hd_stage2_1101 / obs_judge_1028 / gen_stage2_1030, later the package) is imported from --code and
+The code under test (--code: a legacy module directory, or "package" for t2av_eval.judge.stage2.hdepic) is imported and
 its input paths are pointed at the fixture: tool records (FLAM, captions, Synchformer, the pre-registered rule), the row 1
 anchor rows, the prompt files, rows.jsonl and the call cache. Then, for every cached call row:
   - the tool text the code builds now must equal the text stored in rows.jsonl (A / V / AVB, gated A for HG5, + framing note);
@@ -30,20 +30,28 @@ class _NoClient:
 
 import google.genai as genai
 genai.Client = _NoClient
-code = Path(a.code).resolve()
-sys.path.insert(0, str(code)); sys.path.insert(0, str(code / "gepa_stage2"))
-import obs_judge_1028 as O
-import gen_stage2_1030 as G
-import hd_stage2_1101 as H
+import importlib
+if a.code == "package":
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+    H = importlib.import_module("t2av_eval.judge.stage2.hdepic")
+else:
+    code = Path(a.code).resolve()
+    sys.path.insert(0, str(code)); sys.path.insert(0, str(code / "gepa_stage2"))
+    H = importlib.import_module("hd_stage2_1101")
+O, G = H.O, H.G
+# every loaded copy of the observation judge (legacy obs_judge_1028 and/or the package module) gets the fixture paths
+OJS = [m for m in list(sys.modules.values()) if hasattr(m, "OBS_RULES_MD5") and hasattr(m, "ANCHOR") and hasattr(m, "PROMPTS")]
 
 S2 = F / "stage2"
-O.OUT = S2 / "out"
+for m in OJS:
+    m.OUT = S2 / "out"
 H.EVD, H.CAPD, H.SYA, H._PE, H._CAP = S2 / "evd", S2 / "captions", S2 / "sya", None, {}
-H.RULE = json.load(open(S2 / "sya" / "PREREGISTERED_RULE.json"))
+H.RULE = json.load(open(S2 / "sya" / "PREREGISTERED_RULE.json"))  # replaced by the gate module once it moves
 SETFILE = {"hm_hdepic": "hdepic_p12", "hm_hdfoot": "hdfoot_p12", "hm_p3p9": "p3p9"}
-for src, s in SETFILE.items():
-    O.ANCHOR[src] = [F / "rows" / "row1" / f"{s}.csv"]
-    O.PROMPTS[src] = F / "prompts" / f"{s}.json"
+for m in OJS:
+    for src, s in SETFILE.items():
+        m.ANCHOR[src] = [F / "rows" / "row1" / f"{s}.csv"]
+        m.PROMPTS[src] = F / "prompts" / f"{s}.json"
 GT = json.load(open(S2 / "gt_rows.json"))
 H.gt_rows = lambda: [dict(r) for r in GT]
 
@@ -77,4 +85,4 @@ for r in rows:
     checked += 1
 
 H.stage_score(None)
-json.dump(dict(checked_calls=checked, text_mismatch=text_bad, prompt_md5_mismatch=md5_bad, call_settings=sysmd5), open(a.report, "w"), indent=1)
+json.dump(dict(modules=sorted({m.__file__ for m in (H, O, G, *OJS)}), checked_calls=checked, text_mismatch=text_bad, prompt_md5_mismatch=md5_bad, call_settings=sysmd5), open(a.report, "w"), indent=1)

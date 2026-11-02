@@ -6,11 +6,12 @@ every file it was cut from). Rows: 3 per axis.
                                    text of the stored call whose user prompt is identical (so prompts are checked too); system
                                    prompt and schema md5 must equal the pinned values (expected/call_settings.json)
   stage 2     A, V, AVB            rows 4 / 5 / 5-rule / framing b, c from the call cache through the real stage_score()
-Code under test: T2AV_REPLAY_CODE (default legacy/evaluation/ablation).
+Code under test: every implementation in T2AV_REPLAY_CODE (comma list; default "legacy,package"): legacy =
+legacy/evaluation/ablation, package = t2av_eval. A package case is skipped only while its entry module has not been moved yet.
 
   pytest tests/test_replay_1101.py -v
 """
-import hashlib, json, os, shutil, subprocess, sys
+import hashlib, importlib, importlib.util, json, os, shutil, subprocess, sys
 from pathlib import Path
 
 import pandas as pd
@@ -18,7 +19,27 @@ import pytest
 
 REPO = Path(__file__).resolve().parents[1]
 FX = REPO / "tests/fixtures/replay_1101"
-CODE = Path(os.environ.get("T2AV_REPLAY_CODE", REPO / "legacy/evaluation/ablation"))
+LEGACY = REPO / "legacy/evaluation/ablation"
+IMPLS = os.environ.get("T2AV_REPLAY_CODE", "legacy,package").split(",")
+ENTRY = {"rows": "t2av_eval/judge/media/runner.py", "stage2": "t2av_eval/judge/stage2/hdepic.py"}
+
+
+def code_for(impl, what):
+    if impl == "legacy":
+        return LEGACY
+    if not (REPO / ENTRY[what]).exists():
+        pytest.skip(f"{ENTRY[what]} not moved yet")
+    return "package"
+
+
+def scoring(impl):
+    """the stage1_lookup scorer of the implementation under test"""
+    if impl == "package" and (REPO / "t2av_eval/scoring/lookup.py").exists():
+        sys.path.insert(0, str(REPO))
+        return importlib.import_module("t2av_eval.scoring.lookup")
+    spec = importlib.util.spec_from_file_location("legacy_rep_scoring", LEGACY / "gepa_stage2/rep_scoring.py")
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    return m
 sys.path.insert(0, str(REPO / "tests/replay_1101"))
 import common
 LABEL_COLS = ["audio_event_correctness", "visual_event_correctness", "audio_visual_binding", "temporal_relation_satisfaction",
@@ -46,10 +67,11 @@ def test_fixture_unchanged():
     assert {k: os.readlink(FX / k) for k in man["video_symlinks"]} == man["video_symlinks"]
 
 
+@pytest.mark.parametrize("impl", IMPLS)
 @pytest.mark.parametrize("row,s", sorted(tuple(k.split("|")) for k in COMMANDS))
-def test_rows_replay(row, s, tmp_path):
+def test_rows_replay(row, s, impl, tmp_path):
     out, rep = tmp_path / "out.csv", tmp_path / "report.json"
-    argv, env = common.rows_cmd(FX, CODE, row, s, COMMANDS[f"{row}|{s}"], out, rep)
+    argv, env = common.rows_cmd(FX, code_for(impl, "rows"), row, s, COMMANDS[f"{row}|{s}"], out, rep)
     if row == "row2":
         assert env.get("T2AV_AUDIO_EVIDENCE_CACHE_ONLY") == "1"
     p = subprocess.run(argv, env=env, capture_output=True, text=True)
@@ -71,8 +93,7 @@ def test_rows_replay(row, s, tmp_path):
         for col in PE_COLS:
             assert json.loads(new.at[iid, col]) == json.loads(old.at[iid, col]), f"{row} {iid} {col}"
 
-    sys.path.insert(0, str(CODE / "gepa_stage2"))
-    import rep_scoring as RS
+    RS = scoring(impl)
     df = RS.load([str(out)])
     gt = _gt()
     exp = EXPECTED[(EXPECTED.row == row) & EXPECTED.uid.str.startswith(s + "|")]
@@ -82,11 +103,13 @@ def test_rows_replay(row, s, tmp_path):
         assert RS.row_label(df, iid, ax, gt[e.uid]) == e.pred, f"{row} {e.uid}"
 
 
-def test_stage2_replay(tmp_path):
+@pytest.mark.parametrize("impl", IMPLS)
+def test_stage2_replay(impl, tmp_path):
+    code = code_for(impl, "stage2")
     fx = tmp_path / "fx"
     shutil.copytree(FX, fx, symlinks=True)
     rep = tmp_path / "report.json"
-    argv, env = common.stage2_cmd(fx, CODE, rep)
+    argv, env = common.stage2_cmd(fx, code, rep)
     p = subprocess.run(argv, env=env, capture_output=True, text=True)
     assert p.returncode == 0, p.stdout[-2000:] + p.stderr[-2000:]
     r = json.load(open(rep))
