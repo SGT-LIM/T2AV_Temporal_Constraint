@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/evidence/synchformer_action.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Synchformer with ACTION-WINDOW spans (10/30, rev 2). GPU, env t2av_eval_sync. No Gemini calls.
 
 Same code, checkpoint and mode as sync_1030.py (t2av_multiagent synchformer-avb, 24-01-04T16-39-21, window_if_alone_multi,
