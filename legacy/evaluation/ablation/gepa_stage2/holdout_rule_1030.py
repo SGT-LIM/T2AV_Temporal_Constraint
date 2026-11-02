@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/gate/avb_rule_holdout.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """P03-P09 HOLDOUT confirmation of the pre-registered AVB rule (10/30).
 
   python gepa_stage2/holdout_rule_1030.py rule     # code rule on the same-day holdout anchor; no judge calls
