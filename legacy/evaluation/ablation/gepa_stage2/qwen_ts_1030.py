@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/screening/qwen_ts.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Qwen3-VL-8B action timestamps, reproducing sa004/QWEN_timestamps (10/30). Run in the vllm020 env on a GPU. No Gemini calls.
 
 Settings recovered from the release (README + the `prompt` / `model` / `fps` fields of its JSON files):
