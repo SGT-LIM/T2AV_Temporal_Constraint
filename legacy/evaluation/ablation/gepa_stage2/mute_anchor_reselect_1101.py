@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/data/mute_anchor_reselect.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """One loudness path for both groups (user 11/01, option a). No judge calls.
 Every mute_anchor anchor (P01/P02 10/28 set, 78; P03-P09 candidates from the holdout anchor table) gets its dB from
 make_mute_anchor.db_reimpl on the ORIGINAL clip audio (16 kHz mono; RMS of the 0.2 s after the sound onset, or the 0.2 s before
