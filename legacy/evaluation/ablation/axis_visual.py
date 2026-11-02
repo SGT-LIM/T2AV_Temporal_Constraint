@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/media/axes/visual.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """V-axis: Visual Event Correctness. Per-event, over every target event."""
 
 from __future__ import annotations
