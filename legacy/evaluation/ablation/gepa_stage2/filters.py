@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/data/filters.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Scoring-only filters, no API calls (2026-10-25).
   python gepa_stage2/filters.py names
   python gepa_stage2/filters.py move [--run DIR]

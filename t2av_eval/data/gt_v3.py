@@ -17,7 +17,6 @@ Stage-1 dirs may be several (later ones override earlier rows by item_id).
   python gepa_stage2/make_gt_v3.py move --prompt-json $E/hdepic_move_prompts.json --gt-csv $E/hdepic_move_gt.csv \
       --names-csv $E/move_names.csv --stage1-dir $E/results/hdepic_move_multi_baseline_g36 --out gepa_stage2/manifests_v3/gt_hdmove.jsonl
 """
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 import argparse, glob, json, re, sys
 from collections import Counter
 from pathlib import Path
@@ -82,7 +81,7 @@ def make_hdepic(a):
     gt = pd.read_csv(a.gt_csv).drop_duplicates("item_id", keep="last").set_index("item_id")
     TS.STAGE1 = load_stage1_many(a.stage1_dir)
     drop = set(Path(a.drop_ids).read_text().split()) if a.drop_ids else set()
-    import filters
+    from t2av_eval.data import filters as filters
     if a.seq_json:
         d = json.load(open(a.seq_json))
         if isinstance(d, dict):
