@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/media/runner.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """CLI for the agentic (per-axis) T2AV evaluator.
 
 Same inputs/outputs and CSV schema as new_eval.py, but each video is scored by
