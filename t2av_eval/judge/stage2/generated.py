@@ -252,9 +252,17 @@ def v_lemma(src, iid, gt):
     return out
 
 
+# recipe_v4 (user 11/02): row 5 uses the pre-registered T / P on every set. "batch" = the label-free T_batch / P_batch per set,
+# which produced the 10/30 generated row 5; it is kept only to reproduce those outputs (drift_check reports T_batch).
+AVB_MAIN = "preregistered"
+
+
 def sync_fire():
-    """{(source, item_id): {'main': bool, 'tool': bool}}, thresholds."""
+    """{(source, item_id): {'main': bool, 'tool': bool}}, thresholds. main: AVB_MAIN thresholds; tool: T_tool / P_tool."""
     thr = json.load(open(SYNC / "batch_thresholds.json"))
+    if AVB_MAIN not in ("preregistered", "batch"):
+        raise ValueError(f"AVB_MAIN must be 'preregistered' or 'batch', not {AVB_MAIN!r}")
+    pre = PR.avb_rule() if AVB_MAIN == "preregistered" else None
     pe = pd.concat(pd.read_csv(f) for s in ("220", "149") for f in sorted((SYNC / s).glob("per_event_shard*.csv")))
     pe["batch"] = pe["set"].astype(str) + "-" + pe["model"]
     ok = pe[pe.status == "ok"].assign(absoff=lambda t: t.offset.abs())
@@ -263,7 +271,8 @@ def sync_fire():
     for r in best.itertuples():
         t = thr[r.batch]
         src = {"220-LTX_2p3": "g220ltx", "220-MOVA": "g220mova", "149-LTX_2p3": "g149"}[r.batch]
-        out[(src, r.item_id)] = dict(main=bool(r.absoff >= t["T_batch"] - 1e-9 and r.prob >= t["P_batch"] - 1e-9),
+        T, P = (pre["T"], pre["P"]) if pre else (t["T_batch"], t["P_batch"])
+        out[(src, r.item_id)] = dict(main=bool(r.absoff >= T - 1e-9 and r.prob >= P - 1e-9),
                                      tool=bool(r.absoff >= t["T_tool"] - 1e-9 and r.prob >= t["P_tool"] - 1e-9))
     return out, thr
 
