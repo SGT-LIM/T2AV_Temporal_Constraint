@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/media/axes/binding.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """AVB-axis: Audio-Visual Binding. Per-event, GATED per-event on A and V.
 
 An event's binding is evaluated only when that same event's Audio Event
