@@ -16,7 +16,6 @@ stay identical; only the orchestration changes.
 
 from __future__ import annotations
 
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 import csv
 import json
 import sys as _sys
@@ -718,14 +717,16 @@ Judge only this axis. Other axes are handled by separate calls.
 """
 
 
+_NOT_IN_PACKAGE = ("--judge-backend {} is not part of the t2av_eval package (the main table uses Gemini only); "
+                   "run legacy/evaluation/ablation/run_agentic_eval.py for it")
+
+
 def call_gemini_json(ctx: EvalContext, system_prompt: str, user_text: str, schema: dict):
     """Single structured-JSON Gemini call reusing the shared uploaded video."""
     if (ctx.config.get("judge_backend") or "gemini") == "openai":
-        import openai_judge as OJ
-        return OJ.call_openai_json(ctx, system_prompt, user_text, schema)
+        raise RuntimeError(_NOT_IN_PACKAGE.format("openai"))
     if (ctx.config.get("judge_backend") or "gemini") == "local":
-        import local_judge as LJ
-        return LJ.call_local_json(ctx, system_prompt, user_text, schema)
+        raise RuntimeError(_NOT_IN_PACKAGE.format("local"))
     config_kwargs = {
         "response_mime_type": "application/json",
         "response_json_schema": schema,

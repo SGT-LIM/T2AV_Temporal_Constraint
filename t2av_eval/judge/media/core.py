@@ -41,7 +41,6 @@ The parent directory name of each mp4 is used as item_id.
 
 from __future__ import annotations
 
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 from t2av_eval import paths as _P
 import argparse
 import csv
