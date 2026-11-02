@@ -1,0 +1,22 @@
+# Final recipe (pipeline v4): row 5 "gated". One threshold block for both dataset families (HD-EPIC, 220 / 149).
+# Thresholds live in artifact files written before any result of the sets they are applied to was read; the values below
+# are checked against those files at load (t2av_eval.gate.preregistered), so a changed file or config stops the run.
+judge:
+  model: gemini-3.6-flash
+  thinking: high
+  temperature: 0.0
+  seed: 42
+gate:
+  avb_rule:                 # AVB FAIL evidence: strongest binding-event Synchformer reading (action window), |offset| >= T s and p >= P
+    file: tools/synchformer_action_1030/PREREGISTERED_RULE.json      # relative to data_root; written 2026-10-30 11:12
+    T: 1.8
+    P: 0.25
+  a_flam:                   # FLAM line admitted for an event whose first-query whole-clip max score is below T_flam
+    file: tools/gen_evidence_1030/flam_threshold.json                # relative to data_root; written 2026-10-30 14:11
+    T_flam: 0.2705
+  a_whisper: required_word  # Whisper transcript admitted when it contains a required word; never fires on HD-EPIC (no speech events)
+  v: caption_contradiction  # caption shown only when the text-only check finds an explicit contradiction of a GT event
+  reuse_row4_call: true     # an open gate whose text equals the row 4 text reuses the row 4 call (temperature 0, seed 42)
+  avb_variants: [gated_judge, code_rule]   # gated_judge: judge sees the reading when the rule fires; code_rule: rule sets FAIL
+drift_check:                # reported only, never a gate
+  batch_thresholds: label-free T_batch / P_batch per generated set (synchformer batch_thresholds.json, gen_recalib)
