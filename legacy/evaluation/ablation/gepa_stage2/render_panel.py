@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/evidence/panel.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Waveform + frame panel for one clip window (pipeline v4 step 4 observation set, 10/28). No API calls.
 
 One PNG, 1550 px wide (up to 1800 px when frames would be narrower than 150 px):

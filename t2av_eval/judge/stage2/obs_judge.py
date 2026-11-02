@@ -21,7 +21,6 @@ Sets / conditions (user spec 10/28):
   python gepa_stage2/obs_judge_1028.py run --cond audio_only --workers 6 [--dry-run 3]
   python gepa_stage2/obs_judge_1028.py score
 """
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 from t2av_eval import paths as _P
 import os
 for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMBA_NUM_THREADS"):
@@ -213,7 +212,7 @@ def stage_rows_a2(a):
 
 
 def _panel(r):
-    import render_panel as RP
+    from t2av_eval.evidence import panel as RP
     p = Path(r["obs"]["png"])
     p.parent.mkdir(parents=True, exist_ok=True)
     fn = RP.render if r["cond"] == "panel_even" else RP.render_peak
@@ -262,7 +261,7 @@ def stage_prep_a2_window(a):
     each side), cut from each row's own clip. Records query, window and max score; adds rows cond=flam_text_window."""
     pass  # (legacy sys.path insert removed)
     from t2av_eval.evidence.audio import flam as FA
-    import render_panel as RP
+    from t2av_eval.evidence import panel as RP
     allrows = jl(OUT / "rows.jsonl")
     base = [r for r in allrows if r["set"] == "A2" and r["cond"] == "anchor"]
     d = MA / "work/flam_window"
@@ -313,7 +312,7 @@ def stage_rows_a3(a):
 
 
 def stage_prep_a3(a):
-    import render_panel as RP
+    from t2av_eval.evidence import panel as RP
     rows = [r for r in jl(OUT / "rows.jsonl") if r["set"] == "A3" and r["cond"] == "anchor"]
     d = OBS / "a3_windows"
     d.mkdir(parents=True, exist_ok=True)
