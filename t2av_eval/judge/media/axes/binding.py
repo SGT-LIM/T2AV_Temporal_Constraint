@@ -9,10 +9,9 @@ and if no event is eligible the model call is skipped entirely.
 
 from __future__ import annotations
 
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 from typing import Dict
 
-import new_eval as NE
+from t2av_eval.judge.media import core as NE
 from t2av_eval.judge.media.common import EvalContext, PER_EVENT_AXIS_SCHEMA, EVENT_TIME_RULE, EVENT_TIME_FIELD, per_event_schema_with_time, axis_system_prompt, build_axis_user_text, call_gemini_json
 
 AXIS = "audio_visual_binding"

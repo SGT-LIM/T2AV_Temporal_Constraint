@@ -22,11 +22,10 @@ Control flow:
 
 from __future__ import annotations
 
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 import json
 from typing import Dict, List
 
-import new_eval as NE
+from t2av_eval.judge.media import core as NE
 from t2av_eval.judge.media.common import EvalContext, CORE_AXIS_KEYS
 from t2av_eval.judge.media.axes import audio as axis_audio
 from t2av_eval.judge.media.axes import visual as axis_visual

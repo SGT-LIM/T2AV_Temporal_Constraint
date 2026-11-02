@@ -40,13 +40,16 @@ else:
     H = importlib.import_module("hd_stage2_1101")
 O, G = H.O, H.G
 # every loaded copy of the observation judge (legacy obs_judge_1028 and/or the package module) gets the fixture paths
-OJS = [m for m in list(sys.modules.values()) if hasattr(m, "OBS_RULES_MD5") and hasattr(m, "ANCHOR") and hasattr(m, "PROMPTS")]
+OJS = [m for m in list(sys.modules.values()) if isinstance(getattr(m, "OBS_RULES_MD5", None), str)
+       and isinstance(getattr(m, "ANCHOR", None), dict) and isinstance(getattr(m, "PROMPTS", None), dict)]
 
 S2 = F / "stage2"
 for m in OJS:
     m.OUT = S2 / "out"
 H.EVD, H.CAPD, H.SYA, H._PE, H._CAP = S2 / "evd", S2 / "captions", S2 / "sya", None, {}
-H.RULE = json.load(open(S2 / "sya" / "PREREGISTERED_RULE.json"))  # replaced by the gate module once it moves
+H.RULE = json.load(open(S2 / "sya" / "PREREGISTERED_RULE.json"))
+if "t2av_eval.gate.preregistered" in sys.modules:          # package: every reader of the rule goes through the gate module
+    sys.modules["t2av_eval.gate.preregistered"].FILES["avb_rule"] = S2 / "sya" / "PREREGISTERED_RULE.json"
 SETFILE = {"hm_hdepic": "hdepic_p12", "hm_hdfoot": "hdfoot_p12", "hm_p3p9": "p3p9"}
 for m in OJS:
     for src, s in SETFILE.items():

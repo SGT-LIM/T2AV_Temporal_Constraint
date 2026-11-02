@@ -16,10 +16,9 @@ by comparing observed_count against each event's required_count.
 
 from __future__ import annotations
 
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 from typing import List
 
-import new_eval as NE
+from t2av_eval.judge.media import core as NE
 from t2av_eval.judge.media.common import EvalContext, PER_EVENT_COUNT_SCHEMA, axis_system_prompt, build_axis_user_text, call_gemini_json
 
 AXIS = "temporal_count_satisfaction"

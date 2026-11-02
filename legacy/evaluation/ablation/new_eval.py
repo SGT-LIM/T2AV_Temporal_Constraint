@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/media/core.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """
 Open-vocabulary, tool-augmented Gemini evaluator for T2AV temporal-constraint videos.
 

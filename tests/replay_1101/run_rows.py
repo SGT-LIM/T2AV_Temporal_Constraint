@@ -92,7 +92,8 @@ os.chdir(a.workdir)
 RAE = importlib.import_module(entry)
 
 # patch the network edge on every loaded copy of the core module (legacy new_eval and/or t2av_eval.judge.media.core)
-cores = [m for m in list(sys.modules.values()) if all(hasattr(m, x) for x in ("upload_and_wait", "find_video_files", "_audio_evidence_cache_key"))]
+cores = [m for m in list(sys.modules.values()) if all(isinstance(getattr(m, x, None), _types.FunctionType)
+                                                      for x in ("upload_and_wait", "find_video_files", "_audio_evidence_cache_key"))]
 assert cores, "core module not found"
 for NE in cores:
     NE.upload_and_wait = lambda client, video_path, **k: _types.SimpleNamespace(name="files/replay", uri="replay://" + Path(video_path).name,

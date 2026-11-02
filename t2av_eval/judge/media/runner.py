@@ -9,7 +9,6 @@ run Gemini-only while others keep their routed evidence.
 
 from __future__ import annotations
 
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 import argparse
 import os
 import sys
@@ -29,7 +28,7 @@ MAX_RETRIES = 3
 # if _GEMINI_DIR not in sys.path:
 #     sys.path.insert(0, _GEMINI_DIR)
 
-import new_eval as NE
+from t2av_eval.judge.media import core as NE
 from t2av_eval.judge.media import common as AC
 from t2av_eval.judge.media.common import build_context
 from t2av_eval.judge.media.orchestrator import evaluate_video_agentic

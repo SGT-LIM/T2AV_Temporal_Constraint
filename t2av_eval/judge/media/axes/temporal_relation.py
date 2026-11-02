@@ -14,8 +14,7 @@ a skipped "no" result without calling this module.
 
 from __future__ import annotations
 
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
-import new_eval as NE
+from t2av_eval.judge.media import core as NE
 from t2av_eval.judge.media.common import EvalContext, AXIS_RESULT_SCHEMA, axis_system_prompt, build_axis_user_text, call_gemini_json
 
 AXIS = "temporal_relation_satisfaction"

@@ -34,7 +34,7 @@ from google.genai import types
 # if _GEMINI_DIR not in _sys.path:
 #     _sys.path.insert(0, _GEMINI_DIR)
 
-import new_eval as NE  # the original module, reused as a helper library
+from t2av_eval.judge.media import core as NE  # the original module, reused as a helper library
 
 # Sub-schemas reused as-is.
 PER_EVENT_AXIS_SCHEMA = NE.PER_EVENT_AXIS_SCHEMA      # {per_event:[{event_id,label,reason,evidence}]}

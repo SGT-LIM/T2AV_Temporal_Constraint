@@ -158,6 +158,12 @@ def main(pairs):
         if f.name in ("_legacy_bridge.py", "paths.py", "__init__.py", "cli.py"):
             continue
         src = rewrite(f.read_text().replace(BRIDGE, ""), None)
+        if "_P." in src and "from t2av_eval import paths as _P" not in src:
+            t = ast.parse(src)
+            first = next(n for n in t.body if isinstance(n, (ast.Import, ast.ImportFrom)) and getattr(n, "module", None) != "__future__")
+            lines = src.splitlines(keepends=True)
+            lines.insert(first.lineno - 1, "from t2av_eval import paths as _P\n")
+            src = "".join(lines)
         if "_pl." not in src and "_os." not in src:
             src = src.replace("import os as _os, pathlib as _pl\n", "", 1)
         left = legacy_imports(src)
