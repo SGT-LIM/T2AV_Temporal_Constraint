@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/data/generated149.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Generated holdout: 149 LTX-2.3 videos, 3 Prolific raters each (10/30). No judge calls.
 
 Input: generation/149videos.zip -> T2AV_data/gen_holdout_149_1030/raw/prolific_ltx_2k_50/annotations/*.json (one per rater per video).
