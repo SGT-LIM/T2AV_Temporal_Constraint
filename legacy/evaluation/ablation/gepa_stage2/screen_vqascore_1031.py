@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/screening/vqascore.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Tool screening: VQAScore (t2v_metrics 3.0 CLIPT5Model, clip-flant5-xxl, default question template) on the V axis (10/31). GPU, env vqascore_1030. No judge calls.
 
 Per row event: 4 frames evenly spaced inside the event's span (HD-EPIC: the annotated action span; generated: row 1 anchor
