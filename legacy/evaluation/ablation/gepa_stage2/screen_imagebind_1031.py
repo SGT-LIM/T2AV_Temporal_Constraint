@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/screening/imagebind.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Tool screening: ImageBind (imagebind_huge) on the AVB axis (10/31). GPU, env imagebind_1030. No judge calls.
 
 Per binding event: a segment of the clip around the event (HD-EPIC: the annotated action span +-1 s; generated: the row 1 anchor
