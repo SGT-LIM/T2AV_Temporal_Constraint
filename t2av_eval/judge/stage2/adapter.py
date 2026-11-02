@@ -13,7 +13,6 @@ sources.json (paths; one entry per source, see README):
   {"hdepic": {"prompt_json": ..., "outputs_dirs": [...], "stage1": <dir or csv>, "caption_json": ..., "flam_ckpt": ...},
    "ltx":    {...}, "mova": {...}}
 """
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 from t2av_eval import paths as _P
 import hashlib, json, os, re, sys, threading, time, traceback
 from concurrent.futures import ThreadPoolExecutor
@@ -23,7 +22,7 @@ pass  # (legacy sys.path insert removed)
 from t2av_eval.judge.media import core as NE
 from t2av_eval.judge.media import common as AC
 from t2av_eval.judge.media.axes import audio as axis_audio; from t2av_eval.judge.media.axes import visual as axis_visual; from t2av_eval.judge.media.axes import binding as axis_binding; from t2av_eval.judge.media.axes import temporal_relation as axis_temporal_relation; from t2av_eval.judge.media.axes import temporal_count as axis_temporal_count
-import run_two_stage as TS
+from t2av_eval.judge.stage2 import two_stage as TS
 from t2av_eval.judge.media.runner import build_arg_parser
 
 try:

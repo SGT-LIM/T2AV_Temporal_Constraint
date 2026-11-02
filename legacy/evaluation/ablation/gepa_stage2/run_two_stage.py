@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/stage2/two_stage.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Two-stage judge, full pipeline ("perceive first, evidence second"), all axes.  (refactored 10/19: importable)
 
 Same behaviour as before, plus
