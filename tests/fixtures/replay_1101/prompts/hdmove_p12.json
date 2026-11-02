@@ -1,0 +1,99 @@
+[
+ {
+  "item_id": "hdepicmove_P01-20240202-161948_0745330_pass",
+  "canonical_item_id": "real_hdepic_move_count",
+  "modality_combination": "Action (silent)",
+  "subjects": [
+   {
+    "id": "person_A",
+    "description": "one person cooking in a home kitchen, filmed from a head-mounted camera",
+    "initial_pose": "standing at the kitchen counter",
+    "visibility": "hands and manipulated objects visible; face not visible (egocentric view)"
+   }
+  ],
+  "prompt": "A person in a home kitchen moves the bowl exactly 2 times, moves the fork exactly 2 times, and moves the pen exactly 1 time. Each pick-up-and-set-down of an object counts as one move. No other move of these objects happens in the clip.",
+  "events": [
+   {
+    "id": "e1_move",
+    "modality": "silent_action",
+    "actor": "person_A",
+    "action": "move bowl",
+    "body_part": "hand",
+    "definition": "The person moves the bowl: picks it up and sets it down somewhere else. Each pick-up-and-set-down counts as one move. This action is judged visually; no specific sound is required.",
+    "count": 2
+   },
+   {
+    "id": "e2_move",
+    "modality": "silent_action",
+    "actor": "person_A",
+    "action": "move fork",
+    "body_part": "hand",
+    "definition": "The person moves the fork: picks it up and sets it down somewhere else. Each pick-up-and-set-down counts as one move. This action is judged visually; no specific sound is required.",
+    "count": 2
+   },
+   {
+    "id": "e3_move",
+    "modality": "silent_action",
+    "actor": "person_A",
+    "action": "move pen",
+    "body_part": "hand",
+    "definition": "The person moves the pen: picks it up and sets it down somewhere else. Each pick-up-and-set-down counts as one move. This action is judged visually; no specific sound is required.",
+    "count": 1
+   }
+  ],
+  "content": {
+   "e1_move": {
+    "modality": "silent_action",
+    "actor": "person_A",
+    "action": "move bowl",
+    "body_part": "hand",
+    "definition": "The person moves the bowl: picks it up and sets it down somewhere else. Each pick-up-and-set-down counts as one move. This action is judged visually; no specific sound is required."
+   },
+   "e2_move": {
+    "modality": "silent_action",
+    "actor": "person_A",
+    "action": "move fork",
+    "body_part": "hand",
+    "definition": "The person moves the fork: picks it up and sets it down somewhere else. Each pick-up-and-set-down counts as one move. This action is judged visually; no specific sound is required."
+   },
+   "e3_move": {
+    "modality": "silent_action",
+    "actor": "person_A",
+    "action": "move pen",
+    "body_part": "hand",
+    "definition": "The person moves the pen: picks it up and sets it down somewhere else. Each pick-up-and-set-down counts as one move. This action is judged visually; no specific sound is required."
+   }
+  },
+  "temporal_constraint": {
+   "relation_type": "order_count",
+   "task_type": "count",
+   "count_constrained": true,
+   "n_events": 3,
+   "timing_type": "relative",
+   "value": {
+    "events": [
+     "e1_move",
+     "e2_move",
+     "e3_move"
+    ],
+    "ordered_events": [
+     "e1_move",
+     "e2_move",
+     "e3_move"
+    ],
+    "expanded_sequence": [
+     "e1_move",
+     "e2_move",
+     "e3_move",
+     "e2_move",
+     "e1_move"
+    ],
+    "event_counts": {
+     "e1_move": 2,
+     "e2_move": 2,
+     "e3_move": 1
+    }
+   }
+  }
+ }
+]
