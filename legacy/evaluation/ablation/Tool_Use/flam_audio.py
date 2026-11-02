@@ -1,3 +1,4 @@
+# Replaced by t2av_eval/evidence/audio/flam.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """
 OpenFLAM frame-wise language-audio evidence for T2AV evaluation.
 

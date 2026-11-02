@@ -42,11 +42,7 @@ except Exception:  # pragma: no cover
     DEFAULT_NEGATIVE_QUERIES = []
 
 try:
-    from .flam_audio import (
-        extract_flam_evidence,
-        format_flam_as_section,
-        derive_queries_from_item_meta as derive_flam_queries_from_item_meta,
-    )
+    from t2av_eval.evidence.audio.flam import extract_flam_evidence, format_flam_as_section, derive_queries_from_item_meta as derive_flam_queries_from_item_meta
 except Exception:  # pragma: no cover
     extract_flam_evidence = None
     format_flam_as_section = None
