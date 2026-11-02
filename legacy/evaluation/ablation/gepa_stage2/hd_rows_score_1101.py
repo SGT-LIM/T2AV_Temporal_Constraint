@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/scoring/hdepic_rows.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """HD-EPIC main table: score the full-video rows (row 1 media-only, row 2 one call + Synchformer) on all five axes, 11/01. No calls.
 GT rows: A / V / AVB from hd_stage2_1101.gt_rows (P01/P02 v3 test, P03-P09 v3 rules); TCR: P01/P02 v3-test hdepic TCR rows, P03-P09
 order_swap + originals with neighbouring events >= 1.0 s (item level); TCC: P01/P02 v3-test hdmove rows, P03-P09 count_off +
