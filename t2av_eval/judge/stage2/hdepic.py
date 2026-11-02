@@ -24,7 +24,6 @@ Row 5 admission: A: a FLAM line only for an event whose first-query max score < 
   python gepa_stage2/hd_stage2_1101.py rows5 | framing | groups | score
   python gepa_stage2/obs_judge_1028.py run --set HG4|HG5|HFRb|HFRc --cond gen_tool_text --workers 12
 """
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 from t2av_eval import paths as _P
 from t2av_eval.gate import preregistered as PR
 import argparse, json, sys, time
@@ -69,7 +68,7 @@ def rule():
 
 def gt_rows():
     from t2av_eval.judge.media import core as NE
-    from make_gt_v3 import ids_for, struct_for_prompt_event
+    from t2av_eval.data.gt_v3 import ids_for, struct_for_prompt_event
     out = []
     man = [json.loads(l) for l in open(_P.INPUTS / "evaluation/ablation/gepa_stage2/manifests_v3/test.jsonl")]
     for m in man:
@@ -93,7 +92,7 @@ def v3_rows(items_json, prompts_json, gt_csv, source, keep=None):
     """v3 GT rules on one item set (P03-P09 holdout, or the P01/P02 items outside the v3 test). Noun swap: the prompt's
     v_fail_object_v2 event when present (as make_gt_v3), else broken_event_idx."""
     from t2av_eval.judge.media import core as NE
-    from make_gt_v3 import ids_for, struct_for_prompt_event
+    from t2av_eval.data.gt_v3 import ids_for, struct_for_prompt_event
     out = []
     it = {x["item_id"]: x for x in json.load(open(items_json))}
     P = {x["item_id"]: x for x in json.load(open(prompts_json))}

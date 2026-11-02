@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/data/gt_v3.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """GT rows (item x axis) for GEPA v3 (2026-10-26). Same row format as make_gt.py, new data:
   hdepic : v2 prompts. A = new `_A` claim (claim event -> no) + originals; V = `_Vhand` / `_Vnoun` (swapped event -> no) + originals;
            AVB = shift early/late + originals (stage-1 judged); TCR = order_swap + originals, neighbouring events >= --tcr-gap s,
