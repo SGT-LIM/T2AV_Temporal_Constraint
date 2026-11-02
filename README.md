@@ -90,9 +90,40 @@ Synchformer action-window readings (`t2av-eval evidence synchformer-action -- --
 | 4, 5, framing | `t2av-eval judge two_stage_ungated,gated,framing --stage1 <row 1 dir> --sets ltx220,mova220,gen149 --name gen_stage2` |
 
 The launch settings of each set and row (flags, environment, shards) are copied from the recorded launches in
-`config/sets.yaml`; `tests/test_conditions.py` rebuilds the recorded 11/01 and 10/30 commands from it exactly. Note the
-recorded differences: generated row 1 runs with `T2AV_EVENT_TIME_FIELD=1`, HD-EPIC row 1 without; HD-EPIC row 2 uses FLAM
-hop 5, generated row 2 the default; the mute_anchor sets run `--axes a`.
+`config/sets.yaml`; `tests/test_conditions.py` rebuilds the recorded 11/01 and 10/30 commands from it exactly.
+
+**Recorded per-row settings that differ between the families.** They are kept as recorded, so the CLI reproduces the
+recorded runs; a new comparison across families has to take them into account.
+
+| row | setting | HD-EPIC (11/01) | generated (10/30) | mute_anchor A sets (11/01) |
+|---|---|---|---|---|
+| 1 media-only | `T2AV_EVENT_TIME_FIELD` (structured `event_time_s` in the V and AVB prompts) | off | on | off |
+| 1 media-only | `--axes` | all | all | a |
+| 2 all tools | FLAM `--flam-hop-sec` | 5 | default (none) | – |
+| 2 all tools | Synchformer section | action window (`synchformer_action_1030`) | anchor-time window (`synchformer_gen_1030`) | – |
+| 2 all tools | AVoCaDO captions | fps 2, plain | fps 8, plain | – |
+| 3 routing | run before | no | 220 only (10/30) | – |
+
+**Does the event-time field change stage-1 labels on the generated sets?** No new calls; existing runs only. There is no
+same-day pair with the field on and off (the field first existed on 10/30, and every 10/30 generated media-only run has it on).
+The closest comparison is the 10/27 media-only run (off) against the 10/30 row 1 (on), on the 220 test items (35 per model;
+AVB 24 LTX / 21 MOVA rows with a label in both). The field changes the V and AVB user prompts on every item; the A and
+compliance prompts are byte-identical; the TCR / TCC prompts differ only in the list of eligible events (21 items), which
+follows from the upstream labels, never in the field text.
+
+| model | axis | flips off vs on | flip rate | same-day flip rate (10/28 reps) | acc off → on | bound |
+|---|---|---|---|---|---|---|
+| LTX | A (prompt unchanged) | 4 / 34 | .12 | .06 | .79 → .79 | .06 |
+| LTX | V | 5 / 35 | .14 | .00 | .74 → .77 | .00 |
+| LTX | AVB | 8 / 24 | .33 | .15 | .50 → .75 | .12 |
+| MOVA | A (prompt unchanged) | 6 / 34 | .18 | .06 | .82 → .76 | .06 |
+| MOVA | V | 4 / 35 | .11 | .06 | .83 → .94 | .06 |
+| MOVA | AVB | 4 / 21 | .19 | .14 | .52 → .43 | .14 |
+
+V and AVB labels change between the two runs more often than the same-day flip rate. But A, whose prompt is identical in
+both runs, also flips at two to three times its same-day rate across these days. The comparison therefore cannot separate
+the field from day-to-day change: no result. A same-day run with the field off and on would be needed to answer it.
+Details: `docs/status/event_time_field_2026-11-02.md`.
 
 **Tables.**
 
@@ -133,6 +164,28 @@ file keeps its 10/30 column name `row5_rule_batch`; its thresholds follow `--avb
   |Δacc| ≤ bound is no result. P03–P09 uses the P01/P02 values; the 149 has no measured bound ("no bound").
 - **Fixed / broken** vs row 1, with broken PASS rows; **AVB operating points**: recall on shifted rows vs false alarms on originals.
 
+## AVoCaDO captions (GPU, qrsh)
+
+```bash
+qrsh -pe omp 4 -l gpu_memory=48G -l gpu_c=8.0          # the recorded 48 GB request; or an 80 GB A100
+t2av-eval evidence captions -- --target gen149 --hardware a100_80g --name gen149_caps
+```
+
+`t2av_eval.evidence.captions_gen` holds the caption runner (moved from `run_qwen3_captions.py`) and a job entry that runs it in
+the `qwen3_cap` env with the recorded settings of each target (`config/captions_gen.yaml`): fps 8 plain for the generated sets,
+fps 2 plain for HD-EPIC, AVoCaDO full frame, greedy (`--sample-seed` for the screening samples). Output goes to a new dir
+`WORK/captions/<name>_<YYYYMMDD>/`; existing caption files are never written. Hardware profiles, as recorded:
+
+| profile | recorded | settings |
+|---|---|---|
+| `a100_80g` | scc-212, NVIDIA A100 80GB PCIe (10/31 149 and P03–P09 captions, the ones the tables use; 11/02 hdmove run); the qrsh request line was not recorded | no extra env |
+| `gpu_48g` | `qrsh -pe omp 4 -l gpu_memory=48G -l gpu_c=8.0` (job 8386642, 11/01); ran on scc-502, NVIDIA L40S 46 GB; the hdmove captions of row 2 | `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` |
+| `a6000_session` | 10/31 fallback, RTX A6000 46 GB, peak 19.6–20.4 GB; not used by the tables | same, `OMP_NUM_THREADS=2` |
+
+Captions are byte-identical on a repeat on the same GPU but differ across GPU hardware (10/31: similarity .16–.91 to captions
+made on other hardware), so each run README records the GPU from `nvidia-smi`. The recorded job scripts are in
+`legacy/evaluation/ablation/captions/`.
+
 ## Tool screening
 
 `t2av-eval screen clap | imagebind | vqascore | qwen3s` (qrsh). Each tool's FAIL threshold is the value at which 5% of the
@@ -151,9 +204,10 @@ t2av-eval controller choose --backend openai --prompt controller_prompt.yaml --i
 ```
 
 The prompt file holds `system` and `user` (with `{text}`); inputs are JSONL `{id, text}`; choices land in `choices.jsonl` with
-the stage-3 schema `{event_id, axis, action, window, question, stop}`. The OpenAI backend (the GPT-6 Astra tier, key
-`OPENAI_API_KEY`, no service-tier override) refuses to start until `model` (the exact dated id) and `reasoning_effort` (the
-lowest the model accepts) are filled in `config/controller.yaml`.
+the stage-3 schema `{event_id, axis, action, window, question, stop}`. OpenAI backend: `gpt-6-astra` (the API has no dated
+snapshot; its listing date 2026-08-27 goes into every controller run README), reasoning effort `low` (the lowest the model
+accepts), key `OPENAI_API_KEY`, no service-tier override, no temperature (the model rejects it). The Gemini backend uses
+gemini-3.6-flash, thinking high, temperature 0, seed 42.
 
 ## Run dirs
 
@@ -185,6 +239,4 @@ module. Their main-checkout paths go through `T2AV_LEGACY_ROOT` (default `<repo>
 
 ## Open items
 
-- The AVoCaDO caption jobs (`evaluation/ablation/captions/avocado_*.sh` in the main checkout) are not in the package; it reads
-  the caption json files they produced.
 - MediaPipe pose evidence and the OpenAI / local media-judge backends stay in `legacy/` (not used by the main table).
