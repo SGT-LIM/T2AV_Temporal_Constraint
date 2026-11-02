@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/media/common.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Shared infrastructure for the agentic (per-axis) T2AV evaluator.
 
 This module owns everything that is axis-agnostic:

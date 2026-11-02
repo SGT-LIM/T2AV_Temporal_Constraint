@@ -30,8 +30,8 @@ MAX_RETRIES = 3
 #     sys.path.insert(0, _GEMINI_DIR)
 
 import new_eval as NE
-import agentic_common as AC
-from agentic_common import build_context
+from t2av_eval.judge.media import common as AC
+from t2av_eval.judge.media.common import build_context
 from t2av_eval.judge.media.orchestrator import evaluate_video_agentic
 
 

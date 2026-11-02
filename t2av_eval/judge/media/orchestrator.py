@@ -27,7 +27,7 @@ import json
 from typing import Dict, List
 
 import new_eval as NE
-from agentic_common import EvalContext, CORE_AXIS_KEYS
+from t2av_eval.judge.media.common import EvalContext, CORE_AXIS_KEYS
 from t2av_eval.judge.media.axes import audio as axis_audio
 from t2av_eval.judge.media.axes import visual as axis_visual
 from t2av_eval.judge.media.axes import binding as axis_binding
