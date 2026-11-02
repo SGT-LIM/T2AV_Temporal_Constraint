@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/stage2/obs_judge.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Observation validation (pipeline v4 §4 step 4), 10/28. Two-stage KEEP/REVISE judge with ONE observation per call.
 
 Every observation call gets: the item criteria for one axis, the SAME-DAY media-only anchor verdicts and reasons (all

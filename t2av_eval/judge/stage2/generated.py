@@ -42,7 +42,7 @@ import numpy as np, pandas as pd
 HERE = Path(__file__).resolve().parent
 ABL = HERE.parent
 pass  # (legacy sys.path insert removed); pass  # (legacy sys.path insert removed)
-import obs_judge_1028 as O
+from t2av_eval.judge.stage2 import obs_judge as O
 
 EV = Path((str(_P.DATA) + "/tools/gen_evidence_1030"))
 SYNC = Path((str(_P.DATA) + "/tools/synchformer_gen_1030"))
