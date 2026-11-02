@@ -5,7 +5,6 @@ order_swap + originals with neighbouring events >= 1.0 s (item level); TCC: P01/
 originals (item level). stage1_lookup rule (rep_scoring.row_label).
   python gepa_stage2/hd_rows_score_1101.py   -> runs/obsval_1028/hd_rows_table_1101.csv
 """
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 from t2av_eval import paths as _P
 import json, sys
 from pathlib import Path
@@ -15,7 +14,7 @@ HERE = Path(__file__).resolve().parent
 pass  # (legacy sys.path insert removed); pass  # (legacy sys.path insert removed)
 from t2av_eval.scoring import lookup as RS
 from t2av_eval.judge.stage2 import hdepic as H
-import screen_common_1031 as SC
+from t2av_eval.gate import reliability as SC
 
 R = Path((str(_P.DATA) + "/real_av/eval/results"))
 RUNS = {"row1": "hdepic_main_row1_anchor_g36_1101", "row2": "hdepic_main_row2_onecall_sync_g36_1101"}

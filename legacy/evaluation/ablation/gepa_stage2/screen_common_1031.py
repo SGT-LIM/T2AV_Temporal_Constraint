@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/gate/reliability.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Shared rows / thresholds / report for the tool screening (CLAP, ImageBind, VQAScore, Qwen 3-sample), 10/31. No judge calls.
 
 Sets:
