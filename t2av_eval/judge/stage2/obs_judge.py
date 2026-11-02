@@ -512,7 +512,7 @@ def anchor_df(source):
 def anchor_entries(source, item_id, axis):
     """same-day anchor per-event entries (all non-gated events of this axis; GT ids are NOT used)."""
     import run_two_stage as TS
-    from adapter import AXIS_FULL
+    from t2av_eval.judge.stage2.adapter import AXIS_FULL
     df = anchor_df(source)
     with _LOCK:
         TS.STAGE1 = df
@@ -521,7 +521,7 @@ def anchor_entries(source, item_id, axis):
 
 
 def criteria_text(meta, axis):
-    from adapter import CRITERIA
+    from t2av_eval.judge.stage2.adapter import CRITERIA
     if axis in ("TCR", "TCC"):
         return CRITERIA[axis](meta["events"], meta.get("temporal_constraint") or meta.get("constraint"))
     return CRITERIA[axis](meta["events"])
@@ -579,7 +579,7 @@ def obs_block(r):
 def build_call(r):
     from t2av_eval.judge.media import core as NE
     import run_two_stage as TS
-    from adapter import AXIS_FULL
+    from t2av_eval.judge.stage2.adapter import AXIS_FULL
     meta = meta_for(r["source"], r["item_id"])
     axis = AXIS_FULL[r["axis"]]
     ent = anchor_entries(r["source"], r["item_id"], r["axis"])

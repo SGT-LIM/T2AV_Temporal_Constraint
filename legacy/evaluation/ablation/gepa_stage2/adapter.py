@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/stage2/adapter.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """GEPA adapter: one candidate = one STAGE2_RULES text block; one metric call = one stage-2 judge call on (item, axis).
 
 What a metric call does (mirrors run_two_stage.py exactly, minus gating):
