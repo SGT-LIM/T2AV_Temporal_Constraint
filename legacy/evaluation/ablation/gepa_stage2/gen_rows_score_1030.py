@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/scoring/generated_rows.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Score the full-video rows of the generated block (rows 1, 2, 2b, 3), 10/30. No calls.
 stage1_lookup rule (rep_scoring.row_label), per set / model / axis; 220 GT = manifests_v3 ltx / mova, 149 GT = gt_gen149 (majority).
 TCR on the 149 is printed with its Fleiss kappa (.03) and is not interpreted.
