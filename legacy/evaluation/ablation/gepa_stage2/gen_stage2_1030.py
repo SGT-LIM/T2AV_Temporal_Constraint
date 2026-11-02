@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/judge/stage2/generated.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Generated block, stage 2 (rows 4, 5 and framing), 10/30. Text-only KEEP/REVISE calls through obs_judge_1028 (same OBS_RULES,
 same stage-1 block, same call settings: gemini-3.6-flash, thinking high, temperature 0, seed 42). Stage 1 = row 1 anchor.
 

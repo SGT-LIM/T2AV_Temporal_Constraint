@@ -35,7 +35,7 @@ HERE = Path(__file__).resolve().parent
 ABL = HERE.parent
 pass  # (legacy sys.path insert removed); pass  # (legacy sys.path insert removed)
 import obs_judge_1028 as O
-import gen_stage2_1030 as G
+from t2av_eval.judge.stage2 import generated as G
 
 E = Path((str(_P.DATA) + "/real_av/eval"))
 V = E / "hdepic_main_1101"
