@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/data/mute_anchor.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """HD-EPIC "mute_anchor" variant (10/28). Data only, no judge calls.
 
 Anchors = clean action-sound pairs from real_av_pilot/build_items.py (find_anchors, imported, not copied): verb class
