@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/data/mute_class.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """HD-EPIC "mute_class" audio variant (10/28). Data only, no judge calls.
 
 For each (clip, class) pair, EVERY annotated interval of that HD-EPIC-Sounds class inside the 25 s clip is replaced by
