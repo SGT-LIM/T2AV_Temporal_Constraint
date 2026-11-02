@@ -8,6 +8,7 @@ rep1 vs rep2 across days). Refuses to overwrite --out.
   python gepa_stage2/oracle_headroom.py
   python gepa_stage2/oracle_headroom.py --one-call-hd results/hdepic_medium_multi_tools_wf_hop5_g36
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import argparse, glob, json, sys
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -15,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import rep_scoring as RS
 
 HELD = "gepa_stage2/runs/v3_test/heldout_v3.csv"
-R = "/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent"
+R = (_LEGACY_ROOT + "/eval_results/multi_agent")
 V220, T220 = f"{R}/baseline_min3_g36_1027", f"{R}/tools_min3_g36_1027"
 COL = {"A": "audio_event_correctness", "V": "visual_event_correctness", "AVB": "audio_visual_binding",
        "TCR": "temporal_relation_satisfaction", "TCC": "temporal_count_satisfaction"}

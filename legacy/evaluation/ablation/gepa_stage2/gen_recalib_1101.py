@@ -13,6 +13,7 @@ row 4 = the G4 call with the tool text):
                   admitted FLAM lines (a new call when that text differs); here the row 4 call (all lines) stands in.
 Both threshold sets: recalibrated (per seed) and real-video (1.8 s / .25 / .2705). Reported: median and range over seeds.
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import json, sys
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -23,13 +24,13 @@ import gen_stage2_1030 as G
 import rep_scoring as RS
 
 SYNC = Path("/projectnb/ivc-ml/youngsun/T2AV_data/tools/synchformer_gen_1030")
-DOC = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/docs/gen_recalibration_1101.md")
+DOC = Path((_LEGACY_ROOT + "/docs/gen_recalibration_1101.md"))
 REAL = dict(T=1.8, P=0.25, F=0.2705)
 SEEDS = range(20)
 
 
 def main():
-    D = pd.read_csv(HERE / "runs/obsval_1028/gen_stage2_rows_1030.csv").fillna("")
+    D = pd.read_csv(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028/gen_stage2_rows_1030.csv").fillna("")
     D = D[D.axis.isin(["A", "AVB"])].copy()
     D["batch"] = D["set"].astype(str) + "-" + D["model"]
     D["item_id"] = D.uid.str.split("|").str[1]
@@ -80,8 +81,8 @@ def main():
                 m = RS.metrics(g.y, g.row1)
                 res.append(dict(seed=seed, thresholds="-", batch=b, axis=ax, cond="row 1", n=m["n"], n_fail=m["n_fail"], open=0, acc=m["acc"], prec=m["prec"], rec=m["rec"]))
     TH, R = pd.DataFrame(ths), pd.DataFrame(res)
-    TH.to_csv(HERE / "runs/obsval_1028/gen_recalib_thresholds_1101.csv", index=False)
-    R.to_csv(HERE / "runs/obsval_1028/gen_recalib_results_1101.csv", index=False)
+    TH.to_csv(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028/gen_recalib_thresholds_1101.csv", index=False)
+    R.to_csv(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028/gen_recalib_results_1101.csv", index=False)
     q = lambda s: f"{np.nanmedian(s):.2f} [{np.nanmin(s):.2f}, {np.nanmax(s):.2f}]" if s.notna().any() else "–"
     L = ["# Generated-set threshold recalibration check (2026-11-01, no judge calls)", "",
          "Script `evaluation/ablation/gepa_stage2/gen_recalib_1101.py`; per-seed tables in `runs/obsval_1028/gen_recalib_*_1101.csv`.", "",

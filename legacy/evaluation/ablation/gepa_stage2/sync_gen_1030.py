@@ -13,6 +13,7 @@ Label-free batch thresholds (change i): per batch (220-LTX, 220-MOVA, 149), over
   T_batch = median + 2.44 * MAD(|offset|), P_batch = median + 2.44 * MAD(probability); 2.44 = 1.645 * 1.4826, nothing fitted.
 The labeled T_tool = 1.8 s / P_tool = .25 (PREREGISTERED_RULE.json) is kept for comparison; |T_batch - T_tool| > 0.2 s is flagged.
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import os
 for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMBA_NUM_THREADS"):
     os.environ[_v] = "4"
@@ -25,7 +26,7 @@ ABL = HERE.parent
 sys.path.insert(0, str(HERE)); sys.path.insert(0, str(ABL))
 OUT = Path("/projectnb/ivc-ml/youngsun/T2AV_data/tools/synchformer_gen_1030")
 RULE = Path("/projectnb/ivc-ml/youngsun/T2AV_data/tools/synchformer_action_1030/PREREGISTERED_RULE.json")
-R1 = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent/gen_row1_anchor_g36_1030")
+R1 = Path((_LEGACY_ROOT + "/eval_results/multi_agent/gen_row1_anchor_g36_1030"))
 CLIP = 5.04
 
 

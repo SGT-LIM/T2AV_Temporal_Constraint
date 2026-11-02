@@ -5,12 +5,13 @@
   python evaluation/ablation/patch_local_backend.py
 Backups: <file>.bak_local
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[3] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[0])  # legacy path roots, see legacy/README.md
 import re, shutil, sys
 from pathlib import Path
 
-ROOT = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint")
-AC = ROOT / "evaluation/ablation/agentic_common.py"
-RAE = ROOT / "evaluation/ablation/run_agentic_eval.py"
+ROOT = Path(_LEGACY_ROOT)
+AC = _pl.Path(_LEGACY_CODE) / "agentic_common.py"
+RAE = _pl.Path(_LEGACY_CODE) / "run_agentic_eval.py"
 SH = ROOT / "eval_results/scripts/run_parallel_multi.sh"
 
 

@@ -9,10 +9,11 @@
 #   here (whole process groups), write HOLD with the reason, start nothing more. GPU jobs make no Gemini calls and keep running.
 #   A probe error other than 429 is retried 3 times, 5 min apart, then HOLD.
 # Log: $W/auto_0800_1102.out; README and HOLD in $W.
+LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGACY_ROOT:-$(cd "$LEGACY_CODE/../../.." && pwd)/legacy_root}  # legacy path roots, see legacy/README.md
 set -u
 export PATH=/projectnb/ivc-ml/youngsun/conda_envs/t2av_eval/bin:$PATH
 export GEMINI_API_KEY=$(cat ~/.gemini_key)
-ABL=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation; GS=$ABL/gepa_stage2; G=$GS/runs/obsval_1028
+ABL=$LEGACY_CODE; GS=$ABL/gepa_stage2; G=$LROOT/evaluation/ablation/gepa_stage2/runs/obsval_1028
 W=$G/auto_0800_1102; mkdir -p $W
 R=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/results
 AVB1=$R/hdepic_avbadd_row1_anchor_g36_1102

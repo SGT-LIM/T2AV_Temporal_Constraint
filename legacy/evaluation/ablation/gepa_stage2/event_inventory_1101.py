@@ -9,6 +9,7 @@ Items: P01/P02 = all 194 hdepic windows (items_hdepic_medium_with_clips_v2.json;
   TCR  verbs / nouns of the events in windows whose order swap passes the 1.0 s gap rule
   TCC  verbs / nouns of the counted events (P01/P02: movement set; P03-P09: count_off windows)
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import json, re, sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -20,12 +21,12 @@ import filters
 PILOT = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_pilot/items_hdepic_medium_with_clips_v2.json")
 HO = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_holdout_p3p9_1028/items_hdepic_p3p9_v1_with_clips_holdout.json")
 MOVE = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/hdepic_move_prompts.json")
-OUT = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/docs/event_inventory_1101.md")
+OUT = Path((_LEGACY_ROOT + "/docs/event_inventory_1101.md"))
 W = lambda i: re.search(r"(P\d+-\d+-\d+_\d+)", i).group(1)
 
 
 def main():
-    man = [json.loads(l) for l in open(HERE / "manifests_v3/test.jsonl")]
+    man = [json.loads(l) for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "manifests_v3/test.jsonl")]
     # 11/01 option (ii): P01/P02 = all 194 windows (the table now uses every P01/P02 window under the P03-P09 rules)
     items = json.load(open(PILOT)) + json.load(open(HO))
     inv = defaultdict(Counter)          # (axis, kind, participant) -> Counter(type)

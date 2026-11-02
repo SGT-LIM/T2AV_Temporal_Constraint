@@ -26,6 +26,7 @@ Verdicts (tool says PASS / FAIL; FAIL = positive class), only on rows where the 
 "Order error" = share of GT-PASS determined order rows where the tool order differs from the prompt order (the quantity that
 was 37% for Qwen on the HD-EPIC originals).
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import json, re, sys
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -34,10 +35,10 @@ HERE = Path(__file__).resolve().parent
 ABL = HERE.parent
 EV = Path("/projectnb/ivc-ml/youngsun/T2AV_data/tools/gen_evidence_1030")
 G149 = Path("/projectnb/ivc-ml/youngsun/T2AV_data/gen_holdout_149_1030")
-REL500 = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/new_prompts/generated/relative_500_v5_fixed.json")
-CAP = {("220", "LTX_2p3"): ABL / "captions/avocado_fps8_plain_v3_LTX_2p3.json", ("220", "MOVA"): ABL / "captions/avocado_fps8_plain_v3_MOVA.json",
-       ("149", "LTX_2p3"): ABL / "captions/avocado_fps8_plain_v3_gen149.json"}
-OUT = HERE / "runs/obsval_1028"
+REL500 = Path((_LEGACY_ROOT + "/new_prompts/generated/relative_500_v5_fixed.json"))
+CAP = {("220", "LTX_2p3"): _pl.Path(_LEGACY_ROOT, "evaluation/ablation") / "captions/avocado_fps8_plain_v3_LTX_2p3.json", ("220", "MOVA"): _pl.Path(_LEGACY_ROOT, "evaluation/ablation") / "captions/avocado_fps8_plain_v3_MOVA.json",
+       ("149", "LTX_2p3"): _pl.Path(_LEGACY_ROOT, "evaluation/ablation") / "captions/avocado_fps8_plain_v3_gen149.json"}
+OUT = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028"
 FRAME = 0.3125
 NUM = {"once": 1, "one": 1, "twice": 2, "two": 2, "thrice": 3, "three": 3, "four": 4, "five": 5, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5}
 STOP = set("a an the of on in into onto with to from at by for and or his her their its this that it up down off out over hand sign".split())
@@ -57,7 +58,7 @@ def norm(t):
 def rows():
     out = []
     P = {x["item_id"]: x for x in json.load(open(REL500))}
-    man = [json.loads(l) for s in ("train", "val", "test") for l in open(HERE / f"manifests_v3/{s}.jsonl")]
+    man = [json.loads(l) for s in ("train", "val", "test") for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / f"manifests_v3/{s}.jsonl")]
     for m in man:
         if m["source"] in ("ltx", "mova") and m["axis"] in ("TCR", "TCC"):
             out.append(dict(set="220", model={"ltx": "LTX_2p3", "mova": "MOVA"}[m["source"]], item_id=m["item_id"], axis=m["axis"],

@@ -6,6 +6,7 @@ builder would cut for the pair (start 5 s before the action; window_s 25), 16 kH
 0.2 s before the water sound ends. Pass = dB >= 20.
   python gepa_stage2/eligible_class_table_1101.py   -> runs/obsval_1028/eligible_pairs_1101.csv, docs/event_inventory_1101.md section
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import importlib.util, subprocess, sys
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -17,7 +18,7 @@ import make_mute_anchor as MA
 PILOT = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_pilot")
 VID = {p: Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/hdepic/videos") if p in ("P01", "P02") else
        Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/hdepic/videos_P03_P09") for p in [f"P0{k}" for k in range(1, 10)]}
-DOC = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/docs/event_inventory_1101.md")
+DOC = Path((_LEGACY_ROOT + "/docs/event_inventory_1101.md"))
 SR, W, PAD = 16000, 25.0, 5.0
 
 
@@ -46,7 +47,7 @@ def main():
         print(f"[eligible] {vid}: {len(g)} pairs", flush=True)
     anc["db"] = pd.Series(dict(dbs))
     anc["pass20"] = anc.db >= 20
-    anc.to_csv(HERE / "runs/obsval_1028/eligible_pairs_1101.csv", index=False)
+    anc.to_csv(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028/eligible_pairs_1101.csv", index=False)
     T = anc.groupby(["sound", "participant"]).agg(n=("db", "size"), k=("pass20", "sum"))
     elig = anc[~anc.excluded]
     shown = elig.groupby("sound").pass20.sum()

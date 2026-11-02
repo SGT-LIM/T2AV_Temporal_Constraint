@@ -7,6 +7,7 @@ Settings recovered from the release (README + the `prompt` / `model` / `fps` fie
   a reply with >= 20 spans for one action = repetition loop -> re-run once with repetition_penalty 1.1.
   Prompt (HD-EPIC wording), byte-identical to the stored `prompt` fields:
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import os
 for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMBA_NUM_THREADS"):
     os.environ[_v] = "4"
@@ -97,7 +98,7 @@ def main():
         return
     # move set: v3 test hdmove TCC rows (count_off + original); one run per clip (same frames, same action list)
     items = {x["item_id"]: x for x in json.load(open("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/hdepic_move_prompts.json"))}
-    man = [json.loads(l) for l in open(Path(__file__).resolve().parent / "manifests_v3/test.jsonl")]
+    man = [json.loads(l) for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "manifests_v3/test.jsonl")]
     rows = [m for m in man if m["source"] == "hdmove" and m["axis"] == "TCC"]
     if a.reverse:
         rows = rows[::-1]

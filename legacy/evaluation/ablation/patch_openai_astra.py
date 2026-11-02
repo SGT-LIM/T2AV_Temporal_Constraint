@@ -4,10 +4,11 @@
 Changes: gpt-6* treated as reasoning model (reasoning_effort, no temperature); frame detail configurable
 (--frame-detail, default low); per-call usage line in the shard log; frame-fps default unchanged (pass --frame-fps 2).
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[3] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[0])  # legacy path roots, see legacy/README.md
 import shutil, sys
 from pathlib import Path
 
-ROOT = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation")
+ROOT = Path(_LEGACY_CODE)
 OJ, RAE, AC = ROOT / "openai_judge.py", ROOT / "run_agentic_eval.py", ROOT / "agentic_common.py"
 
 

@@ -6,13 +6,14 @@
 # calls / hour. Watchdog: if a shard logs a 429 RESOURCE_EXHAUSTED error, every shard process of this run is killed (python children
 # and this script's own subshells, not only the screen), the run waits 30 min, then relaunches; items already done are skipped
 # (new_eval.already_done) and the newer row wins at scoring. At most 8 cycles. Run date and every cycle go to the README.
+LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGACY_ROOT:-$(cd "$LEGACY_CODE/../../.." && pwd)/legacy_root}  # legacy path roots, see legacy/README.md
 set -u
 export PATH=/projectnb/ivc-ml/youngsun/conda_envs/t2av_eval/bin:/share/pkg.8/ffmpeg/8.1/install/bin:$PATH
 export LD_LIBRARY_PATH=/share/pkg.8/ffmpeg/8.1/install/lib:/share/pkg.8/cuda/12.8/install/lib64:${LD_LIBRARY_PATH:-}
 export GEMINI_API_KEY=$(cat ~/.gemini_key)
 env | grep -q '^GEMINI_API_KEY=.' || { echo "GEMINI_API_KEY missing"; exit 1; }
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=1
-ABL=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation
+ABL=$LEGACY_CODE
 A=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/hdepic_avbadd_1102
 RES=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/results
 declare -A NS=([p12]=3 [p3p9]=8)

@@ -19,6 +19,7 @@ caption_accuracy.py
 
 출력: --out 폴더에 per_event.csv, summary_presence.csv, summary_timing.csv
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[3] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[0])  # legacy path roots, see legacy/README.md
 import argparse
 import csv
 import glob
@@ -33,11 +34,11 @@ from collections import Counter, defaultdict
 csv.field_size_limit(sys.maxsize)
 
 ROOT = "/projectnb/ivc-ml/youngsun"
-DEF_CAPTIONS = f"{ROOT}/T2AV_Temporal_Constraint/evaluation/ablation/captions"
+DEF_CAPTIONS = f"{_LEGACY_ROOT}/evaluation/ablation/captions"
 DEF_SUBSET = f"{ROOT}/T2AV_data/eval_subsets/min3"
 DEF_ANN = f"{ROOT}/T2AV_data/ann_analysis/per_annotation.csv"
 DEF_AUDIO_CACHE = f"{ROOT}/T2AV_data/audio_evidence_cache"
-DEF_OUT = f"{ROOT}/T2AV_Temporal_Constraint/eval_results/caption_accuracy"
+DEF_OUT = f"{_LEGACY_ROOT}/eval_results/caption_accuracy"
 DEF_GEMINI_CACHE = f"{DEF_OUT}/gemini_cache"
 
 # ----------------------------------------------------------------------------

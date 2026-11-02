@@ -12,6 +12,7 @@ GATE_OK if the rule breaks at most 5% of the B originals (round(0.05 * n_origina
 The same 5% criterion is pre-registered for the holdout originals.
   python gepa_stage2/gate_b110_v2_1030.py
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import json, time
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -28,7 +29,7 @@ def rows_with_readings():
     ok = pe[pe.status == "ok"].copy()
     ok["absoff"] = ok.offset.abs()
     best = ok.sort_values(["absoff", "prob"], ascending=False).drop_duplicates("item_id").set_index("item_id")
-    sc = pd.read_csv(HERE / "runs/obsval_1028/scores_rows.csv")
+    sc = pd.read_csv(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028/scores_rows.csv")
     a = sc[(sc["set"] == "B30") & (sc.cond == "anchor") & sc.pred.isin(["yes", "no"])][["uid", "variant", "y", "pred"]].copy()
     a["item_id"] = a.uid.str.split("|").str[1]
     a = a.join(best[["offset", "absoff", "prob"]], on="item_id")

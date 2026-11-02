@@ -6,12 +6,13 @@
   (3) TCC: Qwen occurrence count vs the true count (movement tracks) per action and per item.
   python gepa_stage2/tool_diag_1030.py      # prints markdown tables; writes runs/obsval_1028/tool_diag_1030_*.csv
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import importlib.util, json
 from pathlib import Path
 import numpy as np, pandas as pd
 
 HERE = Path(__file__).resolve().parent
-L = HERE / "runs/obsval_1028"
+L = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028"
 EV = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval")
 QW = Path("/projectnb/ivc-ml/youngsun/T2AV_data/tools/qwen_timestamps_1030")
 SY = Path("/projectnb/ivc-ml/youngsun/T2AV_data/tools/synchformer_1030")
@@ -111,7 +112,7 @@ def tcr():
 def tcc():
     gt = pd.read_csv(EV / "hdepic_move_gt.csv").set_index("item_id")
     M = {x["item_id"]: x for x in json.load(open(EV / "hdepic_move_prompts.json"))}
-    man = [json.loads(l) for l in open(HERE / "manifests_v3/test.jsonl")]
+    man = [json.loads(l) for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "manifests_v3/test.jsonl")]
     per_act, per_item = [], []
     for m in man:
         if m["source"] != "hdmove" or m["axis"] != "TCC":

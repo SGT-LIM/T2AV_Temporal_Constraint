@@ -24,6 +24,7 @@ Row 5 admission: A: a FLAM line only for an event whose first-query max score < 
   python gepa_stage2/hd_stage2_1101.py rows5 | framing | groups | score
   python gepa_stage2/obs_judge_1028.py run --set HG4|HG5|HFRb|HFRc --cond gen_tool_text --workers 12
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import argparse, json, sys, time
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -61,7 +62,7 @@ def gt_rows():
     import new_eval as NE
     from make_gt_v3 import ids_for, struct_for_prompt_event
     out = []
-    man = [json.loads(l) for l in open(HERE / "manifests_v3/test.jsonl")]
+    man = [json.loads(l) for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "manifests_v3/test.jsonl")]
     for m in man:
         if (m["source"] == "hdepic" and m["axis"] in ("A", "V", "AVB")) or (m["source"] == "hdfoot" and m["axis"] == "A"):
             src = "hm_" + m["source"]

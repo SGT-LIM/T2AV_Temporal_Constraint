@@ -21,6 +21,7 @@ Sets / conditions (user spec 10/28):
   python gepa_stage2/obs_judge_1028.py run --cond audio_only --workers 6 [--dry-run 3]
   python gepa_stage2/obs_judge_1028.py score
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import os
 for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMBA_NUM_THREADS"):
     os.environ[_v] = "4"
@@ -36,10 +37,10 @@ DAY = "1028"
 RA = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av")
 EV = RA / "eval"
 RES = EV / "results"
-R220 = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent")
+R220 = Path((_LEGACY_ROOT + "/eval_results/multi_agent"))
 MC = RA / "hdepic/hdepic_mute_class_1028"
 OBS = RA / "eval/obsval_1028"                       # new dir for this task's inputs (wavs, muted videos, subsets)
-OUT = HERE / "runs/obsval_1028"                     # rows, call cache, scores
+OUT = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028"                     # rows, call cache, scores
 # same-day media-only anchors (launched by launch_obsval_1028.sh)
 ANCHOR = {
     "hdepic": [RES / "hdepic_medium_multi_baseline_g36_obsval_1028", RES / "hdepic_regen_multi_baseline_g36_obsval_1028"],
@@ -74,8 +75,8 @@ PROMPTS = {"hdepic": EV / "hdepic_medium_prompts_v2.json", "hdmove": EV / "hdepi
            "hdma": MA / "prompts.json", "hdma29": MA / "prompts.json",
            "hdepic30": EV / "hdepic_medium_prompts.json", "hdmove30": EV / "hdepic_move_prompts.json",
            "hdho": Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_holdout_p3p9_1028/prompts_hdepic_p3p9.json"),
-           "g220ltx": Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/new_prompts/generated/relative_500_v5_fixed.json"),
-           "g220mova": Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/new_prompts/generated/relative_500_v5_fixed.json"),
+           "g220ltx": Path((_LEGACY_ROOT + "/new_prompts/generated/relative_500_v5_fixed.json")),
+           "g220mova": Path((_LEGACY_ROOT + "/new_prompts/generated/relative_500_v5_fixed.json")),
            "g149": Path("/projectnb/ivc-ml/youngsun/T2AV_data/gen_holdout_149_1030/prompts_gen149.json"),
            "hm_hdepic": EV / "hdepic_medium_prompts_v2.json", "hm_hdfoot": EV / "hdepic_medium_prompts.json",
            "hm_p3p9": Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_holdout_p3p9_1028/prompts_hdepic_p3p9.json"),
@@ -130,8 +131,8 @@ def stage_rows(a):
     bad = [c for c in classes if c not in SLUG]
     if bad:
         sys.exit(f"unknown classes {bad}; choose from {list(SLUG)}")
-    pan = {(r["mode"], r["variant"], r["item_id"]): r for r in jl(HERE / "panels_1028/manifest.jsonl")}
-    foc = {r["item_id"]: r for r in jl(HERE / "focus_1028/action_centred/manifest.jsonl")}
+    pan = {(r["mode"], r["variant"], r["item_id"]): r for r in jl(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "panels_1028/manifest.jsonl")}
+    foc = {r["item_id"]: r for r in jl(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "focus_1028/action_centred/manifest.jsonl")}
     rows = []
     # A
     vmap = {"mute_class": "mute_class", "sham": "mute_sham", "original": "mute_original"}
@@ -151,7 +152,7 @@ def stage_rows(a):
             p = pan[(m, vmap[r["variant"]], r["item_id"])]
             rows.append({**base, "cond": m, "obs": {"png": p["panel"], "span": p["span"], "peaks": p.get("peaks"), "fallback": p.get("fallback")}})
     # B / C from the v3 test manifest
-    for m in jl(HERE / "manifests_v3/test.jsonl"):
+    for m in jl(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "manifests_v3/test.jsonl"):
         if m["source"] == "hdepic" and m["axis"] == "AVB":
             st, pv = "B", {"original": "avb_original", "audio_shift_early": "avb_shift_early", "audio_shift_late": "avb_shift_late"}[m["variant"]]
         elif (m["source"] == "hdepic" and m["axis"] == "TCR") or (m["source"] == "hdmove" and m["axis"] == "TCC"):
@@ -170,7 +171,7 @@ def stage_rows(a):
                 p = pan[(c, pv, m["item_id"])]
                 rows.append({**base, "cond": c, "obs": {"png": p["panel"], "span": p["span"], "peaks": p.get("peaks"), "fallback": p.get("fallback")}})
     # D: V rows (scored from the muted run vs the anchor; no observation call)
-    for m in jl(HERE / "manifests_v3/test.jsonl"):
+    for m in jl(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "manifests_v3/test.jsonl"):
         if m["axis"] == "V" and m["source"] in ("hdepic", "ltx", "mova"):
             base = dict(set="D", source=m["source"], uid=m["uid"], item_id=m["item_id"], axis="V", variant=m["variant"], gt=m["gt"],
                         clip=m.get("split_key"))
@@ -189,7 +190,7 @@ def a2_rows():
     the three variants of one anchor (taken from the mute_anchor row)."""
     man = jl(MA / "manifest.jsonl")
     win = {(r["clip"], r["nid"]): [round(r["sound"][0] - 2.0, 3), round(r["sound"][1] + 2.0, 3)] for r in man if r["variant"] == "mute_anchor"}
-    pdir = HERE / "panels_1028"
+    pdir = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "panels_1028"
     rows = []
     for r in man:
         cls = ANCHOR_SOUND[r["aclass"]]
@@ -237,7 +238,7 @@ def stage_prep_a2(a):
             r["obs"].update(span=i["span"], peaks=i.get("peaks"), fallback=i.get("fallback"))
     allrows = [r for r in jl(OUT / "rows.jsonl") if r["set"] != "A2"] + rows
     wjl(OUT / "rows.jsonl", allrows)
-    wjl(HERE / "panels_1028" / "manifest_mute_anchor.jsonl", [dict(uid=u, cond=c, **i) for u, c, i in info])
+    wjl(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "panels_1028" / "manifest_mute_anchor.jsonl", [dict(uid=u, cond=c, **i) for u, c, i in info])
     # FLAM over the whole clip, class query, 10 s windows hop 5 s (same wrapper and settings as the mute_class residual check)
     sys.path.insert(0, str(ABL / "Tool_Use"))
     import flam_audio as FA

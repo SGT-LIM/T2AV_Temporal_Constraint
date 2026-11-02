@@ -1,8 +1,9 @@
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 # writes gepa_stage2/sources_v3.json from the existing sources.json (run from evaluation/ablation)
 import json
 s = json.load(open("gepa_stage2/sources.json"))
 E = "/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval"
-R = "/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent/baseline_min3_g36/rep1"
+R = (_LEGACY_ROOT + "/eval_results/multi_agent/baseline_min3_g36/rep1")
 hd = s["hdepic"]; med = [f"{E}/hdepic_medium_shard{i}" for i in range(6)]
 out = {
   "hdepic": dict(prompt_json=f"{E}/hdepic_medium_prompts_v2.json", outputs_dirs=med, caption_json=hd["caption_json"],

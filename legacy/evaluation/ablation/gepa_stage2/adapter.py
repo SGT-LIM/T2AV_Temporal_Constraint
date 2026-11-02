@@ -13,6 +13,7 @@ sources.json (paths; one entry per source, see README):
   {"hdepic": {"prompt_json": ..., "outputs_dirs": [...], "stage1": <dir or csv>, "caption_json": ..., "flam_ckpt": ...},
    "ltx":    {...}, "mova": {...}}
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import hashlib, json, os, re, sys, threading, time, traceback
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -67,7 +68,7 @@ class Stage2Adapter:
         self.max_chars = max_chars or int(len(TS.SEED_RULES) * 1.5)
         (self.run_dir / "cache").mkdir(parents=True, exist_ok=True)
         # fresh stage-1 calls are shared by every run under gepa_stage2/, independent of rules
-        TS.FRESH_CACHE_DIR = Path(__file__).resolve().parent / "fresh_stage1_cache"
+        TS.FRESH_CACHE_DIR = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "fresh_stage1_cache"
         from google import genai
         self.client = genai.Client()
         self._lock = threading.Lock()

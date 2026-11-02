@@ -2,11 +2,12 @@
 # Watch the B30 / C30 TCR chain running under old job 8343460. If it finishes there, do nothing. As soon as that job ends or its
 # obsv_BC30 screens die (whichever first), relaunch the SAME commands from this job: unfinished anchor shards (run_agentic_eval
 # skips items already in the CSV), then the 4 observation runs (calls already cached are skipped). New log names (_r); old logs kept.
+LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGACY_ROOT:-$(cd "$LEGACY_CODE/../../.." && pwd)/legacy_root}  # legacy path roots, see legacy/README.md
 OLD=8343460
-CODE=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation
+CODE=$LEGACY_CODE
 E=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval
 SUB=$E/obsval_1028/BC30_medium_subset; OUT=$E/results/hdepic_medium_BC_baseline_g36_obsval_1030; PJ=$E/hdepic_medium_prompts.json
-L=$CODE/gepa_stage2/runs/obsval_1028
+L=$LROOT/evaluation/ablation/gepa_stage2/runs/obsval_1028
 COMMON="--model gemini-3.6-flash --thinking-level high --pose-evidence-mode none --audio-evidence-mode none --caption-evidence-mode none"
 OBS_SPECS="B30:synchformer_text B30:qwen_ts_text B30:qwen_plus_synchformer_text C30:qwen_ts_text"
 obs_done() { for sc in $OBS_SPECS; do st=${sc%%:*}; c=${sc#*:}; grep -q "^\[DONE\] $c" $L/run_${st}_$c.log 2>/dev/null || grep -q "^\[DONE\] $c" $L/run_${st}_${c}_r.log 2>/dev/null || return 1; done; return 0; }

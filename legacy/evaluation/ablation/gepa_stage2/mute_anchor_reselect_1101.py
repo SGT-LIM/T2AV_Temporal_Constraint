@@ -7,6 +7,7 @@ P01/P02: the existing 11/01 rows 1 / 4 / 5 (runs/obsval_1028/hd_ma_rows_1101.csv
 (mute_anchor + its sham + its original). P03-P09: the selection is compared with the 40 anchors built by build_p3p9.
   python gepa_stage2/mute_anchor_reselect_1101.py
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import json, sys
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -18,7 +19,7 @@ import rep_scoring as RS
 
 M12 = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/hdepic/hdepic_mute_anchor_1028")
 HO = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_holdout_p3p9_1028")
-OUT = HERE / "runs/obsval_1028"
+OUT = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028"
 
 
 def main():

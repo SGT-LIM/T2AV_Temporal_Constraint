@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Deepti 10/21: 220 two-stage vs video only, event level, no API calls (2026-10-25)."""
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import json, re
 from pathlib import Path
 import pandas as pd
 
-R = "/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent"
+R = (_LEGACY_ROOT + "/eval_results/multi_agent")
 RUNS = {"video": "baseline_min3/{m}_agentic_pure_gemini.csv",
         "oneshot": "tools_wf_avocado_min3/{m}_agentic_wf_avocado.csv",
         "two": "two_stage_min3/rep1/{m}_agentic_two_stage.csv"}

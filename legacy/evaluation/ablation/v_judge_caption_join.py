@@ -10,12 +10,13 @@ Outputs -> eval_results/v_caption_join/
     table_c_transition.csv          baseline right/wrong x caption right/wrong, per kind (majority over reps)
     flips_rationale.csv             per-event dump of flipped events with baseline and caption reasons + keyword tags
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[3] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[0])  # legacy path roots, see legacy/README.md
 import csv, sys, glob, os, re
 from collections import defaultdict, Counter
 import statistics as st
 
 csv.field_size_limit(sys.maxsize)
-os.chdir("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results")
+os.chdir((_LEGACY_ROOT + "/eval_results"))
 OUT = "v_caption_join"; os.makedirs(OUT, exist_ok=True)
 
 MODELS = ["LTX_2p3", "MOVA"]

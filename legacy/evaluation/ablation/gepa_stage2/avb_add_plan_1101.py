@@ -8,6 +8,7 @@ finds a clean shift) + the original (only when the window has a shift). The >= 2
 make_mute_anchor.db_reimpl >= 20 on the 25 s builder window (eligible_pairs_1101.csv), reported as its own table line.
   python gepa_stage2/avb_add_plan_1101.py   -> runs/obsval_1028/avb_add_items_1101.json, avb_add_plan_1101.json
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import importlib.util, json, subprocess, sys
 from collections import Counter
 from pathlib import Path
@@ -17,7 +18,7 @@ HERE = Path(__file__).resolve().parent
 PILOT = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_pilot")
 HO = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_holdout_p3p9_1028")
 V12 = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/hdepic/videos")
-OUT = HERE / "runs/obsval_1028"
+OUT = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028"
 GROUPS = {"P01P02": ["P01", "P02"], "P03P09": [f"P0{k}" for k in range(3, 10)]}
 CALLS_PER_ITEM = 5.26          # full-video pipeline, HD-EPIC (10/30 holdout logs)
 

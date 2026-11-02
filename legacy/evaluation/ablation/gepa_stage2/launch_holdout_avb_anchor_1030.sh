@@ -1,9 +1,10 @@
 #!/bin/bash
 # P03-P09 HOLDOUT, AVB shift_early / shift_late + their originals (785 items): same-day media-only anchor, run on scc1 (login node).
 # usage (on scc1): bash launch_holdout_avb_anchor_1030.sh dry|run
+LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGACY_ROOT:-$(cd "$LEGACY_CODE/../../.." && pwd)/legacy_root}  # legacy path roots, see legacy/README.md
 set -euo pipefail
 MODE=${1:-dry}
-CODE=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation
+CODE=$LEGACY_CODE
 HO=/projectnb/ivc-ml/youngsun/T2AV_data/real_av_holdout_p3p9_1028
 SUB=$HO/eval_avb_subset_1030; PJ=$HO/prompts_hdepic_p3p9.json
 OUT=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/results/hdepic_holdout_p3p9_AVB_baseline_g36_1030

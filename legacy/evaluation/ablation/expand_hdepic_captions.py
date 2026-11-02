@@ -7,10 +7,11 @@ existing external caption JSONs: {relpath: {"caption": str, ...}}.
 
   python expand_hdepic_captions.py
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[3] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[0])  # legacy path roots, see legacy/README.md
 import json, os
 import pandas as pd
 
-CODE = "/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation"
+CODE = _LEGACY_CODE
 GT = "/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/hdepic_medium_gt.csv"
 SRC = [f"{CODE}/captions/avocado_fps2_plain_v3_hdepic_av.json", f"{CODE}/captions/avocado_fps2_plain_v3_hdepic_mute.json"]
 OUT = f"{CODE}/captions/avocado_fps2_plain_v3_hdepic_items.json"

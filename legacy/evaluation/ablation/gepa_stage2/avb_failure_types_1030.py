@@ -7,6 +7,7 @@ Per row, over the GT-'no' binding events: the reading with the largest |offset| 
 labels and reasons, and (149 only) each rater's AVB / A / V label and rationale for the event.
   python gepa_stage2/avb_failure_types_1030.py   -> runs/obsval_1028/avb_failure_rows_1030.csv, prints a 10-row sample (149) + all 220
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import glob, json, sys
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -48,7 +49,7 @@ def per_event(src, iid):
 def main():
     pe = pd.concat(pd.read_csv(f) for s in ("220", "149") for f in sorted((SYNC / s).glob("per_event_shard*.csv")))
     pe["absoff"] = pe.offset.abs()
-    man = [json.loads(l) for s in ("train", "val", "test") for l in open(HERE / f"manifests_v3/{s}.jsonl")]
+    man = [json.loads(l) for s in ("train", "val", "test") for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / f"manifests_v3/{s}.jsonl")]
     gts = [("g220ltx", "220", "LTX_2p3", m) for m in man if m["source"] == "ltx" and m["axis"] == "AVB"]
     gts += [("g220mova", "220", "MOVA", m) for m in man if m["source"] == "mova" and m["axis"] == "AVB"]
     gts += [("g149", "149", "LTX_2p3", json.loads(l)) for l in open("/projectnb/ivc-ml/youngsun/T2AV_data/gen_holdout_149_1030/gt_gen149.jsonl")
@@ -73,7 +74,7 @@ def main():
                          anchor_events=json.dumps({e: ev.get(e, {}) for e in fail_ev}),
                          raters=json.dumps({e: R.get((m["item_id"], e), []) for e in fail_ev}) if s == "149" else ""))
     D = pd.DataFrame(rows)
-    D.to_csv(HERE / "runs/obsval_1028/avb_failure_rows_1030.csv", index=False)
+    D.to_csv(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028/avb_failure_rows_1030.csv", index=False)
     for (s, model), g in D.groupby(["set", "model"]):
         print(f"\n== {s} {model}: {len(g)} GT-FAIL AVB rows with an anchor verdict; anchor says FAIL on {int((g.anchor == 'no').sum())}")
         print(f"   |offset| quantiles .5/.75/.9/max: {g.absoff.quantile([.5, .75, .9]).round(2).tolist()} / {g.absoff.max()}; "

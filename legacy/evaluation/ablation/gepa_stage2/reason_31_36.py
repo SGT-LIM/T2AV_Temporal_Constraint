@@ -2,13 +2,14 @@
 """No API calls. TC-Relation false alarms on GT-PASS items: Gemini 3.1 vs 3.6 (video only, multi-agent).
 HD-EPIC: originals, parents (A, V, AVB) judged PASS by both, neighbouring events >= 1 s apart. 220: human GT PASS videos.
   python gepa_stage2/reason_31_36.py | tee gepa_stage2/runs/reason_31_36.txt"""
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import glob, json, re, sys
 import pandas as pd
 sys.path.insert(0, "gepa_stage2")
 import filters
 
 E = "/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval"
-R = "/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent"
+R = (_LEGACY_ROOT + "/eval_results/multi_agent")
 RUNS = {"hdepic": (f"{E}/results/hdepic_medium_multi_baseline", f"{E}/results/hdepic_medium_multi_baseline_g36"),
         "ltx": (json.load(open("gepa_stage2/sources.json"))["ltx"]["stage1"], f"{R}/baseline_min3_g36/rep1/LTX_2p3_agentic_baseline.csv"),
         "mova": (json.load(open("gepa_stage2/sources.json"))["mova"]["stage1"], f"{R}/baseline_min3_g36/rep1/MOVA_agentic_baseline.csv")}

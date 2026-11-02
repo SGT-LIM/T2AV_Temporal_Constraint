@@ -2,9 +2,10 @@
 # 10/30 set C30T (TCC on the hdmove movement set, v3 test: count_off 69 + original 73): same-day media-only anchor on the
 # 142 move items, then the two-stage qwen_ts_text observation (Qwen3-VL timestamps re-run 10/30, calibrated 5/8 exact).
 # usage: bash gepa_stage2/launch_obsval_C30T_1030.sh dry|run
+LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGACY_ROOT:-$(cd "$LEGACY_CODE/../../.." && pwd)/legacy_root}  # legacy path roots, see legacy/README.md
 set -euo pipefail
 MODE=${1:-dry}
-CODE=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation
+CODE=$LEGACY_CODE
 E=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval
 VD=$E/hdepic_v3test_1028/move
 OUT=$E/results/hdepic_move_TCC_baseline_g36_obsval_1030

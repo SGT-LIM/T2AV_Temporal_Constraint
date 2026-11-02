@@ -12,6 +12,7 @@ Loudness: the re-implementation (RMS of the 0.2 s after the sound onset / median
 which reads about 3-4 dB below the stored 10/08 values on P01/P02; >= 20 dB and >= 16 dB are both reported.
   python gepa_stage2/sound_class_inventory_1101.py   -> runs/obsval_1028/sound_class_pairs_1101.csv, appended to docs/event_inventory_1101.md
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import json, subprocess, sys
 from collections import defaultdict
 from pathlib import Path
@@ -20,7 +21,7 @@ import numpy as np, pandas as pd
 HERE = Path(__file__).resolve().parent
 PILOT = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_pilot")
 HO = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_holdout_p3p9_1028")
-DOC = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/docs/event_inventory_1101.md")
+DOC = Path((_LEGACY_ROOT + "/docs/event_inventory_1101.md"))
 AMBIENT = {"background", "sizzling / boiling", "kettle / mixer / appliance", "hoover / fan"}
 TOL, MAXS = 0.15, 5.0
 ANCHOR = {"open / close", "cut / chop", "beep", "water"}
@@ -86,7 +87,7 @@ def main():
             cache.clear(); cache[c] = audio16(c)
         dbs.append(round(float(db(cache[c], s0)), 2))
     D["db"] = dbs
-    D.to_csv(HERE / "runs/obsval_1028/sound_class_pairs_1101.csv", index=False)
+    D.to_csv(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028/sound_class_pairs_1101.csv", index=False)
     parts = [f"P0{k}" for k in range(1, 10)]
     T = D.assign(p20=D.db >= 20, p16=D.db >= 16).groupby(["sound", "participant"]).agg(n=("db", "size"), n20=("p20", "sum"), n16=("p16", "sum"))
     L = ["", "## Sound classes co-occurring with a narration action inside the windows (all classes, P01–P09; 11/01)", "",

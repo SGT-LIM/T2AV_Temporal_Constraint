@@ -3,9 +3,10 @@
 #   obsv_A2_anchor : media-only anchor, axis A, 3 shards        run_agentic_eval --axes a
 #   obsv_A2_obs    : waits for '[DONE] processed=' in the 3 anchor logs, then audio_only / flam_text / panel_even / panel_peak
 # usage: bash gepa_stage2/launch_obsval_A2_1028.sh dry|run
+LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGACY_ROOT:-$(cd "$LEGACY_CODE/../../.." && pwd)/legacy_root}  # legacy path roots, see legacy/README.md
 set -euo pipefail
 MODE=${1:-dry}
-CODE=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation
+CODE=$LEGACY_CODE
 MA=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/hdepic/hdepic_mute_anchor_1028
 OUT=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/results/hdepic_mute_anchor_A_baseline_g36_obsval_1028
 COMMON="--model gemini-3.6-flash --thinking-level high --pose-evidence-mode none --audio-evidence-mode none --caption-evidence-mode none"

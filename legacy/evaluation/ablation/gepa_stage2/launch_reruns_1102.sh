@@ -5,12 +5,13 @@
 # Same output csvs as 11/01, so done items are skipped (new_eval.already_done) and error rows are retried; the newer row wins at
 # scoring. At most 11 shards at a time (the 11/02 pacing). Rows done on 11/02 are cross-day against the 11/01 rows and are marked so.
 # Started by auto_0800_1102.sh, which stops everything (process group) on the first 429; this script has no retry cycles of its own.
+LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGACY_ROOT:-$(cd "$LEGACY_CODE/../../.." && pwd)/legacy_root}  # legacy path roots, see legacy/README.md
 set -u
 export PATH=/projectnb/ivc-ml/youngsun/conda_envs/t2av_eval/bin:/share/pkg.8/ffmpeg/8.1/install/bin:$PATH
 export LD_LIBRARY_PATH=/share/pkg.8/ffmpeg/8.1/install/lib:/share/pkg.8/cuda/12.8/install/lib64:${LD_LIBRARY_PATH:-}
 export GEMINI_API_KEY=$(cat ~/.gemini_key) OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
 env | grep -q '^GEMINI_API_KEY=.' || { echo "GEMINI_API_KEY missing"; exit 1; }
-ABL=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation; G=$ABL/gepa_stage2/runs/obsval_1028
+ABL=$LEGACY_CODE; G=$LROOT/evaluation/ablation/gepa_stage2/runs/obsval_1028
 R=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/results
 MA=$R/hdepic_main_ma39_row1_A_g36_1101; P12=$R/hdepic_main_row1_p12all_g36_1101
 MAP=/projectnb/ivc-ml/youngsun/T2AV_data/real_av_holdout_p3p9_1028/mute_anchor_1101

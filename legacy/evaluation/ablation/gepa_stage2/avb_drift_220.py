@@ -1,8 +1,9 @@
 """No API calls. 220 AVB media-only drift: 10/16 (baseline_min3_g36/rep1) vs 10/27 (baseline_min3_g36_1027) on v3 test AVB rows.
 Per GT event: label, whether AVB was actually called or gated by a failed parent (A/V), and parent labels. Writes runs/v3_test/avb_drift_220_events.csv.
   python gepa_stage2/avb_drift_220.py"""
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import json, pandas as pd
-R = "/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent"
+R = (_LEGACY_ROOT + "/eval_results/multi_agent")
 RUNS = {"1016": {"ltx": f"{R}/baseline_min3_g36/rep1/LTX_2p3_agentic_baseline_per_event.csv", "mova": f"{R}/baseline_min3_g36/rep1/MOVA_agentic_baseline_per_event.csv"},
         "1027": {"ltx": f"{R}/baseline_min3_g36_1027/LTX_2p3_per_event.csv", "mova": f"{R}/baseline_min3_g36_1027/MOVA_per_event.csv"}}
 AX = {"A": "audio_event_correctness", "V": "visual_event_correctness", "AVB": "audio_visual_binding"}

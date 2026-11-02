@@ -11,6 +11,7 @@
   python make_gemini_captions.py --styles timestamped plain
   python make_gemini_captions.py --styles plain --models MOVA --limit 3 --dry-run   # 확인용
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[3] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[0])  # legacy path roots, see legacy/README.md
 import argparse, json, os, sys, time
 from pathlib import Path
 
@@ -23,8 +24,8 @@ ap.add_argument("--videos-root", type=Path, default=Path("/projectnb/ivc-ml/youn
 ap.add_argument("--models", nargs="+", default=["LTX_2p3", "MOVA"])
 ap.add_argument("--styles", nargs="+", default=["timestamped", "plain"], choices=["timestamped", "plain"])
 ap.add_argument("--caption-model", default="gemini-3.1-pro-preview")
-ap.add_argument("--cache-dir", type=Path, default=HERE / "caption_cache")
-ap.add_argument("--out-dir", type=Path, default=HERE / "captions")
+ap.add_argument("--cache-dir", type=Path, default=_pl.Path(_LEGACY_ROOT, "evaluation/ablation") / "caption_cache")
+ap.add_argument("--out-dir", type=Path, default=_pl.Path(_LEGACY_ROOT, "evaluation/ablation") / "captions")
 ap.add_argument("--media-fps", type=float, default=0.0, help="0 = Gemini 기본 샘플링 (judge run과 동일하게 두는 것을 권장)")
 ap.add_argument("--limit", type=int, default=None, help="모델당 처리할 비디오 수 제한 (테스트용)")
 ap.add_argument("--dry-run", action="store_true", help="캐시 hit/miss 집계만, API 호출 없음")

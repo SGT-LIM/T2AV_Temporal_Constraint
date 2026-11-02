@@ -11,6 +11,7 @@ lowest p(offset 0) (that repo's per_event_fields rule): offset, probability of t
 
   python gepa_stage2/sync_1030.py      # -> T2AV_data/tools/synchformer_1030/{records/<item_id>.json, per_event.csv}
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import os
 for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMBA_NUM_THREADS"):
     os.environ[_v] = "4"
@@ -49,7 +50,7 @@ def main():
     spec.loader.exec_module(OUR)
     THEIR_FLAM.extract_flam_evidence = OUR.extract_flam_evidence     # hop_sec support; _locate_spans imports it at call time
 
-    rows = [json.loads(l) for l in open(HERE / "runs/obsval_1028/rows.jsonl")]
+    rows = [json.loads(l) for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028/rows.jsonl")]
     B = {r["item_id"]: r for r in rows if r["set"] == "B" and r["cond"] == "anchor"}
     items = json.load(open("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/hdepic_medium_prompts_v2.json"))
     metas = NE.build_item_meta_map(items, modality_filter=None, item_overrides=None, relative_only=False)

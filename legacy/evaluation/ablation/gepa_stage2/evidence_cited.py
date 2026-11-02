@@ -3,12 +3,13 @@
   stage 2 : test cache gepa_stage2/runs/v3_test/cache/<sha>/*.json (seed = the folder with every test row; others = GEPA paragraphs)
   one call: HD-EPIC tools run (hop 5) and 220 tools runs, test items only; video-only runs as control (should be ~0)
   python gepa_stage2/evidence_cited.py | tee gepa_stage2/runs/evidence_cited.txt"""
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import glob, json, os, re, sys
 from collections import defaultdict
 import pandas as pd
 
 E = "/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval"
-R = "/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent"
+R = (_LEGACY_ROOT + "/eval_results/multi_agent")
 COL = {"A": "audio_event_correctness", "V": "visual_event_correctness", "AVB": "audio_visual_binding",
        "TCR": "temporal_relation_satisfaction", "TCC": "temporal_count_satisfaction"}
 KW = {"FLAM": r"flam|detect|activation|sound[- ]event", "Whisper": r"whisper|transcri|\basr\b", "caption": r"caption"}

@@ -2,14 +2,15 @@
 # Media-only (anchor) reruns rep2/rep3 on the v3 test videos (HD-EPIC) and the 220 test (LTX_2p3, MOVA).
 # Same command as the anchors: hdepic_{medium,regen,move}_multi_baseline_g36 (10/16, 10/25) and baseline_min3_g36_1027 (10/27).
 # usage: bash gepa_stage2/launch_anchor_reps_1028.sh dry|run
+LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGACY_ROOT:-$(cd "$LEGACY_CODE/../../.." && pwd)/legacy_root}  # legacy path roots, see legacy/README.md
 set -euo pipefail
 MODE=${1:-dry}
-CODE=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation
+CODE=$LEGACY_CODE
 E=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval
 T=$E/hdepic_v3test_1028                                   # test-only symlinks (medium 199 = hdepic non-regen 183 + hdfoot 16, regen 122, move 142)
 T220=/projectnb/ivc-ml/youngsun/T2AV_data/eval_subsets/min3_test1027
-R=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent
-P220=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/new_prompts/generated/relative_500_v5_fixed.json
+R=$LROOT/eval_results/multi_agent
+P220=$LROOT/new_prompts/generated/relative_500_v5_fixed.json
 COMMON="--axes all --model gemini-3.6-flash --thinking-level high --pose-evidence-mode none --audio-evidence-mode none --caption-evidence-mode none"
 ENVS="module load miniconda ffmpeg/8.1; conda activate /projectnb/ivc-ml/youngsun/conda_envs/t2av_eval; cd $CODE; export GEMINI_API_KEY=\$(cat ~/.gemini_key) T2AV_AUDIO_EVIDENCE_CACHE_ONLY=1"
 

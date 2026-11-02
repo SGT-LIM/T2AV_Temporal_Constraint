@@ -7,22 +7,23 @@
 #   obsv_D      : V-only modality ablation, muted video, media-only prompt                     run_agentic_eval --axes v
 #   obsv_obs    : waits for the anchors, then the two-stage observation calls (one process per condition)
 # usage: bash gepa_stage2/launch_obsval_1028.sh dry|run [BCD]   (BCD: sets B, C, D only; set A anchor + observations held)
+LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGACY_ROOT:-$(cd "$LEGACY_CODE/../../.." && pwd)/legacy_root}  # legacy path roots, see legacy/README.md
 set -euo pipefail
 MODE=${1:-dry}
 ONLY=${2:-}
-CODE=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation
+CODE=$LEGACY_CODE
 E=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval
 T=$E/hdepic_v3test_1028
 O=$E/obsval_1028
 T220=/projectnb/ivc-ml/youngsun/T2AV_data/eval_subsets/min3_test1027
-R=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent
-P220=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/new_prompts/generated/relative_500_v5_fixed.json
+R=$LROOT/eval_results/multi_agent
+P220=$LROOT/new_prompts/generated/relative_500_v5_fixed.json
 PMC=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/hdepic/hdepic_mute_class_1028/prompts.json
 COMMON="--model gemini-3.6-flash --thinking-level high --pose-evidence-mode none --audio-evidence-mode none --caption-evidence-mode none"
 CAPS="export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 NUMBA_NUM_THREADS=4"
 ENVS="module load miniconda ffmpeg/8.1; conda activate /projectnb/ivc-ml/youngsun/conda_envs/t2av_eval; cd $CODE; $CAPS; export GEMINI_API_KEY=\$(cat ~/.gemini_key) T2AV_AUDIO_EVIDENCE_CACHE_ONLY=1"
 
-[ -s $CODE/gepa_stage2/runs/obsval_1028/rows.jsonl ] || { echo "run obs_judge_1028.py rows/prep first"; exit 1; }
+[ -s $LROOT/evaluation/ablation/gepa_stage2/runs/obsval_1028/rows.jsonl ] || { echo "run obs_judge_1028.py rows/prep first"; exit 1; }
 NA=$( (ls $O/mute_eval_subset 2>/dev/null || true) | wc -l); NSA=6; HA=$(( (NA + NSA - 1) / NSA ))
 
 # screen|outdir|prompt_json|videos_dir|csv_stem|axes|start|end

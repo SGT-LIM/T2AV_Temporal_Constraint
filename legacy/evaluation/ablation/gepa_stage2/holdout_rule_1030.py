@@ -10,6 +10,7 @@ reading (action-window mode) has |offset| >= T and p >= P, else keep the media-o
 GT: AVB shift_early / shift_late items = FAIL on every binding event; their originals = PASS (the variant construction).
 Holdout criterion (pre-registered): broken originals <= round(0.05 * n originals with an anchor verdict).
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import argparse, json, sys
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -21,7 +22,7 @@ import rep_scoring as RS
 HO = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_holdout_p3p9_1028")
 ANC = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/results/hdepic_holdout_p3p9_AVB_baseline_g36_1030")
 SY = Path("/projectnb/ivc-ml/youngsun/T2AV_data/tools/synchformer_action_1030")
-OUT = HERE / "runs/obsval_1028"
+OUT = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028"
 VAR = {"fail_audio_shift_early": "shift_early", "fail_audio_shift_late": "shift_late", "original": "original"}
 
 

@@ -3,11 +3,12 @@
 10/26-27 two-stage seed and GEPA from the v3 test cache). Old 10/16 columns are printed too, as a drift reference.
 Metrics FAIL = positive: acc / prec / rec / FAR, balanced acc. Gated rows (label not yes/no) are dropped per condition.
   python gepa_stage2/compare_220_1027.py"""
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import glob, re, sys
 import numpy as np
 import pandas as pd
 
-R = "/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent"
+R = (_LEGACY_ROOT + "/eval_results/multi_agent")
 HELD = "gepa_stage2/runs/v3_test/heldout_v3.csv"
 OUT = "gepa_stage2/runs/v3_test/compare_220_1027.csv"
 COL = {"A": "audio_event_correctness", "V": "visual_event_correctness", "AVB": "audio_visual_binding",

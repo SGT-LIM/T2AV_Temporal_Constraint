@@ -10,6 +10,7 @@ Per event: the least-in-sync occurrence (lowest p(offset 0)): offset, probabilit
   python gepa_stage2/sync_action_1030.py --set holdout --shard 1 --nshards 2
   -> T2AV_data/tools/synchformer_action_1030/<set>/records/<item_id>.json, per_event_shard<k>.csv
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import os
 for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMBA_NUM_THREADS"):
     os.environ[_v] = "4"
@@ -38,7 +39,7 @@ def their_ss():
 def jobs(which):
     """[(item_id, variant, video, items-json events, prompt item)]"""
     if which == "b110":
-        rows = [json.loads(l) for l in open(HERE / "runs/obsval_1028/rows.jsonl")]
+        rows = [json.loads(l) for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028/rows.jsonl")]
         B = {r["item_id"]: r["variant"] for r in rows if r["set"] == "B" and r["cond"] == "anchor"}
         it = {x["item_id"]: x for x in json.load(open(PILOT / "items_hdepic_medium_with_clips_v2.json"))}
         pr = {x["item_id"]: x for x in json.load(open(EV / "hdepic_medium_prompts.json"))}

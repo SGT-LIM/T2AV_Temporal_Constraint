@@ -14,6 +14,7 @@ T2AV_data/tools/screen_1031/<tool>/thresholds.json BEFORE any other set is score
 Report per tool, axis, set and model: open rate, precision when open (agreement with the human majority), recall on human-FAIL rows,
 and media-only recall on the same rows (220 / 149: row 1 of 10/30; p3p9 AVB: the 10/30 holdout anchor; others: not yet available).
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import glob, json, os, sys, time
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -26,7 +27,7 @@ E = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval")
 HO = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_holdout_p3p9_1028")
 G149 = Path("/projectnb/ivc-ml/youngsun/T2AV_data/gen_holdout_149_1030")
 MIN3 = Path("/projectnb/ivc-ml/youngsun/T2AV_data/eval_subsets/min3")
-REL500 = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/new_prompts/generated/relative_500_v5_fixed.json")
+REL500 = Path((_LEGACY_ROOT + "/new_prompts/generated/relative_500_v5_fixed.json"))
 PILOT = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_pilot/items_hdepic_medium_with_clips_v2.json")
 PROMPTS_P12 = {"hdepic": E / "hdepic_medium_prompts_v2.json", "hdfoot": E / "hdepic_medium_prompts.json", "hdmove": E / "hdepic_move_prompts.json"}
 FA = 0.05
@@ -63,7 +64,7 @@ def rows(which):
         P = {s: {x["item_id"]: x for x in json.load(open(f))} for s, f in PROMPTS_P12.items()}
         M = {s: _metas(list(P[s].values())) for s in P}
         win = {x["item_id"]: x for x in json.load(open(PILOT))}
-        man = [json.loads(l) for s in ("train", "val", "test") for l in open(HERE / f"manifests_v3/{s}.jsonl")]
+        man = [json.loads(l) for s in ("train", "val", "test") for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / f"manifests_v3/{s}.jsonl")]
         for m in man:
             if m["source"] not in P or m["item_id"] not in idx:
                 continue
@@ -96,7 +97,7 @@ def rows(which):
     else:
         if which == "220":
             P = {x["item_id"]: x for x in json.load(open(REL500))}
-            man = [json.loads(l) for s in ("train", "val", "test") for l in open(HERE / f"manifests_v3/{s}.jsonl")]
+            man = [json.loads(l) for s in ("train", "val", "test") for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / f"manifests_v3/{s}.jsonl")]
             src = [({"ltx": "LTX_2p3", "mova": "MOVA"}[m["source"]], m) for m in man if m["source"] in ("ltx", "mova")]
             vid = lambda model, iid: str(sorted((MIN3 / model / iid).glob("*.mp4"))[0].resolve())
         else:
@@ -126,7 +127,7 @@ def _hd_windows(x, meta):
 
 def _row1_times(which):
     """{(model, item_id): {event_id: t}} from the 10/30 row 1 anchor (event_time_s; AVB over V)."""
-    R1 = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent/gen_row1_anchor_g36_1030")
+    R1 = Path((_LEGACY_ROOT + "/eval_results/multi_agent/gen_row1_anchor_g36_1030"))
     pre = {"220": [("LTX_2p3", "LTX_2p3"), ("MOVA", "MOVA")], "149": [("gen149", "LTX_2p3")]}[which]
     out = {}
     for p, model in pre:
@@ -167,13 +168,13 @@ def write_threshold(tool, axis, scores_pass, low_is_fail=True, note=""):
 def media_only():
     """{(set, model, item_id, axis): label} for the media-only reference available tonight."""
     ref = {}
-    f = HERE / "runs/obsval_1028/gen_rows_scored_1030.csv"
+    f = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028/gen_rows_scored_1030.csv"
     if f.exists():
         d = pd.read_csv(f)
         for r in d[d.row == "row1"].itertuples():
             s, m, iid, ax = r.uid.split("|")
             ref[(s, m, iid, ax)] = r.pred
-    f = HERE / "runs/obsval_1028/holdout_rule_rows_1030.csv"
+    f = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028/holdout_rule_rows_1030.csv"
     if f.exists():
         for r in pd.read_csv(f).itertuples():
             ref[("p3p9", r.participant, r.item_id, "AVB")] = r.anchor

@@ -6,13 +6,14 @@
 # Prompt sets: hdepic_p12 (v2 prompts), hdfoot_p12 (old prompts), hdmove_p12 (movement prompts), p3p9 (holdout prompts).
 # Videos: T2AV_data/real_av/eval/hdepic_main_1101/<set>/<item>/<item>_v1_raw.mp4 (symlinks to the existing files).
 # Same-day rule dropped 11/01 (user): every README records the run date; cross-day comparisons are marked in the tables.
+LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGACY_ROOT:-$(cd "$LEGACY_CODE/../../.." && pwd)/legacy_root}  # legacy path roots, see legacy/README.md
 set -u
 export PATH=/projectnb/ivc-ml/youngsun/conda_envs/t2av_eval/bin:/share/pkg.8/ffmpeg/8.1/install/bin:$PATH
 export LD_LIBRARY_PATH=/share/pkg.8/ffmpeg/8.1/install/lib:/share/pkg.8/cuda/12.8/install/lib64:${LD_LIBRARY_PATH:-}
 export GEMINI_API_KEY=$(cat ~/.gemini_key)
 env | grep -q '^GEMINI_API_KEY=.' || { echo "GEMINI_API_KEY missing"; exit 1; }
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=1
-ABL=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation
+ABL=$LEGACY_CODE
 E=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval
 V=$E/hdepic_main_1101
 RES=$E/results

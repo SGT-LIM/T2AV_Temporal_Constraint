@@ -16,6 +16,7 @@ Cross: the one-call (Whisper+FLAM+caption) runs' V verdicts, stage1_lookup rule:
 
   python gepa_stage2/v_caption_diag_1030.py   -> runs/obsval_1028/v_caption_diag_1030_rows.csv + printed tables
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import json, re, sys
 from pathlib import Path
 import pandas as pd
@@ -26,11 +27,11 @@ sys.path.insert(0, str(HERE)); sys.path.insert(0, str(ABL))
 import rep_scoring as RS
 
 EV = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval")
-R = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent")
-CAP = {"hdepic": ABL / "captions/avocado_fps2_plain_v3_hdepic_items.json",
-       "ltx": ABL / "captions/avocado_fps8_plain_v3_LTX_2p3.json", "mova": ABL / "captions/avocado_fps8_plain_v3_MOVA.json"}
+R = Path((_LEGACY_ROOT + "/eval_results/multi_agent"))
+CAP = {"hdepic": _pl.Path(_LEGACY_ROOT, "evaluation/ablation") / "captions/avocado_fps2_plain_v3_hdepic_items.json",
+       "ltx": _pl.Path(_LEGACY_ROOT, "evaluation/ablation") / "captions/avocado_fps8_plain_v3_LTX_2p3.json", "mova": _pl.Path(_LEGACY_ROOT, "evaluation/ablation") / "captions/avocado_fps8_plain_v3_MOVA.json"}
 PROMPT = {"hdepic": EV / "hdepic_medium_prompts_v2.json",
-          "ltx": Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/new_prompts/generated/relative_500_v5_fixed.json")}
+          "ltx": Path((_LEGACY_ROOT + "/new_prompts/generated/relative_500_v5_fixed.json"))}
 PROMPT["mova"] = PROMPT["ltx"]
 ONECALL = {"hdepic": [EV / "results/hdepic_medium_multi_tools_wf_hop5_g36"],
            "ltx": [R / "tools_min3_g36_1027/LTX_2p3.csv"], "mova": [R / "tools_min3_g36_1027/MOVA.csv"]}
@@ -87,7 +88,7 @@ def classify(cap_toks, verb, nouns, side):
 
 def main():
     import new_eval as NE
-    man = [json.loads(l) for l in open(HERE / "manifests_v3/test.jsonl")]
+    man = [json.loads(l) for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "manifests_v3/test.jsonl")]
     rows = []
     for src in ("hdepic", "ltx", "mova"):
         caps = json.load(open(CAP[src]))
@@ -125,7 +126,7 @@ def main():
             rows.append(dict(source=src, item_id=iid, variant=m["variant"], y=y, cls=cls, per_event=res,
                              onecall=RS.row_label(oc, iid, "V", m["gt"])))
     d = pd.DataFrame(rows)
-    d.to_csv(HERE / "runs/obsval_1028/v_caption_diag_1030_rows.csv", index=False)
+    d.to_csv(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028/v_caption_diag_1030_rows.csv", index=False)
     order = ["a_mentions", "b_contradicts", "c_silent", "partial", "no_caption"]
     t = d.groupby(["source", "y", "cls"]).size().unstack(fill_value=0).reindex(columns=order, fill_value=0)
     t["n"] = t.sum(1)

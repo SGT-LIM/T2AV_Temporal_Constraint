@@ -12,6 +12,7 @@ V, TCR, TCC items are untouched. TCC check: count_off items whose counted event 
 items with a stir / mix / whisk event, are listed for exclusion.
   python gepa_stage2/rebuild_plan_1101.py   -> runs/obsval_1028/rebuild_plan_1101.json + printed tables
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import importlib.util, json, re, subprocess, sys
 from collections import Counter
 from pathlib import Path
@@ -21,7 +22,7 @@ HERE = Path(__file__).resolve().parent
 PILOT = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_pilot")
 HO = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_holdout_p3p9_1028")
 V12 = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/hdepic/videos")
-OUT = HERE / "runs/obsval_1028"
+OUT = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/obsval_1028"
 ELIG = {"open / close", "cut / chop", "stir / mix / whisk"}
 STIR_VERBS = {"stir", "mix", "whisk", "beat", "fold"}
 GROUPS = {"P01P02": ["P01", "P02"], "P03P09": [f"P0{k}" for k in range(3, 10)]}

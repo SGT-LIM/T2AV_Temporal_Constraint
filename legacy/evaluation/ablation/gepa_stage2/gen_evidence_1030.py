@@ -14,6 +14,7 @@ max FLAM score for its first query; T_flam = 5th percentile. Written to T2AV_dat
 a timestamp before any generated-set result exists.
 Out: T2AV_data/tools/gen_evidence_1030/<set>/<item_id>.json
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import os
 for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMBA_NUM_THREADS"):
     os.environ[_v] = "4"
@@ -27,7 +28,7 @@ sys.path.insert(0, str(ABL)); sys.path.insert(0, str(ABL / "Tool_Use")); sys.pat
 OUT = Path("/projectnb/ivc-ml/youngsun/T2AV_data/tools/gen_evidence_1030")
 FLAM_KW = dict(model_name="v1-base", device="cuda", ckpt_path="/projectnb/ivc-ml/youngsun/.hf_cache/openflam", method="unbiased",
                max_duration_sec=10.0, threshold=0.98, min_duration_sec=0.05, merge_gap_sec=0.10, median_filter_size=3, top_k=5, hop_sec=5.0)
-REL500 = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/new_prompts/generated/relative_500_v5_fixed.json")
+REL500 = Path((_LEGACY_ROOT + "/new_prompts/generated/relative_500_v5_fixed.json"))
 MIN3 = Path("/projectnb/ivc-ml/youngsun/T2AV_data/eval_subsets/min3")
 G149 = Path("/projectnb/ivc-ml/youngsun/T2AV_data/gen_holdout_149_1030")
 
@@ -64,7 +65,7 @@ def videos(which):
         V = E / "hdepic_main_1101"
         PJ = {"hdepic_p12": E / "hdepic_medium_prompts_v2.json", "hdfoot_p12": E / "hdepic_medium_prompts.json",
               "hdmove_p12": E / "hdepic_move_prompts.json", "p3p9": HO / "prompts_hdepic_p3p9.json"}
-        man = [json.loads(l) for l in open(HERE / "manifests_v3/test.jsonl")]
+        man = [json.loads(l) for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "manifests_v3/test.jsonl")]
         want = {}
         if which == "hdmove":
             want["hdmove_p12"] = {m["item_id"] for m in man if m["source"] == "hdmove"}
@@ -181,7 +182,7 @@ def stage_threshold(a):
     f = OUT / "flam_threshold.json"
     if f.exists():
         sys.exit(f"exists, not overwriting: {f}")
-    man = [json.loads(l) for s in ("train", "val", "test") for l in open(HERE / f"manifests_v3/{s}.jsonl")]
+    man = [json.loads(l) for s in ("train", "val", "test") for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / f"manifests_v3/{s}.jsonl")]
     keys = sorted({m["split_key"] for m in man if m["source"] == "hdepic" and m["variant"] == "original"})
     P = {x["item_id"]: x for x in json.load(open("/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/hdepic_medium_prompts_v2.json"))}
     vals = []

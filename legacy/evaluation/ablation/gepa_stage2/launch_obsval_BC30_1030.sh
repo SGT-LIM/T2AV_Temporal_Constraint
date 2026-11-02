@@ -2,9 +2,10 @@
 # 10/30 sets B30 (AVB shift + originals, 110) and C30 TCR (61): same-day media-only anchor on the 138 unique items, then
 # two-stage tool-text observations: B30 synchformer_text, qwen_ts_text, qwen_plus_synchformer_text; C30 TCR qwen_ts_text.
 # usage: bash gepa_stage2/launch_obsval_BC30_1030.sh dry|run
+LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGACY_ROOT:-$(cd "$LEGACY_CODE/../../.." && pwd)/legacy_root}  # legacy path roots, see legacy/README.md
 set -euo pipefail
 MODE=${1:-dry}
-CODE=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation
+CODE=$LEGACY_CODE
 E=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval
 SUB=$E/obsval_1028/BC30_medium_subset
 OUT=$E/results/hdepic_medium_BC_baseline_g36_obsval_1030

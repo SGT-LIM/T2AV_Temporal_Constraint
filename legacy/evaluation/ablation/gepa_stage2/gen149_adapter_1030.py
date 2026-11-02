@@ -18,12 +18,13 @@ Fleiss' kappa per axis over the rated units (2 categories, 3 raters).
   python gepa_stage2/gen149_adapter_1030.py build      # items, GT, kappa (no network)
   python gepa_stage2/gen149_adapter_1030.py videos     # download the 149 videos (huggingface_hub)
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import argparse, collections, glob, json, re, shutil
 from pathlib import Path
 
 D = Path("/projectnb/ivc-ml/youngsun/T2AV_data/gen_holdout_149_1030")
 A = D / "raw/prolific_ltx_2k_50/annotations"
-REL500 = Path("/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/new_prompts/generated/relative_500_v5_fixed.json")
+REL500 = Path((_LEGACY_ROOT + "/new_prompts/generated/relative_500_v5_fixed.json"))
 TASK = {"order": "order", "count": "count", "synchronization": "sync"}
 MODLAB = {"speech": "Speech", "silent_action": "Action (silent)", "sounding_action": "Action (sounding)"}
 
@@ -141,7 +142,7 @@ def build():
               f"FAIL unanimous {c[(ax, 'FAIL', 'unanimous')]}, FAIL majority-only {c[(ax, 'FAIL', 'majority_only')]} | kappa {kap.get(ax)}")
     # check the converted items parse in the pipeline
     import sys
-    sys.path.insert(0, "/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation")
+    sys.path.insert(0, _LEGACY_CODE)
     import new_eval as NE
     metas = NE.build_item_meta_map(items, modality_filter=None, item_overrides=None, relative_only=False)
     bad = []

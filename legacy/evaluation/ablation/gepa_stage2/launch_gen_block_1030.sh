@@ -5,15 +5,16 @@
 #   bash gepa_stage2/launch_gen_block_1030.sh row3 220|149     # routing: A Whisper+FLAM, V caption, AVB/TCR/TCC media only
 #   bash gepa_stage2/launch_gen_block_1030.sh row2 220|149     # one call, all tools + Synchformer section
 #   bash gepa_stage2/launch_gen_block_1030.sh row2b            # row 2 with neutral tool wording, 220 only
+LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGACY_ROOT:-$(cd "$LEGACY_CODE/../../.." && pwd)/legacy_root}  # legacy path roots, see legacy/README.md
 set -u
 module load miniconda ffmpeg/8.1 >/dev/null 2>&1
 conda activate /projectnb/ivc-ml/youngsun/conda_envs/t2av_eval
 export GEMINI_API_KEY=$(cat ~/.gemini_key)
 env | grep -q '^GEMINI_API_KEY=.' || { echo "GEMINI_API_KEY missing"; exit 1; }
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=1
-ABL=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/evaluation/ablation
-RES=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent
-REL500=/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/new_prompts/generated/relative_500_v5_fixed.json
+ABL=$LEGACY_CODE
+RES=$LROOT/eval_results/multi_agent
+REL500=$LROOT/new_prompts/generated/relative_500_v5_fixed.json
 MIN3=/projectnb/ivc-ml/youngsun/T2AV_data/eval_subsets/min3
 G149=/projectnb/ivc-ml/youngsun/T2AV_data/gen_holdout_149_1030
 SYNC=/projectnb/ivc-ml/youngsun/T2AV_data/tools/synchformer_gen_1030/sync_sections_oncall.json
@@ -48,8 +49,8 @@ launch() {  # dir, tag, prompt json, videos dir, nshards, n videos, env prefix, 
   done
 }
 
-TOOLS220() { echo "--audio-evidence-mode whisper_flam --caption-evidence-mode external --caption-style plain --caption-external-json $ABL/captions/avocado_fps8_plain_v3_$1.json"; }
-TOOLS149="--audio-evidence-mode whisper_flam --caption-evidence-mode external --caption-style plain --caption-external-json $ABL/captions/avocado_fps8_plain_v3_gen149.json"
+TOOLS220() { echo "--audio-evidence-mode whisper_flam --caption-evidence-mode external --caption-style plain --caption-external-json $LROOT/evaluation/ablation/captions/avocado_fps8_plain_v3_$1.json"; }
+TOOLS149="--audio-evidence-mode whisper_flam --caption-evidence-mode external --caption-style plain --caption-external-json $LROOT/evaluation/ablation/captions/avocado_fps8_plain_v3_gen149.json"
 MEDIA="--audio-evidence-mode none --caption-evidence-mode none"
 ROUTE="--no-binding-tools --no-temporal-tools"
 CACHE="T2AV_AUDIO_EVIDENCE_CACHE_ONLY=1"

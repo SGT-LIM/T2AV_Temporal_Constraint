@@ -22,6 +22,7 @@ Stages (each writes into OUT, never touches existing clips / caches / manifests)
   python gepa_stage2/make_mute_class.py flam       # GPU: FLAM residual check (10 s windows, hop 5 s) -> OUT/work/flam/
   python gepa_stage2/make_mute_class.py items      # prompts.json, eval symlinks, manifest.jsonl, counts, listen_sample/
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import argparse, json, os, re, subprocess, sys, tempfile
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -96,7 +97,7 @@ def stage_clips(a):
     pmv = {x["item_id"]: x for x in json.load(open(EV / "hdepic_move_prompts.json"))}
     clips = {}
     for split in ("train", "val", "test"):
-        for l in open(HERE / f"manifests_v3/{split}.jsonl"):
+        for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / f"manifests_v3/{split}.jsonl"):
             m = json.loads(l)
             key = m["split_key"]
             if key in clips:

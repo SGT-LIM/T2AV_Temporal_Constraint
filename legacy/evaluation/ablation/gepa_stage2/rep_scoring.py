@@ -15,16 +15,17 @@ Runs per source (sources_v3.json layout; hdepic = medium then regen, regen wins 
 
   python gepa_stage2/rep_scoring.py            # writes runs/v3_test/anchor_reps_1028_rows.csv (refuses to overwrite)
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import json, re, sys
 from pathlib import Path
 import numpy as np, pandas as pd
 
 HERE = Path(__file__).resolve().parent
 E = "/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval/results"
-R = "/projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint/eval_results/multi_agent"
-MAN = HERE / "manifests_v3/test.jsonl"
-HELD = HERE / "runs/v3_test/heldout_v3.csv"
-OUT = HERE / "runs/v3_test/anchor_reps_1028_rows.csv"
+R = (_LEGACY_ROOT + "/eval_results/multi_agent")
+MAN = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "manifests_v3/test.jsonl"
+HELD = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/v3_test/heldout_v3.csv"
+OUT = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "runs/v3_test/anchor_reps_1028_rows.csv"
 SKIP_RE = re.compile(r"precondition|not evaluable|not evaluated|skipped", re.I)     # = run_two_stage.SKIP_RE
 COL = {"A": "audio_event_correctness", "V": "visual_event_correctness", "AVB": "audio_visual_binding",
        "TCR": "temporal_relation_satisfaction", "TCC": "temporal_count_satisfaction"}

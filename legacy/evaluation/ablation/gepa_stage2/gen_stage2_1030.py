@@ -32,6 +32,7 @@ Framing (row 5 sub-variant): (a) = the G4 call; (b) one sentence added after the
       framing_config_1030.json -> PREREGISTERED_RULE.json (never typed into the prompt code).
   220 and (11/01) 149 V rows where the check says the caption does not mention a GT event: a descriptive sentence, no number.
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import argparse, json, re, sys
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -44,8 +45,8 @@ import obs_judge_1028 as O
 EV = Path("/projectnb/ivc-ml/youngsun/T2AV_data/tools/gen_evidence_1030")
 SYNC = Path("/projectnb/ivc-ml/youngsun/T2AV_data/tools/synchformer_gen_1030")
 G149 = Path("/projectnb/ivc-ml/youngsun/T2AV_data/gen_holdout_149_1030")
-CAP = {"g220ltx": ABL / "captions/avocado_fps8_plain_v3_LTX_2p3.json", "g220mova": ABL / "captions/avocado_fps8_plain_v3_MOVA.json",
-       "g149": ABL / "captions/avocado_fps8_plain_v3_gen149.json"}
+CAP = {"g220ltx": _pl.Path(_LEGACY_ROOT, "evaluation/ablation") / "captions/avocado_fps8_plain_v3_LTX_2p3.json", "g220mova": _pl.Path(_LEGACY_ROOT, "evaluation/ablation") / "captions/avocado_fps8_plain_v3_MOVA.json",
+       "g149": _pl.Path(_LEGACY_ROOT, "evaluation/ablation") / "captions/avocado_fps8_plain_v3_gen149.json"}
 MODEL = {"g220ltx": "LTX_2p3", "g220mova": "MOVA", "g149": "LTX_2p3"}
 SETN = {"g220ltx": "220", "g220mova": "220", "g149": "149"}
 BATCH = {"g220ltx": "220-LTX_2p3", "g220mova": "220-MOVA", "g149": "149-LTX_2p3"}
@@ -60,7 +61,7 @@ VCHK_SYSTEM = ("You compare a video caption with a list of target visual events.
 
 def gt_rows():
     out = []
-    man = [json.loads(l) for s in ("train", "val", "test") for l in open(HERE / f"manifests_v3/{s}.jsonl")]
+    man = [json.loads(l) for s in ("train", "val", "test") for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / f"manifests_v3/{s}.jsonl")]
     for m in man:
         if m["source"] in ("ltx", "mova") and m["axis"] in ("A", "V", "AVB"):
             src = {"ltx": "g220ltx", "mova": "g220mova"}[m["source"]]

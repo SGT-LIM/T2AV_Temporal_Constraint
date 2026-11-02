@@ -20,6 +20,7 @@ Focus clips -> gepa_stage2/focus_1028/<mode>_centred/<variant>/<item_id>.mp4 + f
   python gepa_stage2/obs_sets_1028.py sample          # 5 panels + 5 focus clips, symlinked into */sample/
   python gepa_stage2/obs_sets_1028.py all             # everything (after the layout check)
 """
+import os as _os, pathlib as _pl; _LEGACY_ROOT = _os.environ.get("T2AV_LEGACY_ROOT", str(_pl.Path(__file__).resolve().parents[4] / "legacy_root")); _LEGACY_CODE = str(_pl.Path(__file__).resolve().parents[1])  # legacy path roots, see legacy/README.md
 import os
 for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMBA_NUM_THREADS"):
     os.environ[_v] = "4"                  # SCC job has 4 cores (10/28: a run was killed at 5.4 cores); set before numpy/librosa import
@@ -36,7 +37,7 @@ RA = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av")
 PILOT = Path("/projectnb/ivc-ml/youngsun/T2AV_data/real_av_pilot")
 MC = RA / "hdepic/hdepic_mute_class_1028/manifest.jsonl"
 ASSOC = PILOT / "annotations/data/scene-and-object-movements/assoc_info.json"
-PAN, FOC = HERE / "panels_1028", HERE / "focus_1028"
+PAN, FOC = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "panels_1028", _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "focus_1028"
 PAD, NFR, FOCUS_SOUND = 2.0, 7, 1.5
 PRE_ACTION, POST_ACTION, NO_END = 3.0, 4.0, 1.0      # focus = [action onset - 3, action end + 4]; no end -> onset + 1
 MODE = "action"
@@ -68,7 +69,7 @@ def base(n):
 
 
 def build():
-    man = [json.loads(l) for l in open(HERE / "manifests_v3/test.jsonl")]
+    man = [json.loads(l) for l in open(_pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "manifests_v3/test.jsonl")]
     items = {x["item_id"]: x for x in json.load(open(PILOT / "items_hdepic_medium_with_clips_v2.json"))}
     rows, focus = [], []
     # ---- AVB shift + originals
@@ -172,7 +173,7 @@ def set_frames(r):
 
 PREV = {}
 for _m in ("panel_even", "panel_peak"):
-    _f = HERE / "panels_1028" / _m / "sample" / "sample_manifest.jsonl"
+    _f = _pl.Path(_LEGACY_ROOT, "evaluation/ablation/gepa_stage2") / "panels_1028" / _m / "sample" / "sample_manifest.jsonl"
     if _f.exists():
         for _r in map(json.loads, open(_f)):
             PREV[(_r["mode"], _r["variant"], _r["item_id"])] = _r
