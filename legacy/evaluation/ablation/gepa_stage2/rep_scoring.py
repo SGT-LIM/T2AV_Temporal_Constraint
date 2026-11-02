@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/scoring/lookup.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """No API calls. One scoring rule for every media-only / one-call run on the v3 test rows (10/28).
 
 Rule = how heldout `stage1` is built (run_two_stage.stage1_lookup + eval_v3.item_label):

@@ -25,8 +25,14 @@ POINTER = "# Replaced by {dst} (t2av_eval package); this copy is kept to reprodu
 LEGACY_NAMES = {p.stem for p in list(LEG.glob("*.py")) + list((LEG / "gepa_stage2").glob("*.py")) + list((LEG / "Tool_Use").glob("*.py"))}
 
 
+# run outputs that no package module produces: read from the main checkout, never written
+READ_ONLY_RUNS = {"evaluation/ablation/gepa_stage2/runs/v3_test/heldout_v3.csv"}
+
+
 def where(full):
     """WORK or INPUTS for a path that was under the main checkout (relative to it)"""
+    if full in READ_ONLY_RUNS:
+        return "_P.INPUTS", full
     if full.startswith("evaluation/ablation/gepa_stage2/runs/"):
         return "_P.WORK", full[len("evaluation/ablation/gepa_stage2/runs/"):]
     for d in ("caption_cache", "panels_1028", "focus_1028", "fresh_stage1_cache"):
@@ -85,9 +91,8 @@ def rewrite(src, todo):
                     new.append(f"from {pk} import {md} as {a_.asname or a_.name}")
                 else:
                     new.append(f"import {a_.name}" + (f" as {a_.asname}" if a_.asname else ""))
-            txt = "; ".join(new)
-            if txt != src[slice(*span(n))]:
-                rep.append((*span(n), txt))
+            if any((a_.name.split(".")[-1] if a_.name.startswith("Tool_Use.") else a_.name) in moved for a_ in n.names):
+                rep.append((*span(n), "; ".join(new)))
         if isinstance(n, ast.ImportFrom) and n.module:
             nm = n.module.split(".")[-1] if n.module.startswith("Tool_Use.") else n.module
             if nm in moved:
@@ -153,6 +158,8 @@ def main(pairs):
         if f.name in ("_legacy_bridge.py", "paths.py", "__init__.py", "cli.py"):
             continue
         src = rewrite(f.read_text().replace(BRIDGE, ""), None)
+        if "_pl." not in src and "_os." not in src:
+            src = src.replace("import os as _os, pathlib as _pl\n", "", 1)
         left = legacy_imports(src)
         if left:
             t = ast.parse(src)
