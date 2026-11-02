@@ -1748,6 +1748,19 @@ def upload_and_wait(client: genai.Client, video_path, poll_seconds: float = 5.0,
     raise last
 
 
+def maybe_delete_upload(client, uploaded):
+    """11/02 (user): with T2AV_DELETE_UPLOADS=1, delete an uploaded Gemini File right after the call(s) that used it succeeded.
+    Gemini Files storage is capped at 20 GB per project and uploads fail with 429 above it; nothing reuses an upload after its item.
+    Files of failed items are kept (they expire after 48 h). Never deletes anything else."""
+    if os.environ.get("T2AV_DELETE_UPLOADS") != "1" or uploaded is None or not getattr(uploaded, "name", ""):
+        return
+    try:
+        client.files.delete(name=uploaded.name)
+        print(f"  [DELETE upload] {uploaded.name}", flush=True)
+    except Exception as e:
+        print(f"  [WARN] delete upload {uploaded.name} failed: {type(e).__name__}: {str(e)[:120]}", flush=True)
+
+
 def normalize_axis(obj: dict, axis_name: str) -> dict:
     """Tolerant scalar-axis normalizer (used for relation + constraint_compliance).
 
@@ -2311,6 +2324,7 @@ def evaluate_video(
     result["audio_evidence_used"] = bool(audio_evidence_section)
     result["audio_evidence_error"] = audio_evidence_error
     result["audio_evidence_summary"] = audio_evidence_section
+    maybe_delete_upload(client, uploaded)   # 11/02: opt-in, T2AV_DELETE_UPLOADS=1
     return result
 
 

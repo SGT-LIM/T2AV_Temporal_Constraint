@@ -6,3 +6,4 @@ export E=/projectnb/ivc-ml/youngsun/T2AV_data/real_av/eval D=/projectnb/ivc-ml/y
 export R=$LROOT/eval_results
 export P=$LROOT/new_prompts/generated/relative_500_v5_fixed.json
 export G=gepa_stage2 V=/projectnb/ivc-ml/youngsun/T2AV_data/gt_annotations/min3_gt/gt_video.csv
+export T2AV_DELETE_UPLOADS=1   # 11/02 (user): delete each uploaded Gemini File after its call succeeded (new_eval.maybe_delete_upload)

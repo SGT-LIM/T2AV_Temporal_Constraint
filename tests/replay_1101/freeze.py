@@ -31,6 +31,7 @@ SYA = DATA / "tools/synchformer_action_1030"
 CAPD = DATA / "real_av/eval/hdepic_main_1101_captions"
 VID = DATA / "real_av/eval/hdepic_main_1101"
 PY = sys.executable
+VERBATIM = "786d16e"          # commit with the byte-identical copy of the main-checkout code (legacy/.../SOURCE.md)
 READ = {}
 
 
@@ -280,8 +281,9 @@ def main():
 
 def pin(fx, work):
     """Pin what 11/01 did not store: the md5 of the system prompt and response schema of every replayed call, as built by the
-    legacy code. Valid only if the legacy row 1 / 2 code is the code that ran on 11/01: checked against the md5 list in both run
-    READMEs; any difference stops the pin."""
+    legacy code. Valid only if the legacy row 1 / 2 code is the code that ran on 11/01: the verbatim copy (commit VERBATIM) is
+    checked against the md5 list in both run READMEs; any difference stops the pin. Later legacy edits (11/02 upload deletion,
+    opt-in) do not change any prompt; the replay test checks that."""
     sys.path.insert(0, str(Path(__file__).parent))
     import common
     fx, work = Path(fx), Path(work)
@@ -291,7 +293,8 @@ def pin(fx, work):
         for line in open(src(d / "README.md")):
             m = re.match(r"^([0-9a-f]{32})  ([a-z_]+\.py)$", line.strip())
             if m:
-                body = re.sub(rb"(?m)^# Replaced by t2av_eval.*\n", b"", (LEG / m.group(2)).read_bytes(), count=1)  # pointer line of step 3
+                body = subprocess.run(["git", "-C", str(REPO), "show", f"{VERBATIM}:legacy/evaluation/ablation/{m.group(2)}"],
+                                      capture_output=True, check=True).stdout          # the verbatim copy, before later legacy edits
                 now = hashlib.md5(body).hexdigest()
                 check[f"{row}|{m.group(2)}"] = dict(run=m.group(1), legacy=now, same=m.group(1) == now)
     bad = [k for k, v in check.items() if not v["same"]]

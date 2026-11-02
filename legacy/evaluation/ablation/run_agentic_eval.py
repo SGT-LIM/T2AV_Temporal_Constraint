@@ -326,6 +326,7 @@ def main() -> None:
                     print(f"  [RETRY {attempt + 1}/{MAX_RETRIES}] {type(exc).__name__}: {exc} — waiting {wait}s", flush=True)
                     time.sleep(wait)
             row = AC.add_result_to_row(row, result)
+            NE.maybe_delete_upload(client, getattr(ctx, "uploaded", None))   # 11/02: opt-in (T2AV_DELETE_UPLOADS=1), after every axis call of the item succeeded
             print(f"  -> overall_temporal_success={row['overall_temporal_success']} "
                   f"| A={result['audio_event_correctness']['label']} "
                   f"V={result['visual_event_correctness']['label']} "

@@ -10,6 +10,7 @@ LEGACY_CODE=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); LROOT=${T2AV_LEGAC
 set -u
 export PATH=/projectnb/ivc-ml/youngsun/conda_envs/t2av_eval/bin:/share/pkg.8/ffmpeg/8.1/install/bin:$PATH
 export LD_LIBRARY_PATH=/share/pkg.8/ffmpeg/8.1/install/lib:/share/pkg.8/cuda/12.8/install/lib64:${LD_LIBRARY_PATH:-}
+export T2AV_DELETE_UPLOADS=1   # 11/02 (user): delete each uploaded Gemini File after its call succeeded (new_eval.maybe_delete_upload)
 export GEMINI_API_KEY=$(cat ~/.gemini_key)
 env | grep -q '^GEMINI_API_KEY=.' || { echo "GEMINI_API_KEY missing"; exit 1; }
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMBA_NUM_THREADS=1

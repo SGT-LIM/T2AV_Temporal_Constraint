@@ -33,3 +33,11 @@ Never point `T2AV_LEGACY_ROOT` at the main checkout: the scripts write call cach
 `legacy/link_inputs.sh` symlinks the read-only inputs from the main checkout into the root: the v3 GT manifests,
 the caption json files and the generation prompts. Output and cache folders are never linked, because a symlinked
 output folder would send writes back into the main checkout. Copy a cache (`cp -r`) if a run should reuse it.
+
+## Changes after the copy
+
+- 11/02: `new_eval.maybe_delete_upload` and its two calls (`new_eval.evaluate_video`, `run_agentic_eval.main`), and
+  `export T2AV_DELETE_UPLOADS=1` in `gepa_stage2/env.sh`, `launch_avbadd_1102.sh`, `launch_reruns_1102.sh`, taken from the main
+  checkout as edited 11/02 11:45. Opt-in: without the variable nothing is deleted. `new_eval.py` and `run_agentic_eval.py`
+  now equal the main checkout apart from the pointer line. Other 11/02 launcher edits in the main checkout (MAXPAR pacing,
+  resume phases, `auto_resume_1102.sh`) are not copied.
