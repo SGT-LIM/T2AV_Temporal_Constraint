@@ -167,7 +167,7 @@ def main(pairs):
         if "_pl." not in src and "_os." not in src:
             src = src.replace("import os as _os, pathlib as _pl\n", "", 1)
         left = legacy_imports(src)
-        if left:
+        if left and (PKG / "_legacy_bridge.py").exists():     # after step 3 the bridge is gone: report only (test_no_legacy_imports)
             t = ast.parse(src)
             first = next((n for n in t.body if isinstance(n, (ast.Import, ast.ImportFrom)) and getattr(n, "module", None) != "__future__"), None)
             lines = src.splitlines(keepends=True)

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/evidence/captions_gen/runner.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Dump Qwen3-VL or Qwen3-Omni dense captions for every video under --videos-dir
 into a JSON file consumable by the agentic evaluator's caption evidence.
 
