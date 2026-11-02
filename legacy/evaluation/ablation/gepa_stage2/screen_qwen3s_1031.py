@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/screening/qwen3s.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Tool screening: Qwen3-VL-8B timestamps, 3 sampled runs, on V / TCR / TCC (10/31). GPU, env vllm020. No judge calls.
 
 Same model, prompt (qwen_ts_1030.prompt_for, HD-EPIC or generated header), frames (2 fps, <= 448x448) and parser as the 10/30 Qwen
