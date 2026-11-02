@@ -1,0 +1,12 @@
+# Text-only controller backends (t2av_eval.gate.controller). The media judge is Gemini only and does not read this file.
+gemini:
+  model: gemini-3.6-flash
+  thinking: high
+  temperature: 0.0
+  seed: 42
+  key_env: GEMINI_API_KEY
+openai:             # third-controller experiment (lab account, user 11/02): the GPT-6 Astra tier
+  model: null        # exact dated id of the GPT-6 Astra tier: fill in from the main run's README
+  reasoning_effort: null   # the lowest effort value this model accepts: fill in with the model id (unset would send the default, not the lowest)
+  key_env: OPENAI_API_KEY
+  service_tier: null # no override: the account default
