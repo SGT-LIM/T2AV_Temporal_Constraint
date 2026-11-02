@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/gate/v_caption_diag.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """V-axis caption admission diagnostic (10/30). No judge calls.
 
 For each v3-test V row (HD-EPIC 164, LTX 35, MOVA 35) and its cached AVoCaDO caption, per focal event

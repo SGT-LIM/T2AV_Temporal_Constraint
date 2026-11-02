@@ -32,7 +32,6 @@ Framing (row 5 sub-variant): (a) = the G4 call; (b) one sentence added after the
       framing_config_1030.json -> PREREGISTERED_RULE.json (never typed into the prompt code).
   220 and (11/01) 149 V rows where the check says the caption does not mention a GT event: a descriptive sentence, no number.
 """
-import t2av_eval._legacy_bridge  # noqa: F401  (temporary: unmoved legacy modules)
 from t2av_eval import paths as _P
 from t2av_eval.gate import preregistered as PR
 import argparse, json, re, sys
@@ -238,7 +237,7 @@ def vcheck(uid):
 
 
 def v_lemma(src, iid, gt):
-    import v_caption_diag_1030 as VD
+    from t2av_eval.gate import v_caption_diag as VD
     c = caption(src, iid)
     if c is None:
         return None
