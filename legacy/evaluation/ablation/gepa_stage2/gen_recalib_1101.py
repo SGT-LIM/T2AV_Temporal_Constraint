@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Replaced by t2av_eval/gate/drift_check.py (t2av_eval package); this copy is kept to reproduce the 10/28-11/02 runs.
 """Generated-set threshold recalibration check (11/01). No judge calls. Writes docs/gen_recalibration_1101.md.
 
 Calibration (per seed, 20 seeds): a random 20% of the GT rows of the 220 and 149 (stratified by batch: 220-LTX, 220-MOVA, 149),
