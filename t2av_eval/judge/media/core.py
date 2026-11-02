@@ -112,7 +112,7 @@ def _audio_evidence_cache_key(video_path, item_meta, kwargs) -> str:
             "flam_min_duration_sec", "flam_merge_gap_sec", "flam_median_filter_size",
             "flam_top_k", "flam_detail_chars")
     payload = {
-        "video": str(Path(video_path).resolve()),
+        "video": _P.canonical_video(video_path),        # canonical root (paths.py); = resolved path on SCC
         "sounding_actions": sounding,
         "settings": {k: kwargs.get(k) for k in keep if k in kwargs
                      and not (k == "flam_hop_sec" and not kwargs.get(k))},  # hop=0 keeps legacy keys

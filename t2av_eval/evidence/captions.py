@@ -51,6 +51,7 @@ Prompt history:
 
 from __future__ import annotations
 
+from t2av_eval import paths as _P
 import hashlib
 import json
 import re
@@ -141,7 +142,7 @@ _SECTION_GUIDE = """Provenance of this evidence:
 # Cache
 # ---------------------------------------------------------------------------
 def _cache_path(cache_dir: Path, video_path: Path, backend: str, model: str, style: str) -> Path:
-    key = f"{video_path.resolve()}|{backend}|{model}|{style}|{CAPTION_PROMPT_VERSION}"
+    key = f"{_P.canonical_video(video_path)}|{backend}|{model}|{style}|{CAPTION_PROMPT_VERSION}"   # canonical root (paths.py)
     digest = hashlib.sha1(key.encode("utf-8")).hexdigest()[:16]
     safe_stem = re.sub(r"[^A-Za-z0-9_.-]", "_", video_path.stem)[:60]
     return cache_dir / f"{safe_stem}__{backend}__{style}__{digest}.json"

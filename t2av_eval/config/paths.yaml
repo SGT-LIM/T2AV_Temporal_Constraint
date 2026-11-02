@@ -2,3 +2,5 @@
 data_root: /projectnb/ivc-ml/youngsun/T2AV_data                        # [T2AV_DATA_ROOT] videos, prompts, tool records (FLAM, Synchformer, captions)
 inputs_root: /projectnb/ivc-ml/youngsun/T2AV_Temporal_Constraint       # [T2AV_INPUTS_ROOT] read-only: v3 manifests, caption json, 220 prompts, past run CSVs
 work_root: null                                                         # [T2AV_WORK_ROOT] every output and call cache this package writes; null = <repo>/runs
+cache_key_data_root: /projectnb/ivc-ml/youngsun/T2AV_data              # fixed, not overridable: video paths in cache keys are written
+                                                                       # under this root, so keys stay the same when data_root moves

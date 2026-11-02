@@ -16,6 +16,7 @@ stay identical; only the orchestration changes.
 
 from __future__ import annotations
 
+from t2av_eval import paths as _P
 import csv
 import json
 import sys as _sys
@@ -599,7 +600,7 @@ def sync_section(video_path) -> str:
         return ""
     if _SYNC_MAP is None:
         _SYNC_MAP = json.load(open(p))
-    return _SYNC_MAP.get(str(Path(video_path).resolve()), "")
+    return _SYNC_MAP.get(_P.canonical_video(video_path), "")      # canonical root (paths.py); = resolved path on SCC
 
 
 def routed_evidence(ctx: EvalContext, axis: str):
