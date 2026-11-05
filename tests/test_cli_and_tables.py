@@ -49,3 +49,29 @@ def test_never_pool_models():
     w = W().assign(model=["LTX_2p3", "MOVA", "LTX_2p3", "LTX_2p3"])
     with pytest.raises(ValueError, match="never pooled"):
         T.metrics_table(w)
+
+
+def test_run_media_launches_shards(monkeypatch, tmp_path):
+    """run_media past the dry run: Files check (fake client), README, one process per shard with the right env; no network"""
+    import google.genai as genai
+    from t2av_eval.run import launch as L
+    monkeypatch.setenv("GEMINI_API_KEY", "a"); monkeypatch.setenv("GEMINI_API_KEY_2", "b")
+    monkeypatch.setattr(L._rd, "create", lambda name, root=None: (tmp_path / f"{name}_x").mkdir() or tmp_path / f"{name}_x")
+    monkeypatch.setattr(genai, "Client", lambda **k: __import__("types").SimpleNamespace(files=__import__("types").SimpleNamespace(list=lambda: [])))
+    started = []
+
+    class P:
+        returncode = 0
+        def __init__(self, cmd, env, **k):
+            started.append((cmd, env))
+        def poll(self):
+            return 0
+    monkeypatch.setattr(L, "subprocess", __import__("types").SimpleNamespace(Popen=P, STDOUT=-2))   # launch.py only
+    monkeypatch.setattr(L, "watch", lambda d, procs, every=60: 0)
+    assert L.run_media("media_only", ["ma_p3p9"], "t") == 0
+    assert len(started) == 3
+    cmd, env = started[1]
+    assert cmd[1:3] == ["-m", "t2av_eval.run.shard"] and cmd[cmd.index("--axes") + 1] == "a"
+    assert env["GEMINI_API_KEY"] == "b" and "GEMINI_API_KEY_2" not in env and env["T2AV_DELETE_UPLOADS"] == "1"
+    assert env["T2AV_SHARD"] == "ma_p3p9_shard1" and env["OMP_NUM_THREADS"] == "1" and env["T2AV_CALLS_PER_HOUR"] == "2000"
+    assert "files storage before launch" in (tmp_path / "t_x" / "README.md").read_text()

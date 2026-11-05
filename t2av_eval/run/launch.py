@@ -106,8 +106,9 @@ def run_media(condition, set_names, name, n_keys=None, calls_per_hour=None, shar
     for i, p in enumerate(P):
         kn, kv = _keys.for_shard(i, keys)
         env = _keys.shard_env(os.environ, kn, kv)
-        env.update(p["env"], THREADS, T2AV_RUN_DIR=str(d), T2AV_SHARD=f"{p['set']}_shard{p['shard']}", T2AV_CALLS_PER_HOUR=str(cph),
-                   PYTHONUNBUFFERED="1")
+        env.update(p["env"])
+        env.update(THREADS)
+        env.update(T2AV_RUN_DIR=str(d), T2AV_SHARD=f"{p['set']}_shard{p['shard']}", T2AV_CALLS_PER_HOUR=str(cph), PYTHONUNBUFFERED="1")
         if RUNS["uploads"]["delete_after_use"]:
             env["T2AV_DELETE_UPLOADS"] = "1"
         out = d / f"{p['set']}_shard{p['shard']}.csv"
