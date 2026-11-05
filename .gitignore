@@ -22,3 +22,23 @@ runs/
 *.egg-info/
 legacy/evaluation/ablation/captions/*.json
 legacy/evaluation/ablation/captions/*.log
+
+# secrets: never commit keys or tokens (keys come from the environment only)
+.env
+.env.*
+*.key
+.gemini_key*
+.openai_key*
+**/huggingface/token
+*token*.txt
+*.pem
+# caches, uploads and run outputs (keep them on disk, never in git)
+caption_cache/
+audio_evidence_cache/
+audio_only_cache/
+frame_cache/
+fresh_stage1_cache/
+uploads/
+results/
+# fixture video links are tracked explicitly (git add -f tests/fixtures/**/*.mp4); they are symlinks, no video bytes
+!tests/fixtures/**/*.mp4
