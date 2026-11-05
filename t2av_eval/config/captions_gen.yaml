@@ -20,8 +20,8 @@ targets:          # videos (data: = paths.DATA), fps, the file name of the recor
                  note: "142 movement-set items; the 48 GB fallback (job 8386642, L40S) was used for row 2; the later A100 run is not used"}
 hardware:         # recorded settings per GPU class
   a100_80g:
-    recorded: "hosts scc-212 (NVIDIA A100 80GB PCIe), jobs 8362236 / 8370297 (10/31) and the 11/02 04:39 hdmove run; the qrsh request line was not recorded"
-    qrsh: null
+    recorded: "hosts scc-212 (NVIDIA A100 80GB PCIe), jobs 8362236 / 8370297 (10/31) and the 11/02 04:39 hdmove run"
+    qrsh: "unrecorded, use these flags: qrsh -pe omp 4 -l gpu_memory=80G -l gpu_c=8.0"   # the recorded 48 GB request with 80G
     env: {}
   gpu_48g:
     recorded: "job 8386642 (11/01): qrsh -pe omp 4 -l gpu_memory=48G -l gpu_c=8.0; ran on scc-502, NVIDIA L40S 46068 MiB"

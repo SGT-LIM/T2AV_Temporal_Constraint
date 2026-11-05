@@ -178,7 +178,7 @@ fps 2 plain for HD-EPIC, AVoCaDO full frame, greedy (`--sample-seed` for the scr
 
 | profile | recorded | settings |
 |---|---|---|
-| `a100_80g` | scc-212, NVIDIA A100 80GB PCIe (10/31 149 and P03–P09 captions, the ones the tables use; 11/02 hdmove run); the qrsh request line was not recorded | no extra env |
+| `a100_80g` | scc-212, NVIDIA A100 80GB PCIe (10/31 149 and P03–P09 captions, the ones the tables use; 11/02 hdmove run). Request line unrecorded, use these flags: `qrsh -pe omp 4 -l gpu_memory=80G -l gpu_c=8.0` | no extra env |
 | `gpu_48g` | `qrsh -pe omp 4 -l gpu_memory=48G -l gpu_c=8.0` (job 8386642, 11/01); ran on scc-502, NVIDIA L40S 46 GB; the hdmove captions of row 2 | `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` |
 | `a6000_session` | 10/31 fallback, RTX A6000 46 GB, peak 19.6–20.4 GB; not used by the tables | same, `OMP_NUM_THREADS=2` |
 
@@ -237,6 +237,57 @@ qrsh -pe omp 4 -l h_rt=4:00:00 bash -c 'export OMP_NUM_THREADS=4 MKL_NUM_THREADS
 `legacy/evaluation/ablation/` keeps every script runnable for reproduction; each has a first line pointing to its package
 module. Their main-checkout paths go through `T2AV_LEGACY_ROOT` (default `<repo>/legacy_root`); see `legacy/README.md`.
 
+## For a new collaborator
+
+### Your own Gemini key
+
+The package reads keys from the environment only; nothing in the repo or the config holds a key.
+
+```bash
+export GEMINI_API_KEY=<your key>          # in your shell or ~/.bashrc, never in a file inside the repo
+export GEMINI_API_KEY_2=<second key>      # optional: shards rotate over the keys, each with its own calls-per-hour budget
+t2av-eval check --files                   # shows GEMINI_API_KEY:<sha256 prefix> and your Files storage; never the key
+```
+
+Run READMEs record that id, so two people's runs can be told apart. Pacing and the Files check are per key, but the quota
+behind them is per Google Cloud project: if your key shares a project with someone else's runs, lower `--calls-per-hour`.
+Uploads count against the project's 20 GB Gemini Files storage until deleted (the CLI deletes each clip after its item).
+
+### A new AVB evidence model (for example SparseFormer)
+
+AVB evidence enters in two steps; the second needs the first.
+
+1. **Screening, against the gate** (no judge calls). Copy `t2av_eval/screening/imagebind.py` to
+   `screening/sparseformer.py`: its `run` stage scores every row of `gate.reliability.rows("p1p2" | "p3p9" | "220" | "149")`
+   (row score = the weakest binding event), its `threshold` stage calls `gate.reliability.write_threshold("sparseformer", "AVB",
+   <scores of the P01/P02 PASS rows>, low_is_fail=...)`, which sets the value that flags 5% of the P01/P02 PASS rows and
+   writes it with a timestamp to `T2AV_data/tools/screen_1031/sparseformer/thresholds.json` before any other set is scored,
+   and its `report` stage (`gate.reliability.report`) gives open rate, precision when open, recall, and the media-only judge
+   on the same rows. Add the module to `PASS["screen"]` in `cli.py`; run it in qrsh. The tool passes only if the 5% holds
+   outside P01/P02 and it beats the media-only judge where it opens (ImageBind failed both).
+2. **AVB evidence next to Synchformer.** `t2av_eval/evidence/synchformer_action.py` writes per-event readings to
+   `T2AV_data/tools/synchformer_action_1030/<set>/per_event_shard*.csv` with the columns `item_id, variant, event_id, label,
+   status, offset, prob, p_offset0, n_occ, method`; stage 2 reads them through `judge/stage2/hdepic.py` (`sync_pe`,
+   `avb_text`, `fires`). A SparseFormer module (`evidence/sparseformer_action.py`) that writes the same columns to its own
+   `tools/sparseformer_action_<date>/` dir can feed the same code. If it reports an offset and a probability, derive its rule
+   with `gate/avb_rule_derive.py` (T = 95th percentile of |offset| on the P01/P02 originals, P = 5th percentile of p on the
+   shifted rows above T, 5% broken originals at most) and write its own pre-registered rule file before any holdout result;
+   if it reports one score, the threshold of step 1 is its calibration. Making it part of `recipe_v4.yaml` changes the
+   recipe and is decided before any evaluation-set result is read.
+
+### A new dataset (BRITE)
+
+There is no BRITE adapter in the package, in `legacy/` or in the main checkout yet. A new dataset enters at these points:
+
+- **Items:** a prompt file in the item format the judge reads (`judge/media/core.build_item_meta_map`; examples:
+  `T2AV_data/gen_holdout_149_1030/prompts_gen149.json`) and a videos dir with one `<item_id>/<item_id>_v1_raw.mp4` per item.
+- **A set** in `config/sets.yaml` (family, prompts, videos, captions, shards); `t2av-eval judge media_only --sets <name>`
+  then runs row 1 and `tests/test_conditions.py`-style checks can pin its command.
+- **Captions:** a target in `config/captions_gen.yaml`, then `t2av-eval evidence captions -- --target <name> ...`.
+- **GT for scoring:** a loader returning rows `{set, model, item_id, axis, gt}` like `scoring/generated_rows.gt()`
+  (majority labels: `data/generated_gt.py`), added to `scoring/runs.py`.
+
 ## Open items
 
+- No BRITE adapter exists yet (see "A new dataset").
 - MediaPipe pose evidence and the OpenAI / local media-judge backends stay in `legacy/` (not used by the main table).
