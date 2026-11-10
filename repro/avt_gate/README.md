@@ -90,7 +90,7 @@ python repro/avt_gate/audit/whisper_trace.py --tag whisper_trace     # -> $T2AV_
 python repro/avt_gate/audit/tc_tr_prereq.py  --tag tc_tr_prereq      # -> $T2AV_OUT_DIR/tc_tr_prereq/
 ```
 
-## 4. Re-run the gate and the evaluation from cached outputs (no API / GPU; verified)
+## 4. Re-run the gate and the evaluation from cached outputs (no API / GPU; verified, also from a fresh clone and env, see `VALIDATION.md`)
 
 ```bash
 # main configuration (paper): calibration_v2, alpha = .05
@@ -176,6 +176,8 @@ is not documented in the records; ask the data owner.** The references below are
 | videos | generated: `$T2AV_DATA/videos_repo/main_videos/<MODEL>/` (records name the HF dataset `dghadiya/T2AV_TemporalConstraint`; access controlled); HD-EPIC clips: `$T2AV_DATA/real_av_holdout_p3p9_1028/clips/` and `$T2AV_DATA/real_av/` (HD-EPIC dataset terms apply) | Stage-1 / tool re-runs only |
 | tool outputs | `$T2AV_DATA/tools/gen_evidence_1030/` (Whisper + FLAM), `tools/synchformer_action_1030/`, `tools/synchformer_gen_1030/` | gate features |
 | results of the controls / sensitivity | `$T2AV_WORKSPACE/eval_results/analysis/{sanjoy_two_baselines_2026-11-08, sensitivity_2026-11-10, paper_tables_handoff_2026-11-09}/` | comparisons |
+
+For the exact list of files the cached re-scoring reads, and what a full re-run additionally needs, see `DATA_INVENTORY.md`.
 
 **Not committed:**
 - the P01/P02 calibration population `final_benchmark_1108/calibration_v2/p12_calibration_units.csv` (843 KB);
