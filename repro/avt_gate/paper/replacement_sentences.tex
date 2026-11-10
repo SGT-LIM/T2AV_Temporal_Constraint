@@ -1,0 +1,25 @@
+% Candidate replacement text for the paper (verified against the code and cached runs; see repro/avt_gate/GATE_SPEC.md sections 4.1 and 7).
+% Not inserted into the paper source: the paper file was not available here. Use the parts you need.
+
+% --- Whisper rule (method section, speech events) ------------------------------------------------------------------------------------
+\paragraph{Speech events.}
+P01/P02 contains no speech, so speech events use a fixed Whisper rule instead of a calibrated threshold.
+The audio check of a clip is reopened when Whisper hears a requested word of any speech event in the clip, or when FLAM scores a requested sound below $T_{\text{flam}}$.
+The Judge then receives one text observation with the Whisper transcript (if a requested word was heard) and the FLAM lines below $T_{\text{flam}}$, and it may keep or revise the audio label of every event in the clip.
+This rule does not depend on the initial PASS/FAIL label, and it is the same for every admission limit $\alpha$.
+In Gate-only, a speech event is changed to PASS only when its own requested word is heard; otherwise its initial label is kept.
+
+% --- Section 3.2: TC / TR prerequisites ----------------------------------------------------------------------------------------------
+\paragraph{Temporal prerequisites.}
+Temporal labels follow the event hierarchy.
+A temporal-count (TC) label is scored per event, and only when that event passes its own prerequisites: A, V, and AVB for an audio event, and V for a silent event.
+Failures of other events in the same video do not remove it.
+A temporal-relation (TR) label is scored per video, and only when every event in the video passes A, V, and AVB.
+These prerequisites are checked on both the human reference labels and the media-only judgment.
+The human labels themselves are aggregated without prerequisites (majority vote per event for TC and per video for TR).
+
+% --- Evaluation protocol (optional) --------------------------------------------------------------------------------------------------
+\paragraph{Evaluation protocol.}
+Prerequisites always use the media-only judgment; labels revised in the second stage are not propagated to other axes.
+A unit without a model answer is reported as unanswered and is never counted as PASS or FAIL.
+We report each method on its own answered units, on the examples answered by all compared methods, and on the fixed set of reference-eligible units with coverage.

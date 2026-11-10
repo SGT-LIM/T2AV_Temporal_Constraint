@@ -74,7 +74,7 @@ def test_missing_evidence_keeps_gate_closed():
 
 
 def test_speech_and_temporal_axes_closed_in_combined_rule():
-    assert not opened(u("A", "yes", family="A speech", flam_max=0.0))         # speech: combined gate inherits the original Whisper rule
+    assert not opened(u("A", "yes", family="A speech", flam_max=0.0))         # open_rule is closed for speech: its label comes from the original-gate A call (GATE_SPEC 4.1)
     for ax in ("TCC", "TCR"):
         assert not opened(R(axis=ax, initial="yes", family=None, flam_max=NAN, vcap=None, off=NAN, prob=NAN))
 

@@ -48,11 +48,22 @@ def main():
     ap.add_argument("--stored-labels", default="", help="optional stored unit labels to compare with (sensitivity runs)")
     ap.add_argument("--stored-tag", default="", help="a01 / a05 / a10 column suffix in --stored-labels")
     ap.add_argument("--extra-calls", nargs="*", default=None, help="extra directories of AS__/NB__ call records (default: historical sensitivity calls)")
+    ap.add_argument("--trace-files", action="store_true", help="record every data file / directory read (files_read.csv); does not change any result")
     a = ap.parse_args()
     out = Path(a.out) / a.tag
     if out.exists():
         sys.exit(f"{out} exists; choose a new --tag (results are never overwritten)")
     out.mkdir(parents=True)
+    seen = {}
+    if a.trace_files:
+        def hook(ev, args):                              # read-side audit only
+            if ev in ("open", "os.listdir", "os.scandir", "glob.glob") and args:
+                p = args[0]
+                if isinstance(p, (str, bytes, os.PathLike)):
+                    p = os.fsdecode(p)
+                    if ev != "open" or (len(args) > 1 and isinstance(args[1], str) and "r" in args[1] and "+" not in args[1]) or (len(args) > 1 and args[1] is None):
+                        seen[(ev, p)] = seen.get((ev, p), 0) + 1
+        sys.addaudithook(hook)
     os.environ.setdefault("T2AV_OUT_DIR", str(Path(a.out) / "_analysis_scratch"))
     import numpy as np, pandas as pd
     import t2av_paths as tp
@@ -131,6 +142,15 @@ def main():
                env={k: ("set" if os.environ.get(k) else "unset") for k in ("T2AV_WORKSPACE", "T2AV_DATA", "T2AV_HF_CACHE", "T2AV_EXT_TMP", "T2AV_OUT_DIR", "GEMINI_API_KEY")},
                wall_s=round(time.time() - t0, 1))
     json.dump(man, open(out / "run_manifest.json", "w"), indent=1, default=str)
+    if a.trace_files:
+        roots = {"$T2AV_WORKSPACE": str(Path(tp.WORKSPACE).resolve()), "$T2AV_DATA": str(Path(tp.DATA).resolve()), "$REPO": str(REPO)}
+        rec = []
+        for (ev, p), n in sorted(seen.items()):
+            rp = str(Path(p).resolve()) if os.path.exists(p) else p
+            lab = next((f"{k}/{os.path.relpath(rp, v)}" for k, v in roots.items() if rp.startswith(v + os.sep) or rp == v), None)
+            if lab and not lab.startswith("$REPO/") and "/site-packages/" not in rp:
+                rec.append(dict(event=ev, path=lab, times=n, is_dir=os.path.isdir(rp)))
+        pd.DataFrame(rec).to_csv(out / "files_read.csv", index=False)
     print(json.dumps(chk, indent=1)[:3000])
 
 

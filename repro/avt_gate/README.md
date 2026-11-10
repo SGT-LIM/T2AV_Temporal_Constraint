@@ -27,6 +27,9 @@ This directory makes the evidence gate of the latest T2AV experiments reproducib
 | `rescore_cached.py` | recompute gate openings, AVT-Judge and Gate-only labels, and the three evaluation views from cached outputs; compare with the stored run |
 | `analysis/` | portable copies of the scripts that produced the controls, the paper-table handoff and the alpha sensitivity study |
 | `tools/make_portable.py`, `tools/portable_map.tsv` | how the portable copies were generated |
+| `audit/` | cached-output audits of the Whisper path and of the TC / TR prerequisite scope |
+| `paper/replacement_sentences.tex` | candidate paper text for the Whisper rule, the TC / TR prerequisites and the evaluation protocol |
+| `DATA_INVENTORY.md` | files needed for cached re-scoring vs a full re-run from videos |
 | `requirements-rescore.txt`, `requirements-full-freeze.txt` | minimal deps for cached re-scoring; full freeze of the experiment env (`t2av_eval`, Python 3.11.16) |
 
 ## 1. Install
@@ -66,9 +69,26 @@ The tests check:
 - that each branch is chosen only by the initial PASS / FAIL label;
 - missing evidence → closed;
 - caption `not_mentioned` (omission) vs `contradicts`;
-- A speech / TC / TR closed in the combined rule;
+- `open_rule` returns closed for A speech (the speech label is then taken from the original-gate call; see `GATE_SPEC.md` §4.1) and for TC / TR;
 - inactive branches at alpha = .01;
 - Gate-only mapping and closed gate → initial label kept.
+
+## Key behaviours in short (verified; details and code locations in `GATE_SPEC.md`)
+
+- **Whisper (A speech)** is not calibrated and not branch-based.
+  - The original A gate reopens the whole clip's A check when any requested speech word is heard or any sounding event has FLAM < T_flam.
+  - One text call can revise every A event of the clip, for initial PASS and initial FAIL alike.
+  - AVT-Judge uses that label for speech at every alpha.
+  - Gate-only turns a speech event to PASS only when its own word is heard.
+- **TC** is scored per event, using that event's own A / V / AVB prerequisites (V for a silent event).
+- **TR** is scored per video and needs every event to pass.
+- GT is aggregated without prerequisites; they are applied in the Stage-1 harness and at scoring.
+
+Re-run the two audits (cached outputs only):
+```bash
+python repro/avt_gate/audit/whisper_trace.py --tag whisper_trace     # -> $T2AV_OUT_DIR/whisper_trace/
+python repro/avt_gate/audit/tc_tr_prereq.py  --tag tc_tr_prereq      # -> $T2AV_OUT_DIR/tc_tr_prereq/
+```
 
 ## 4. Re-run the gate and the evaluation from cached outputs (no API / GPU; verified)
 
