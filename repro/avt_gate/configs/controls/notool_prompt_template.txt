@@ -1,0 +1,17 @@
+SYSTEM: new_eval.build_system_prompt('none','none','none', single_axis=True)  [identical to gated Stage 2]
+
+USER (blocks joined by blank lines):
+1. Prompt of the clip being evaluated:\n<generated prompt>
+2. <axis criteria, adapter.CRITERIA>
+3. OBS_RULES (unchanged, md5 556c2b2ef432344bbe8a53bfef15e0b1):
+TWO-STAGE PROTOCOL (read carefully):
+- A first judge already evaluated this axis from the full video with its audio. Its judgment is shown below under "Stage 1 (media only)".
+- You now receive ONE additional observation of the same clip, described under "Observation". You do NOT see the original video in this call.
+- The observation is approximate and can be incomplete or misleading. Your job is to COMPARE stage 1 with the observation, not to re-judge from scratch.
+- KEEP the stage-1 answer unless the observation gives specific evidence (a sound you hear or do not hear, a timestamped onset, a visible action at a given time, a detector result) that directly contradicts what stage 1 concluded.
+- An observation that is ambiguous, does not cover the event, or merely agrees with stage 1 is NOT by itself a reason to change stage 1.
+- Answer for every event listed under stage 1, with the same event ids. Start each reason with "KEEP:" or "REVISE:" followed by the comparison you made.
+4. <Stage 1 (media only) block, run_two_stage.fmt_block(axis, anchor entries)>
+5. Observation: none. No tool was run for this call and no additional observation of the clip is available.
+
+SCHEMA: run_two_stage.SCHEMA[axis]

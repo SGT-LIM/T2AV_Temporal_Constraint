@@ -1,0 +1,24 @@
+{
+ "rule": "AVB -> FAIL if the strongest binding-event Synchformer reading (action-window mode, window_if_alone_multi) has |offset| >= T and probability >= P; otherwise keep the media-only anchor verdict",
+ "T": 1.8,
+ "P": 0.25,
+ "T_raw": 1.8,
+ "P_raw": 0.2476,
+ "derived_on": "P01/P02 v3-test B rows (anchor_1030), action-window Synchformer",
+ "derivation": "T = 95th pct of |offset| on originals (0.2 s grid); P = 5th pct of p among shifted rows with |offset| > T (0.01)",
+ "b_operating_point": {
+  "T": 1.8,
+  "P": 0.25,
+  "fired": 25,
+  "fixed": 13,
+  "broken_orig": 1,
+  "broken": 1,
+  "orig_FA": 0.02
+ },
+ "b_broken_originals": 1,
+ "b_n_originals": 51,
+ "b_gate": "broken originals <= round(0.05 * n_originals) = 3 of 51",
+ "holdout_criterion": "pass if broken holdout originals <= round(0.05 * n_holdout_originals) (originals with an anchor verdict), with the rule applied in code to the same-day holdout anchor",
+ "written": "2026-10-30T11:12:01",
+ "holdout_results_seen": false
+}

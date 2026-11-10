@@ -1,0 +1,98 @@
+{
+ "written": "2026-11-08T22:45:01",
+ "reference": "$T2AV_WORKSPACE/evaluation/ablation/gepa_stage2/runs/obsval_1028/final_benchmark_1108",
+ "model": "gemini-3.6-flash",
+ "thinking": "high",
+ "temperature": 0.0,
+ "seed": 42,
+ "response_mime_type": "application/json",
+ "schema": "run_two_stage.SCHEMA[axis] (unchanged)",
+ "media": "none (text only)",
+ "obs_rules_md5": "556c2b2ef432344bbe8a53bfef15e0b1",
+ "notool_observation_text": "Observation: none. No tool was run for this call and no additional observation of the clip is available.",
+ "notool_template_source": "overnight_1104.NOTOOL_TEXT (sets HN / GN, 2026-11-04)",
+ "request_grouping": "one request per (source, item, axis); targets = obs_judge_1028.anchor_entries (all non-gated Stage-1 events, corrected anchor builder)",
+ "variants": {
+  "B1": "every (dataset, item, axis) with >= 1 valid Stage-1 unit",
+  "B2_original": "units with orig_opened; closed -> Stage 1",
+  "B2_combined_v2": "units with comb_opened (v2); A speech follows the original gate as in the combined gate; closed -> Stage 1"
+ },
+ "label_policy": "established Stage-2 extraction (audit_1106.s2_event: per-event label); failed / missing outputs -> missing (no fill)",
+ "original_gate": {
+  "A_sound": "FLAM line admitted when FLAM max < T_flam = 0.2705 -> FAIL direction",
+  "A_speech": "Whisper transcript admitted when a target word is heard (kept segments); event whose own target word is heard -> PASS direction; other speech events: ambiguous (retain)",
+  "V": "row opens when any GT event's caption check says contradicts; contradicts -> FAIL direction; describes / not_mentioned: no directional rule (retain)",
+  "AVB": "pre-registered rule (|offset| >= 1.8 s and p >= 0.25 on the strongest reading) -> AVB FAIL (row level, every binding event of the opened row; historical hd_stage2_1101 row5_rule)",
+  "TC_TR": "closed (media only)"
+ },
+ "combined_v2": {
+  "config": {
+   "A_FAIL": {
+    "active": true,
+    "params": [
+     "t",
+     0.3723524212837219
+    ],
+    "status": "USABLE EMPIRICAL CANDIDATE",
+    "fallback": null
+   },
+   "A_PASS": {
+    "active": true,
+    "params": [
+     "t",
+     0.989681363105774
+    ],
+    "status": "USABLE EMPIRICAL CANDIDATE",
+    "fallback": null
+   },
+   "AVB_FAIL": {
+    "active": true,
+    "params": [
+     "T",
+     1.2,
+     "P",
+     0.1278
+    ],
+    "status": "USABLE EMPIRICAL CANDIDATE",
+    "fallback": null
+   },
+   "AVB_PASS": {
+    "active": true,
+    "params": [
+     "S",
+     0.2,
+     "Q",
+     0.3453
+    ],
+    "status": "USABLE EMPIRICAL CANDIDATE",
+    "fallback": null
+   },
+   "V_FAIL": {
+    "active": true,
+    "params": null,
+    "status": "MEETS CRITERION",
+    "fallback": null
+   },
+   "V_PASS": {
+    "active": true,
+    "params": null,
+    "status": "MEETS CRITERION",
+    "fallback": null
+   },
+   "A_SPEECH_FAIL (Whisper absence)": {
+    "active": false,
+    "params": null,
+    "status": "UNSUPPORTED: no P01/P02 speech events (HD-EPIC has no speech); branch falls back to media only",
+    "fallback": "media-only label"
+   },
+   "A_SPEECH_PASS (word heard, p >= .5)": {
+    "active": false,
+    "params": null,
+    "status": "UNSUPPORTED: no P01/P02 speech events (HD-EPIC has no speech); branch falls back to media only",
+    "fallback": "media-only label"
+   }
+  },
+  "mapping": "opened initial PASS (FAIL-evidence branch) -> FAIL; opened initial FAIL (PASS-evidence branch) -> PASS; A speech -> original-gate direct mapping (inherited)"
+ },
+ "excluded": "FLAM+Synchformer-only ablation"
+}
