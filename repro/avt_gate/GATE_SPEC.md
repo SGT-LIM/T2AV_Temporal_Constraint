@@ -1,5 +1,8 @@
 # Evidence gate used in the latest experiments (verified from code, frozen configs and run outputs)
 
+> **Correction (2026-11-10, branch `fix/a-axis-event-gate-2026-11-10`).** The A-speech behaviour of AVT-Judge described below (§3 row "A speech / Whisper" and §4.1: the speech label is inherited from the clip-level original-gate call) is the *historical* implementation. It does not match the intended event-level rule and is superseded by `a_axis_v3/A_AXIS_CONTRACT.md` (contract v3). Everything else in this file is unchanged.
+
+
 Sources:
 - code: the portable copies in this branch (`evaluation/ablation/gepa_stage2/*`); originals and hashes are listed in
   `provenance/ORIGINAL_CODE_SHA256.txt`;

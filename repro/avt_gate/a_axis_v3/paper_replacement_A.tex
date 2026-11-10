@@ -1,0 +1,31 @@
+% Replacement text for the A-axis description of AVT-Judge and Gate-only (contract v3, 2026-11-10). Not inserted automatically.
+% It replaces the "Speech events" paragraph of ../paper/replacement_sentences.tex and any paper text that describes a clip-level
+% audio gate for speech. Numbers: eval_results/analysis/a_axis_event_gate_v3_2026-11-10/tables/.
+
+% --- Method: audio axis (replaces the previous "Speech events" paragraph) --------------------------------------------------------
+\paragraph{Audio evidence gate.}
+The audio gate decides each event separately, from that event's own initial audio judgment and its own tool evidence.
+For a sounding event, FLAM opens the gate only in the direction that can change the initial judgment: an initially passing event opens when its FLAM score is below the calibrated FAIL threshold, and an initially failing event opens when its score reaches the calibrated PASS threshold (both thresholds are selected on P01/P02 for each admission limit $\alpha$).
+P01/P02 contains no speech, so speech events use a fixed rule that is the same for every $\alpha$ and is not calibrated: the gate opens only when the event was initially judged as failing and Whisper recognises that event's own requested word (exact token match in segments with no-speech probability below 0.5).
+An initially passing speech event is never reopened, a word requested by another event never opens it, and a FLAM score never opens a speech event.
+Missing tool output keeps the gate closed.
+AVT-Judge reconsiders only the opened events, in one text-only call per clip that contains the Whisper transcript (if a speech event opened) and the FLAM lines of the opened sounding events; every closed event keeps its initial label, and an opened event keeps its initial label if the Judge sees no reason to revise it.
+Gate-only uses the same openings and applies the admitted direction directly (an opened speech event becomes PASS).
+
+% --- Results sentences that change ------------------------------------------------------------------------------------------------
+% LTX, A speech, alpha = .05, six-method common examples (n = 1,769):
+%   AVT-Judge accuracy 0.9751 (was 0.9695), balanced accuracy 0.5974 (was 0.6284), FAIL recall 0.2069 (was 0.2759),
+%   false-alarm rate 0.0121 (was 0.0190); corrections / harmful revisions vs MLLM-only 16 / 0 (was 17 / 11).
+% MOVA, A speech (n = 479): AVT-Judge accuracy 0.9395 (was 0.9353), balanced accuracy 0.7881 (was 0.7857); 0 / 1 (was 0 / 3).
+% A sounding, Gate-only (all groups) and all non-A axes: unchanged.
+
+% --- Superseded claims (remove or replace) -----------------------------------------------------------------------------------------
+% (1) "The audio check of a clip is reopened when Whisper hears a requested word of any speech event in the clip, or when FLAM scores a
+%     requested sound below T_flam" -- superseded: openings are per event; T_flam (0.2705) is not used by AVT-Judge / Gate-only.
+% (2) "The Judge ... may keep or revise the audio label of every event in the clip" -- superseded: only opened events can change.
+% (3) "This rule does not depend on the initial PASS/FAIL label" -- superseded: speech opens only for an initial FAIL.
+% (4) GATE_SPEC.md 3 / 4.1: "A speech uses the original-gate label at every alpha" / "combined = original_gate for all 2,248 scored
+%     A-speech units" -- superseded for the corrected AVT-Judge.
+% (5) Any A / A-speech AVT-Judge number taken from final_benchmark_1108, sanjoy_two_baselines_2026-11-08,
+%     paper_tables_handoff_2026-11-09 or sensitivity_2026-11-10 -- superseded by the corrected tables (A sounding, Gate-only and all
+%     other axes are numerically identical, so their numbers remain valid).

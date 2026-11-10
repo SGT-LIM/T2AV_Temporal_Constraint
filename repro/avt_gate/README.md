@@ -1,5 +1,8 @@
 # Reproducing the AVT-Judge evidence gate (combined gate v2) and the alpha sensitivity study
 
+> **Correction (2026-11-10, branch `fix/a-axis-event-gate-2026-11-10`).** The A-speech behaviour of AVT-Judge described below (§3 row "A speech / Whisper" and §4.1: the speech label is inherited from the clip-level original-gate call) is the *historical* implementation. It does not match the intended event-level rule and is superseded by `a_axis_v3/A_AXIS_CONTRACT.md` (contract v3). Everything else in this file is unchanged.
+
+
 This directory makes the evidence gate of the latest T2AV experiments reproducible from a fresh clone.
 
 **Status before this branch.** The code that produced the experiments (`evaluation/ablation/` on the lab workspace) was **not on GitHub**:
